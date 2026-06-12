@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --night: #0b0f14;
+  --slate: #16202b;
+  --glacier: #e8ecef;
+  --ice: #9fb3c2;
+  --apricot: #d98e4a;
+  --teal: #5c7a8a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--night);
+  color: var(--glacier);
+}
+
+/* Eyebrow / coordinate-style label */
+.coord-label {
+  font-family: var(--font-jetbrains);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--apricot);
+}
+
+/* Signature element: the altitude line.
+   A horizontal topographic divider with tick marks and labels,
+   used sparingly between major sections. */
+.altitude-line {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--teal) 15%,
+    var(--apricot) 50%,
+    var(--teal) 85%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+.altitude-line::before,
+.altitude-line::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 1px;
+  height: 7px;
+  background: var(--ice);
+  opacity: 0.6;
+}
+
+.altitude-line::before {
+  left: 15%;
+}
+
+.altitude-line::after {
+  right: 15%;
+}
+
+/* Focus visibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--apricot);
+  outline-offset: 3px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom scrollbar for horizontal galleries */
+.scroll-row::-webkit-scrollbar {
+  height: 6px;
+}
+.scroll-row::-webkit-scrollbar-track {
+  background: var(--slate);
+}
+.scroll-row::-webkit-scrollbar-thumb {
+  background: var(--teal);
+  border-radius: 3px;
+}
