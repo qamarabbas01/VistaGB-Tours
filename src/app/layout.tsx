@@ -29,6 +29,11 @@ export const metadata: Metadata = {
     "Discover the Karakoram, Hunza, Skardu and the high valleys of Gilgit-Baltistan with VistaGB Tours — curated journeys, treks and stays across northern Pakistan.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

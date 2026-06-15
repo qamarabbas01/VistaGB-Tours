@@ -49,13 +49,18 @@ export default function Navbar() {
           className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
         >
           <span
-            className={`h-px w-6 bg-glacier transition-transform ${
-              open ? "translate-y-[3px] rotate-45" : ""
+            className={`h-px w-6 bg-glacier transition-all ${
+              open ? "translate-y-[7px] rotate-45" : ""
             }`}
           />
           <span
-            className={`h-px w-6 bg-glacier transition-transform ${
-              open ? "-translate-y-[3px] -rotate-45" : ""
+            className={`h-px w-6 bg-glacier transition-opacity ${
+              open ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`h-px w-6 bg-glacier transition-all ${
+              open ? "-translate-y-[7px] -rotate-45" : ""
             }`}
           />
         </button>

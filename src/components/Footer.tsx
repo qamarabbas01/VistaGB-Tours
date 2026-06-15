@@ -30,9 +30,9 @@ export default function Footer() {
             <p className="coord-label mb-4">Company</p>
             <ul className="flex flex-col gap-2 text-sm text-ice">
               <li><Link href="/contact" className="hover:text-apricot">Contact</Link></li>
-              <li><a href="#" className="hover:text-apricot">About Us</a></li>
-              <li><a href="#" className="hover:text-apricot">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-apricot">Terms of Service</a></li>
+              <li><Link href="/about" className="hover:text-apricot">About Us</Link></li>
+              <li><Link href="/privacy" className="hover:text-apricot">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-apricot">Terms of Service</Link></li>
             </ul>
           </div>
 
