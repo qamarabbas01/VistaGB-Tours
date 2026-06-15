@@ -62,6 +62,7 @@ export default function Home() {
           alt="Snow-capped peaks of the Karakoram range above Hunza Valley"
           fill
           priority
+          sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-night via-night/70 to-night/30" />
@@ -158,6 +159,7 @@ export default function Home() {
                   src={dest.image}
                   alt={dest.name}
                   fill
+                  sizes="(max-width: 768px) 300px, 340px"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-night via-night/30 to-transparent" />

@@ -1,3 +1,5 @@
+import ContactForm from "@/components/ContactForm";
+
 export const metadata = {
   title: "Contact — VistaGB Tours",
 };
@@ -20,75 +22,7 @@ export default function ContactPage() {
 
       <section className="py-16 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-2 md:px-10">
-          <form className="flex flex-col gap-5">
-            <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="coord-label">
-                Full Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                className="rounded-lg border border-teal/30 bg-night px-4 py-3 text-glacier outline-none transition-colors focus:border-apricot"
-                placeholder="Your name"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="coord-label">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="rounded-lg border border-teal/30 bg-night px-4 py-3 text-glacier outline-none transition-colors focus:border-apricot"
-                placeholder="you@example.com"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="destination" className="coord-label">
-                Interested In
-              </label>
-              <select
-                id="destination"
-                name="destination"
-                className="rounded-lg border border-teal/30 bg-night px-4 py-3 text-glacier outline-none transition-colors focus:border-apricot"
-              >
-                <option>Hunza Valley</option>
-                <option>Skardu</option>
-                <option>Deosai Plains</option>
-                <option>Fairy Meadows</option>
-                <option>Khaplu</option>
-                <option>Attabad Lake</option>
-                <option>Not sure yet — help me decide</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="message" className="coord-label">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                required
-                className="rounded-lg border border-teal/30 bg-night px-4 py-3 text-glacier outline-none transition-colors focus:border-apricot"
-                placeholder="Travel dates, group size, what you'd like to see..."
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="mt-2 w-full rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-night transition-transform hover:scale-[1.02]"
-            >
-              Send Message
-            </button>
-          </form>
+          <ContactForm />
 
           <div className="flex flex-col gap-8">
             <div className="rounded-2xl border border-teal/20 bg-slate p-8">

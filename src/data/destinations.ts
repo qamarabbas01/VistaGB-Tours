@@ -67,7 +67,7 @@ export const destinations: Destination[] = [
   {
     slug: "attabad-lake",
     name: "Attabad Lake",
-    region: "Hunza",  
+    region: "Hunza",
     altitude: "2,560M",
     tagline: "Turquoise water born from a landslide",
     description:
