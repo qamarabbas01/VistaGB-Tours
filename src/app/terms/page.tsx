@@ -1,3 +1,5 @@
+import { contact } from "@/config/contact";
+
 export const metadata = {
   title: "Terms of Service — VistaGB Tours",
 };
@@ -36,10 +38,10 @@ export default function TermsPage() {
             Cancellation and refund policies are provided at the time of booking.
             For questions, contact{" "}
             <a
-              href="mailto:qamrabbas629@gmail.com"
+              href={`mailto:${contact.email}`}
               className="text-apricot hover:underline"
             >
-              qamrabbas629@gmail.com
+              {contact.email}
             </a>
             .
           </p>
@@ -51,7 +53,7 @@ export default function TermsPage() {
             Final payment schedules and methods will be detailed in your booking confirmation. Failure to pay
             remaining balances by the specified deadline may result in cancellation of your trip and forfeiture of your deposit.
           </p>
-          <h2 className="font-display text-base font-semibold text-glacier">
+          <h2 className="mt-8 font-display text-base font-semibold text-glacier">
             Changes & Cancellations by VistaGB Tours
           </h2>
           <p>
@@ -60,7 +62,7 @@ export default function TermsPage() {
             We will do our utmost to offer a comparable experience or alternative dates. If we cancel your trip due to unforeseen events
             (e.g. natural disasters, political unrest), you will be entitled to a refund of recoverable costs, minus incurred expenses.
           </p>
-          <h2 className="font-display text-base font-semibold text-glacier">
+          <h2 className="mt-8 font-display text-base font-semibold text-glacier">
             Client Responsibilities
           </h2>
           <p>
@@ -68,7 +70,7 @@ export default function TermsPage() {
             You are responsible for complying with local laws, customs, and respecting the environment and communities visited.
             Any disruption caused by failure to follow local or guide instructions may result in removal from the tour without refund.
           </p>
-          <h2 className="font-display text-base font-semibold text-glacier">
+          <h2 className="mt-8 font-display text-base font-semibold text-glacier">
             Liability Waiver
           </h2>
           <p>
@@ -77,7 +79,7 @@ export default function TermsPage() {
             from circumstances beyond our reasonable control. We strongly advise comprehensive
             travel insurance covering medical emergencies, evacuations, cancellations, and personal belongings.
           </p>
-          <h2 className="font-display text-base font-semibold text-glacier">
+          <h2 className="mt-8 font-display text-base font-semibold text-glacier">
             Privacy & Data Protection
           </h2>
           <p>
@@ -85,7 +87,7 @@ export default function TermsPage() {
             and emergency contact as required by law. We do not sell or share your data with third parties
             except as needed to provide travel arrangements.
           </p>
-          <h2 className="font-display text-base font-semibold text-glacier">
+          <h2 className="mt-8 font-display text-base font-semibold text-glacier">
             Governing Law
           </h2>
           <p>

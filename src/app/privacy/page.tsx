@@ -1,3 +1,5 @@
+import { contact } from "@/config/contact";
+
 export const metadata = {
   title: "Privacy Policy — VistaGB Tours",
 };
@@ -41,10 +43,10 @@ export default function PrivacyPage() {
           <p>
             We may retain correspondence and booking details for business records, support, or legal compliance. You may request deletion of your data at any time by emailing{" "}
             <a
-              href="mailto:qamrabbas629@gmail.com"
+              href={`mailto:${contact.email}`}
               className="text-apricot hover:underline"
             >
-              qamrabbas629@gmail.com
+              {contact.email}
             </a>
             . We will confirm deletion within a reasonable period, except information required to fulfill legal obligations or resolve disputes.
           </p>
@@ -97,10 +99,10 @@ export default function PrivacyPage() {
           <p>
             If you have questions or concerns about this Privacy Policy, please contact us at{" "}
             <a
-              href="mailto:qamrabbas629@gmail.com"
+              href={`mailto:${contact.email}`}
               className="text-apricot hover:underline"
             >
-              qamrabbas629@gmail.com
+              {contact.email}
             </a>
             .
           </p>
