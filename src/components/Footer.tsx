@@ -41,13 +41,13 @@ export default function Footer() {
             <ul className="flex flex-col gap-2 text-sm text-ice">
               <li>Skardu, Gilgit-Baltistan, Pakistan</li>
               <li>
-                <a href="mailto:hello@vistagbtours.pk" className="hover:text-apricot">
-                  hello@vistagbtours.pk
+                <a href="mailto:qamrabbas629@gmail.com" className="hover:text-apricot">
+                  qamrabbas629@gmail.com
                 </a>
               </li>
               <li>
-                <a href="tel:+923000000000" className="hover:text-apricot">
-                  +92 300 000 0000
+                <a href="tel:+923554646853" className="hover:text-apricot">
+                  +92 3554646853
                 </a>
               </li>
             </ul>

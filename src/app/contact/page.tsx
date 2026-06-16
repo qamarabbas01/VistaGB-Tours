@@ -37,14 +37,14 @@ export default function ContactPage() {
               <p className="coord-label mb-4">Contact</p>
               <p className="text-sm text-ice">
                 Email:{" "}
-                <a href="mailto:hello@vistagbtours.pk" className="text-apricot hover:underline">
-                  hello@vistagbtours.pk
+                <a href="mailto:qamrabbas629@gmail.com" className="text-apricot hover:underline">
+                  qamrabbas629@gmail.com
                 </a>
               </p>
               <p className="mt-2 text-sm text-ice">
                 Phone:{" "}
-                <a href="tel:+923000000000" className="text-apricot hover:underline">
-                  +92 300 000 0000
+                <a href="tel:+923554646853" className="text-apricot hover:underline">
+                  +92 3554646853
                 </a>
               </p>
             </div>
