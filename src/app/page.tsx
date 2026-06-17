@@ -151,7 +151,7 @@ export default function Home() {
           <div className="scroll-row mt-12 flex gap-6 overflow-x-auto pb-4">
             {destinations.map((dest) => (
               <Link
-                href="/destinations"
+                href={`/destinations/${dest.slug}`}
                 key={dest.slug}
                 className="group relative h-[420px] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl md:w-[340px]"
               >
