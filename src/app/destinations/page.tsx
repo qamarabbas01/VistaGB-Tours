@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { destinations } from "@/data/destinations";
 
 export const metadata = {
@@ -25,9 +26,10 @@ export default function DestinationsPage() {
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {destinations.map((dest) => (
-              <article
+              <Link
                 key={dest.slug}
-                className="group overflow-hidden rounded-2xl border border-teal/20 bg-slate"
+                href={`/destinations/${dest.slug}`}
+                className="group overflow-hidden rounded-2xl border border-teal/20 bg-slate transition-colors hover:border-apricot/50"
               >
                 <div className="relative h-56 w-full overflow-hidden">
                   <Image
@@ -42,7 +44,7 @@ export default function DestinationsPage() {
                   <p className="coord-label mb-2">
                     {dest.region} · ALT {dest.altitude}
                   </p>
-                  <h2 className="font-display text-2xl font-semibold text-glacier">
+                  <h2 className="font-display text-2xl font-semibold text-glacier transition-colors group-hover:text-apricot">
                     {dest.name}
                   </h2>
                   <p className="mt-1 text-sm font-medium text-apricot">
@@ -51,8 +53,11 @@ export default function DestinationsPage() {
                   <p className="mt-3 text-sm leading-relaxed text-ice">
                     {dest.description}
                   </p>
+                  <span className="mt-4 inline-block text-sm font-medium text-apricot">
+                    Explore →
+                  </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
