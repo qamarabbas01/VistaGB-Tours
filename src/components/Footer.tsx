@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { contact } from "@/config/contact";
 
 export default function Footer() {
   return (
@@ -41,13 +42,13 @@ export default function Footer() {
             <ul className="flex flex-col gap-2 text-sm text-ice">
               <li>Skardu, Gilgit-Baltistan, Pakistan</li>
               <li>
-                <a href="mailto:hello@vistagbtours.pk" className="hover:text-apricot">
-                  hello@vistagbtours.pk
+                <a href={`mailto:${contact.email}`} className="hover:text-apricot">
+                  {contact.email}
                 </a>
               </li>
               <li>
-                <a href="tel:+923000000000" className="hover:text-apricot">
-                  +92 300 000 0000
+                <a href={`tel:${contact.phone.tel}`} className="hover:text-apricot">
+                  {contact.phone.display}
                 </a>
               </li>
             </ul>
