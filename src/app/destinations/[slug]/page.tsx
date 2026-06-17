@@ -36,9 +36,11 @@ export default async function DestinationDetailPage({ params }: Props) {
     notFound();
   }
 
-  const otherDestinations = destinations
-    .filter((d) => d.slug !== dest.slug)
-    .slice(0, 3);
+  const currentIndex = destinations.findIndex((d) => d.slug === dest.slug);
+  const otherDestinations = [
+    ...destinations.slice(currentIndex + 1),
+    ...destinations.slice(0, currentIndex),
+  ].slice(0, 3);
 
   return (
     <div>

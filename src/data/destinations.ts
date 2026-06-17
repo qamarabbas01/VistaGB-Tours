@@ -175,7 +175,7 @@ export const destinations: Destination[] = [
       "90-minute drive north of Karimabad on the Karakoram Highway. Public minibuses and private cars are available from Hunza town.",
   },
   {
-    slug: "gharipo",
+    slug: "ghanche",
     name: "Ghanche",
     region: "Baltistan",
     altitude: "2,620M",
@@ -321,7 +321,7 @@ export const destinations: Destination[] = [
     description:
       "Bazaar life, ancient carvings, and the meeting point of mountains and cultures at the region’s hub.",
     image:
-      "https://images.unsplash.com/photo-1463592177119-dc1ca6f7b696?q=80&w=1600&auto=format&fit=crop",
+      "https://i.brecorder.com/primary/2024/07/20172202193b7b7.jpg",
     overview:
       "Gilgit is the principal city and historic crossroads of Gilgit-Baltistan, boasting a lively bazaar, tantalizing local cuisine, and easy trips to the Kargah Buddha or Naltar Valley. The city makes a convenient base for trips north to Hunza or west towards Chitral via the Shandur Pass.",
     highlights: [
