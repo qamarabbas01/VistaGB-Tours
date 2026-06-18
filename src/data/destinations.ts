@@ -410,7 +410,7 @@ export const destinations: Destination[] = [
     description:
       "A glittering turquoise tarn, reached via multi-day trek, offering panoramic views of K2, Spantik, and Hunza peaks.",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpnKaj3GO0WM7lgloWxg9VvU-WP2sY-jjQNw&s",
+      "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
     overview:
       "The Rush Lake trek is for serious adventurers seeking extreme beauty. Starting from Hoper Valley, trekkers pass glaciers and meadows before reaching the mirror-like high-altitude lake. From the summit of Rush Peak nearby, there are unmatched views of the Karakoram, including peaks like Ultar Sar and Spantik. Camping and guides are essential.",
     highlights: [

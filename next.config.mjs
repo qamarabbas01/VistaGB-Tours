@@ -7,7 +7,6 @@ const nextConfig = {
       { protocol: "https", hostname: "www.ajktours.com" },
       { protocol: "https", hostname: "northbackend.northonwheels.com" },
       { protocol: "https", hostname: "upload.wikimedia.org" },
-      { protocol: "https", hostname: "encrypted-tbn0.gstatic.com" },
       { protocol: "https", hostname: "guidetourismpakistan.com" },
       { protocol: "https", hostname: "www.shutterstock.com" },
       { protocol: "https", hostname: "visitgilgitbaltistan.gov.pk" },
