@@ -29,6 +29,7 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+Preview [https://vista-gb-tours.vercel.app/](VistaGb Tours).
 
 ## Notes
 
