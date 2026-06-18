@@ -19,12 +19,9 @@ export const destinations: Destination[] = [
     region: "Hunza",
     altitude: "2,438M",
     tagline: "Terraced orchards beneath Rakaposhi",
-    description:
-      "Apricot blossoms, glacial peaks, and centuries-old forts overlooking the Karakoram Highway.",
-    image:
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
-    overview:
-      "Hunza Valley sits along the Karakoram Highway where terraced apricot orchards climb toward glaciers and 7,000-metre peaks. Karimabad and Altit anchor the valley with restored forts, local bazaars, and viewpoints over Rakaposhi and Ultar Sar. Spring brings pink and white blossom; autumn turns the hills gold. Most travelers spend three to five days here, pairing village walks with day trips to Passu, Attabad Lake, and the Khunjerab corridor.",
+    description: "Apricot blossoms, glacial peaks, and centuries-old forts overlooking the Karakoram Highway.",
+    image: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+    overview: "Hunza Valley sits along the Karakoram Highway where terraced apricot orchards climb toward glaciers and 7,000-metre peaks. Karimabad and Altit anchor the valley with restored forts, local bazaars, and viewpoints over Rakaposhi and Ultar Sar. Spring brings pink and white blossom; autumn turns the hills gold. Most travelers spend three to five days here, pairing village walks with day trips to Passu, Attabad Lake, and the Khunjerab corridor.",
     highlights: [
       "Baltit and Altit forts overlooking Karimabad",
       "Eagle's Nest sunset viewpoint above the valley",
@@ -334,6 +331,259 @@ export const destinations: Destination[] = [
     bestTime: "March–October; peak bloom in spring, mild autumn days",
     gettingThere:
       "Daily flights (weather permitting) from Islamabad or a 14-16 hour drive up the Karakoram Highway.",
+  },
+  {
+    slug: "naltar-valley",
+    name: "Naltar Valley",
+    region: "Gilgit",
+    altitude: "3,048M",
+    tagline: "Pine forests, lakes, and ski slopes",
+    description:
+      "Home to vibrant alpine lakes, lush forests, a ski resort, and local villages tucked deep in the mountains.",
+    image:
+      "https://www.ajktours.com/wp-content/uploads/2020/08/Naltar-Valley-Gilgit_Baltistan_122.jpg",
+    overview:
+      "Naltar Valley is famed for its three dazzling lakes (known as the Bashkiri Lakes), dense pine forests, and a crisp alpine climate. The valley turns into a winter sports destination in January and February and is equally stunning in summer, with wildflowers and hiking trails. The bumpy jeep road from Gilgit is an adventure, but the payoff is pure tranquillity and natural splendour.",
+    highlights: [
+      "Naltar Lakes’ surreal blues and greens",
+      "Alpine skiing at Pakistan’s oldest ski resort",
+      "Wildflowers and forest walks in summer",
+      "Starry skies and peaceful nights",
+      "Mountain jeep rides from Gilgit",
+    ],
+    bestTime: "May–October for hiking and lakes; January–February for skiing",
+    gettingThere:
+      "45 km (2 hours) by jeep from Gilgit; private jeeps and local arrangements required beyond Nomal village. Road is rough but spectacular.",
+  },
+  {
+    slug: "bagrote-valley",
+    name: "Bagrote Valley",
+    region: "Gilgit",
+    altitude: "2,500M",
+    tagline: "Gateway to glaciers and glacier-fed rivers",
+    description:
+      "A narrow valley south of Gilgit rimmed with glaciers, crystal streams, and vibrant villages famed for their apples and apricots.",
+    image:
+      "https://northbackend.northonwheels.com/storage/uploads/Gargo-Meadows-Bagrote-valley-5.jpg",
+    overview:
+      "Bagrote is an agricultural valley set beneath immense peaks such as Rakaposhi and Diran. Turquoise rivers, traditional wooden homes, and scenic footpaths attract photographers and hikers. The valley is less developed for tourism, making it an offbeat alternative for immersion in mountain life and nature.",
+    highlights: [
+      "Footpaths lined with fruit orchards",
+      "Danyor Glacier and Harcho village",
+      "Views of Rakaposhi and Diran peaks",
+      "Local Bagrote culture and food",
+      "Pristine glacier-melt streams",
+    ],
+    bestTime: "April–October; bloom in spring, fruit in summer",
+    gettingThere:
+      "1-hour drive from Gilgit via Danyor town. Road suitable for cars and adventurous travelers; jeeps advised for off-road travel within the valley.",
+  },
+  {
+    slug: "hoper-valley",
+    name: "Hoper Valley",
+    region: "Nagar",
+    altitude: "2,800M",
+    tagline: "Glaciers, peaks, and blossom orchards",
+    description:
+      "An emerald valley facing sweeping white glaciers and surrounded by barley fields, apple orchards, and historic stone houses.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hopar_Valley.jpg",
+    overview:
+      "Hoper Valley is the heart of Nagar’s orchard culture and the base for treks onto the Hoper Glacier and toward the Barpu Glacier campsite. In blossom season, the fertile valley is alight with pinks and whites—a welcoming contrast to the wild, snowy terrain beyond. Watch local women tilling the fields and taste fresh apricots and apples right from the trees.",
+    highlights: [
+      "Panorama of Hoper Glacier and Miar Peak",
+      "Blossom season in April–May",
+      "Barpu Glacier trek and camping",
+      "Stone village architecture and channels",
+      "Farm-to-table fruit experience",
+    ],
+    bestTime: "April–September; spring bloom and late-summer harvest",
+    gettingThere:
+      "About 50 minutes’ drive from Karimabad or Nagar Khas on paved and rough village roads. Local taxis and jeeps available.",
+  },
+  {
+    slug: "rush-lake",
+    name: "Rush Lake",
+    region: "Nagar",
+    altitude: "4,694M",
+    tagline: "One of the world's highest alpine lakes",
+    description:
+      "A glittering turquoise tarn, reached via multi-day trek, offering panoramic views of K2, Spantik, and Hunza peaks.",
+    image:
+      "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "The Rush Lake trek is for serious adventurers seeking extreme beauty. Starting from Hoper Valley, trekkers pass glaciers and meadows before reaching the mirror-like high-altitude lake. From the summit of Rush Peak nearby, there are unmatched views of the Karakoram, including peaks like Ultar Sar and Spantik. Camping and guides are essential.",
+    highlights: [
+      "Jaw-dropping Karakoram panoramas",
+      "Reflections of snowy peaks in Rush Lake",
+      "Wild camping and star-watching at altitude",
+      "Trek through ablation valleys and summer pastures",
+      "Descent to Hoper via glaciers",
+    ],
+    bestTime: "July–September for safe trekking conditions",
+    gettingThere:
+      "Drive to Hoper Valley (Nagar), then 3–4 day trek up to Rush Lake; hiring local porters/guides advised.",
+  },
+  {
+    slug: "shandur-top",
+    name: "Shandur Top",
+    region: "Ghizer",
+    altitude: "3,700M",
+    tagline: "The Roof of the World and Polo Festival",
+    description:
+      "A high-altitude plateau famed for its wild beauty and the enigmatic annual Shandur Polo Festival, set between Chitral and Gilgit–Baltistan.",
+    image:
+      "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
+    overview:
+      "Shandur Top is often called 'The Roof of the World.' Each July, teams play polo in a rugged open-air stadium surrounded by lakes and wildflowers. The plateau separates the valleys of Gilgit and Chitral and is accessible only in summer. Off-festival, it’s a paradise for wild camping, trout fishing, and serious solitude.",
+    highlights: [
+      "Shandur Polo Festival in July",
+      "Lakes, alpine meadows, and wildflowers",
+      "Stunning road trips from Gupis/Phander or Mastuj",
+      "Camping under immense skies",
+      "Sweeping vistas toward Hindukush and Karakoram",
+    ],
+    bestTime: "Late June–August (road open, festival in July)",
+    gettingThere:
+      "Full-day drive from Gilgit via Gupis and Phander valleys. 4x4 required. Only accessible in summer due to snow.",
+  },
+  {
+    slug: "sheosar-lake",
+    name: "Sheosar Lake",
+    region: "Deosai/Baltistan",
+    altitude: "4,142M",
+    tagline: "Mirror lake of Deosai",
+    description:
+      "A pristine alpine lake in the heart of Deosai National Park, reflecting snow peaks, wildflowers, and blue sky.",
+    image:
+      "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
+    overview:
+      "Sheosar Lake is the gleaming heart of Deosai National Park, surrounded by the rolling grasslands of the high plateau. Panoramic views of Nanga Parbat on clear days, carpets of summer flowers, and silence broken only by marmots and fluttering cranes. Reached by jeep via Astore or Skardu.",
+    highlights: [
+      "Glass-like reflections of clouds and peaks",
+      "Wildflowers and birdlife in summer",
+      "Breathtaking views of Nanga Parbat",
+      "Lakeside picnics and photography",
+      "Part of the Deosai adventure circuit",
+    ],
+    bestTime: "July–September; snowbound the rest of year",
+    gettingThere:
+      "By jeep from Skardu via Deosai (rough, requires permit) or Astore via Chilim. The road may be impassable before July.",
+  },
+  {
+    slug: "katpana-desert",
+    name: "Katpana Desert",
+    region: "Skardu",
+    altitude: "2,226M",
+    tagline: "Cold Desert of Skardu",
+    description:
+      "Golden dunes, blue sky, and snow-capped peaks flank one of the world’s highest cold deserts, minutes from Skardu town.",
+    image:
+      "https://visitgilgitbaltistan.gov.pk/storage/images/dl0P1Wbj1i5mKshe2rIjYfkLtHL24W-metaZGVzZXJ0LmpwZw==-.jpg",
+    overview:
+      "The Katpana Desert’s dreamlike dunes shimmer with sunlight during the day and beneath the Milky Way at night. Just outside Skardu, it’s a unique place to ride horses or just stroll and photograph the contrast of desert, river, and mountains.",
+    highlights: [
+      "Sunset photography across dunes",
+      "Stargazing in clear, unpolluted skies",
+      "Camel and horse rides by the Indus",
+      "Snow-capped Himalayan horizon",
+      "Easy access from Skardu town",
+    ],
+    bestTime: "April–October; best light in spring or early autumn",
+    gettingThere:
+      "10-minute drive from Skardu toward the airport; accessible by any vehicle.",
+  },
+  {
+    slug: "machlu-village",
+    name: "Machlu Village",
+    region: "Baltistan",
+    altitude: "2,900M",
+    tagline: "Terraced village with panoramic Karakoram views",
+    description:
+      "A lesser-known gem near Khaplu, Machlu is a tranquil Balti village set among walnut orchards and snow peaks, with views toward the Masherbrum range.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/f/f2/Machlu_Village%2C_Khaplu_Ghizer_GB_%28Pakistan%29.jpg",
+    overview:
+      "Machlu offers a window onto traditional Balti life and hospitality, with walking paths through orchards, stone houses clustered on sunlit terraces, and breathtaking mountain vistas. Stay in a homestay or mid-level lodge for a true escape from the rush.",
+    highlights: [
+      "Views of Masherbrum from the village",
+      "Village walks among walnut and apricot trees",
+      "Authentic Balti home cooking",
+      "Spring blossom and autumn foliage",
+      "Base for treks into Saltoro or Hushe valley",
+    ],
+    bestTime: "May–October; magical in spring or autumn",
+    gettingThere:
+      "About 40 minutes by jeep or taxi from Khaplu through rural roads.",
+  },
+  {
+    slug: "basho-valley",
+    name: "Basho Valley",
+    region: "Skardu",
+    altitude: "3,400M",
+    tagline: "Abode of cedars and glaciers",
+    description:
+      "A pine-fringed valley beyond Skardu, famed for tall trees, glacier rivers, and campsites under a skyful of stars.",
+    image:
+      "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MjAyNjY2NjI3MTY1MDcwNDA0/basho-valley-the-hidden-gem-of-pakistan.jpg",
+    overview:
+      "Basho Valley offers a break from the dry, rocky terrain of lower Baltistan. The valley floor is laced with pines and dotted with wild campgrounds, with cool river breezes and views to Basho Peak. Ideal for families, trekkers, or anyone needing a cooling escape in summer.",
+    highlights: [
+      "Majestic pine forest and glacier creek picnics",
+      "Easy hiking and nature observation",
+      "Camping under the Milky Way",
+      "Traditional wooden footbridges",
+      "Wild berries and flowers in season",
+    ],
+    bestTime: "June–September (snow in winter, best in July/August)",
+    gettingThere:
+      "About one hour by jeep from Skardu toward Basho village. Last stretch is rough and requires a 4x4.",
+  },
+  {
+    slug: "upper-kachura-lake",
+    name: "Upper Kachura Lake",
+    region: "Skardu",
+    altitude: "2,500M",
+    tagline: "Serene alpine lake hidden by forest",
+    description:
+      "Crystal-clear, deep blue waters surrounded by apricot orchards and forested slopes, near Skardu.",
+    image:
+      "https://vepakistan.com/wp-content/uploads/2014/12/shangrila-fall.jpg",
+    overview:
+      "Upper Kachura Lake, far quieter than the resort-laden lower lake, is perfect for serene boat rides, trout fishing, or simply soaking up mountain silence. In spring and summer, the surrounding valleys are full of wildflowers and butterflies.",
+    highlights: [
+      "Peaceful boat rides and fishing",
+      "Wildflowers and forested paths",
+      "Views of the Karakoram reflected in the lake",
+      "Picnics under fruit trees",
+      "Less-crowded than Lower Kachura (Shangrila)",
+    ],
+    bestTime: "May–September; spring flowers, autumn foliage",
+    gettingThere:
+      "25–30 min drive from Skardu; walk about 10–15 minutes from the parking to the lake’s edge.",
+  },
+  {
+    slug: "khunjerab-pass",
+    name: "Khunjerab Pass",
+    region: "Hunza",
+    altitude: "4,693M",
+    tagline: "Pakistan-China border in the clouds",
+    description:
+      "The highest paved international border crossing in the world—where the Karakoram Highway crests the Pakistan–China frontier.",
+    image:
+      "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+    overview:
+      "Khunjerab Pass marks the end of the legendary Karakoram Highway. Windblown plateaus, grazing yaks, and border-marking arches attract visitors for dramatic photography and a taste of China-Pakistan crossroad culture. At nearly 4,700m, the air is thin, the scenery stark, and the experience unique.",
+    highlights: [
+      "Border gate and milestone photo ops",
+      "Chance to spot Himalayan wildlife (ibex, marmots, yaks)",
+      "Snow even in summer",
+      "Sweeping scenes over Karakoram peaks",
+      "Visit to Khunjerab National Park",
+    ],
+    bestTime: "June–September; closed in winter due to snow",
+    gettingThere:
+      "Drive from Sost, Hunza (about 2–3 hours); check KKH road status and border formalities before visiting.",
   },
 ];
 
