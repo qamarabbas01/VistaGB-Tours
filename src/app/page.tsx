@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { destinations } from "@/data/destinations";
+import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
 
 const reasons = [
   {
@@ -53,6 +56,7 @@ const services = [
 ];
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div>
       {/* Hero */}
@@ -80,18 +84,18 @@ export default function Home() {
             by the people who call them home.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Link
-              href="/destinations"
+            <Button
+              onClick={() => router.push('/destinations')}
               className="rounded-full bg-apricot px-8 py-3 text-center text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
             >
               Explore Destinations
-            </Link>
-            <Link
-              href="/contact"
+            </Button>
+            <Button
+              onClick={() => router.push('/contact')}
               className="rounded-full border border-ice/40 px-8 py-3 text-center text-sm font-medium text-glacier transition-colors hover:border-apricot hover:text-apricot"
             >
               Plan Your Trip
-            </Link>
+            </Button>
           </div>
         </div>
 
@@ -220,12 +224,12 @@ export default function Home() {
             Tell us your dates and the valleys you&apos;re curious about — we&apos;ll
             build a route around them.
           </p>
-          <Link
-            href="/contact"
+          <Button
+            onClick={() => router.push('/contact')}
             className="mt-8 inline-block rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
           >
             Get in Touch
-          </Link>
+          </Button>
         </div>
       </section>
     </div>
