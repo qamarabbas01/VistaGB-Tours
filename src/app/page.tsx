@@ -1,9 +1,7 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { destinations } from "@/data/destinations";
 import Button from "@/components/Button";
-import { useRouter } from "next/navigation";
 
 const reasons = [
   {
@@ -56,7 +54,6 @@ const services = [
 ];
 
 export default function Home() {
-  const router = useRouter();
   return (
     <div>
       {/* Hero */}
@@ -85,13 +82,13 @@ export default function Home() {
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Button
-              onClick={() => router.push('/destinations')}
+              href="/destinations"
               className="rounded-full bg-apricot px-8 py-3 text-center text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
             >
               Explore Destinations
             </Button>
             <Button
-              onClick={() => router.push('/contact')}
+              href="/contact"
               className="rounded-full border border-ice/40 px-8 py-3 text-center text-sm font-medium text-glacier transition-colors hover:border-apricot hover:text-apricot"
             >
               Plan Your Trip
@@ -225,7 +222,7 @@ export default function Home() {
             build a route around them.
           </p>
           <Button
-            onClick={() => router.push('/contact')}
+            href="/contact"
             className="mt-8 inline-block rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
           >
             Get in Touch

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
-import { useRouter } from "next/navigation";
 
 const links = [
   { href: "/", label: "Home" },
@@ -15,7 +14,6 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
 
   return (
     <header className="sticky top-0 z-50 border-b border-teal/20 bg-night/80 backdrop-blur-md">
@@ -85,7 +83,8 @@ export default function Navbar() {
             ))}
             <li>
               <Button
-                onClick={() => router.push('/contact')}
+                href="/contact"
+                onClick={() => setOpen(false)}
                 className="inline-block rounded-full border border-apricot px-5 py-2 text-sm font-medium text-apricot"
               >
                 Plan a Trip

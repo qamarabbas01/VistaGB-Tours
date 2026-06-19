@@ -1,8 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
 
 type ButtonProps = {
     children: React.ReactNode;
     onClick?: () => void;
+    href?: string;
     bgColor?: string;
     textColor?: string;
     outline?: boolean;
@@ -15,6 +17,7 @@ type ButtonProps = {
 function Button({
     children,
     onClick,
+    href,
     bgColor = "",
     textColor = "",
     outline = false,
@@ -35,10 +38,20 @@ function Button({
 
     base += ` ${textColor}`;
 
+    const combinedClassName = `${base} ${className}`;
+
+    if (href) {
+        return (
+            <Link href={href} className={combinedClassName} onClick={onClick}>
+                {children}
+            </Link>
+        );
+    }
+
     return (
         <button
             type={type}
-            className={`${base} ${className}`}
+            className={combinedClassName}
             onClick={onClick}
             disabled={disabled}
         >
@@ -47,4 +60,4 @@ function Button({
     )
 }
 
-export default Button
+export default Button;
