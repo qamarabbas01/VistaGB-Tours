@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Button from "./Button";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -119,13 +120,13 @@ export default function ContactForm() {
         </p>
       )}
 
-      <button
+      <Button
         type="submit"
         disabled={submitting}
         className="mt-2 w-full rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-night transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {submitting ? "Sending…" : "Send Message"}
-      </button>
+      </Button>
     </form>
   );
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import Button from "./Button";
 
 const links = [
   { href: "/", label: "Home" },
@@ -81,13 +82,13 @@ export default function Navbar() {
               </li>
             ))}
             <li>
-              <Link
+              <Button
                 href="/contact"
                 onClick={() => setOpen(false)}
                 className="inline-block rounded-full border border-apricot px-5 py-2 text-sm font-medium text-apricot"
               >
                 Plan a Trip
-              </Link>
+              </Button>
             </li>
           </ul>
         </nav>
