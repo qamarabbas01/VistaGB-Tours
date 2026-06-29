@@ -585,6 +585,282 @@ export const destinations: Destination[] = [
     gettingThere:
       "Drive from Sost, Hunza (about 2–3 hours); check KKH road status and border formalities before visiting.",
   },
+  {
+    slug: "gojal-valley",
+    name: "Gojal Valley",
+    region: "Upper Hunza",
+    altitude: "2,800M",
+    tagline: "Silk Road villages to the China border",
+    description:
+      "The upper Hunza corridor — glacier-fed rivers, Wakhi culture, and the last settlements before Khunjerab Pass.",
+    image:
+      "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Gojal stretches from Attabad Lake north to the Pakistan–China border, encompassing Gulmit, Passu, Sost, and a string of Wakhi-speaking villages along the Hunza River. It is the most international stretch of the Karakoram Highway — traders, trekkers, and border traffic pass through Sost before the climb to Khunjerab. The valley offers glacier walks, Borith Lake, and a distinct cultural rhythm from lower Hunza, with homestays in Gulmit and Ghulkin ideal for two to four nights.",
+    highlights: [
+      "Sost — last major town before the China border",
+      "Gulmit and Ghulkin village walks",
+      "Borith Lake and Batura Glacier day hikes",
+      "Wakhi heritage, music, and apricot harvests",
+      "Gateway to Khunjerab Pass and Khunjerab National Park",
+    ],
+    bestTime: "May–October; border road open June–September",
+    gettingThere:
+      "Drive north from Karimabad on the Karakoram Highway (~2–3 hours to Sost). Public transport and private jeeps run daily in season.",
+  },
+  {
+    slug: "astore-valley",
+    name: "Astore Valley",
+    region: "Astore",
+    altitude: "2,600M",
+    tagline: "Gateway to Rama, Deosai, and Nanga Parbat",
+    description:
+      "A broad green valley south of the Karakoram — meadows, pine forests, and the road to Fairy Meadows and Deosai.",
+    image:
+      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Astore is a fertile valley descending from the southern flanks of Nanga Parbat toward the Indus. The district town of Astore serves as a hub for trips to Rama Meadow, Sheosar Lake via Deosai, and the Fairy Meadows jeep track from Tato Village near Raikot Bridge. Less crowded than Hunza or Skardu, Astore rewards travelers who want forest walks, trout streams, and a slower pace — plan two to four days as a base for plateau and meadow excursions.",
+    highlights: [
+      "Rama Meadow and Rama Lake access",
+      "Southern approach to Deosai National Park",
+      "Tato Village trailhead for Fairy Meadows",
+      "Pine forests and trout-filled rivers",
+      "Traditional wooden villages and walnut orchards",
+    ],
+    bestTime: "May–October; Deosai access from late June",
+    gettingThere:
+      "4–5 hours by road from Gilgit over the Astore Valley road. Jeeps connect Astore town to Rama, Deosai, and Raikot Bridge.",
+  },
+  {
+    slug: "hushe-valley",
+    name: "Hushe Valley",
+    region: "Baltistan",
+    altitude: "3,050M",
+    tagline: "Trailhead to Masherbrum and the Saltoro",
+    description:
+      "A remote Balti valley of stone villages and glacier rivers — the launchpad for treks toward Masherbrum and the Gondogoro La.",
+    image:
+      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Hushe Valley branches east from Khaplu into some of the Karakoram's most dramatic trekking country. The village of Hushe sits beneath Masherbrum — the 'Queen of Peaks' — and marks the start of routes toward Gondogoro La, Masherbrum base camp, and the southern approaches to the Baltoro. Few tourists make it this far, so expect genuine Balti hospitality, irrigated barley terraces, and clear views of peaks above 7,000 metres.",
+    highlights: [
+      "Masherbrum base camp and Gondogoro La treks",
+      "Views of Masherbrum, Laila Peak, and K6",
+      "Authentic Balti villages — Hushe, Khurumal, Saicho",
+      "Glacier-fed streams and summer pastures",
+      "Less-travelled alternative to the Baltoro Highway",
+    ],
+    bestTime: "June–September for trekking; road open May–October",
+    gettingThere:
+      "Drive from Khaplu east along the Hushe River (~2 hours). The road is rough; 4x4 recommended. Porters and guides arrange at Hushe village.",
+  },
+  {
+    slug: "askole",
+    name: "Askole",
+    region: "Baltistan",
+    altitude: "3,048M",
+    tagline: "Last village before K2",
+    description:
+      "The final settlement on the road to Concordia — where expeditions begin the trek along the Baltoro Glacier toward K2.",
+    image:
+      "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Askole is the highest permanently inhabited village on the approach to the Baltoro Glacier and the legendary amphitheatre of Concordia — where K2, Broad Peak, and the Gasherbrums crowd the skyline. Reached by a rugged jeep track from Skardu via Shigar and Thongal, Askole is where porters are hired, loads are sorted, and trekkers take their first steps onto the glacier. Even if you are not climbing, the jeep journey and village stay offer a rare glimpse of expedition life at the edge of the Karakoram.",
+    highlights: [
+      "Starting point for K2 and Concordia treks",
+      "Dramatic jeep ride through the Braldu Gorge",
+      "Views toward the Baltoro and Muztagh Tower",
+      "Expedition culture and Balti porter community",
+      "Gateway to Paiju, Urdukas, and Goro camps",
+    ],
+    bestTime: "June–September; glacier trek season only",
+    gettingThere:
+      "Jeep from Skardu via Shigar and Thongal (~7–8 hours, often split over two days). Road is rough and seasonal; 4x4 essential.",
+  },
+  {
+    slug: "yasin-valley",
+    name: "Yasin Valley",
+    region: "Ghizer",
+    altitude: "2,700M",
+    tagline: "Emerald valleys west of Gilgit",
+    description:
+      "Terraced fields, walnut forests, and Khowar-speaking villages in one of Ghizer's most beautiful and least-visited valleys.",
+    image:
+      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Yasin Valley lies in western Ghizer District, reached over the scenic Gupis road from Gilgit. The valley is known for its green terraces, clear rivers, and the historic Darkut and Gupis connections toward Broghil and Chitral. Khalanga village is the main settlement; from here, day walks lead through walnut groves and summer pastures. Yasin suits travelers who have already seen Hunza and want a quieter, more pastoral side of Gilgit-Baltistan.",
+    highlights: [
+      "Terraced agriculture and walnut forests",
+      "Khowar culture and traditional wooden architecture",
+      "Scenic drive from Gupis through the Ghizer highlands",
+      "Trout fishing in clear mountain streams",
+      "Access toward Darkut and Broghil (permit required)",
+    ],
+    bestTime: "May–September; lush in June and July",
+    gettingThere:
+      "6–7 hours from Gilgit via Gupis and the Yasin road. 4x4 advised for side valleys; public transport reaches Khalanga in season.",
+  },
+  {
+    slug: "borith-lake",
+    name: "Borith Lake",
+    region: "Upper Hunza",
+    altitude: "2,600M",
+    tagline: "High pasture lake beneath Passu peaks",
+    description:
+      "A quiet glacial lake on a yak pasture above Gulmit — turquoise water, tundra flowers, and views of the Passu Cones.",
+    image:
+      "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Borith Lake sits on a high meadow above Gulmit in Gojal, reached by a short hike or jeep track from the Karakoram Highway. The lake is a seasonal wetland fed by glacial melt — in summer, migratory birds rest here and the surrounding pasture blooms with wildflowers. On clear days, the Passu Cones and Batura Glacier dominate the horizon. A simple lodge near the shore makes this an easy overnight stop on an upper Hunza itinerary.",
+    highlights: [
+      "Reflective lake views with Passu Cones backdrop",
+      "Birdwatching — ducks, geese, and migratory species",
+      "Short hikes to Ghulkin Glacier viewpoint",
+      "Summer wildflowers on the surrounding pasture",
+      "Peaceful alternative to busier Attabad Lake",
+    ],
+    bestTime: "May–October; wildflowers in July and August",
+    gettingThere:
+      "Turn off the KKH near Gulmit; 15–20 minutes by jeep or a 45-minute hike from the road. Often combined with a Passu or Gojal stay.",
+  },
+  {
+    slug: "satpara-lake",
+    name: "Satpara Lake",
+    region: "Skardu",
+    altitude: "2,636M",
+    tagline: "Skardu's alpine lake and dam",
+    description:
+      "A broad turquoise lake fed by Deosai meltwater — boating, trout fishing, and the gateway road to the plateau.",
+    image:
+      "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Satpara Lake lies a short drive south of Skardu, enclosed by barren hills and fed by the Deosai plateau's snowmelt. A dam has raised the water level, but the lake remains a popular half-day escape for boating, trout fishing, and picnics with views toward the Karakoram. The road continuing south from Satpara is the main route onto Deosai National Park, making the lake a natural stop before or after a plateau crossing.",
+    highlights: [
+      "Boat rides and trout fishing on the lake",
+      "Views toward the Karakoram from the shoreline",
+      "Gateway road to Deosai National Park",
+      "Manthal Buddha rock carving nearby",
+      "Easy half-day trip from Skardu town",
+    ],
+    bestTime: "May–October; combine with Deosai from late June",
+    gettingThere:
+      "20–30 minutes by car or jeep from Skardu. The Deosai road branches south from the lake; check plateau access before planning a crossing.",
+  },
+  {
+    slug: "manthoka-waterfall",
+    name: "Manthoka Waterfall",
+    region: "Kharmang",
+    altitude: "2,400M",
+    tagline: "Baltistan's tallest cascade",
+    description:
+      "A 180-foot waterfall plunging into a green gorge — one of the most dramatic day trips from Skardu.",
+    image:
+      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Manthoka Waterfall is in Kharmang District, southeast of Skardu along the Indus River. The cascade drops roughly 180 feet into a mossy gorge surrounded by apricot orchards and terraced fields. A short walk from the parking area reaches viewpoints at the base, where the spray and roar of the falls make for a refreshing stop on a warm summer day. The area is developing basic visitor facilities while retaining its rural Balti character.",
+    highlights: [
+      "One of the highest waterfalls in Gilgit-Baltistan",
+      "Short walk to the base through apricot orchards",
+      "Scenic drive along the Indus from Skardu",
+      "Nearby Blind Lake for a combined day trip",
+      "Photography and picnic spots in the gorge",
+    ],
+    bestTime: "April–October; fullest flow in late spring and summer",
+    gettingThere:
+      "1.5–2 hours by jeep from Skardu toward Kharmang. Road is paved in sections; allow a half-day for the round trip.",
+  },
+  {
+    slug: "gupis",
+    name: "Gupis",
+    region: "Ghizer",
+    altitude: "2,900M",
+    tagline: "Lakes and passes in western Ghizer",
+    description:
+      "A high valley town between Gilgit and Yasin — trout lakes, polo grounds, and the road toward Shandur.",
+    image:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Gupis is the principal settlement of western Ghizer, set among rolling hills and glacial lakes. Khalti Lake, just outside town, mirrors the surrounding peaks and is stocked with trout. Gupis sits on the route between Gilgit and Phander, and the road east connects toward Yasin and eventually Shandur Top. The town makes a practical overnight stop on a westward Gilgit-Baltistan loop — less famous than Hunza, but equally photogenic in summer.",
+    highlights: [
+      "Khalti Lake trout fishing and boating",
+      "Scenic position on the Gilgit–Phander–Shandur route",
+      "Local polo and cultural events in summer",
+      "Gateway to Yasin and Darkut valleys",
+      "Rolling meadows and poplar-lined rivers",
+    ],
+    bestTime: "May–September; Shandur road open late June onward",
+    gettingThere:
+      "4–5 hours from Gilgit via the Ghizer Valley road. Connects west to Phander and north toward Shandur Top in summer.",
+  },
+  {
+    slug: "ishkoman-valley",
+    name: "Ishkoman Valley",
+    region: "Ghizer",
+    altitude: "2,800M",
+    tagline: "Remote valleys toward the Pamir",
+    description:
+      "A northern Ghizer district of deep gorges, shepherd trails, and valleys that reach toward the Afghan Wakhan corridor.",
+    image:
+      "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Ishkoman Valley branches north from Gahkuch in Ghizer District, following the Ishkoman River toward some of the most remote settled terrain in Gilgit-Baltistan. The valley is home to Wakhi and Domaaki-speaking communities, summer pastures, and trekking routes toward the Pamir Knot. Few organized tours reach Ishkoman, making it ideal for experienced travelers seeking homestays, multi-day hikes, and landscapes that feel far from the Karakoram Highway crowds.",
+    highlights: [
+      "Remote Wakhi villages and summer pastures",
+      "Trekking routes toward the Pamir and Afghan border zone",
+      "Deep gorges and glacial rivers",
+      "Authentic homestay experiences",
+      "Off-the-beaten-path complement to Phander and Yasin",
+    ],
+    bestTime: "June–September; snowbound in winter",
+    gettingThere:
+      "Turn north from Gahkuch on the Ishkoman road (~2–3 hours to central villages). 4x4 recommended; check local conditions before trekking toward border areas.",
+  },
+  {
+    slug: "ganish-village",
+    name: "Ganish Village",
+    region: "Hunza",
+    altitude: "2,420M",
+    tagline: "Ancient settlement on the Silk Road",
+    description:
+      "One of Hunza's oldest villages — carved wooden mosques, narrow lanes, and 1,000 years of Karakoram trade history.",
+    image:
+      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Ganish sits on the Karakoram Highway just south of Karimabad, yet feels centuries apart from the tourist bustle above. Narrow stone lanes wind between mosques with carved wooden pillars, ancient watchtowers, and communal water channels fed by glacier melt. The village won a UNESCO Asia-Pacific Heritage Award for its restoration work, and guided walks reveal inscriptions, shrines, and stories from the Silk Road era. Allow a half-day from Karimabad to explore properly.",
+    highlights: [
+      "UNESCO-recognised heritage restoration",
+      "Carved wooden mosques and watchtowers",
+      "Silk Road history and ancient inscriptions",
+      "Guided heritage walks with local historians",
+      "Easy access from Karimabad on the KKH",
+    ],
+    bestTime: "April–October; blossom season in spring",
+    gettingThere:
+      "5 minutes south of Karimabad on the Karakoram Highway, or a short walk from central Hunza. Heritage guides available through local community organisations.",
+  },
+  {
+    slug: "broghil-valley",
+    name: "Broghil Valley",
+    region: "Upper Chitral / GB",
+    altitude: "3,300M",
+    tagline: "Meadows at the edge of the Wakhan",
+    description:
+      "High pastures, turquoise lakes, and yurt camps where Gilgit-Baltistan meets the Afghan Pamir — accessible only in summer.",
+    image:
+      "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
+    overview:
+      "Broghil Valley is one of the most remote destinations in northern Pakistan — a high bowl of meadows and lakes at the junction of the Hindu Kush, Pamir, and Karakoram. Reached from Laspur in Upper Chitral or via Darkut in Yasin (with permits), Broghil is known for Karambar Lake, polo on horseback, and views toward the Wakhan Corridor. The journey is demanding, but the reward is solitude, wildflowers, and a landscape unlike anywhere else in Gilgit-Baltistan.",
+    highlights: [
+      "Karambar Lake — one of the highest biologically active lakes",
+      "Summer yurt camps and Wakhi shepherd culture",
+      "Wildflowers and snow leopards in surrounding peaks",
+      "Polo on horseback — a Broghil tradition",
+      "Junction of Hindu Kush, Pamir, and Karakoram ranges",
+    ],
+    bestTime: "July–August only; snowbound and inaccessible otherwise",
+    gettingThere:
+      "Multi-day approach via Laspur (Chitral) or Darkut (Yasin) with 4x4 and trekking. NOC and local permits required; plan with an experienced operator.",
+  },
 ];
 
 export function getDestinationBySlug(slug: string): Destination | undefined {
