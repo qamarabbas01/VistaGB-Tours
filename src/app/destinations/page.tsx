@@ -10,13 +10,15 @@ export const metadata = {
 const ITEMS_PER_PAGE = 9;
 
 type Props = {
-  searchParams?: { page?: string };
+  searchParams?: { page?: string | string[] };
 };
 
 export default function DestinationsPage({ searchParams }: Props) {
+  const pageParam = searchParams?.page;
+  const pageStr = Array.isArray(pageParam) ? pageParam[0] : pageParam;
   const requestedPage = Math.max(
     1,
-    parseInt(searchParams?.page ?? "1", 10) || 1
+    parseInt(pageStr ?? "1", 10) || 1
   );
   const totalPages = Math.ceil(destinations.length / ITEMS_PER_PAGE);
   const currentPage = Math.min(requestedPage, Math.max(totalPages, 1));

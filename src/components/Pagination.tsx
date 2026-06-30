@@ -13,9 +13,15 @@ function buildPageHref(
   page: number,
   pageParam: string
 ): string {
-  if (page <= 1) return basePath;
-  const separator = basePath.includes("?") ? "&" : "?";
-  return `${basePath}${separator}${pageParam}=${page}`;
+  const [path, search] = basePath.split("?");
+  const params = new URLSearchParams(search);
+  if (page <= 1) {
+    params.delete(pageParam);
+  } else {
+    params.set(pageParam, page.toString());
+  }
+  const queryString = params.toString();
+  return queryString ? `${path}?${queryString}` : path;
 }
 
 function getVisiblePages(
