@@ -54,6 +54,9 @@ const services = [
 ];
 
 export default function Home() {
+  const trendingToShow = 5;
+  const trendingDestinations = destinations.slice(0, trendingToShow);
+
   return (
     <div>
       {/* Hero */}
@@ -143,14 +146,14 @@ export default function Home() {
             </div>
             <Link
               href="/destinations"
-              className="text-sm font-medium text-apricot hover:underline"
+              className="text-sm font-medium text-apricot hover:underline hidden md:inline"
             >
               View all destinations →
             </Link>
           </div>
 
           <div className="scroll-row mt-12 flex gap-6 overflow-x-auto pb-4">
-            {destinations.map((dest) => (
+            {trendingDestinations.map((dest) => (
               <Link
                 href={`/destinations/${dest.slug}`}
                 key={dest.slug}
@@ -175,6 +178,14 @@ export default function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+          <div className="mt-8 flex justify-center md:hidden">
+            <Link
+              href="/destinations"
+              className="rounded-full bg-apricot px-6 py-2 text-sm font-semibold text-night hover:scale-[1.03] transition-transform"
+            >
+              View all destinations
+            </Link>
           </div>
         </div>
       </section>
