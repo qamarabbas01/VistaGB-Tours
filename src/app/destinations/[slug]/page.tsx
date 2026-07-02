@@ -42,6 +42,8 @@ export default async function DestinationDetailPage({ params }: Props) {
     ...destinations.slice(0, currentIndex),
   ].slice(0, 3);
 
+  const galleryImages = dest.gallery.filter((src) => src !== dest.image);
+
   return (
     <div>
       <section className="relative h-[50vh] min-h-[360px] w-full overflow-hidden md:h-[60vh]">
@@ -127,7 +129,7 @@ export default async function DestinationDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {dest.gallery.length ? (
+      {galleryImages.length > 0 ? (
         <section className="border-t border-teal/20 py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 md:px-10">
             <p className="coord-label mb-3">Gallery</p>
@@ -136,16 +138,16 @@ export default async function DestinationDetailPage({ params }: Props) {
             </h2>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {dest.gallery.map((src, index) => (
+              {galleryImages.map((src, index) => (
                 <div
-                  key={`${src}-${index}`}
+                  key={src}
                   className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-teal/20"
                 >
                   <Image
                     src={src}
                     alt={`${dest.name} — photo ${index + 1}`}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>
