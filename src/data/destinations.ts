@@ -1,3 +1,9 @@
+export type GalleryImage = {
+  src: string;
+  title: string;
+  caption?: string;
+};
+
 export type Destination = {
   slug: string;
   name: string;
@@ -6,7 +12,7 @@ export type Destination = {
   tagline: string;
   description: string;
   image: string;
-  gallery: string[];
+  gallery: GalleryImage[];
   overview: string;
   highlights: string[];
   bestTime: string;
@@ -23,11 +29,31 @@ export const destinations: Destination[] = [
     description: "Apricot blossoms, glacial peaks, and centuries-old forts overlooking the Karakoram Highway.",
     image: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Panorama",
+        caption: "Hunza · ALT 2,438M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?q=80&w=1600&auto=format&fit=crop",
+        title: "Rakaposhi from Karimabad",
+        caption: "Hunza · ALT 2,438M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Highway Vista",
+        caption: "Hunza · ALT 2,438M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow Trail",
+        caption: "Hunza · ALT 2,438M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1600&auto=format&fit=crop",
+        title: "Valley Orchard Season",
+        caption: "Hunza · ALT 2,438M",
+      },
     ],
     overview:
       "Hunza Valley sits along the Karakoram Highway...",
@@ -54,10 +80,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
-      "https://visitgilgitbaltistan.gov.pk/storage/images/dl0P1Wbj1i5mKshe2rIjYfkLtHL24W-metaZGVzZXJ0LmpwZw==-.jpg",
-      "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
+        title: "Indus Valley & Peaks",
+        caption: "Baltistan · ALT 2,228M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+        title: "Balti Heritage",
+        caption: "Baltistan · ALT 2,228M",
+      },
+      {
+        src: "https://visitgilgitbaltistan.gov.pk/storage/images/dl0P1Wbj1i5mKshe2rIjYfkLtHL24W-metaZGVzZXJ0LmpwZw==-.jpg",
+        title: "Katpana Cold Desert",
+        caption: "Baltistan · ALT 2,228M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+        title: "Shigar Fort",
+        caption: "Baltistan · ALT 2,228M",
+      },
     ],
     overview:
       "Skardu is the administrative and logistical hub of Baltistan — a town on the Indus where expeditions stock up before heading toward K2, Broad Peak, and the Gasherbrum massif. Beyond mountaineering, the surrounding valleys offer Shangrila Resort at Lower Kachura, the cold desert of Katpana, and the historic Kharpocho Fort rising above the river. Skardu works well as a base for three to seven days of lake visits, desert sunsets, and jeep transfers deeper into Baltistan.",
@@ -83,10 +125,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
-      "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
-      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
+        title: "High Plateau Wildflowers",
+        caption: "Baltistan · ALT 4,114M",
+      },
+      {
+        src: "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
+        title: "Sheosar Lake",
+        caption: "Baltistan · ALT 4,114M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow",
+        caption: "Baltistan · ALT 4,114M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Baltistan · ALT 4,114M",
+      },
     ],
     overview:
       "Deosai National Park is one of the highest plateaus on earth — a treeless expanse of rolling grassland between Skardu and Astore. In summer, wildflowers cover the meadows and shepherds move their flocks across the passes. The park is a refuge for the Himalayan brown bear, though sightings require patience and an early start. Most visits are day trips or overnight camps from Skardu, crossing the Sadpara side or the Chilim Valley route from Astore.",
@@ -112,10 +170,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+        title: "Nanga Parbat Views",
+        caption: "Diamer · ALT 3,300M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow",
+        caption: "Diamer · ALT 3,300M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+        title: "Glacier Trail",
+        caption: "Diamer · ALT 3,300M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow Trail",
+        caption: "Diamer · ALT 3,300M",
+      },
     ],
     overview:
       "Fairy Meadows is a high alpine pasture at the foot of Nanga Parbat, the world's ninth-highest peak. The journey begins with a jeep ride on one of Pakistan's most dramatic roads, followed by a two- to three-hour hike through pine forest. Simple lodges and camps sit on the meadow's edge, facing the sheer Rupal Face — a wall of rock and ice that dominates the skyline. Most visitors stay one or two nights, with optional hikes toward Beyal Camp or Nanga Parbat base camp.",
@@ -141,10 +215,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
-      "https://upload.wikimedia.org/wikipedia/commons/f/f2/Machlu_Village%2C_Khaplu_Ghizer_GB_%28Pakistan%29.jpg",
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+        title: "Balti Heritage",
+        caption: "Baltistan · ALT 2,560M",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Machlu_Village%2C_Khaplu_Ghizer_GB_%28Pakistan%29.jpg",
+        title: "Machlu Village",
+        caption: "Baltistan · ALT 2,560M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Panorama",
+        caption: "Baltistan · ALT 2,560M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+        title: "Heritage Fort",
+        caption: "Baltistan · ALT 2,560M",
+      },
     ],
     overview:
       "Khaplu is a riverside town in eastern Baltistan, quieter than Skardu but rich in heritage. The restored Khaplu Palace — now a heritage hotel — anchors the old bazaar, where apricot orchards and timber houses line narrow lanes. The town is the staging point for treks into Hushe Valley toward Masherbrum and the Saltoro range. Travellers seeking culture over crowds often base themselves here for two to four days.",
@@ -170,10 +260,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
-      "https://vepakistan.com/wp-content/uploads/2014/12/shangrila-fall.jpg",
-      "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
+        title: "Turquoise Lake Waters",
+        caption: "Hunza · ALT 2,560M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
+        title: "Indus Valley & Peaks",
+        caption: "Hunza · ALT 2,560M",
+      },
+      {
+        src: "https://vepakistan.com/wp-content/uploads/2014/12/shangrila-fall.jpg",
+        title: "Kachura Lake",
+        caption: "Hunza · ALT 2,560M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
+        title: "High-Altitude Lake",
+        caption: "Hunza · ALT 2,560M",
+      },
     ],
     overview:
       "Attabad Lake appeared overnight in January 2010 when a massive landslide dammed the Hunza River, displacing communities and burying a stretch of the Karakoram Highway. Today the lake is a striking turquoise corridor between sheer rock walls — boat trips connect the north and south shores while a tunnel bypasses the submerged road. Cafes and viewpoints line the southern end near Karimabad, making it an easy half-day stop or a scenic transit point through upper Hunza.",
@@ -199,10 +305,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
+        title: "Passu Cones",
+        caption: "Upper Hunza · ALT 2,500M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Panorama",
+        caption: "Upper Hunza · ALT 2,500M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+        title: "Nanga Parbat Views",
+        caption: "Upper Hunza · ALT 2,500M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Highway Vista",
+        caption: "Upper Hunza · ALT 2,500M",
+      },
     ],
     overview:
       "Passu is famed for its saw-toothed Passu Cones (or Passu Cathedral) and its proximity to glaciers and pristine villages in Gojal, Upper Hunza. The town sits beneath towering peaks and beside the Hunza River, with the Batura and Passu glaciers within hiking range. Walk across the adrenaline-pumping Hussaini suspension bridge, visit Gulmit, and stay at family guesthouses for immersive cultural experiences.",
@@ -228,11 +350,31 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
-      "https://visitgilgitbaltistan.gov.pk/storage/images/dl0P1Wbj1i5mKshe2rIjYfkLtHL24W-metaZGVzZXJ0LmpwZw==-.jpg",
-      "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
+        title: "Remote Karakoram Valley",
+        caption: "Baltistan · ALT 2,620M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
+        title: "Indus Valley & Peaks",
+        caption: "Baltistan · ALT 2,620M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+        title: "Balti Heritage",
+        caption: "Baltistan · ALT 2,620M",
+      },
+      {
+        src: "https://visitgilgitbaltistan.gov.pk/storage/images/dl0P1Wbj1i5mKshe2rIjYfkLtHL24W-metaZGVzZXJ0LmpwZw==-.jpg",
+        title: "Base for Siachen Glacier expeditions (with sp…",
+        caption: "Baltistan · ALT 2,620M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+        title: "Heritage Fort",
+        caption: "Baltistan · ALT 2,620M",
+      },
     ],
     overview:
       "Ghanche, also known as Ghangche or Gharipo, is one of the easternmost districts of Pakistan, bordering Ladakh and Siachen. It’s a land of dramatic topography, with glacial rivers flowing through deep valleys and vibrant villages clinging to mountain slopes. Explore the Chaqchan Mosque in Khaplu, freshwater springs, and trails into the Saltoro Mountains.",
@@ -258,10 +400,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
-      "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
+      {
+        src: "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+        title: "Ghizer Valley",
+        caption: "Ghizer · ALT 2,850M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Ghizer · ALT 2,850M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
+        title: "Remote Karakoram Valley",
+        caption: "Ghizer · ALT 2,850M",
+      },
+      {
+        src: "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
+        title: "Shandur Top",
+        caption: "Ghizer · ALT 2,850M",
+      },
     ],
     overview:
       "Phander is a tranquil valley in the Gilgit region, hemmed in by pine-covered hills and known for its mirror-like trout lakes. The Phander River splits and rejoins throughout the valley, with poplar and willow trees lining its green shores. It’s an idyllic escape for anglers, hikers, and anyone seeking village hospitality away from the main tourist routes.",
@@ -287,11 +445,31 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Nagar · ALT 2,700M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
+        title: "Passu Cones",
+        caption: "Nagar · ALT 2,700M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Panorama",
+        caption: "Nagar · ALT 2,700M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+        title: "Nanga Parbat Views",
+        caption: "Nagar · ALT 2,700M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Highway Vista",
+        caption: "Nagar · ALT 2,700M",
+      },
     ],
     overview:
       "Nagar lies on the opposite side of the Hunza River from Karimabad, offering spectacular reciprocal views of the valley and direct access to treks up Rakaposhi and Diran. Spring is a riot of blossom and autumn brings vibrant harvests, while daily life revolves around farming, herding, and the local bazaar.",
@@ -317,10 +495,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow",
+        caption: "Astore · ALT 3,300M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+        title: "Nanga Parbat Views",
+        caption: "Astore · ALT 3,300M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+        title: "Glacier Trail",
+        caption: "Astore · ALT 3,300M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow Trail",
+        caption: "Astore · ALT 3,300M",
+      },
     ],
     overview:
       "Rama Meadow is an alpine oasis in the Astore Valley, known for its grassy glades and wood cabins. Surrounded by snowcapped peaks, it's the preferred launching point for trekkers heading to Nanga Parbat’s south face or nearby Rama Lake. The alpine setting turns lush green from May onwards, with wildflowers carpeting the slopes and yaks grazing at leisure.",
@@ -346,11 +540,31 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+        title: "Glacier Trail",
+        caption: "Nagar · ALT 2,036M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
+        title: "Passu Cones",
+        caption: "Nagar · ALT 2,036M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Panorama",
+        caption: "Nagar · ALT 2,036M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+        title: "Nanga Parbat Views",
+        caption: "Nagar · ALT 2,036M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Highway Vista",
+        caption: "Nagar · ALT 2,036M",
+      },
     ],
     overview:
       "Minapin is synonymous with adventure, being the favored starting point for the Rakaposhi and Diran base camp treks. Guesthouses line the irrigated fields, and the village offers a close-up of Nagar’s pastoral rhythms, traditional stone architecture, and spectacular valley views.",
@@ -376,10 +590,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
-      "https://upload.wikimedia.org/wikipedia/commons/f/f2/Machlu_Village%2C_Khaplu_Ghizer_GB_%28Pakistan%29.jpg",
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+        title: "Heritage Fort",
+        caption: "Baltistan · ALT 2,230M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+        title: "Balti Heritage",
+        caption: "Baltistan · ALT 2,230M",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Machlu_Village%2C_Khaplu_Ghizer_GB_%28Pakistan%29.jpg",
+        title: "Machlu Village",
+        caption: "Baltistan · ALT 2,230M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Panorama",
+        caption: "Baltistan · ALT 2,230M",
+      },
     ],
     overview:
       "Shigar is the launchpad for K2 expeditions and home to the beautifully restored Shigar Fort. The meandering river cradles villages rich in heritage, fruit-laden gardens, and sand dunes unique to the Karakoram’s lower reaches.",
@@ -405,11 +635,31 @@ export const destinations: Destination[] = [
     image:
       "https://i.brecorder.com/primary/2024/07/20172202193b7b7.jpg",
     gallery: [
-      "https://i.brecorder.com/primary/2024/07/20172202193b7b7.jpg",
-      "https://www.ajktours.com/wp-content/uploads/2020/08/Naltar-Valley-Gilgit_Baltistan_122.jpg",
-      "https://northbackend.northonwheels.com/storage/uploads/Gargo-Meadows-Bagrote-valley-5.jpg",
-      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://i.brecorder.com/primary/2024/07/20172202193b7b7.jpg",
+        title: "Gilgit City",
+        caption: "Gilgit · ALT 1,500M",
+      },
+      {
+        src: "https://www.ajktours.com/wp-content/uploads/2020/08/Naltar-Valley-Gilgit_Baltistan_122.jpg",
+        title: "Naltar Valley",
+        caption: "Gilgit · ALT 1,500M",
+      },
+      {
+        src: "https://northbackend.northonwheels.com/storage/uploads/Gargo-Meadows-Bagrote-valley-5.jpg",
+        title: "Bagrote Meadows",
+        caption: "Gilgit · ALT 1,500M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+        title: "Ghizer Valley",
+        caption: "Gilgit · ALT 1,500M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Gilgit · ALT 1,500M",
+      },
     ],
     overview:
       "Gilgit is the principal city and historic crossroads of Gilgit-Baltistan, boasting a lively bazaar, tantalizing local cuisine, and easy trips to the Kargah Buddha or Naltar Valley. The city makes a convenient base for trips north to Hunza or west towards Chitral via the Shandur Pass.",
@@ -435,10 +685,26 @@ export const destinations: Destination[] = [
     image:
       "https://www.ajktours.com/wp-content/uploads/2020/08/Naltar-Valley-Gilgit_Baltistan_122.jpg",
     gallery: [
-      "https://www.ajktours.com/wp-content/uploads/2020/08/Naltar-Valley-Gilgit_Baltistan_122.jpg",
-      "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MjAyNjY2NjI3MTY1MDcwNDA0/basho-valley-the-hidden-gem-of-pakistan.jpg",
-      "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://www.ajktours.com/wp-content/uploads/2020/08/Naltar-Valley-Gilgit_Baltistan_122.jpg",
+        title: "Naltar Valley",
+        caption: "Gilgit · ALT 3,048M",
+      },
+      {
+        src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MjAyNjY2NjI3MTY1MDcwNDA0/basho-valley-the-hidden-gem-of-pakistan.jpg",
+        title: "Basho Valley",
+        caption: "Gilgit · ALT 3,048M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+        title: "Glacier Trail",
+        caption: "Gilgit · ALT 3,048M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow",
+        caption: "Gilgit · ALT 3,048M",
+      },
     ],
     overview:
       "Naltar Valley is famed for its three dazzling lakes (known as the Bashkiri Lakes), dense pine forests, and a crisp alpine climate. The valley turns into a winter sports destination in January and February and is equally stunning in summer, with wildflowers and hiking trails. The bumpy jeep road from Gilgit is an adventure, but the payoff is pure tranquillity and natural splendour.",
@@ -464,10 +730,26 @@ export const destinations: Destination[] = [
     image:
       "https://northbackend.northonwheels.com/storage/uploads/Gargo-Meadows-Bagrote-valley-5.jpg",
     gallery: [
-      "https://northbackend.northonwheels.com/storage/uploads/Gargo-Meadows-Bagrote-valley-5.jpg",
-      "https://www.ajktours.com/wp-content/uploads/2020/08/Naltar-Valley-Gilgit_Baltistan_122.jpg",
-      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://northbackend.northonwheels.com/storage/uploads/Gargo-Meadows-Bagrote-valley-5.jpg",
+        title: "Bagrote Meadows",
+        caption: "Gilgit · ALT 2,500M",
+      },
+      {
+        src: "https://www.ajktours.com/wp-content/uploads/2020/08/Naltar-Valley-Gilgit_Baltistan_122.jpg",
+        title: "Naltar Valley",
+        caption: "Gilgit · ALT 2,500M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+        title: "Ghizer Valley",
+        caption: "Gilgit · ALT 2,500M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Gilgit · ALT 2,500M",
+      },
     ],
     overview:
       "Bagrote is an agricultural valley set beneath immense peaks such as Rakaposhi and Diran. Turquoise rivers, traditional wooden homes, and scenic footpaths attract photographers and hikers. The valley is less developed for tourism, making it an offbeat alternative for immersion in mountain life and nature.",
@@ -493,10 +775,26 @@ export const destinations: Destination[] = [
     image:
       "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hopar_Valley.jpg",
     gallery: [
-      "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hopar_Valley.jpg",
-      "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hopar_Valley.jpg",
+        title: "Hopar Glacier View",
+        caption: "Nagar · ALT 2,800M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
+        title: "Passu Cones",
+        caption: "Nagar · ALT 2,800M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
+        title: "High-Altitude Lake",
+        caption: "Nagar · ALT 2,800M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+        title: "Glacier Trail",
+        caption: "Nagar · ALT 2,800M",
+      },
     ],
     overview:
       "Hoper Valley is the heart of Nagar’s orchard culture and the base for treks onto the Hoper Glacier and toward the Barpu Glacier campsite. In blossom season, the fertile valley is alight with pinks and whites—a welcoming contrast to the wild, snowy terrain beyond. Watch local women tilling the fields and taste fresh apricots and apples right from the trees.",
@@ -522,10 +820,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
-      "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hopar_Valley.jpg",
-      "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
+        title: "High-Altitude Lake",
+        caption: "Nagar · ALT 4,694M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
+        title: "Passu Cones",
+        caption: "Nagar · ALT 4,694M",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hopar_Valley.jpg",
+        title: "Hopar Glacier View",
+        caption: "Nagar · ALT 4,694M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+        title: "Glacier Trail",
+        caption: "Nagar · ALT 4,694M",
+      },
     ],
     overview:
       "The Rush Lake trek is for serious adventurers seeking extreme beauty. Starting from Hoper Valley, trekkers pass glaciers and meadows before reaching the mirror-like high-altitude lake. From the summit of Rush Peak nearby, there are unmatched views of the Karakoram, including peaks like Ultar Sar and Spantik. Camping and guides are essential.",
@@ -551,10 +865,26 @@ export const destinations: Destination[] = [
     image:
       "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
     gallery: [
-      "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
-      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
+        title: "Shandur Top",
+        caption: "Ghizer · ALT 3,700M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+        title: "Ghizer Valley",
+        caption: "Ghizer · ALT 3,700M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Ghizer · ALT 3,700M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
+        title: "Remote Karakoram Valley",
+        caption: "Ghizer · ALT 3,700M",
+      },
     ],
     overview:
       "Shandur Top is often called 'The Roof of the World.' Each July, teams play polo in a rugged open-air stadium surrounded by lakes and wildflowers. The plateau separates the valleys of Gilgit and Chitral and is accessible only in summer. Off-festival, it’s a paradise for wild camping, trout fishing, and serious solitude.",
@@ -580,10 +910,26 @@ export const destinations: Destination[] = [
     image:
       "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
     gallery: [
-      "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
-      "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
+        title: "Sheosar Lake",
+        caption: "Deosai/Baltistan · ALT 4,142M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
+        title: "High Plateau Wildflowers",
+        caption: "Deosai/Baltistan · ALT 4,142M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow",
+        caption: "Deosai/Baltistan · ALT 4,142M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Deosai/Baltistan · ALT 4,142M",
+      },
     ],
     overview:
       "Sheosar Lake is the gleaming heart of Deosai National Park, surrounded by the rolling grasslands of the high plateau. Panoramic views of Nanga Parbat on clear days, carpets of summer flowers, and silence broken only by marmots and fluttering cranes. Reached by jeep via Astore or Skardu.",
@@ -609,10 +955,26 @@ export const destinations: Destination[] = [
     image:
       "https://visitgilgitbaltistan.gov.pk/storage/images/dl0P1Wbj1i5mKshe2rIjYfkLtHL24W-metaZGVzZXJ0LmpwZw==-.jpg",
     gallery: [
-      "https://visitgilgitbaltistan.gov.pk/storage/images/dl0P1Wbj1i5mKshe2rIjYfkLtHL24W-metaZGVzZXJ0LmpwZw==-.jpg",
-      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://visitgilgitbaltistan.gov.pk/storage/images/dl0P1Wbj1i5mKshe2rIjYfkLtHL24W-metaZGVzZXJ0LmpwZw==-.jpg",
+        title: "Katpana Desert Overview",
+        caption: "Skardu · ALT 2,226M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
+        title: "Indus Valley & Peaks",
+        caption: "Skardu · ALT 2,226M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
+        title: "High Plateau Wildflowers",
+        caption: "Skardu · ALT 2,226M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+        title: "Balti Heritage",
+        caption: "Skardu · ALT 2,226M",
+      },
     ],
     overview:
       "The Katpana Desert’s dreamlike dunes shimmer with sunlight during the day and beneath the Milky Way at night. Just outside Skardu, it’s a unique place to ride horses or just stroll and photograph the contrast of desert, river, and mountains.",
@@ -638,10 +1000,26 @@ export const destinations: Destination[] = [
     image:
       "https://upload.wikimedia.org/wikipedia/commons/f/f2/Machlu_Village%2C_Khaplu_Ghizer_GB_%28Pakistan%29.jpg",
     gallery: [
-      "https://upload.wikimedia.org/wikipedia/commons/f/f2/Machlu_Village%2C_Khaplu_Ghizer_GB_%28Pakistan%29.jpg",
-      "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Machlu_Village%2C_Khaplu_Ghizer_GB_%28Pakistan%29.jpg",
+        title: "Machlu Village",
+        caption: "Baltistan · ALT 2,900M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+        title: "Balti Heritage",
+        caption: "Baltistan · ALT 2,900M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Panorama",
+        caption: "Baltistan · ALT 2,900M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+        title: "Heritage Fort",
+        caption: "Baltistan · ALT 2,900M",
+      },
     ],
     overview:
       "Machlu offers a window onto traditional Balti life and hospitality, with walking paths through orchards, stone houses clustered on sunlit terraces, and breathtaking mountain vistas. Stay in a homestay or mid-level lodge for a true escape from the rush.",
@@ -667,10 +1045,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MjAyNjY2NjI3MTY1MDcwNDA0/basho-valley-the-hidden-gem-of-pakistan.jpg",
     gallery: [
-      "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MjAyNjY2NjI3MTY1MDcwNDA0/basho-valley-the-hidden-gem-of-pakistan.jpg",
-      "https://www.ajktours.com/wp-content/uploads/2020/08/Naltar-Valley-Gilgit_Baltistan_122.jpg",
-      "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MjAyNjY2NjI3MTY1MDcwNDA0/basho-valley-the-hidden-gem-of-pakistan.jpg",
+        title: "Basho Valley",
+        caption: "Skardu · ALT 3,400M",
+      },
+      {
+        src: "https://www.ajktours.com/wp-content/uploads/2020/08/Naltar-Valley-Gilgit_Baltistan_122.jpg",
+        title: "Naltar Valley",
+        caption: "Skardu · ALT 3,400M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+        title: "Glacier Trail",
+        caption: "Skardu · ALT 3,400M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow",
+        caption: "Skardu · ALT 3,400M",
+      },
     ],
     overview:
       "Basho Valley offers a break from the dry, rocky terrain of lower Baltistan. The valley floor is laced with pines and dotted with wild campgrounds, with cool river breezes and views to Basho Peak. Ideal for families, trekkers, or anyone needing a cooling escape in summer.",
@@ -696,10 +1090,26 @@ export const destinations: Destination[] = [
     image:
       "https://vepakistan.com/wp-content/uploads/2014/12/shangrila-fall.jpg",
     gallery: [
-      "https://vepakistan.com/wp-content/uploads/2014/12/shangrila-fall.jpg",
-      "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://vepakistan.com/wp-content/uploads/2014/12/shangrila-fall.jpg",
+        title: "Kachura Lake",
+        caption: "Skardu · ALT 2,500M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
+        title: "Turquoise Lake Waters",
+        caption: "Skardu · ALT 2,500M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
+        title: "Indus Valley & Peaks",
+        caption: "Skardu · ALT 2,500M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
+        title: "High-Altitude Lake",
+        caption: "Skardu · ALT 2,500M",
+      },
     ],
     overview:
       "Upper Kachura Lake, far quieter than the resort-laden lower lake, is perfect for serene boat rides, trout fishing, or simply soaking up mountain silence. In spring and summer, the surrounding valleys are full of wildflowers and butterflies.",
@@ -725,10 +1135,26 @@ export const destinations: Destination[] = [
     image:
       "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
     gallery: [
-      "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
-      "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+        title: "Khunjerab Pass",
+        caption: "Hunza · ALT 4,693M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
+        title: "Passu Cones",
+        caption: "Hunza · ALT 4,693M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
+        title: "Turquoise Lake Waters",
+        caption: "Hunza · ALT 4,693M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Panorama",
+        caption: "Hunza · ALT 4,693M",
+      },
     ],
     overview:
       "Khunjerab Pass marks the end of the legendary Karakoram Highway. Windblown plateaus, grazing yaks, and border-marking arches attract visitors for dramatic photography and a taste of China-Pakistan crossroad culture. At nearly 4,700m, the air is thin, the scenery stark, and the experience unique.",
@@ -754,10 +1180,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
+        title: "Passu Cones",
+        caption: "Upper Hunza · ALT 2,800M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Panorama",
+        caption: "Upper Hunza · ALT 2,800M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+        title: "Nanga Parbat Views",
+        caption: "Upper Hunza · ALT 2,800M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Highway Vista",
+        caption: "Upper Hunza · ALT 2,800M",
+      },
     ],
     overview:
       "Gojal stretches from Attabad Lake north to the Pakistan–China border, encompassing Gulmit, Passu, Sost, and a string of Wakhi-speaking villages along the Hunza River. It is the most international stretch of the Karakoram Highway — traders, trekkers, and border traffic pass through Sost before the climb to Khunjerab. The valley offers glacier walks, Borith Lake, and a distinct cultural rhythm from lower Hunza, with homestays in Gulmit and Ghulkin ideal for two to four nights.",
@@ -783,10 +1225,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow",
+        caption: "Astore · ALT 2,600M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+        title: "Nanga Parbat Views",
+        caption: "Astore · ALT 2,600M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+        title: "Glacier Trail",
+        caption: "Astore · ALT 2,600M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow Trail",
+        caption: "Astore · ALT 2,600M",
+      },
     ],
     overview:
       "Astore is a fertile valley descending from the southern flanks of Nanga Parbat toward the Indus. The district town of Astore serves as a hub for trips to Rama Meadow, Sheosar Lake via Deosai, and the Fairy Meadows jeep track from Tato Village near Raikot Bridge. Less crowded than Hunza or Skardu, Astore rewards travelers who want forest walks, trout streams, and a slower pace — plan two to four days as a base for plateau and meadow excursions.",
@@ -812,10 +1270,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
-      "https://visitgilgitbaltistan.gov.pk/storage/images/dl0P1Wbj1i5mKshe2rIjYfkLtHL24W-metaZGVzZXJ0LmpwZw==-.jpg",
-      "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
+        title: "Indus Valley & Peaks",
+        caption: "Baltistan · ALT 3,050M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+        title: "Balti Heritage",
+        caption: "Baltistan · ALT 3,050M",
+      },
+      {
+        src: "https://visitgilgitbaltistan.gov.pk/storage/images/dl0P1Wbj1i5mKshe2rIjYfkLtHL24W-metaZGVzZXJ0LmpwZw==-.jpg",
+        title: "Authentic Balti villages",
+        caption: "Baltistan · ALT 3,050M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+        title: "Heritage Fort",
+        caption: "Baltistan · ALT 3,050M",
+      },
     ],
     overview:
       "Hushe Valley branches east from Khaplu into some of the Karakoram's most dramatic trekking country. The village of Hushe sits beneath Masherbrum — the 'Queen of Peaks' — and marks the start of routes toward Gondogoro La, Masherbrum base camp, and the southern approaches to the Baltoro. Few tourists make it this far, so expect genuine Balti hospitality, irrigated barley terraces, and clear views of peaks above 7,000 metres.",
@@ -841,11 +1315,31 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
-      "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hopar_Valley.jpg",
-      "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+        title: "Balti Heritage",
+        caption: "Baltistan · ALT 3,048M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1632133915653-8ded5c72e329?q=80&w=1600&auto=format&fit=crop",
+        title: "Passu Cones",
+        caption: "Baltistan · ALT 3,048M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
+        title: "High-Altitude Lake",
+        caption: "Baltistan · ALT 3,048M",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hopar_Valley.jpg",
+        title: "Hopar Glacier View",
+        caption: "Baltistan · ALT 3,048M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1683548503315-bb949615f80b?q=80&w=1600&auto=format&fit=crop",
+        title: "Glacier Trail",
+        caption: "Baltistan · ALT 3,048M",
+      },
     ],
     overview:
       "Askole is the highest permanently inhabited village on the approach to the Baltoro Glacier and the legendary amphitheatre of Concordia — where K2, Broad Peak, and the Gasherbrums crowd the skyline. Reached by a rugged jeep track from Skardu via Shigar and Thongal, Askole is where porters are hired, loads are sorted, and trekkers take their first steps onto the glacier. Even if you are not climbing, the jeep journey and village stay offer a rare glimpse of expedition life at the edge of the Karakoram.",
@@ -871,10 +1365,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
-      "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
+      {
+        src: "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+        title: "Ghizer Valley",
+        caption: "Ghizer · ALT 2,700M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Ghizer · ALT 2,700M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
+        title: "Remote Karakoram Valley",
+        caption: "Ghizer · ALT 2,700M",
+      },
+      {
+        src: "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
+        title: "Shandur Top",
+        caption: "Ghizer · ALT 2,700M",
+      },
     ],
     overview:
       "Yasin Valley lies in western Ghizer District, reached over the scenic Gupis road from Gilgit. The valley is known for its green terraces, clear rivers, and the historic Darkut and Gupis connections toward Broghil and Chitral. Khalanga village is the main settlement; from here, day walks lead through walnut groves and summer pastures. Yasin suits travelers who have already seen Hunza and want a quieter, more pastoral side of Gilgit-Baltistan.",
@@ -900,10 +1410,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
-      "https://vepakistan.com/wp-content/uploads/2014/12/shangrila-fall.jpg",
-      "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1722082933604-288a1c130475?q=80&w=1600&auto=format&fit=crop",
+        title: "Turquoise Lake Waters",
+        caption: "Upper Hunza · ALT 2,600M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
+        title: "Indus Valley & Peaks",
+        caption: "Upper Hunza · ALT 2,600M",
+      },
+      {
+        src: "https://vepakistan.com/wp-content/uploads/2014/12/shangrila-fall.jpg",
+        title: "Kachura Lake",
+        caption: "Upper Hunza · ALT 2,600M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1759027684392-0eecdf15da6e?q=80&w=1600&auto=format&fit=crop",
+        title: "High-Altitude Lake",
+        caption: "Upper Hunza · ALT 2,600M",
+      },
     ],
     overview:
       "Borith Lake sits on a high meadow above Gulmit in Gojal, reached by a short hike or jeep track from the Karakoram Highway. The lake is a seasonal wetland fed by glacial melt — in summer, migratory birds rest here and the surrounding pasture blooms with wildflowers. On clear days, the Passu Cones and Batura Glacier dominate the horizon. A simple lodge near the shore makes this an easy overnight stop on an upper Hunza itinerary.",
@@ -929,10 +1455,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
-      "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
-      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
+        title: "High Plateau Wildflowers",
+        caption: "Skardu · ALT 2,636M",
+      },
+      {
+        src: "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
+        title: "Sheosar Lake",
+        caption: "Skardu · ALT 2,636M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow",
+        caption: "Skardu · ALT 2,636M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Skardu · ALT 2,636M",
+      },
     ],
     overview:
       "Satpara Lake lies a short drive south of Skardu, enclosed by barren hills and fed by the Deosai plateau's snowmelt. A dam has raised the water level, but the lake remains a popular half-day escape for boating, trout fishing, and picnics with views toward the Karakoram. The road continuing south from Satpara is the main route onto Deosai National Park, making the lake a natural stop before or after a plateau crossing.",
@@ -958,10 +1500,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+        title: "Nanga Parbat Views",
+        caption: "Kharmang · ALT 2,400M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+        title: "Ghizer Valley",
+        caption: "Kharmang · ALT 2,400M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Kharmang · ALT 2,400M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Highway Vista",
+        caption: "Kharmang · ALT 2,400M",
+      },
     ],
     overview:
       "Manthoka Waterfall is in Kharmang District, southeast of Skardu along the Indus River. The cascade drops roughly 180 feet into a mossy gorge surrounded by apricot orchards and terraced fields. A short walk from the parking area reaches viewpoints at the base, where the spray and roar of the falls make for a refreshing stop on a warm summer day. The area is developing basic visitor facilities while retaining its rural Balti character.",
@@ -987,10 +1545,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
-      "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Ghizer · ALT 2,900M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+        title: "Ghizer Valley",
+        caption: "Ghizer · ALT 2,900M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
+        title: "Remote Karakoram Valley",
+        caption: "Ghizer · ALT 2,900M",
+      },
+      {
+        src: "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
+        title: "Shandur Top",
+        caption: "Ghizer · ALT 2,900M",
+      },
     ],
     overview:
       "Gupis is the principal settlement of western Ghizer, set among rolling hills and glacial lakes. Khalti Lake, just outside town, mirrors the surrounding peaks and is stocked with trout. Gupis sits on the route between Gilgit and Phander, and the road east connects toward Yasin and eventually Shandur Top. The town makes a practical overnight stop on a westward Gilgit-Baltistan loop — less famous than Hunza, but equally photogenic in summer.",
@@ -1016,10 +1590,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
-      "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
+      {
+        src: "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1600&auto=format&fit=crop",
+        title: "Remote Karakoram Valley",
+        caption: "Ghizer · ALT 2,800M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+        title: "Ghizer Valley",
+        caption: "Ghizer · ALT 2,800M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Ghizer · ALT 2,800M",
+      },
+      {
+        src: "https://guidetourismpakistan.com/wp-content/uploads/2021/05/Shandur-pass-1.jpg",
+        title: "Shandur Top",
+        caption: "Ghizer · ALT 2,800M",
+      },
     ],
     overview:
       "Ishkoman Valley branches north from Gahkuch in Ghizer District, following the Ishkoman River toward some of the most remote settled terrain in Gilgit-Baltistan. The valley is home to Wakhi and Domaaki-speaking communities, summer pastures, and trekking routes toward the Pamir Knot. Few organized tours reach Ishkoman, making it ideal for experienced travelers seeking homestays, multi-day hikes, and landscapes that feel far from the Karakoram Highway crowds.",
@@ -1045,10 +1635,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+        title: "Karakoram Panorama",
+        caption: "Hunza · ALT 2,420M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?q=80&w=1600&auto=format&fit=crop",
+        title: "Balti Heritage",
+        caption: "Hunza · ALT 2,420M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?q=80&w=1600&auto=format&fit=crop",
+        title: "Rakaposhi from Karimabad",
+        caption: "Hunza · ALT 2,420M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1677103036843-df9e5ad74eea?q=80&w=1600&auto=format&fit=crop",
+        title: "Heritage Fort",
+        caption: "Hunza · ALT 2,420M",
+      },
     ],
     overview:
       "Ganish sits on the Karakoram Highway just south of Karimabad, yet feels centuries apart from the tourist bustle above. Narrow stone lanes wind between mosques with carved wooden pillars, ancient watchtowers, and communal water channels fed by glacier melt. The village won a UNESCO Asia-Pacific Heritage Award for its restoration work, and guided walks reveal inscriptions, shrines, and stories from the Silk Road era. Allow a half-day from Karimabad to explore properly.",
@@ -1074,10 +1680,26 @@ export const destinations: Destination[] = [
     image:
       "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
-      "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
-      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+      {
+        src: "https://images.unsplash.com/photo-1606490194859-07c18c9f0968?q=80&w=1600&auto=format&fit=crop",
+        title: "High Plateau Wildflowers",
+        caption: "Upper Chitral / GB · ALT 3,300M",
+      },
+      {
+        src: "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
+        title: "Sheosar Lake",
+        caption: "Upper Chitral / GB · ALT 3,300M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+        title: "Alpine Meadow",
+        caption: "Upper Chitral / GB · ALT 3,300M",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+        title: "River Valley Panorama",
+        caption: "Upper Chitral / GB · ALT 3,300M",
+      },
     ],
     overview:
       "Broghil Valley is one of the most remote destinations in northern Pakistan — a high bowl of meadows and lakes at the junction of the Hindu Kush, Pamir, and Karakoram. Reached from Laspur in Upper Chitral or via Darkut in Yasin (with permits), Broghil is known for Karambar Lake, polo on horseback, and views toward the Wakhan Corridor. The journey is demanding, but the reward is solitude, wildflowers, and a landscape unlike anywhere else in Gilgit-Baltistan.",

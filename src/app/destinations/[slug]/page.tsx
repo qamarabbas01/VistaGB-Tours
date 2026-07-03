@@ -5,6 +5,7 @@ import {
   destinations,
   getDestinationBySlug,
 } from "@/data/destinations";
+import DestinationGallery from "@/components/DestinationGallery";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -127,33 +128,11 @@ export default async function DestinationDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {dest.gallery.length ? (
-        <section className="border-t border-teal/20 py-16 md:py-24">
-          <div className="mx-auto max-w-7xl px-6 md:px-10">
-            <p className="coord-label mb-3">Gallery</p>
-            <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
-              Photos of {dest.name}
-            </h2>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {dest.gallery.map((src, index) => (
-                <div
-                  key={`${src}-${index}`}
-                  className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-teal/20"
-                >
-                  <Image
-                    src={src}
-                    alt={`${dest.name} — photo ${index + 1}`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
+      <DestinationGallery
+        images={dest.gallery}
+        heroImage={dest.image}
+        destinationName={dest.name}
+      />
 
       <section className="border-t border-teal/20 bg-slate py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
