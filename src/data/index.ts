@@ -1,0 +1,176 @@
+import type { Place, RegionDestination, SearchResult, TravelLocation } from "./types";
+import { hunzaDestination } from "./destinations/hunza";
+import { skarduDestination } from "./destinations/skardu";
+import { gilgitDestination } from "./destinations/gilgit";
+import { nagarDestination } from "./destinations/nagar";
+import { legacyDestinations } from "./destinations/legacy";
+import { allPlaces } from "./places";
+
+export type {
+  GalleryImage,
+  Place,
+  PlaceType,
+  RegionDestination,
+  Destination,
+  TravelLocation,
+  SearchResult,
+} from "./types";
+
+/** Top-level region hubs shown on the destinations map */
+export const regions: RegionDestination[] = [
+  hunzaDestination,
+  skarduDestination,
+  gilgitDestination,
+  nagarDestination,
+  ...legacyDestinations,
+];
+
+/** @deprecated Use `regions` — kept for existing imports */
+export const destinations = regions;
+
+export const places: Place[] = allPlaces;
+
+const placeBySlug = new Map(places.map((p) => [p.slug, p]));
+const regionBySlug = new Map(regions.map((r) => [r.slug, r]));
+
+export function isPlace(location: TravelLocation): location is Place {
+  return "parentSlug" in location;
+}
+
+export function getRegionBySlug(slug: string): RegionDestination | undefined {
+  return regionBySlug.get(slug);
+}
+
+/** Resolves a region or place by slug (for /destinations/[slug] routes) */
+export function getLocationBySlug(slug: string): TravelLocation | undefined {
+  return placeBySlug.get(slug) ?? regionBySlug.get(slug);
+}
+
+/** @deprecated Use getLocationBySlug */
+export function getDestinationBySlug(slug: string): RegionDestination | undefined {
+  return getRegionBySlug(slug);
+}
+
+export function getPlaceBySlug(slug: string): Place | undefined {
+  return placeBySlug.get(slug);
+}
+
+export function getPlacesForRegion(regionSlug: string): Place[] {
+  const region = regionBySlug.get(regionSlug);
+  if (!region) return [];
+  return region.placeSlugs
+    .map((slug) => placeBySlug.get(slug))
+    .filter((p): p is Place => Boolean(p));
+}
+
+export function getParentRegion(place: Place): RegionDestination | undefined {
+  return regionBySlug.get(place.parentSlug);
+}
+
+export function getAllStaticSlugs(): string[] {
+  return [...regions.map((r) => r.slug), ...places.map((p) => p.slug)];
+}
+
+const SEARCH_ALIASES: Record<string, string[]> = {
+  hunza: ["hunza-valley"],
+  gojal: ["gojal-valley", "hunza-valley"],
+  karimabad: ["karimabad", "hunza-valley"],
+  baltit: ["baltit-fort", "hunza-valley"],
+  altit: ["altit-fort", "hunza-valley"],
+  attabad: ["attabad-lake", "hunza-valley"],
+  passu: ["passu", "passu-cones", "hunza-valley"],
+  khunjerab: ["khunjerab-pass", "hunza-valley"],
+  hopper: ["hopper-valley", "nagar"],
+  hoper: ["hopper-valley", "nagar"],
+  nagar: ["nagar", "nagar-khas"],
+  skardu: ["skardu"],
+  kachura: ["shangrila-resort", "upper-kachura-lake", "skardu"],
+  shangrila: ["shangrila-resort", "skardu"],
+  deosai: ["deosai-plains", "skardu"],
+  naltar: ["naltar-valley", "gilgit"],
+  gilgit: ["gilgit"],
+};
+
+function scoreMatch(text: string, query: string): number {
+  const lower = text.toLowerCase();
+  if (lower === query) return 100;
+  if (lower.startsWith(query)) return 80;
+  if (lower.includes(query)) return 50;
+  return 0;
+}
+
+function placeSearchText(place: Place): string {
+  return [
+    place.name,
+    place.tagline,
+    place.description,
+    place.overview,
+    place.type,
+    ...place.highlights,
+    ...place.activities,
+    place.parentSlug,
+  ].join(" ");
+}
+
+function regionSearchText(region: RegionDestination): string {
+  return [
+    region.name,
+    region.region,
+    region.tagline,
+    region.description,
+    region.overview,
+    ...(region.majorValleys ?? []),
+    ...region.highlights,
+    ...region.placeSlugs,
+  ].join(" ");
+}
+
+/** Search regions and places — expanding matched regions to include all child places */
+export function searchLocations(query: string): SearchResult {
+  const q = query.trim().toLowerCase();
+  if (!q) {
+    return { query, regions: [], places: [], placesByRegion: {} };
+  }
+
+  const aliasSlugs = new Set<string>();
+  for (const [alias, slugs] of Object.entries(SEARCH_ALIASES)) {
+    if (alias.includes(q) || q.includes(alias)) {
+      slugs.forEach((s) => aliasSlugs.add(s));
+    }
+  }
+
+  const matchedRegions = regions
+    .filter((r) => {
+      if (aliasSlugs.has(r.slug)) return true;
+      return scoreMatch(regionSearchText(r), q) > 0;
+    })
+    .sort(
+      (a, b) =>
+        scoreMatch(regionSearchText(b), q) - scoreMatch(regionSearchText(a), q),
+    );
+
+  const matchedRegionSlugs = new Set(matchedRegions.map((r) => r.slug));
+
+  const matchedPlaces = places
+    .filter((p) => {
+      if (aliasSlugs.has(p.slug)) return true;
+      if (matchedRegionSlugs.has(p.parentSlug)) return true;
+      return scoreMatch(placeSearchText(p), q) > 0;
+    })
+    .sort(
+      (a, b) =>
+        scoreMatch(placeSearchText(b), q) - scoreMatch(placeSearchText(a), q),
+    );
+
+  const placesByRegion: Record<string, Place[]> = {};
+  for (const region of matchedRegions) {
+    placesByRegion[region.slug] = getPlacesForRegion(region.slug);
+  }
+
+  return {
+    query,
+    regions: matchedRegions,
+    places: matchedPlaces,
+    placesByRegion,
+  };
+}

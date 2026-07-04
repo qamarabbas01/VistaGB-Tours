@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { destinations } from "@/data/destinations";
+import { regions } from "@/data";
 import Button from "@/components/Button";
 
 const reasons = [
@@ -55,7 +55,7 @@ const services = [
 
 export default function Home() {
   const trendingToShow = 5;
-  const trendingDestinations = destinations.slice(0, trendingToShow);
+  const trendingDestinations = regions.slice(0, trendingToShow);
 
   return (
     <div>
