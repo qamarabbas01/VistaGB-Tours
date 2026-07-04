@@ -1,0 +1,751 @@
+import type { Place } from "../types";
+
+const HUB = "Karimabad";
+const PARENT = "hunza-valley";
+
+export const hunzaPlaces: Place[] = [
+  {
+    slug: "karimabad",
+    name: "Karimabad",
+    parentSlug: PARENT,
+    type: "Town",
+    tagline: "The heart of Hunza on the Karakoram Highway",
+    description:
+      "Karimabad is Hunza's main town — bazaars, forts, apricot orchards, and Rakaposhi views above the Karakoram Highway.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+        title: "Karimabad Bazaar",
+        caption: "Central Hunza · ALT 2,438M",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Baltit_Fort_Hunza.jpg",
+        title: "Baltit Fort from Karimabad",
+        caption: "Central Hunza",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Altit_Fort_-_Hunza_Valley.jpg",
+        title: "Altit Fort",
+        caption: "Central Hunza",
+      },
+    ],
+    overview:
+      "Karimabad (formerly Baltit) is the cultural and tourist centre of Hunza. Stone lanes climb between guesthouses, craft shops, and apricot-drying terraces, with Baltit and Altit forts anchoring either end of the ridge. Most visitors base themselves here for three to five days, making day trips to Attabad, Passu, and Eagle's Nest.",
+    highlights: [
+      "Main bazaar and Hunza handicrafts",
+      "Walking distance to Baltit and Altit forts",
+      "Rakaposhi and Ultar Sar viewpoints",
+      "Apricot and cherry blossom in spring",
+      "Cafes with valley and peak views",
+    ],
+    activities: ["Heritage walks", "Photography", "Local cuisine", "Fort visits"],
+    bestTime: "April–October; blossom in April",
+    duration: "1–3 days as a base",
+    hubName: HUB,
+    coordinates: "36.316°N, 74.650°E",
+    altitude: "2,438M",
+    gettingThere:
+      "2.5 hours north of Gilgit on the Karakoram Highway. Public vans and private jeeps run daily in season.",
+    nearby: ["baltit-fort", "altit-fort", "eagle-nest", "duikar", "attabad-lake"],
+  },
+  {
+    slug: "baltit-fort",
+    name: "Baltit Fort",
+    parentSlug: PARENT,
+    type: "Fort",
+    tagline: "700 years of royal Hunza heritage above Karimabad",
+    description:
+      "A restored hilltop fort with museum rooms, carved timber, and panoramic views over Karimabad and the Hunza River.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Baltit_Fort_Hunza.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Baltit_Fort_Hunza.jpg",
+        title: "Baltit Fort Exterior",
+        caption: "Karimabad · ALT 2,470M",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+        title: "View over Karimabad",
+        caption: "From Baltit Fort",
+      },
+    ],
+    overview:
+      "Baltit Fort crowns a knoll above Karimabad and served as the seat of the Mir of Hunza for centuries. Painstakingly restored with Aga Khan Trust support, the fort now houses cultural exhibits and a café. Allow one to two hours for the climb, tour, and rooftop photography.",
+    highlights: [
+      "UNESCO-recognised restoration",
+      "Museum and royal chambers",
+      "Rakaposhi and valley panoramas",
+      "Traditional timber architecture",
+      "Sunset from the ramparts",
+    ],
+    activities: ["Heritage tour", "Photography", "Museum visit"],
+    bestTime: "April–October; clear mornings for peaks",
+    duration: "1–2 hours",
+    distanceFromHub: "15 min walk uphill from Karimabad bazaar",
+    hubName: HUB,
+    coordinates: "36.318°N, 74.655°E",
+    altitude: "2,470M",
+    gettingThere: "Footpath from Karimabad bazaar; moderate uphill walk.",
+    nearby: ["karimabad", "altit-fort", "eagle-nest"],
+  },
+  {
+    slug: "altit-fort",
+    name: "Altit Fort",
+    parentSlug: PARENT,
+    type: "Fort",
+    tagline: "Hunza's oldest fort in the village of Altit",
+    description:
+      "A 900-year-old fort and village at the confluence of the Hunza and Altit rivers — older than Baltit and deeply atmospheric.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/2/2e/Altit_Fort_-_Hunza_Valley.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Altit_Fort_-_Hunza_Valley.jpg",
+        title: "Altit Fort",
+        caption: "Altit Village · ALT 2,300M",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+        title: "Hunza Valley from Altit",
+        caption: "Central Hunza",
+      },
+    ],
+    overview:
+      "Altit Fort predates Baltit and sits in the lower village of Altit, where the Hunza River meets the Altit gorge. Guided tours cover dungeons, watchtowers, and the royal garden. The walk from Karimabad takes 20–30 minutes through orchards.",
+    highlights: [
+      "Oldest fort in Hunza",
+      "Royal garden and apricot orchards",
+      "River confluence views",
+      "Guided cultural tours",
+      "Less crowded than Baltit",
+    ],
+    activities: ["Guided fort tour", "Village walk", "Photography"],
+    bestTime: "April–October",
+    duration: "1–2 hours",
+    distanceFromHub: "20 min walk from Karimabad",
+    hubName: HUB,
+    coordinates: "36.310°N, 74.665°E",
+    altitude: "2,300M",
+    gettingThere: "Downhill walk from Karimabad or short jeep ride to Altit village.",
+    nearby: ["karimabad", "baltit-fort", "ganish-village"],
+  },
+  {
+    slug: "eagle-nest",
+    name: "Eagle's Nest",
+    parentSlug: PARENT,
+    type: "Viewpoint",
+    tagline: "Hunza's premier sunset viewpoint",
+    description:
+      "A ridge-top hotel and viewpoint above Duikar with sweeping views of Rakaposhi, Ultar Sar, and the full Hunza Valley.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Hunza_Valley_from_Eagle%27s_Nest.jpg/1280px-Hunza_Valley_from_Eagle%27s_Nest.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Hunza_Valley_from_Eagle%27s_Nest.jpg/1280px-Hunza_Valley_from_Eagle%27s_Nest.jpg",
+        title: "Sunset over Hunza",
+        caption: "Duikar · ALT 2,850M",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+        title: "Rakaposhi at dusk",
+        caption: "Eagle's Nest viewpoint",
+      },
+    ],
+    overview:
+      "Eagle's Nest (often accessed via Duikar village) is the classic Hunza sunset spot. A short jeep ride from Karimabad brings you to a ridge where Rakaposhi, Golden Peak, and the valley floor glow at golden hour. Many visitors come for one evening; some stay at the hilltop lodge.",
+    highlights: [
+      "360° valley and peak panorama",
+      "Legendary sunset photography",
+      "Rakaposhi and Ultar Sar aligned at dusk",
+      "Hilltop café and lodge",
+      "Stargazing on clear nights",
+    ],
+    activities: ["Sunset photography", "Stargazing", "Short hike"],
+    bestTime: "April–October; arrive 30 min before sunset",
+    duration: "2–3 hours",
+    distanceFromHub: "20 min jeep from Karimabad",
+    hubName: HUB,
+    coordinates: "36.325°N, 74.640°E",
+    altitude: "2,850M",
+    gettingThere: "Jeep from Karimabad to Duikar, then short walk to the viewpoint.",
+    nearby: ["duikar", "karimabad", "baltit-fort"],
+  },
+  {
+    slug: "duikar",
+    name: "Duikar",
+    parentSlug: PARENT,
+    type: "Village",
+    tagline: "Ridge village above Karimabad",
+    description:
+      "A small settlement on the ridge above Hunza — gateway to Eagle's Nest and quiet orchard walks.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Hunza_Valley_from_Eagle%27s_Nest.jpg/1280px-Hunza_Valley_from_Eagle%27s_Nest.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Hunza_Valley_from_Eagle%27s_Nest.jpg/1280px-Hunza_Valley_from_Eagle%27s_Nest.jpg",
+        title: "Duikar Ridge",
+        caption: "Above Karimabad · ALT 2,850M",
+      },
+    ],
+    overview:
+      "Duikar sits on the ridge above Karimabad and serves as the access point for Eagle's Nest. The village itself is quiet, with a few guesthouses and orchard paths — ideal for visitors who want sunset views without staying in the busier town below.",
+    highlights: [
+      "Access to Eagle's Nest",
+      "Quiet orchard walks",
+      "Valley views without crowds",
+      "Guesthouses on the ridge",
+    ],
+    activities: ["Sunset viewing", "Village walk", "Photography"],
+    bestTime: "April–October",
+    duration: "Half day",
+    distanceFromHub: "20 min jeep from Karimabad",
+    hubName: HUB,
+    coordinates: "36.326°N, 74.638°E",
+    altitude: "2,850M",
+    gettingThere: "Jeep track from Karimabad; shared jeeps run at sunset in peak season.",
+    nearby: ["eagle-nest", "karimabad"],
+  },
+  {
+    slug: "attabad-lake",
+    name: "Attabad Lake",
+    parentSlug: PARENT,
+    type: "Lake",
+    tagline: "Turquoise water born from a landslide",
+    description:
+      "A surreal blue lake formed in 2010, framed by sheer rock walls — boating and lakeside cafes.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/7/7f/Attabad_Lake_Gojal_Hunza_Gilgit_Baltistan.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Attabad_Lake_Gojal_Hunza_Gilgit_Baltistan.jpg",
+        title: "Attabad Lake panorama",
+        caption: "Gojal · ALT 2,560M",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Attabad_Lake_Gojal_Hunza_Gilgit_Baltistan.jpg",
+        title: "Turquoise waters",
+        caption: "Attabad Lake",
+      },
+    ],
+    overview:
+      "Attabad Lake appeared overnight in January 2010 when a landslide dammed the Hunza River. Today boat trips cross the turquoise corridor between sheer canyon walls, while the Attabad Tunnel bypasses the submerged Karakoram Highway. Cafes and viewpoints line the southern shore.",
+    highlights: [
+      "Boat rides across glacial water",
+      "Dramatic canyon walls",
+      "Lakeside cafes and viewpoints",
+      "Attabad Tunnel scenic route",
+      "Gateway to upper Hunza",
+    ],
+    activities: ["Boating", "Jet ski", "Photography", "Cafe stops"],
+    bestTime: "May–October when boats operate",
+    duration: "2–3 hours",
+    distanceFromHub: "25 km north of Karimabad",
+    hubName: HUB,
+    coordinates: "36.347°N, 74.857°E",
+    altitude: "2,560M",
+    gettingThere:
+      "~30 min drive north of Karimabad on the KKH. Boats from the southern shore.",
+    nearby: ["passu", "gulmit", "gojal-valley"],
+  },
+  {
+    slug: "passu",
+    name: "Passu",
+    parentSlug: PARENT,
+    type: "Village",
+    tagline: "Cathedrals of the North",
+    description:
+      "Dramatic serrated peaks, glacier walks, and iconic suspension bridges in upper Hunza.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+        title: "Passu Cones",
+        caption: "Passu · ALT 2,500M",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Hussaini_hunza_bridge.jpg",
+        title: "Hussaini Bridge nearby",
+        caption: "Upper Hunza",
+      },
+    ],
+    overview:
+      "Passu sits beneath the saw-toothed Passu Cones and beside the Hunza River. The village is a base for glacier day hikes, bridge crossings, and drives toward Khunjerab. Golden-hour photography of the cones is a highlight.",
+    highlights: [
+      "Passu Cones at golden hour",
+      "Passu and Batura Glacier day hikes",
+      "Proximity to Hussaini Bridge",
+      "Family guesthouses",
+      "Apricot and almond orchards",
+    ],
+    activities: ["Photography", "Glacier hike", "Village stay"],
+    bestTime: "May–October",
+    duration: "1–2 days",
+    distanceFromHub: "90 min north of Karimabad",
+    hubName: HUB,
+    coordinates: "36.469°N, 74.889°E",
+    altitude: "2,500M",
+    gettingThere: "Drive north from Karimabad on the KKH; minibuses available.",
+    nearby: ["passu-cones", "hussaini-bridge", "gulmit", "borith-lake"],
+  },
+  {
+    slug: "passu-cones",
+    name: "Passu Cones",
+    parentSlug: PARENT,
+    type: "Viewpoint",
+    tagline: "The Cathedral peaks of the Karakoram",
+    description:
+      "Serrated spires rising above Passu village — among the most photographed peaks in Pakistan.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+        title: "Passu Cathedral",
+        caption: "Passu · ALT 2,500M",
+      },
+    ],
+    overview:
+      "The Passu Cones (Passu Cathedral) are a cluster of jagged peaks visible from Passu village and the Karakoram Highway. Sunrise and sunset light turn the spires gold and pink — photographers often shoot from the road or guesthouse rooftops.",
+    highlights: [
+      "Iconic Karakoram skyline",
+      "Golden-hour photography",
+      "Visible from KKH without hiking",
+      "Backdrop to Passu Glacier treks",
+    ],
+    activities: ["Photography", "Sunrise/sunset viewing"],
+    bestTime: "May–October; clear mornings",
+    duration: "1 hour",
+    distanceFromHub: "90 min north of Karimabad",
+    hubName: HUB,
+    coordinates: "36.475°N, 74.895°E",
+    altitude: "2,500M",
+    gettingThere: "View from Passu village and KKH; no trek required for classic shots.",
+    nearby: ["passu", "hussaini-bridge", "gulmit"],
+  },
+  {
+    slug: "hussaini-bridge",
+    name: "Hussaini Suspension Bridge",
+    parentSlug: PARENT,
+    type: "Bridge",
+    tagline: "Hunza's most thrilling river crossing",
+    description:
+      "A famous rope-and-plank suspension bridge over the Hunza River — not for the faint-hearted.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Hussaini_hunza_bridge.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Hussaini_hunza_bridge.jpg",
+        title: "Hussaini Bridge",
+        caption: "Upper Hunza · ALT 2,600M",
+      },
+    ],
+    overview:
+      "The Hussaini suspension bridge near Passu is one of the most photographed — and nerve-testing — footbridges in the Karakoram. Missing planks and river views below make for an unforgettable short walk; allow 30 minutes round trip from the parking area.",
+    highlights: [
+      "Iconic Karakoram footbridge",
+      "Dramatic Hunza River views",
+      "Popular photography spot",
+      "Short walk from the KKH",
+    ],
+    activities: ["Bridge crossing", "Photography"],
+    bestTime: "May–October",
+    duration: "30–45 min",
+    distanceFromHub: "15 min from Passu village",
+    hubName: HUB,
+    coordinates: "36.453°N, 74.881°E",
+    altitude: "2,600M",
+    gettingThere: "Short drive from Passu; footpath to the bridge.",
+    nearby: ["passu", "passu-cones", "gulmit"],
+  },
+  {
+    slug: "gulmit",
+    name: "Gulmit",
+    parentSlug: PARENT,
+    type: "Village",
+    tagline: "Historic capital of Gojal",
+    description:
+      "A Wakhi village above the KKH with homestays, orchards, and access to Borith Lake and Ghulkin.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+        title: "Gulmit and Passu peaks",
+        caption: "Gojal · ALT 2,800M",
+      },
+    ],
+    overview:
+      "Gulmit was the winter capital of the Hunza state and remains the cultural centre of Gojal. Stone houses, poplar alleys, and Wakhi hospitality make it ideal for two-night stays while exploring Borith Lake, Ghulkin, and upper Hunza.",
+    highlights: [
+      "Wakhi culture and homestays",
+      "Historic Gojal capital",
+      "Gateway to Borith Lake",
+      "Apricot harvest in late summer",
+    ],
+    activities: ["Homestay", "Village walk", "Lake day trips"],
+    bestTime: "May–October",
+    duration: "1–2 nights",
+    distanceFromHub: "2 hours north of Karimabad",
+    hubName: HUB,
+    coordinates: "36.392°N, 74.845°E",
+    altitude: "2,800M",
+    gettingThere: "On the KKH north of Attabad; turn off near Gulmit sign.",
+    nearby: ["borith-lake", "ghulkin", "passu", "sost"],
+  },
+  {
+    slug: "ghulkin",
+    name: "Ghulkin",
+    parentSlug: PARENT,
+    type: "Village",
+    tagline: "Terraced village above Gulmit",
+    description:
+      "A quiet Gojal village with glacier views and walks toward the Ghulkin Glacier viewpoint.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+        title: "Ghulkin terraces",
+        caption: "Gojal · ALT 2,900M",
+      },
+    ],
+    overview:
+      "Ghulkin sits on terraces above Gulmit with views toward the Ghulkin Glacier. A short hike leads to a glacier viewpoint; the village itself offers peaceful homestays away from KKH traffic.",
+    highlights: [
+      "Ghulkin Glacier viewpoint hike",
+      "Terraced orchards",
+      "Quiet homestays",
+      "Wakhi village life",
+    ],
+    activities: ["Glacier viewpoint hike", "Homestay", "Photography"],
+    bestTime: "May–October",
+    duration: "Half day to 1 night",
+    distanceFromHub: "20 min above Gulmit",
+    hubName: HUB,
+    coordinates: "36.400°N, 74.850°E",
+    altitude: "2,900M",
+    gettingThere: "Jeep or walk uphill from Gulmit.",
+    nearby: ["gulmit", "borith-lake", "passu"],
+  },
+  {
+    slug: "borith-lake",
+    name: "Borith Lake",
+    parentSlug: PARENT,
+    type: "Lake",
+    tagline: "High pasture lake beneath Passu peaks",
+    description:
+      "A quiet glacial lake on a yak pasture above Gulmit — turquoise water and Passu Cones backdrop.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/7/7f/Attabad_Lake_Gojal_Hunza_Gilgit_Baltistan.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Attabad_Lake_Gojal_Hunza_Gilgit_Baltistan.jpg",
+        title: "Borith Lake",
+        caption: "Above Gulmit · ALT 2,600M",
+      },
+    ],
+    overview:
+      "Borith Lake sits on a high meadow above Gulmit, reached by jeep track or 45-minute hike from the KKH. Migratory birds rest here in summer; on clear days the Passu Cones reflect in the still water.",
+    highlights: [
+      "Reflective lake with Passu backdrop",
+      "Birdwatching in summer",
+      "Short hike from the road",
+      "Peaceful overnight lodge",
+    ],
+    activities: ["Birdwatching", "Photography", "Short hike"],
+    bestTime: "May–October; wildflowers July–August",
+    duration: "2–4 hours",
+    distanceFromHub: "15 min jeep from Gulmit",
+    hubName: HUB,
+    coordinates: "36.410°N, 74.860°E",
+    altitude: "2,600M",
+    gettingThere: "Turn off KKH near Gulmit; jeep or hike to the lake.",
+    nearby: ["gulmit", "ghulkin", "passu"],
+  },
+  {
+    slug: "sost",
+    name: "Sost",
+    parentSlug: PARENT,
+    type: "Town",
+    tagline: "Last major town before the China border",
+    description:
+      "The northern hub of Gojal — customs, supplies, and the road to Khunjerab Pass.",
+    image:
+      "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+    gallery: [
+      {
+        src: "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+        title: "Road to Khunjerab from Sost",
+        caption: "Gojal · ALT 2,800M",
+      },
+    ],
+    overview:
+      "Sost is the last substantial settlement before Khunjerab Pass and the Pakistan–China border. Traders, trekkers, and border traffic pass through; it's a practical stop for fuel, supplies, and overnight stays before an early start to the pass.",
+    highlights: [
+      "Last town before Khunjerab",
+      "Border trade atmosphere",
+      "Supply point for upper Gojal",
+      "Gateway to Chipursan and Misgar",
+    ],
+    activities: ["Border trip staging", "Local bazaar", "Photography"],
+    bestTime: "June–September for Khunjerab road",
+    duration: "Overnight stop",
+    distanceFromHub: "3 hours north of Karimabad",
+    hubName: HUB,
+    coordinates: "36.689°N, 74.823°E",
+    altitude: "2,800M",
+    gettingThere: "Drive north on KKH from Karimabad via Passu and Gulmit.",
+    nearby: ["khunjerab-pass", "gulmit", "chipursan-valley"],
+  },
+  {
+    slug: "khunjerab-pass",
+    name: "Khunjerab Pass",
+    parentSlug: PARENT,
+    type: "Pass",
+    tagline: "Pakistan–China border in the clouds",
+    description:
+      "The highest paved international border crossing — yaks, snow, and Karakoram drama at 4,693m.",
+    image:
+      "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+    gallery: [
+      {
+        src: "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+        title: "Khunjerab border gate",
+        caption: "ALT 4,693M",
+      },
+    ],
+    overview:
+      "Khunjerab Pass marks the crest of the Karakoram Highway at nearly 4,700 metres. Windblown plateaus, grazing yaks, and the border arch make for a memorable day trip from Sost or Karimabad — check road and border formalities before visiting.",
+    highlights: [
+      "World's highest paved border crossing",
+      "Border gate photography",
+      "Himalayan wildlife (ibex, marmots, yaks)",
+      "Khunjerab National Park",
+    ],
+    activities: ["Border visit", "Wildlife spotting", "Photography"],
+    bestTime: "June–September; closed in winter",
+    duration: "Full day from Karimabad",
+    distanceFromHub: "120 km north of Karimabad",
+    hubName: HUB,
+    coordinates: "36.850°N, 75.425°E",
+    altitude: "4,693M",
+    gettingThere: "2–3 hour drive from Sost; day trip from Karimabad with early start.",
+    nearby: ["sost", "passu", "chipursan-valley"],
+  },
+  {
+    slug: "shimshal-valley",
+    name: "Shimshal Valley",
+    parentSlug: PARENT,
+    type: "Valley",
+    tagline: "Pakistan's highest village and mountaineering valley",
+    description:
+      "A remote Wakhi valley east of Passu — Shimshal Peak, pastures, and multi-day treks.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+        title: "Shimshal approach",
+        caption: "Shimshal · ALT 3,100M",
+      },
+    ],
+    overview:
+      "Shimshal is one of the highest settlements in Pakistan and a renowned mountaineering community. The jeep road from Passu takes 3+ hours; visitors come for trekking, Shimshal Peak views, and authentic Wakhi hospitality.",
+    highlights: [
+      "Highest village in the region",
+      "Mountaineering heritage",
+      "Multi-day trekking routes",
+      "Wakhi culture",
+    ],
+    activities: ["Trekking", "Mountaineering", "Homestay"],
+    bestTime: "June–September",
+    duration: "2–5 days",
+    distanceFromHub: "Jeep road from Passu (~3 hours)",
+    hubName: HUB,
+    coordinates: "36.443°N, 75.412°E",
+    altitude: "3,100M",
+    gettingThere: "Jeep from Passu on a rough road; allow a full day for transit.",
+    nearby: ["passu", "chipursan-valley"],
+  },
+  {
+    slug: "chipursan-valley",
+    name: "Chipursan Valley",
+    parentSlug: PARENT,
+    type: "Valley",
+    tagline: "Remote valley toward the Wakhan",
+    description:
+      "A high valley branching north from Sost toward the Afghan Wakhan corridor — permits required.",
+    image:
+      "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+    gallery: [
+      {
+        src: "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+        title: "Upper Gojal high country",
+        caption: "Chipursan · ALT 3,300M",
+      },
+    ],
+    overview:
+      "Chipursan is among the most remote valleys in Hunza, reached from Sost with special permits. Yaks, high pastures, and views toward the Pamir attract serious trekkers.",
+    highlights: [
+      "Remote Wakhi settlements",
+      "High-altitude pastures",
+      "Pamir views",
+      "Off-the-beaten-path trekking",
+    ],
+    activities: ["Trekking", "Permit-based exploration"],
+    bestTime: "July–August only",
+    duration: "3–7 days",
+    distanceFromHub: "North of Sost",
+    hubName: HUB,
+    coordinates: "36.750°N, 75.200°E",
+    altitude: "3,300M",
+    gettingThere: "Jeep from Sost; NOC and permits required.",
+    nearby: ["sost", "khunjerab-pass", "misgar-valley"],
+  },
+  {
+    slug: "misgar-valley",
+    name: "Misgar Valley",
+    parentSlug: PARENT,
+    type: "Valley",
+    tagline: "Northernmost settled valley of Hunza",
+    description:
+      "A frontier valley north of Sost with historic fort ruins and routes toward the Kilik Pass.",
+    image:
+      "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+    gallery: [
+      {
+        src: "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+        title: "Misgar frontier country",
+        caption: "Misgar · ALT 3,000M",
+      },
+    ],
+    overview:
+      "Misgar lies at the northern edge of Hunza near old trade routes to China and Afghanistan. The valley sees fewer tourists than central Hunza; visitors need permits and a local guide.",
+    highlights: [
+      "Historic trade-route valley",
+      "Qalandarchi Fort ruins",
+      "Frontier atmosphere",
+      "Multi-day trekking",
+    ],
+    activities: ["Trekking", "Heritage exploration"],
+    bestTime: "July–August",
+    duration: "2–4 days",
+    distanceFromHub: "North of Sost",
+    hubName: HUB,
+    coordinates: "36.720°N, 74.950°E",
+    altitude: "3,000M",
+    gettingThere: "Jeep from Sost; permits required.",
+    nearby: ["sost", "chipursan-valley"],
+  },
+  {
+    slug: "ganish-village",
+    name: "Ganish Village",
+    parentSlug: PARENT,
+    type: "Village",
+    tagline: "Ancient Silk Road settlement",
+    description:
+      "One of Hunza's oldest villages — carved wooden mosques and 1,000 years of trade history.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+        title: "Ganish heritage lanes",
+        caption: "Central Hunza · ALT 2,420M",
+      },
+    ],
+    overview:
+      "Ganish sits on the KKH just south of Karimabad. UNESCO-recognised restoration preserved carved mosques, watchtowers, and water channels — guided walks reveal Silk Road inscriptions and shrines.",
+    highlights: [
+      "UNESCO heritage restoration",
+      "Carved wooden mosques",
+      "Silk Road history",
+      "Guided heritage walks",
+    ],
+    activities: ["Heritage walk", "Guided tour", "Photography"],
+    bestTime: "April–October",
+    duration: "2–3 hours",
+    distanceFromHub: "5 min south of Karimabad on KKH",
+    hubName: HUB,
+    coordinates: "36.305°N, 74.655°E",
+    altitude: "2,420M",
+    gettingThere: "Walk or drive 5 minutes south from Karimabad on the KKH.",
+    nearby: ["karimabad", "altit-fort", "attabad-lake"],
+  },
+  {
+    slug: "rakaposhi-viewpoint",
+    name: "Rakaposhi Viewpoint",
+    parentSlug: PARENT,
+    type: "Viewpoint",
+    tagline: "Classic Rakaposhi view from the KKH",
+    description:
+      "Roadside viewpoint where Rakaposhi's south face dominates the skyline — no trek required.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+        title: "Rakaposhi from the highway",
+        caption: "Between Gilgit and Karimabad",
+      },
+    ],
+    overview:
+      "The Rakaposhi viewpoint on the Karakoram Highway between Gilgit and Karimabad offers one of the closest roadside views of a 7,000-metre peak anywhere in the world. Stop for tea and photography on the drive into Hunza.",
+    highlights: [
+      "7,788m Rakaposhi south face",
+      "No hiking required",
+      "Tea stalls and photo stops",
+      "Classic KKH experience",
+    ],
+    activities: ["Photography", "Tea stop"],
+    bestTime: "April–October; morning clarity",
+    duration: "30 min",
+    distanceFromHub: "45 min south of Karimabad on KKH",
+    hubName: HUB,
+    coordinates: "36.200°N, 74.580°E",
+    altitude: "2,200M",
+    gettingThere: "Marked stop on the KKH between Gilgit and Karimabad.",
+    nearby: ["karimabad", "ganish-village"],
+  },
+  {
+    slug: "gojal-valley",
+    name: "Gojal Valley",
+    parentSlug: PARENT,
+    type: "Valley",
+    tagline: "Upper Hunza — from Attabad to the China border",
+    description:
+      "The upper Hunza corridor: Wakhi culture, glaciers, and the last settlements before Khunjerab.",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/7/7f/Attabad_Lake_Gojal_Hunza_Gilgit_Baltistan.jpg",
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Attabad_Lake_Gojal_Hunza_Gilgit_Baltistan.jpg",
+        title: "Gojal corridor",
+        caption: "Upper Hunza",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+        title: "Passu section of Gojal",
+        caption: "Upper Hunza",
+      },
+    ],
+    overview:
+      "Gojal stretches from Attabad Lake north to the Pakistan–China border, encompassing Gulmit, Passu, Sost, and remote valleys like Shimshal and Chipursan. Wakhi-speaking communities, glacier walks, and border traffic define this stretch of the Karakoram Highway.",
+    highlights: [
+      "Upper Hunza cultural corridor",
+      "Wakhi heritage and homestays",
+      "Attabad to Khunjerab scenic drive",
+      "Gateway to Shimshal and Chipursan",
+    ],
+    activities: ["Road trip", "Village stays", "Trekking"],
+    bestTime: "May–October; border road June–September",
+    duration: "2–5 days",
+    distanceFromHub: "North of Karimabad on KKH",
+    hubName: HUB,
+    coordinates: "36.400°N, 74.850°E",
+    altitude: "2,800M",
+    gettingThere: "Drive north from Karimabad on the Karakoram Highway.",
+    nearby: ["attabad-lake", "gulmit", "passu", "khunjerab-pass"],
+  },
+];
+
+export const hunzaPlaceSlugs = hunzaPlaces.map((p) => p.slug);

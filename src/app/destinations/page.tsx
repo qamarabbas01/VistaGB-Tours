@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Pagination from "@/components/Pagination";
-import { destinations } from "@/data/destinations";
+import { regions } from "@/data";
 
 export const metadata = {
   title: "Destinations — VistaGB Tours",
@@ -20,13 +20,10 @@ export default function DestinationsPage({ searchParams }: Props) {
     1,
     parseInt(pageStr ?? "1", 10) || 1
   );
-  const totalPages = Math.ceil(destinations.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(regions.length / ITEMS_PER_PAGE);
   const currentPage = Math.min(requestedPage, Math.max(totalPages, 1));
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
-  const paginatedDestinations = destinations.slice(
-    start,
-    start + ITEMS_PER_PAGE
-  );
+  const paginatedDestinations = regions.slice(start, start + ITEMS_PER_PAGE);
 
   return (
     <div>
@@ -74,6 +71,11 @@ export default function DestinationsPage({ searchParams }: Props) {
                   <p className="mt-3 text-sm leading-relaxed text-ice">
                     {dest.description}
                   </p>
+                  {dest.placeSlugs.length > 0 ? (
+                    <p className="mt-2 text-xs font-medium text-apricot">
+                      {dest.placeSlugs.length} places inside
+                    </p>
+                  ) : null}
                   <span className="mt-4 inline-block text-sm font-medium text-apricot">
                     Explore →
                   </span>

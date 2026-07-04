@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import type { GalleryImage } from "@/data/destinations";
+import type { GalleryImage } from "@/data/types";
 
 type Props = {
   images: GalleryImage[];
