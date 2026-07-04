@@ -5,14 +5,12 @@ import type { Place } from "@/data/types";
 type Props = {
   place: Place;
   parentName: string;
-  parentSlug: string;
   compact?: boolean;
 };
 
 export default function PlaceCard({
   place,
   parentName,
-  parentSlug,
   compact = false,
 }: Props) {
   return (

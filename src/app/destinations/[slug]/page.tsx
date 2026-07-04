@@ -10,6 +10,8 @@ import {
   getPlacesForRegion,
   isPlace,
   regions,
+  type Place,
+  type RegionDestination,
 } from "@/data";
 
 type Props = {
@@ -28,7 +30,7 @@ export async function generateMetadata({ params }: Props) {
     return { title: "Destination Not Found — VistaGB Tours" };
   }
 
-  const name = isPlace(location) ? location.name : location.name;
+  const name = location.name;
 
   return {
     title: `${name} — VistaGB Tours`,
@@ -51,11 +53,11 @@ export default async function DestinationDetailPage({ params }: Props) {
   return <RegionDetailPage region={location} />;
 }
 
-function PlaceDetailPage({ place }: { place: import("@/data/types").Place }) {
+function PlaceDetailPage({ place }: { place: Place }) {
   const parent = getParentRegion(place);
   const nearbyPlaces = place.nearby
     .map((s) => getLocationBySlug(s))
-    .filter((loc): loc is import("@/data/types").Place => Boolean(loc && isPlace(loc)));
+    .filter((loc): loc is Place => Boolean(loc && isPlace(loc)));
 
   return (
     <div>
@@ -207,7 +209,6 @@ function PlaceDetailPage({ place }: { place: import("@/data/types").Place }) {
                   key={nearby.slug}
                   place={nearby}
                   parentName={parent?.name ?? "Gilgit-Baltistan"}
-                  parentSlug={nearby.parentSlug}
                   compact
                 />
               ))}
@@ -222,7 +223,7 @@ function PlaceDetailPage({ place }: { place: import("@/data/types").Place }) {
 function RegionDetailPage({
   region,
 }: {
-  region: import("@/data/types").RegionDestination;
+  region: RegionDestination;
 }) {
   const childPlaces = getPlacesForRegion(region.slug);
   const otherRegions = regions.filter((r) => r.slug !== region.slug).slice(0, 3);
@@ -341,7 +342,6 @@ function RegionDetailPage({
                   key={place.slug}
                   place={place}
                   parentName={region.name}
-                  parentSlug={region.slug}
                 />
               ))}
             </div>
