@@ -6,6 +6,78 @@ export const metadata = {
 
 const posts = [
   {
+    title: "Photographing Eagle's Nest at Sunset",
+    excerpt:
+      "Camera settings, timing, and the best viewpoints on Duikar ridge for Rakaposhi and Hunza Valley golden hour.",
+    date: "July 2026",
+    tag: "Photography",
+    image:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    title: "Shandur Polo Festival: A Visitor's Guide",
+    excerpt:
+      "How to reach the world's highest polo ground, what to expect over three days, and where to camp at Shandur Top.",
+    date: "June 2026",
+    tag: "Culture",
+    image:
+      "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    title: "A Day Trip to Khunjerab Pass",
+    excerpt:
+      "Permits, border formalities, wildlife sightings, and how to plan a round trip from Hunza to the China border.",
+    date: "June 2026",
+    tag: "Road Trips",
+    image:
+      "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    title: "Phander Lake: The Hidden Gem of Ghizer",
+    excerpt:
+      "Turquoise water, trout fishing, and quiet Khowar villages — why Phander deserves more than a quick stop.",
+    date: "May 2026",
+    tag: "Nature",
+    image:
+      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    title: "Katpana Desert: Where Sand Meets Snow",
+    excerpt:
+      "Skardu's cold desert at dusk — how the dunes glow against snowy peaks and when to visit for the best light.",
+    date: "May 2026",
+    tag: "Travel Tips",
+    image:
+      "https://images.unsplash.com/photo-1509316785289-025f5b846b8f?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    title: "Altitude Sickness in the Karakoram",
+    excerpt:
+      "Recognizing symptoms above 3,000 metres, acclimatization schedules, and when to descend on a GB itinerary.",
+    date: "April 2026",
+    tag: "Travel Tips",
+    image:
+      "https://images.unsplash.com/photo-1454496521418-7a8ce86f4361?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    title: "Five Dishes You Must Try in Hunza",
+    excerpt:
+      "From chapshuro and diram fitti to apricot soup — a food lover's shortlist for Karimabad and beyond.",
+    date: "March 2026",
+    tag: "Food",
+    image:
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    title: "K2 Base Camp: Is the Trek Right for You?",
+    excerpt:
+      "Distance, difficulty, costs, and what a typical 14-day Baltoro Glacier trek demands from first-time trekkers.",
+    date: "February 2026",
+    tag: "Trekking",
+    image:
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
     title: "Best Time to Visit Hunza Valley",
     excerpt:
       "Cherry and apricot blossoms in spring, golden harvest colors in autumn — here's how to pick your season in Hunza.",
