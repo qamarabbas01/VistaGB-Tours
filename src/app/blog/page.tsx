@@ -134,6 +134,10 @@ const posts = [
 ];
 
 export default function BlogPage() {
+  const sortedPosts = [...posts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
+
   return (
     <div>
       <section className="border-b border-teal/20 bg-slate py-16 md:py-24">
@@ -152,7 +156,7 @@ export default function BlogPage() {
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
+            {sortedPosts.map((post) => (
               <article
                 key={post.title}
                 className="group overflow-hidden rounded-2xl border border-teal/20 bg-slate"
