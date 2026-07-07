@@ -70,3 +70,11 @@ export type SearchResult = {
   /** When a region matches, all of its places are included here */
   placesByRegion: Record<string, Place[]>;
 };
+
+export type BlogPost = {
+  title: string;
+  excerpt: string;
+  date: string;
+  tag: string;
+  image: string;
+};

@@ -13,6 +13,8 @@ const nextConfig = {
       { protocol: "https", hostname: "images.saymedia-content.com" },
       { protocol: "https", hostname: "vepakistan.com" },
       { protocol: "https", hostname: "visitsilkroad.org" },
+      { protocol: "https", hostname: "cdn.prod.rexby.com" },
+      { protocol: "https", hostname: "encrypted-tbn0.gstatic.com" },
     ],
   },
 };
