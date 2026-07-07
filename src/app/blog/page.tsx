@@ -12,14 +12,14 @@ type Props = {
   searchParams?: { page?: string | string[] };
 };
 
+const sortedPosts = [...blogPosts].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+);
+
 export default function BlogPage({ searchParams }: Props) {
   const pageParam = searchParams?.page;
   const pageStr = Array.isArray(pageParam) ? pageParam[0] : pageParam;
   const requestedPage = Math.max(1, parseInt(pageStr ?? "1", 10) || 1);
-
-  const sortedPosts = [...blogPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
 
   const totalPages = Math.ceil(sortedPosts.length / ITEMS_PER_PAGE);
   const currentPage = Math.min(requestedPage, Math.max(totalPages, 1));
