@@ -1,14 +1,30 @@
 import Image from "next/image";
+import Pagination from "@/components/Pagination";
 import { blogPosts } from "@/data";
 
 export const metadata = {
   title: "Blog — VistaGB Tours",
 };
 
-export default function BlogPage() {
+const ITEMS_PER_PAGE = 9;
+
+type Props = {
+  searchParams?: { page?: string | string[] };
+};
+
+export default function BlogPage({ searchParams }: Props) {
+  const pageParam = searchParams?.page;
+  const pageStr = Array.isArray(pageParam) ? pageParam[0] : pageParam;
+  const requestedPage = Math.max(1, parseInt(pageStr ?? "1", 10) || 1);
+
   const sortedPosts = [...blogPosts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
+
+  const totalPages = Math.ceil(sortedPosts.length / ITEMS_PER_PAGE);
+  const currentPage = Math.min(requestedPage, Math.max(totalPages, 1));
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedPosts = sortedPosts.slice(start, start + ITEMS_PER_PAGE);
 
   return (
     <div>
@@ -28,7 +44,7 @@ export default function BlogPage() {
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {sortedPosts.map((post) => (
+            {paginatedPosts.map((post) => (
               <article
                 key={post.title}
                 className="group overflow-hidden rounded-2xl border border-teal/20 bg-slate"
@@ -59,6 +75,13 @@ export default function BlogPage() {
               </article>
             ))}
           </div>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            basePath="/blog"
+            className="mt-12"
+          />
         </div>
       </section>
     </div>
