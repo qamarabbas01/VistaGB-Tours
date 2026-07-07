@@ -6,7 +6,10 @@ import { nagarDestination } from "./destinations/nagar";
 import { legacyDestinations } from "./destinations/legacy";
 import { allPlaces } from "./places";
 
+export { blogPosts } from "./blog";
+
 export type {
+  BlogPost,
   GalleryImage,
   Place,
   PlaceType,
