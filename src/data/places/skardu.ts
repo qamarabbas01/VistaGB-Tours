@@ -121,9 +121,14 @@ export const skarduPlaces: Place[] = [
     type: "Valley",
     tagline: "Gateway to the mountains beyond Skardu",
     description: "Apricot orchards, Shigar Fort, and the road toward Askole and K2.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/%22Jarbaso%22.jpg/250px-%22Jarbaso%22.jpg",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/%22Jarbaso%22.jpg/1280px-%22Jarbaso%22.jpg",
     gallery: [
-      { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/%22Jarbaso%22.jpg/250px-%22Jarbaso%22.jpg", title: "Shigar Fort", caption: "Shigar · ALT 2,230M" },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/%22Jarbaso%22.jpg/1280px-%22Jarbaso%22.jpg",
+        title: "Shigar Fort",
+        caption: "Shigar · ALT 2,230M",
+      },
     ],
     overview: "Shigar Valley branches east from Skardu with the restored Shigar Fort (Sarfa Khar), Amburiq Mosque, and the jeep track toward Askole and the Baltoro Glacier.",
     highlights: ["Shigar Fort heritage hotel", "Amburiq Mosque", "Apricot blossom in spring", "Gateway to Askole"],
@@ -209,9 +214,14 @@ export const skarduPlaces: Place[] = [
     type: "Village",
     tagline: "Last village before K2",
     description: "Final settlement before Concordia — where Baltoro Glacier treks begin.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYczbVLtldQkfhW2EuCLJ-tEC6-ulfsIrRlkE2l9fyPw&s=10",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Shigar_Fort_03.jpg/1280px-Shigar_Fort_03.jpg",
     gallery: [
-      { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Shigar_Fort_03.jpg/1280px-Shigar_Fort_03.jpg", title: "Askole approach", caption: "Baltoro · ALT 3,048M" },
+      {
+        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/%22Jarbaso%22.jpg/1280px-%22Jarbaso%22.jpg',
+        title: "Askole approach",
+        caption: "Baltoro · ALT 3,048M",
+      },
     ],
     overview: "Askole is the highest permanent village on the approach to K2 and Concordia. Rugged jeep track from Shigar; porters and expedition culture at the edge of the glacier.",
     highlights: ["K2 trek starting point", "Braldu Gorge jeep ride", "Expedition staging village", "Balti porter community"],

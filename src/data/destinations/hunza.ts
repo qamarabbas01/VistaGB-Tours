@@ -23,12 +23,12 @@ export const hunzaDestination: RegionDestination = {
       caption: "Central Hunza",
     },
     {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmtm9MgCSlOA38kFUCXU2Zr3t59sQ5QIkvypIJjm31KQ&s=10",
+      src: "https://hunzaguidespakistan.com/wp-content/uploads/2023/12/Attabad-Lake.jpg",
       title: "Attabad Lake",
       caption: "Gojal",
     },
     {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw13402rzS7Hs5_WkDijXQkaF_PmehRUDi8nHEFoOGnYREhpfL7r4jm66H&s=10",
+      src: "https://gulmitcontinentalhotel.com/wp-content/uploads/2022/10/passu-8.jpg",
       title: "Passu Cones",
       caption: "Upper Hunza",
     },

@@ -53,7 +53,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 2026",
     tag: "Travel Tips",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxJFAhLt6soNPY5UbsublJs7H3BPzQy1UjhyHdxS-MkU3vmK8eHcQKUlRx&s=10",
+      "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?q=80&w=1600&auto=format&fit=crop",
   },
   {
     title: "Five Dishes You Must Try in Hunza",

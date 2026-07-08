@@ -140,17 +140,12 @@ export const hunzaPlaces: Place[] = [
     description:
       "A ridge-top hotel and viewpoint above Duikar with sweeping views of Rakaposhi, Ultar Sar, and the full Hunza Valley.",
     image:
-      "https://media-cdn.tripadvisor.com/media/photo-s/02/c0/8f/a3/the-newly-built-section.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/02/c0/8f/a3/the-newly-built-section.jpg",
     gallery: [
       {
         src: "https://northbackend.northonwheels.com/storage/uploads/image_4978.webp",
         title: "Sunset over Hunza",
         caption: "Duikar · ALT 2,850M",
-      },
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxffn1wZVJ8xKTZrY9yAOYTDl9_v2F3yqF5b2UQ-eVQVMtIfch4kyOjH6&s=10",
-        title: "Rakaposhi at dusk",
-        caption: "Eagle's Nest viewpoint",
       },
     ],
     overview:
@@ -182,13 +177,7 @@ export const hunzaPlaces: Place[] = [
       "A small settlement on the ridge above Hunza — gateway to Eagle's Nest and quiet orchard walks.",
     image:
       "https://flypakistan.pk/assets/img/attractions/Hunza.jpg",
-    gallery: [
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgcdrzgeJHHSq1iXLIte1PjCgyqkBWHly_GwjB8xMHp0aHQAyQuIPDlk_H&s=10",
-        title: "Duikar Ridge",
-        caption: "Above Karimabad · ALT 2,850M",
-      },
-    ],
+    gallery: [],
     overview:
       "Duikar sits on the ridge above Karimabad and serves as the access point for Eagle's Nest. The village itself is quiet, with a few guesthouses and orchard paths — ideal for visitors who want sunset views without staying in the busier town below.",
     highlights: [
@@ -222,11 +211,6 @@ export const hunzaPlaces: Place[] = [
         src: "https://hunzaguidespakistan.com/wp-content/uploads/2023/12/Attabad-Lake.jpg",
         title: "Attabad Lake panorama",
         caption: "Gojal · ALT 2,560M",
-      },
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0FSFdfgqDszOTbUM63nhOLPU3xhJChUItndGTaQfN2ZjJA3PW5d6i3w&s=10",
-        title: "Turquoise waters",
-        caption: "Attabad Lake",
       },
     ],
     overview:
@@ -264,11 +248,6 @@ export const hunzaPlaces: Place[] = [
         title: "Passu Cones",
         caption: "Passu · ALT 2,500M",
       },
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxADFAfKuFMTSwMxhmeYT7ZdJXeqwtr9-kEOML5xYxbA&s=10",
-        title: "Hussaini Bridge nearby",
-        caption: "Upper Hunza",
-      },
     ],
     overview:
       "Passu sits beneath the saw-toothed Passu Cones and beside the Hunza River. The village is a base for glacier day hikes, bridge crossings, and drives toward Khunjerab. Golden-hour photography of the cones is a highlight.",
@@ -298,13 +277,7 @@ export const hunzaPlaces: Place[] = [
     description:
       "Serrated spires rising above Passu village — among the most photographed peaks in Pakistan.",
     image: "https://gulmitcontinentalhotel.com/wp-content/uploads/2022/10/passu-8.jpg",
-    gallery: [
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ0nZTTKfXvNBAAhLjhju4dsOj_Vlq16EjCVGPygOz0ZbVu6qDgxMTRPJK&s=10",
-        title: "Passu Cathedral",
-        caption: "Passu · ALT 2,500M",
-      },
-    ],
+    gallery: [],
     overview:
       "The Passu Cones (Passu Cathedral) are a cluster of jagged peaks visible from Passu village and the Karakoram Highway. Sunrise and sunset light turn the spires gold and pink — photographers often shoot from the road or guesthouse rooftops.",
     highlights: [
@@ -331,10 +304,11 @@ export const hunzaPlaces: Place[] = [
     tagline: "Hunza's most thrilling river crossing",
     description:
       "A famous rope-and-plank suspension bridge over the Hunza River — not for the faint-hearted.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxADFAfKuFMTSwMxhmeYT7ZdJXeqwtr9-kEOML5xYxbA&s=10",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/0/08/The_Hussaini_Hanging_Bridge.jpg",
     gallery: [
       {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxADFAfKuFMTSwMxhmeYT7ZdJXeqwtr9-kEOML5xYxbA&s=10",
+        src: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Hussaini_Hanging_Bridge,_Hunza_Karimabad,_Pakistan.jpg",
         title: "Hussaini Bridge",
         caption: "Upper Hunza · ALT 2,600M",
       },
@@ -404,7 +378,7 @@ export const hunzaPlaces: Place[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/b7/ce/b3/ghulkin-village-in-upper.jpg?w=1400&h=-1&s=1",
     gallery: [
       {
-        src: "https://media-cdn.tripadvisor.com/media/photo-s/18/b7/ce/b3/ghulkin-village-in-upper.jpg",
+        src: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/b7/ce/b3/ghulkin-village-in-upper.jpg?w=1400&h=-1&s=1",
         title: "Ghulkin terraces",
         caption: "Gojal · ALT 2,900M",
       },
@@ -437,13 +411,7 @@ export const hunzaPlaces: Place[] = [
       "A quiet glacial lake on a yak pasture above Gulmit — turquoise water and Passu Cones backdrop.",
     image:
       "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgi2R5mfLDEZpQsK-NI4CK8m4T3PjTXEnGo20YBUZRspsG6B5jBSdFQFBOfTlopvjqzrPcP6S4-xpwbCYEgCHmVdXMYh_UpoCNtlDo9eCyIYLCI5bXHz3JOKpxXms4ovGgXyZxF3AMYuQU/s1600/borith-lake.jpg",
-    gallery: [
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmtm9MgCSlOA38kFUCXU2Zr3t59sQ5QIkvypIJjm31KQ&s=10",
-        title: "Borith Lake",
-        caption: "Above Gulmit · ALT 2,600M",
-      },
-    ],
+    gallery: [],
     overview:
       "Borith Lake sits on a high meadow above Gulmit, reached by jeep track or 45-minute hike from the KKH. Migratory birds rest here in summer; on clear days the Passu Cones reflect in the still water.",
     highlights: [
@@ -472,13 +440,7 @@ export const hunzaPlaces: Place[] = [
       "The northern hub of Gojal — customs, supplies, and the road to Khunjerab Pass.",
     image:
       "https://naturehikepakistan.pk/wp-content/uploads/2024/03/gulmit-a-min.jpeg",
-    gallery: [
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHx2y5mE0fHeD2TLT6rDVqGUVkmKtQIytctcMaKqK66VW8PRPGS7gEvzs&s=10",
-        title: "Road to Khunjerab from Sost",
-        caption: "Gojal · ALT 2,800M",
-      },
-    ],
+    gallery: [],
     overview:
       "Sost is the last substantial settlement before Khunjerab Pass and the Pakistan–China border. Traders, trekkers, and border traffic pass through; it's a practical stop for fuel, supplies, and overnight stays before an early start to the pass.",
     highlights: [
@@ -541,13 +503,7 @@ export const hunzaPlaces: Place[] = [
     description:
       "A remote Wakhi valley east of Passu — Shimshal Peak, pastures, and multi-day treks.",
     image: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Summer_in_Shimshal.JPG",
-    gallery: [
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4t9sS_W-opE-Dg-h_Au33yuymynkpLXHa-UDBMMDqJzIAAzkxWZzGTfxA&s=10",
-        title: "Shimshal approach",
-        caption: "Shimshal · ALT 3,100M",
-      },
-    ],
+    gallery: [],
     overview:
       "Shimshal is one of the highest settlements in Pakistan and a renowned mountaineering community. The jeep road from Passu takes 3+ hours; visitors come for trekking, Shimshal Peak views, and authentic Wakhi hospitality.",
     highlights: [
@@ -576,13 +532,7 @@ export const hunzaPlaces: Place[] = [
       "A high valley branching north from Sost toward the Afghan Wakhan corridor — permits required.",
     image:
       "https://upload.wikimedia.org/wikipedia/commons/3/38/Chipurson_Valley.jpg",
-    gallery: [
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLe8euXUlb7dPFrrcFfZf6WInn0Z8WgbHo0xJ1uK1hPXxdzN6jmGwsal-E&s=10",
-        title: "Upper Gojal high country",
-        caption: "Chipursan · ALT 3,300M",
-      },
-    ],
+    gallery: [],
     overview:
       "Chipursan is among the most remote valleys in Hunza, reached from Sost with special permits. Yaks, high pastures, and views toward the Pamir attract serious trekkers.",
     highlights: [
@@ -611,13 +561,7 @@ export const hunzaPlaces: Place[] = [
       "A frontier valley north of Sost with historic fort ruins and routes toward the Kilik Pass.",
     image:
       "https://www.visitgilgitbaltistan.gov.pk/storage/images/IeeANCsxeWssH7qiftnrAon5ngcb6O-metaTWlzZ2FyIHZhbGxleSAxLndlYnA=-.webp",
-    gallery: [
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEOA6Db67eBedRkdcvzpklrM8kZEgIjk4UoCAZ_i4ZD2HpMLzLZqJWUEA&s=10",
-        title: "Misgar frontier country",
-        caption: "Misgar · ALT 3,000M",
-      },
-    ],
+    gallery: [],
     overview:
       "Misgar lies at the northern edge of Hunza near old trade routes to China and Afghanistan. The valley sees fewer tourists than central Hunza; visitors need permits and a local guide.",
     highlights: [
@@ -681,13 +625,7 @@ export const hunzaPlaces: Place[] = [
       "Roadside viewpoint where Rakaposhi's south face dominates the skyline — no trek required.",
     image:
       "https://visitgilgitbaltistan.gov.pk/storage/images/amF3lOQaNWavgTlumgn9lgeW8FdoL1-metacmFrYXBvc2hpX3ZpZXdfcG9pbnRfcGFraXN0YW4uanBn-.jpg",
-    gallery: [
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDM4FPqNQO6ncIde1EduiVAWYhciQpLTCst-2g-IduMt406655T7bViwMG&s=10",
-        title: "Rakaposhi from the highway",
-        caption: "Between Gilgit and Karimabad",
-      },
-    ],
+    gallery: [],
     overview:
       "The Rakaposhi viewpoint on the Karakoram Highway between Gilgit and Karimabad offers one of the closest roadside views of a 7,000-metre peak anywhere in the world. Stop for tea and photography on the drive into Hunza.",
     highlights: [
@@ -720,11 +658,6 @@ export const hunzaPlaces: Place[] = [
       {
         src: "https://northbackend.northonwheels.com/storage/uploads/Gojal-Valley-upper-hunza.jpg",
         title: "Gojal corridor",
-        caption: "Upper Hunza",
-      },
-      {
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw13402rzS7Hs5_WkDijXQkaF_PmehRUDi8nHEFoOGnYREhpfL7r4jm66H&s=10",
-        title: "Passu section of Gojal",
         caption: "Upper Hunza",
       },
     ],
