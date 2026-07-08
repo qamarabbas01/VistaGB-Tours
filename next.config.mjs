@@ -27,6 +27,7 @@ const nextConfig = {
       { protocol: "https", hostname: "visitsilkroad.org" },
       { protocol: "https", hostname: "cdn.prod.rexby.com" },
       { protocol: "https", hostname: "encrypted-tbn0.gstatic.com" },
+      { protocol: "https", hostname: "**" },
     ],
   },
 };
