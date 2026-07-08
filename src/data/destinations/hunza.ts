@@ -10,25 +10,25 @@ export const hunzaDestination: RegionDestination = {
   description:
     "Apricot blossoms, glacial peaks, and centuries-old forts overlooking the Karakoram Highway.",
   image:
-    "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+    'https://res.cloudinary.com/jerrick/image/upload/c_scale,f_jpg,q_auto/643599b38d0197001d05f18f.jpg',
   gallery: [
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+      src: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/1f/02/35/baltit-fort-hunza-gilgit.jpg?w=800&h=-1&s=1",
       title: "Karimabad panorama",
       caption: "Hunza · ALT 2,438M",
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Baltit_Fort_Hunza.jpg",
+      src: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Baltit_fort%2C_Hunza_Valley.jpg",
       title: "Baltit Fort",
       caption: "Central Hunza",
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Attabad_Lake_Gojal_Hunza_Gilgit_Baltistan.jpg",
+      src: "https://hunzaguidespakistan.com/wp-content/uploads/2023/12/Attabad-Lake.jpg",
       title: "Attabad Lake",
       caption: "Gojal",
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Passu_cones_Pakistan.jpg",
+      src: "https://gulmitcontinentalhotel.com/wp-content/uploads/2022/10/passu-8.jpg",
       title: "Passu Cones",
       caption: "Upper Hunza",
     },
