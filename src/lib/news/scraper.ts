@@ -11,7 +11,9 @@ function decodeHtmlEntities(text: string): string {
     .replace(/&quot;/g, '"')
     .replace(/&#039;/g, "'")
     .replace(/&apos;/g, "'")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+    .replace(/&#(?:x([\da-fA-F]+)|(\d+));/g, (_, hex, dec) =>
+      String.fromCharCode(hex ? parseInt(hex, 16) : parseInt(dec, 10)),
+    )
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -21,7 +23,7 @@ function stripTags(text: string): string {
 }
 
 function parseTotalPages(html: string): number {
-  const pageNumbers = [...html.matchAll(/pages\/news\?page=(\d+)/g)].map((match) =>
+  const pageNumbers = [...html.matchAll(/\bnews\?page=(\d+)/g)].map((match) =>
     Number(match[1]),
   );
 
@@ -41,12 +43,15 @@ function parseNewsItems(html: string): NewsItem[] {
     );
     if (!titleMatch) continue;
 
-    const url = titleMatch[1];
+    const rawUrl = titleMatch[1];
+    const url = rawUrl ? new URL(rawUrl, NEWS_BASE_URL).href : "";
     const title = stripTags(titleMatch[2]);
     const id = url.match(/\/news\/(\d+)/)?.[1] ?? url;
 
     const imageMatch = block.match(/<img[^>]+src="([^"]+)"/);
-    const image = imageMatch?.[1] ?? "";
+    const image = imageMatch?.[1]
+      ? new URL(imageMatch[1], NEWS_BASE_URL).href
+      : "";
 
     const summaryMatch = block.match(
       /<div class="blog-meta[^"]*">[\s\S]*?<p>([\s\S]*?)<\/p>/,

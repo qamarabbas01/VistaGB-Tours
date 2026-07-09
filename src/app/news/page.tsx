@@ -10,11 +10,12 @@ export const metadata = {
 export const revalidate = 3600;
 
 type Props = {
-  searchParams?: { page?: string | string[] };
+  searchParams?: Promise<{ page?: string | string[] }>;
 };
 
 export default async function NewsPage({ searchParams }: Props) {
-  const pageParam = searchParams?.page;
+  const resolvedSearchParams = await searchParams;
+  const pageParam = resolvedSearchParams?.page;
   const pageStr = Array.isArray(pageParam) ? pageParam[0] : pageParam;
   const requestedPage = Math.max(1, parseInt(pageStr ?? "1", 10) || 1);
 
@@ -26,7 +27,7 @@ export default async function NewsPage({ searchParams }: Props) {
     newsData = null;
   }
 
-  if (!newsData) {
+  if (!newsData || newsData.items.length === 0) {
     return (
       <div>
         <section className="border-b border-teal/20 bg-slate py-16 md:py-24">
