@@ -113,21 +113,40 @@ export async function POST(request: Request) {
     message = "",
   } = body as Partial<ContactPayload>;
 
-  if (!name?.trim() || !email?.trim() || !destination?.trim() || !duration?.trim() || !groupSize?.trim()) {
+  if (
+    typeof name !== "string" ||
+    typeof email !== "string" ||
+    typeof destination !== "string" ||
+    typeof duration !== "string" ||
+    typeof groupSize !== "string" ||
+    typeof places !== "string" ||
+    typeof travelFrom !== "string" ||
+    typeof travelTo !== "string" ||
+    typeof datesFlexible !== "string" ||
+    typeof travelMonth !== "string" ||
+    typeof message !== "string"
+  ) {
+    return NextResponse.json(
+      { error: "Invalid input: all fields must be text." },
+      { status: 400 },
+    );
+  }
+
+  if (!name.trim() || !email.trim() || !destination.trim() || !duration.trim() || !groupSize.trim()) {
     return NextResponse.json(
       { error: "Please fill in all required fields." },
       { status: 400 },
     );
   }
 
-  if (datesFlexible !== "yes" && !travelFrom?.trim()) {
+  if (datesFlexible !== "yes" && !travelFrom.trim()) {
     return NextResponse.json(
       { error: "Please choose when you want to travel." },
       { status: 400 },
     );
   }
 
-  if (datesFlexible === "yes" && !travelMonth?.trim()) {
+  if (datesFlexible === "yes" && !travelMonth.trim()) {
     return NextResponse.json(
       { error: "Please choose the month you are hoping to travel." },
       { status: 400 },

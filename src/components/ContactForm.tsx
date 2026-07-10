@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Button from "./Button";
 
 export type RegionFormOption = {
@@ -45,8 +45,11 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
   const [selectedPlaces, setSelectedPlaces] = useState<string[]>([]);
   const [placesFlexible, setPlacesFlexible] = useState(false);
   const [datesFlexible, setDatesFlexible] = useState(false);
+  const [monthOptions, setMonthOptions] = useState<{ value: string; label: string }[]>([]);
 
-  const monthOptions = useMemo(() => buildMonthOptions(), []);
+  useEffect(() => {
+    setMonthOptions(buildMonthOptions());
+  }, []);
   const selectedRegion = regionOptions.find((region) => region.slug === selectedRegionSlug);
   const hasPlaces = Boolean(selectedRegion?.places.length);
 
