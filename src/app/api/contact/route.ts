@@ -6,6 +6,13 @@ type ContactPayload = {
   name: string;
   email: string;
   destination: string;
+  places: string;
+  travelFrom: string;
+  travelTo: string;
+  datesFlexible: string;
+  travelMonth: string;
+  duration: string;
+  groupSize: string;
   message: string;
 };
 
@@ -21,6 +28,65 @@ function escapeHtml(text: string) {
     .replace(/"/g, "&quot;");
 }
 
+function formatTravelDates(inquiry: ContactPayload) {
+  if (inquiry.datesFlexible === "yes") {
+    return inquiry.travelMonth
+      ? `Flexible — hoping for ${inquiry.travelMonth}`
+      : "Flexible dates";
+  }
+
+  if (inquiry.travelFrom && inquiry.travelTo) {
+    return `${inquiry.travelFrom} to ${inquiry.travelTo}`;
+  }
+
+  if (inquiry.travelFrom) {
+    return `From ${inquiry.travelFrom}`;
+  }
+
+  return "Not specified";
+}
+
+function buildEmailBody(inquiry: ContactPayload) {
+  const lines = [
+    `Name: ${inquiry.name}`,
+    `Email: ${inquiry.email}`,
+    `Region: ${inquiry.destination}`,
+    inquiry.places ? `Places: ${inquiry.places}` : null,
+    `Travel dates: ${formatTravelDates(inquiry)}`,
+    `Trip length: ${inquiry.duration}`,
+    `Travelers: ${inquiry.groupSize}`,
+    inquiry.message ? "" : null,
+    inquiry.message ? inquiry.message : null,
+  ].filter((line): line is string => line !== null);
+
+  return lines.join("\n");
+}
+
+function buildEmailHtml(inquiry: ContactPayload) {
+  const rows = [
+    ["Name", inquiry.name],
+    ["Email", inquiry.email],
+    ["Region", inquiry.destination],
+    inquiry.places ? ["Places", inquiry.places] : null,
+    ["Travel dates", formatTravelDates(inquiry)],
+    ["Trip length", inquiry.duration],
+    ["Travelers", inquiry.groupSize],
+  ].filter((row): row is [string, string] => row !== null);
+
+  const tableRows = rows
+    .map(
+      ([label, value]) =>
+        `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</p>`,
+    )
+    .join("");
+
+  const notes = inquiry.message
+    ? `<p><strong>Additional notes:</strong></p><p>${escapeHtml(inquiry.message).replace(/\n/g, "<br>")}</p>`
+    : "";
+
+  return `${tableRows}${notes}`;
+}
+
 export async function POST(request: Request) {
   let body: unknown;
 
@@ -33,11 +99,56 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, email, destination, message } = body as Partial<ContactPayload>;
+  const {
+    name,
+    email,
+    destination,
+    places = "",
+    travelFrom = "",
+    travelTo = "",
+    datesFlexible = "no",
+    travelMonth = "",
+    duration,
+    groupSize,
+    message = "",
+  } = body as Partial<ContactPayload>;
 
-  if (!name?.trim() || !email?.trim() || !destination?.trim() || !message?.trim()) {
+  if (
+    typeof name !== "string" ||
+    typeof email !== "string" ||
+    typeof destination !== "string" ||
+    typeof duration !== "string" ||
+    typeof groupSize !== "string" ||
+    typeof places !== "string" ||
+    typeof travelFrom !== "string" ||
+    typeof travelTo !== "string" ||
+    typeof datesFlexible !== "string" ||
+    typeof travelMonth !== "string" ||
+    typeof message !== "string"
+  ) {
     return NextResponse.json(
-      { error: "All fields are required." },
+      { error: "Invalid input: all fields must be text." },
+      { status: 400 },
+    );
+  }
+
+  if (!name.trim() || !email.trim() || !destination.trim() || !duration.trim() || !groupSize.trim()) {
+    return NextResponse.json(
+      { error: "Please fill in all required fields." },
+      { status: 400 },
+    );
+  }
+
+  if (datesFlexible !== "yes" && !travelFrom.trim()) {
+    return NextResponse.json(
+      { error: "Please choose when you want to travel." },
+      { status: 400 },
+    );
+  }
+
+  if (datesFlexible === "yes" && !travelMonth.trim()) {
+    return NextResponse.json(
+      { error: "Please choose the month you are hoping to travel." },
       { status: 400 },
     );
   }
@@ -53,6 +164,13 @@ export async function POST(request: Request) {
     name: name.trim(),
     email: email.trim(),
     destination: destination.trim(),
+    places: places.trim(),
+    travelFrom: travelFrom.trim(),
+    travelTo: travelTo.trim(),
+    datesFlexible,
+    travelMonth: travelMonth.trim(),
+    duration: duration.trim(),
+    groupSize: groupSize.trim(),
     message: message.trim(),
   };
 
@@ -78,21 +196,9 @@ export async function POST(request: Request) {
     from,
     to,
     replyTo: inquiry.email,
-    subject: `New inquiry: ${inquiry.destination} — ${inquiry.name}`,
-    text: [
-      `Name: ${inquiry.name}`,
-      `Email: ${inquiry.email}`,
-      `Interested in: ${inquiry.destination}`,
-      "",
-      inquiry.message,
-    ].join("\n"),
-    html: `
-      <p><strong>Name:</strong> ${escapeHtml(inquiry.name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(inquiry.email)}</p>
-      <p><strong>Interested in:</strong> ${escapeHtml(inquiry.destination)}</p>
-      <p><strong>Message:</strong></p>
-      <p>${escapeHtml(inquiry.message).replace(/\n/g, "<br>")}</p>
-    `,
+    subject: `New inquiry: ${inquiry.destination} · ${inquiry.duration} — ${inquiry.name}`,
+    text: buildEmailBody(inquiry),
+    html: buildEmailHtml(inquiry),
   });
 
   if (error) {
