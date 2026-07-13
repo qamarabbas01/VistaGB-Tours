@@ -4,7 +4,7 @@ import Pagination from "@/components/Pagination";
 import { regions } from "@/data";
 
 export const metadata = {
-  title: "Destinations — VistaGB Tours",
+  title: "Destinations",
 };
 
 const ITEMS_PER_PAGE = 9;

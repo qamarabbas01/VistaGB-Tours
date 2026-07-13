@@ -21,7 +21,7 @@ export const hunzaPlaces: Place[] = [
         caption: "Central Hunza · ALT 2,438M",
       },
       {
-        src: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Baltit_fort%2C_Hunza_Valley.jpg",
+        src: "/images/commons/92ff9643469e41ed.jpg",
         title: "Baltit Fort from Karimabad",
         caption: "Central Hunza",
       },
@@ -58,15 +58,15 @@ export const hunzaPlaces: Place[] = [
     tagline: "700 years of royal Hunza heritage above Karimabad",
     description:
       "A restored hilltop fort with museum rooms, carved timber, and panoramic views over Karimabad and the Hunza River.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Baltit_fort%2C_Hunza_Valley.jpg",
+    image: "/images/commons/92ff9643469e41ed.jpg",
     gallery: [
       {
-        src: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Baltit_Fort_Hunza.jpg",
+        src: "/images/commons/9ffbf7caa77b300f.jpg",
         title: "Baltit Fort Exterior",
         caption: "Karimabad · ALT 2,470M",
       },
       {
-        src: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Karimabad_Hunza_Valley.jpg",
+        src: "/images/commons/bd7ddfea0e6ee033.jpg",
         title: "View over Karimabad",
         caption: "From Baltit Fort",
       },
@@ -205,7 +205,7 @@ export const hunzaPlaces: Place[] = [
     description:
       "A surreal blue lake formed in 2010, framed by sheer rock walls — boating and lakeside cafes.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/5/52/Attabad.jpg",
+      "/images/commons/4680a3d14ca1af46.jpg",
     gallery: [
       {
         src: "https://hunzaguidespakistan.com/wp-content/uploads/2023/12/Attabad-Lake.jpg",
@@ -241,7 +241,7 @@ export const hunzaPlaces: Place[] = [
     tagline: "Cathedrals of the North",
     description:
       "Dramatic serrated peaks, glacier walks, and iconic suspension bridges in upper Hunza.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Pasu_cones.jpg/1280px-Pasu_cones.jpg",
+    image: "/images/commons/988e06319b75f6d9.jpg",
     gallery: [
       {
         src: "https://gulmitcontinentalhotel.com/wp-content/uploads/2022/10/passu-8.jpg",
@@ -305,10 +305,10 @@ export const hunzaPlaces: Place[] = [
     description:
       "A famous rope-and-plank suspension bridge over the Hunza River — not for the faint-hearted.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/0/08/The_Hussaini_Hanging_Bridge.jpg",
+      "/images/commons/c79f4f12881921ba.jpg",
     gallery: [
       {
-        src: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Hussaini_Hanging_Bridge,_Hunza_Karimabad,_Pakistan.jpg",
+        src: "/images/commons/bc57aaad67839099.jpg",
         title: "Hussaini Bridge",
         caption: "Upper Hunza · ALT 2,600M",
       },
@@ -340,7 +340,7 @@ export const hunzaPlaces: Place[] = [
     description:
       "A Wakhi village above the KKH with homestays, orchards, and access to Borith Lake and Ghulkin.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/a/a0/Gulmit_hunza_best.jpg",
+      "/images/commons/48f585baebd979ab.jpg",
     gallery: [
       {
         src: "https://globerovers.com/wp-content/uploads/2022/08/Pakistan-Gulmit-Hunza-Valley-4.jpg",
@@ -502,7 +502,7 @@ export const hunzaPlaces: Place[] = [
     tagline: "Pakistan's highest village and mountaineering valley",
     description:
       "A remote Wakhi valley east of Passu — Shimshal Peak, pastures, and multi-day treks.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Summer_in_Shimshal.JPG",
+    image: "/images/commons/aa5a3051e0bf5851.jpg",
     gallery: [],
     overview:
       "Shimshal is one of the highest settlements in Pakistan and a renowned mountaineering community. The jeep road from Passu takes 3+ hours; visitors come for trekking, Shimshal Peak views, and authentic Wakhi hospitality.",
@@ -531,7 +531,7 @@ export const hunzaPlaces: Place[] = [
     description:
       "A high valley branching north from Sost toward the Afghan Wakhan corridor — permits required.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/3/38/Chipurson_Valley.jpg",
+      "/images/commons/a79dc6d69e979ba6.jpg",
     gallery: [],
     overview:
       "Chipursan is among the most remote valleys in Hunza, reached from Sost with special permits. Yaks, high pastures, and views toward the Pamir attract serious trekkers.",
@@ -589,10 +589,10 @@ export const hunzaPlaces: Place[] = [
     description:
       "One of Hunza's oldest villages — carved wooden mosques and 1,000 years of trade history.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/3/3b/Ganish_hunza_in_summers.JPG",
+      "/images/commons/bcd5d7dbff73c3f1.jpg",
     gallery: [
       {
-        src: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Ganish_hunza_in_summers.JPG",
+        src: "/images/commons/bcd5d7dbff73c3f1.jpg",
         title: "Ganish heritage lanes",
         caption: "Central Hunza · ALT 2,420M",
       },

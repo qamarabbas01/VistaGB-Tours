@@ -9,10 +9,10 @@ export const nagarDestination: RegionDestination = {
   tagline: "Orchards, glaciers, and Rakaposhi",
   description:
     "The valley across the river from Hunza — forts, glaciers, and treks to Rakaposhi and Rush Lake.",
-  image: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hopar_Valley.jpg",
+  image: "/images/commons/9df8326eb5be0e2f.jpg",
   gallery: [
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hopar_Valley.jpg",
+      src: "/images/commons/9df8326eb5be0e2f.jpg",
       title: "Hopper Valley",
       caption: "Nagar · ALT 2,800M",
     },

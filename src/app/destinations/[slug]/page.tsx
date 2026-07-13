@@ -27,13 +27,13 @@ export async function generateMetadata({ params }: Props) {
   const location = getLocationBySlug(slug);
 
   if (!location) {
-    return { title: "Destination Not Found — VistaGB Tours" };
+    return { title: "Destination Not Found" };
   }
 
   const name = location.name;
 
   return {
-    title: `${name} — VistaGB Tours`,
+    title: name,
     description: location.description,
   };
 }

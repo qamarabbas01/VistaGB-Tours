@@ -6,10 +6,11 @@ a travel operator in Gilgit-Baltistan, Pakistan.
 ## Pages
 
 - `/` — Home (hero, Why Choose VistaGB, Trending Destinations, Our Services)
-- `/destinations` — Famous places in Gilgit-Baltistan
-- `/blog` — Travel guides and stories
-- `/news` — Latest news, sourced from the GB Tourism Department
-- `/contact` — Contact form & info
+- `/destinations` — Region hubs and place detail pages
+- `/blog` — Travel guides and field notes (excerpts)
+- `/news` — Latest news from the GB Tourism Department (scraped + cached)
+- `/contact` — Inquiry form (Resend email)
+- `/about`, `/privacy`, `/terms` — Company / legal
 
 ## Design
 
@@ -24,21 +25,30 @@ a travel operator in Gilgit-Baltistan, Pakistan.
 ## Setup
 
 ```bash
-npm install
-npm run dev
+yarn install
+cp .env.example .env.local
+# fill in RESEND_API_KEY and RESEND_FROM_EMAIL
+yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
-Preview [VistaGb Tours](https://vista-gb-tours.vercel.app/).
+
+## Environment
+
+See `.env.example`:
+
+| Variable | Purpose |
+|----------|---------|
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL for sitemap / OG |
+| `RESEND_API_KEY` | Resend API key for contact emails |
+| `RESEND_FROM_EMAIL` | Verified from address |
+| `CONTACT_EMAIL_TO` | Optional inbox override |
 
 ## Notes
 
-- Hero and destination images currently use Unsplash URLs as placeholders.
-  Replace with your own photography in `src/data/destinations.ts` and
-  `src/app/page.tsx` for production.
-- The contact form is static (no submit handler yet) — wire it up to your
-  preferred backend (e.g. an API route, Formspree, or email service).
-- The `/news` page content is paraphrased from the official GB Tourism
-  Department news feed (https://visitgilgitbaltistan.gov.pk/pages/news).
-  For live data, build a small scraper or API route that fetches and
-  caches this feed server-side.
+- Destination images that previously hotlinked Wikimedia Commons are mirrored
+  under `public/images/commons/` to avoid upstream `429` rate limits.
+- Other place images may still use third-party hosts; replace with your own
+  photography or a CDN you control for production.
+- Contact form includes a honeypot field and per-IP rate limiting.
+- News is fetched from https://visitgilgitbaltistan.gov.pk and revalidated hourly.

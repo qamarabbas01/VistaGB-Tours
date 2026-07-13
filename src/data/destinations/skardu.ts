@@ -23,7 +23,7 @@ export const skarduDestination: RegionDestination = {
       caption: "Skardu",
     },
     {
-      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/%22Jarbaso%22.jpg/1280px-%22Jarbaso%22.jpg',
+      src: '/images/commons/feb717273e82a627.jpg',
       title: "Shigar Fort",
       caption: "Shigar Valley",
     },

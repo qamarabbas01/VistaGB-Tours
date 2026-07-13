@@ -122,10 +122,10 @@ export const skarduPlaces: Place[] = [
     tagline: "Gateway to the mountains beyond Skardu",
     description: "Apricot orchards, Shigar Fort, and the road toward Askole and K2.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/%22Jarbaso%22.jpg/1280px-%22Jarbaso%22.jpg",
+      "/images/commons/feb717273e82a627.jpg",
     gallery: [
       {
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/%22Jarbaso%22.jpg/1280px-%22Jarbaso%22.jpg",
+        src: "/images/commons/feb717273e82a627.jpg",
         title: "Shigar Fort",
         caption: "Shigar · ALT 2,230M",
       },
@@ -215,10 +215,10 @@ export const skarduPlaces: Place[] = [
     tagline: "Last village before K2",
     description: "Final settlement before Concordia — where Baltoro Glacier treks begin.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Shigar_Fort_03.jpg/1280px-Shigar_Fort_03.jpg",
+      "/images/commons/feb717273e82a627.jpg",
     gallery: [
       {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/%22Jarbaso%22.jpg/1280px-%22Jarbaso%22.jpg',
+        src: '/images/commons/feb717273e82a627.jpg',
         title: "Askole approach",
         caption: "Baltoro · ALT 3,048M",
       },

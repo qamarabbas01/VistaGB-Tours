@@ -1,4 +1,5 @@
 import { contact } from "@/config/contact";
+import { getClientIp, rateLimit } from "@/lib/rate-limit";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
@@ -15,6 +16,21 @@ type ContactPayload = {
   groupSize: string;
   message: string;
 };
+
+const FIELD_LIMITS = {
+  name: 120,
+  email: 254,
+  destination: 120,
+  places: 500,
+  travelFrom: 40,
+  travelTo: 40,
+  datesFlexible: 8,
+  travelMonth: 40,
+  duration: 40,
+  groupSize: 20,
+  message: 4000,
+  website: 200, // honeypot
+} as const;
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -87,7 +103,23 @@ function buildEmailHtml(inquiry: ContactPayload) {
   return `${tableRows}${notes}`;
 }
 
+function tooLong(value: string, max: number) {
+  return value.length > max;
+}
+
 export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  const limited = rateLimit(`contact:${ip}`, { limit: 5, windowMs: 60 * 60 * 1000 });
+  if (!limited.ok) {
+    return NextResponse.json(
+      { error: "Too many inquiries from this network. Please try again later." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(limited.retryAfterSec) },
+      },
+    );
+  }
+
   let body: unknown;
 
   try {
@@ -111,7 +143,13 @@ export async function POST(request: Request) {
     duration,
     groupSize,
     message = "",
-  } = body as Partial<ContactPayload>;
+    website = "",
+  } = body as Partial<ContactPayload> & { website?: string };
+
+  // Honeypot: bots fill this hidden field; humans never see it.
+  if (typeof website === "string" && website.trim() !== "") {
+    return NextResponse.json({ ok: true });
+  }
 
   if (
     typeof name !== "string" ||
@@ -128,6 +166,25 @@ export async function POST(request: Request) {
   ) {
     return NextResponse.json(
       { error: "Invalid input: all fields must be text." },
+      { status: 400 },
+    );
+  }
+
+  if (
+    tooLong(name, FIELD_LIMITS.name) ||
+    tooLong(email, FIELD_LIMITS.email) ||
+    tooLong(destination, FIELD_LIMITS.destination) ||
+    tooLong(places, FIELD_LIMITS.places) ||
+    tooLong(travelFrom, FIELD_LIMITS.travelFrom) ||
+    tooLong(travelTo, FIELD_LIMITS.travelTo) ||
+    tooLong(datesFlexible, FIELD_LIMITS.datesFlexible) ||
+    tooLong(travelMonth, FIELD_LIMITS.travelMonth) ||
+    tooLong(duration, FIELD_LIMITS.duration) ||
+    tooLong(groupSize, FIELD_LIMITS.groupSize) ||
+    tooLong(message, FIELD_LIMITS.message)
+  ) {
+    return NextResponse.json(
+      { error: "One or more fields are too long." },
       { status: 400 },
     );
   }

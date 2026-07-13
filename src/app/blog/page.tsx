@@ -3,7 +3,7 @@ import Pagination from "@/components/Pagination";
 import { blogPosts } from "@/data";
 
 export const metadata = {
-  title: "Blog — VistaGB Tours",
+  title: "Blog",
 };
 
 const ITEMS_PER_PAGE = 9;
@@ -68,9 +68,6 @@ export default function BlogPage({ searchParams }: Props) {
                   <p className="mt-3 text-sm leading-relaxed text-ice">
                     {post.excerpt}
                   </p>
-                  <span className="mt-4 inline-block text-sm font-medium text-apricot">
-                    Read more →
-                  </span>
                 </div>
               </article>
             ))}

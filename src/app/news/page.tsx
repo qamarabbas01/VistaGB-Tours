@@ -4,7 +4,7 @@ import { fetchNewsPage } from "@/lib/news/scraper";
 import type { NewsPageResult } from "@/lib/news/types";
 
 export const metadata = {
-  title: "News — VistaGB Tours",
+  title: "News",
 };
 
 export const revalidate = 3600;
