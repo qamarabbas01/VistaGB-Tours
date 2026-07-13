@@ -18,7 +18,7 @@ export const hunzaDestination: RegionDestination = {
       caption: "Hunza · ALT 2,438M",
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Baltit_fort%2C_Hunza_Valley.jpg",
+      src: "/images/commons/92ff9643469e41ed.jpg",
       title: "Baltit Fort",
       caption: "Central Hunza",
     },

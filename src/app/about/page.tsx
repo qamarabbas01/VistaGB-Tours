@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "About Us — VistaGB Tours",
+  title: "About Us",
 };
 
 export default function AboutPage() {

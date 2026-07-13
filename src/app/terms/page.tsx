@@ -1,7 +1,7 @@
 import { contact } from "@/config/contact";
 
 export const metadata = {
-  title: "Terms of Service — VistaGB Tours",
+  title: "Terms of Service",
 };
 
 export default function TermsPage() {

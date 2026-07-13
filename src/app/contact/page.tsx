@@ -4,7 +4,7 @@ import { contact } from "@/config/contact";
 import { getPlacesForRegion, regions } from "@/data";
 
 export const metadata = {
-  title: "Contact — VistaGB Tours",
+  title: "Contact",
   description:
     "Plan your Gilgit-Baltistan trip with VistaGB Tours. Send an inquiry and we'll reply with a custom route, timeline, and quote.",
 };

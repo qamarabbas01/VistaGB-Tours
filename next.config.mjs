@@ -17,7 +17,6 @@ const nextConfig = {
       { protocol: "https", hostname: "www.imusafir.pk" },
       { protocol: "https", hostname: "www.ajktours.com" },
       { protocol: "https", hostname: "northbackend.northonwheels.com" },
-      { protocol: "https", hostname: "upload.wikimedia.org" },
       { protocol: "https", hostname: "guidetourismpakistan.com" },
       { protocol: "https", hostname: "www.shutterstock.com" },
       { protocol: "https", hostname: "visitgilgitbaltistan.gov.pk" },
@@ -26,8 +25,6 @@ const nextConfig = {
       { protocol: "https", hostname: "vepakistan.com" },
       { protocol: "https", hostname: "visitsilkroad.org" },
       { protocol: "https", hostname: "cdn.prod.rexby.com" },
-      { protocol: "https", hostname: "encrypted-tbn0.gstatic.com" },
-      { protocol: "https", hostname: "**" },
     ],
   },
 };

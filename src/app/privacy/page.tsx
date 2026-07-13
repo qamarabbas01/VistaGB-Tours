@@ -1,7 +1,7 @@
 import { contact } from "@/config/contact";
 
 export const metadata = {
-  title: "Privacy Policy — VistaGB Tours",
+  title: "Privacy Policy",
 };
 
 export default function PrivacyPage() {
@@ -27,7 +27,14 @@ export default function PrivacyPage() {
             Information We Collect
           </h2>
           <p>
-            When you submit our contact form, we collect your name, email address, selected destination, and message solely to respond to your inquiry and plan your trip. If you proceed with a booking, we may also collect travel preferences and relevant details needed to arrange your itinerary or services. We do not collect financial or payment information via this website.
+            When you submit our contact form, we collect your name, email address,
+            preferred region or valley, specific places of interest (if selected),
+            travel dates or preferred travel month, trip length, number of travelers,
+            and any optional notes you provide. We use this information solely to
+            respond to your inquiry and plan your trip. If you proceed with a booking,
+            we may also collect travel preferences and relevant details needed to
+            arrange your itinerary or services. We do not collect financial or payment
+            information via this website.
           </p>
 
           <h2 className="font-display text-base font-semibold text-glacier mt-8 mb-1">

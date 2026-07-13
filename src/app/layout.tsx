@@ -24,9 +24,29 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VistaGB Tours — Gilgit-Baltistan",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://vista-gb-tours.vercel.app",
+  ),
+  title: {
+    default: "VistaGB Tours — Gilgit-Baltistan",
+    template: "%s — VistaGB Tours",
+  },
   description:
     "Discover the Karakoram, Hunza, Skardu and the high valleys of Gilgit-Baltistan with VistaGB Tours — curated journeys, treks and stays across northern Pakistan.",
+  openGraph: {
+    type: "website",
+    locale: "en_PK",
+    siteName: "VistaGB Tours",
+    title: "VistaGB Tours — Gilgit-Baltistan",
+    description:
+      "Curated journeys through the Karakoram, Hunza, Skardu and the high valleys of Gilgit-Baltistan.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VistaGB Tours — Gilgit-Baltistan",
+    description:
+      "Curated journeys through the Karakoram, Hunza, Skardu and the high valleys of Gilgit-Baltistan.",
+  },
 };
 
 export const viewport: Viewport = {

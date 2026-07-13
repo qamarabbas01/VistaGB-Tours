@@ -118,6 +118,8 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
       duration,
       groupSize,
       message: String(formData.get("message") ?? "").trim(),
+      // Honeypot — leave empty; bots that fill it are rejected server-side.
+      website: String(formData.get("website") ?? ""),
     };
 
     try {
@@ -167,7 +169,23 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
     "w-full rounded-lg border border-teal/30 bg-night px-4 py-3 text-glacier outline-none transition-colors focus:border-apricot disabled:opacity-60";
 
   return (
-    <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+    <form className="relative flex flex-col gap-8" onSubmit={handleSubmit}>
+      {/* Honeypot field — hidden from users, visible to naive bots */}
+      <div
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+      >
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
+        />
+      </div>
+
       <fieldset className="flex flex-col gap-5 border-0 p-0">
         <legend className="coord-label mb-1">Where</legend>
 
@@ -361,6 +379,7 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
               name="name"
               type="text"
               required
+              maxLength={120}
               disabled={submitting}
               className={inputClassName}
               placeholder="Your name"
@@ -376,6 +395,7 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
               name="email"
               type="email"
               required
+              maxLength={254}
               disabled={submitting}
               className={inputClassName}
               placeholder="you@example.com"
@@ -391,6 +411,7 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
             id="message"
             name="message"
             rows={4}
+            maxLength={4000}
             disabled={submitting}
             className={inputClassName}
             placeholder="Fitness level, budget, kids traveling with you, must-see spots..."

@@ -103,10 +103,10 @@ export const legacyDestinations: RegionDestination[] = [
     description:
       "Restored palace, apricot orchards, and trailheads into Hushe and the Saltoro.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/f/f2/Machlu_Village%2C_Khaplu_Ghizer_GB_%28Pakistan%29.jpg",
+      "/images/commons/3c2d7908aa0f7960.jpg",
     gallery: [
       {
-        src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Machlu_Village%2C_Khaplu_Ghizer_GB_%28Pakistan%29.jpg",
+        src: "/images/commons/3c2d7908aa0f7960.jpg",
         title: "Khaplu region",
         caption: "Baltistan · ALT 2,560M",
       },
