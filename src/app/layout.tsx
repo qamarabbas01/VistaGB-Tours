@@ -47,6 +47,9 @@ export const metadata: Metadata = {
     description:
       "Curated journeys through the Karakoram, Hunza, Skardu and the high valleys of Gilgit-Baltistan.",
   },
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export const viewport: Viewport = {
