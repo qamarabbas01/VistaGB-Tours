@@ -1,7 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import { regions } from "@/data";
+import { blogPosts, regions } from "@/data";
+import {
+  activities,
+  experiences,
+  faqs,
+  galleryImages,
+  mapPins,
+  packages,
+  reviews,
+  statistics,
+} from "@/data/hero";
 import Button from "@/components/Button";
+import FaqAccordion from "@/components/FaqAccordion";
+import { fetchNewsPage } from "@/lib/news/scraper";
+
+export const revalidate = 3600;
 
 const reasons = [
   {
@@ -30,32 +44,27 @@ const reasons = [
   },
 ];
 
-const services = [
-  {
-    title: "Custom Tours",
-    detail:
-      "Multi-day road trips along the Karakoram Highway, built around the valleys, food, and pace you choose.",
-  },
-  {
-    title: "Trekking & Expeditions",
-    detail:
-      "From Fairy Meadows day hikes to multi-week K2 base camp treks, with permits and porters arranged.",
-  },
-  {
-    title: "Hotel & Homestay Booking",
-    detail:
-      "Hand-picked stays — from heritage forts to riverside lodges and family homestays in remote valleys.",
-  },
-  {
-    title: "Transport & Logistics",
-    detail:
-      "4x4 jeep transfers, airport pickups, and Karakoram Highway driving with experienced mountain drivers.",
-  },
-];
+function SectionDivider() {
+  return (
+    <div className="mx-auto max-w-7xl px-6 md:px-10">
+      <div className="altitude-line" />
+    </div>
+  );
+}
 
-export default function Home() {
-  const trendingToShow = 5;
-  const trendingDestinations = regions.slice(0, trendingToShow);
+export default async function Home() {
+  const popularDestinations = regions.slice(0, 6);
+  const latestPosts = [...blogPosts]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 3);
+
+  let latestNews: Awaited<ReturnType<typeof fetchNewsPage>>["items"] = [];
+  try {
+    const news = await fetchNewsPage(1);
+    latestNews = news.items.slice(0, 3);
+  } catch {
+    latestNews = [];
+  }
 
   return (
     <div>
@@ -67,23 +76,26 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="hero-media object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-night via-night/70 to-night/30" />
         <div className="absolute inset-0 bg-gradient-to-r from-night/60 via-transparent to-transparent" />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-10">
-          <p className="coord-label mb-6">35.8°N · 75.5°E · KARAKORAM RANGE</p>
-          <h1 className="max-w-3xl font-display text-5xl font-semibold leading-[1.1] text-glacier md:text-7xl">
-            Where the Karakoram
-            <span className="block italic text-apricot">meets the sky.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-ice md:text-lg">
-            VistaGB Tours leads journeys through Gilgit-Baltistan — the
-            valleys, glaciers, and ancient roads of northern Pakistan, guided
-            by the people who call them home.
+          <p className="coord-label rise-in mb-6">
+            35.8°N · 75.5°E · KARAKORAM RANGE
           </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <h1 className="rise-in rise-in-delay-1 max-w-3xl font-display text-5xl font-semibold leading-[1.1] text-glacier md:text-7xl">
+            VistaGB
+            <span className="mt-2 block text-4xl italic text-apricot md:text-6xl">
+              Where the Karakoram meets the sky.
+            </span>
+          </h1>
+          <p className="rise-in rise-in-delay-2 mt-6 max-w-xl text-base leading-relaxed text-ice md:text-lg">
+            Journeys through Gilgit-Baltistan — valleys, glaciers, and ancient
+            roads of northern Pakistan, guided by the people who call them home.
+          </p>
+          <div className="rise-in rise-in-delay-3 mt-10 flex flex-col gap-4 sm:flex-row">
             <Button
               href="/destinations"
               className="rounded-full bg-apricot px-8 py-3 text-center text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
@@ -134,26 +146,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trending Destinations */}
+      {/* Popular Destinations */}
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="coord-label mb-3">On The Map</p>
               <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
-                Trending Destinations
+                Popular Destinations
               </h2>
+              <p className="mt-4 max-w-xl text-ice">
+                Valleys and plateaus that define a first — or fiftieth — journey
+                through the Karakoram.
+              </p>
             </div>
             <Link
               href="/destinations"
-              className="text-sm font-medium text-apricot hover:underline hidden md:inline"
+              className="hidden text-sm font-medium text-apricot hover:underline md:inline"
             >
               View all destinations →
             </Link>
           </div>
 
           <div className="scroll-row mt-12 flex gap-6 overflow-x-auto pb-4">
-            {trendingDestinations.map((dest) => (
+            {popularDestinations.map((dest) => (
               <Link
                 href={`/destinations/${dest.slug}`}
                 key={dest.slug}
@@ -182,7 +198,7 @@ export default function Home() {
           <div className="mt-8 flex justify-center md:hidden">
             <Link
               href="/destinations"
-              className="rounded-full bg-apricot px-6 py-2 text-sm font-semibold text-night hover:scale-[1.03] transition-transform"
+              className="rounded-full bg-apricot px-6 py-2 text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
             >
               View all destinations
             </Link>
@@ -190,54 +206,533 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="altitude-line" />
-      </div>
+      <SectionDivider />
 
-      {/* Our Services */}
+      {/* Top Experiences */}
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <p className="coord-label mb-3">What We Offer</p>
+          <p className="coord-label mb-3">Must See</p>
           <h2 className="max-w-2xl font-display text-3xl font-semibold leading-tight md:text-5xl">
-            Our Services
+            Top Experiences
           </h2>
+          <p className="mt-4 max-w-xl text-ice">
+            Places our travelers ask for again — lakes, forts, meadows, and
+            ridges that stay with you.
+          </p>
+
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {experiences.map((item, index) => (
+              <Link
+                key={item.slug}
+                href={`/destinations/${item.slug}`}
+                className={`group relative min-h-[300px] overflow-hidden rounded-2xl lg:min-h-[340px] ${index === 0 ? "sm:col-span-2 lg:col-span-2" : ""
+                  }`}
+              >
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 66vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <p className="coord-label mb-2">{item.region}</p>
+                  <h3 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
+                    {item.name}
+                  </h3>
+                  <p className="mt-1 text-sm text-ice">{item.tagline}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Adventure Activities */}
+      <section className="relative overflow-hidden bg-slate py-20 md:py-28">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 20% 20%, #d98e4a 0%, transparent 40%), radial-gradient(circle at 80% 80%, #5c7a8a 0%, transparent 45%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-7xl px-6 md:px-10">
+          <p className="coord-label mb-3">On The Ground</p>
+          <h2 className="max-w-2xl font-display text-3xl font-semibold leading-tight md:text-5xl">
+            Adventure Activities
+          </h2>
+          <p className="mt-4 max-w-xl text-ice">
+            How you move through the mountains — on foot, by jeep, through
+            heritage sites, or behind a camera.
+          </p>
 
           <div className="mt-14 grid gap-6 md:grid-cols-2">
-            {services.map((service, i) => (
-              <div
-                key={service.title}
-                className="rounded-2xl border border-teal/20 bg-slate p-8 transition-colors hover:border-apricot/50"
+            {activities.map((activity) => (
+              <article
+                key={activity.title}
+                className="group relative min-h-[280px] overflow-hidden rounded-2xl"
               >
-                <p className="coord-label mb-4">SERVICE {String(i + 1).padStart(2, "0")}</p>
-                <h3 className="font-display text-2xl font-semibold text-glacier">
-                  {service.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-ice">
-                  {service.detail}
+                <Image
+                  src={activity.image}
+                  alt={activity.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-night via-night/75 to-night/20" />
+                <div className="relative flex h-full min-h-[280px] flex-col justify-end p-8">
+                  <p className="coord-label mb-3">{activity.mark}</p>
+                  <h3 className="font-display text-3xl font-semibold text-glacier">
+                    {activity.title}
+                  </h3>
+                  <p className="mt-3 max-w-md text-sm leading-relaxed text-ice">
+                    {activity.detail}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tour Packages */}
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="coord-label mb-3">Ready Routes</p>
+              <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
+                Tour Packages
+              </h2>
+              <p className="mt-4 max-w-xl text-ice">
+                Starting points we tailor to your dates, pace, and the valleys
+                you want most.
+              </p>
+            </div>
+            <Link
+              href="/contact"
+              className="text-sm font-medium text-apricot hover:underline"
+            >
+              Request a custom quote →
+            </Link>
+          </div>
+
+          <div className="mt-14 grid gap-8 md:grid-cols-2">
+            {packages.map((pkg) => (
+              <article
+                key={pkg.name}
+                className="overflow-hidden rounded-2xl border border-teal/20 bg-slate transition-colors hover:border-apricot/40"
+              >
+                <div className="relative h-56 w-full overflow-hidden">
+                  <Image
+                    src={pkg.image}
+                    alt={pkg.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-end justify-between gap-2">
+                    <p className="coord-label">{pkg.days}</p>
+                    <p className="font-mono text-xs text-apricot">{pkg.price}</p>
+                  </div>
+                </div>
+                <div className="p-6 md:p-8">
+                  <h3 className="font-display text-2xl font-semibold text-glacier">
+                    {pkg.name}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ice">
+                    {pkg.summary}
+                  </p>
+                  <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
+                    {pkg.includes.map((item) => (
+                      <li
+                        key={item}
+                        className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-teal"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    href="/contact"
+                    className="mt-6 inline-block rounded-full border border-ice/30 px-6 py-2 text-center text-sm font-medium text-glacier transition-colors hover:border-apricot hover:text-apricot"
+                  >
+                    Enquire
+                  </Button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider />
+
+      {/* Customer Reviews */}
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <p className="coord-label mb-3">From The Road</p>
+          <h2 className="max-w-2xl font-display text-3xl font-semibold leading-tight md:text-5xl">
+            Customer Reviews
+          </h2>
+          <p className="mt-4 max-w-xl text-ice">
+            Words from travelers who trusted us with their first — or return —
+            journey north.
+          </p>
+
+          <div className="mt-14 grid gap-10 md:grid-cols-3">
+            {reviews.map((review) => (
+              <blockquote key={review.name} className="relative">
+                <span
+                  className="font-display text-5xl leading-none text-apricot/40"
+                  aria-hidden
+                >
+                  &ldquo;
+                </span>
+                <p className="mt-2 text-base leading-relaxed text-glacier">
+                  {review.quote}
                 </p>
+                <footer className="mt-6">
+                  <p className="font-display text-lg font-semibold text-glacier">
+                    {review.name}
+                  </p>
+                  <p className="coord-label mt-2">
+                    {review.from} · {review.trip}
+                  </p>
+                </footer>
+              </blockquote>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Travel Statistics */}
+      <section className="relative overflow-hidden py-20 md:py-28">
+        <Image
+          src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2400&auto=format&fit=crop"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-30"
+          aria-hidden
+        />
+        <div className="absolute inset-0 bg-night/80" />
+        <div className="relative mx-auto max-w-7xl px-6 md:px-10">
+          <p className="coord-label mb-3">By The Numbers</p>
+          <h2 className="max-w-2xl font-display text-3xl font-semibold leading-tight md:text-5xl">
+            Travel Statistics
+          </h2>
+          <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {statistics.map((stat) => (
+              <div key={stat.label}>
+                <p className="font-display text-5xl font-semibold text-apricot md:text-6xl">
+                  {stat.value}
+                </p>
+                <p className="mt-3 font-display text-xl font-semibold text-glacier">
+                  {stat.label}
+                </p>
+                <p className="mt-1 text-sm text-ice">{stat.detail}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Travel Map */}
+      <section className="bg-slate py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.2fr]">
+            <div>
+              <p className="coord-label mb-3">The Region</p>
+              <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
+                Travel Map
+              </h2>
+              <p className="mt-4 max-w-md text-ice">
+                Trace the valleys we operate across — from Ghizer in the west to
+                Baltistan in the east, and up the Karakoram Highway to the China
+                border.
+              </p>
+              <ul className="mt-8 space-y-3">
+                {mapPins.map((pin) => (
+                  <li key={pin.slug}>
+                    <Link
+                      href={`/destinations/${pin.slug}`}
+                      className="group flex items-baseline justify-between gap-4 border-b border-teal/15 py-2 transition-colors hover:border-apricot/40"
+                    >
+                      <span className="font-display text-lg text-glacier group-hover:text-apricot">
+                        {pin.name}
+                      </span>
+                      <span className="coord-label shrink-0">{pin.alt}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-teal/20 md:aspect-[5/4]">
+              <Image
+                src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=1600&auto=format&fit=crop"
+                alt="Topographic atmosphere over northern Pakistan"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover opacity-60"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-night/70 via-slate/40 to-night/80" />
+              <div
+                className="absolute inset-0 opacity-30"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(rgba(159,179,194,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(159,179,194,0.15) 1px, transparent 1px)",
+                  backgroundSize: "48px 48px",
+                }}
+              />
+              <p className="absolute left-6 top-6 coord-label">
+                GILGIT-BALTISTAN · LIVE ROUTES
+              </p>
+              {mapPins.map((pin) => (
+                <Link
+                  key={pin.slug}
+                  href={`/destinations/${pin.slug}`}
+                  className="group absolute -translate-x-1/2 -translate-y-1/2"
+                  style={{ top: pin.top, left: pin.left }}
+                >
+                  <span className="map-pin-dot block h-3 w-3 rounded-full bg-apricot" />
+                  <span className="absolute left-5 top-1/2 -translate-y-1/2 whitespace-nowrap font-display text-sm font-semibold text-glacier opacity-90 transition-colors group-hover:text-apricot">
+                    {pin.name}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Latest News */}
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="coord-label mb-3">Regional Updates</p>
+              <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
+                Latest News
+              </h2>
+              <p className="mt-4 max-w-xl text-ice">
+                Festivals, events, and developments from across Gilgit-Baltistan.
+              </p>
+            </div>
+            <Link
+              href="/news"
+              className="text-sm font-medium text-apricot hover:underline"
+            >
+              All news →
+            </Link>
+          </div>
+
+          {latestNews.length > 0 ? (
+            <div className="mt-14 grid gap-8 md:grid-cols-3">
+              {latestNews.map((item) => (
+                <a
+                  key={item.id}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block overflow-hidden rounded-2xl border border-teal/20 bg-slate transition-colors hover:border-apricot/50"
+                >
+                  {item.image ? (
+                    <div className="relative h-44 w-full overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                  ) : null}
+                  <div className="p-6">
+                    <p className="coord-label mb-2">
+                      {item.date}
+                      {item.time ? ` · ${item.time}` : ""}
+                    </p>
+                    <h3 className="font-display text-xl font-semibold leading-snug text-glacier transition-colors group-hover:text-apricot">
+                      {item.title}
+                    </h3>
+                    {item.summary ? (
+                      <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ice">
+                        {item.summary}
+                      </p>
+                    ) : null}
+                  </div>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-14 rounded-2xl border border-teal/20 bg-slate p-10 text-center">
+              <p className="text-ice">
+                News is temporarily unavailable.{" "}
+                <Link href="/news" className="text-apricot hover:underline">
+                  Try the news page
+                </Link>
+                .
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <SectionDivider />
+
+      {/* Blog */}
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="coord-label mb-3">Field Notes</p>
+              <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
+                From the Blog
+              </h2>
+              <p className="mt-4 max-w-xl text-ice">
+                Guides, season tips, and stories from the road across northern
+                Pakistan.
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className="text-sm font-medium text-apricot hover:underline"
+            >
+              Read the blog →
+            </Link>
+          </div>
+
+          <div className="mt-14 grid gap-8 md:grid-cols-3">
+            {latestPosts.map((post) => (
+              <article
+                key={post.title}
+                className="group overflow-hidden rounded-2xl border border-teal/20 bg-slate"
+              >
+                <div className="relative h-48 w-full overflow-hidden">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="coord-label mb-2">
+                    {post.tag} · {post.date}
+                  </p>
+                  <h3 className="font-display text-xl font-semibold leading-snug text-glacier">
+                    {post.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ice">
+                    {post.excerpt}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Instagram Gallery */}
+      <section className="bg-slate py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-10">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="coord-label mb-3">On Film</p>
+              <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
+                Instagram Gallery
+              </h2>
+              <p className="mt-4 max-w-xl text-ice">
+                Frames from the valleys — forts, glaciers, and road light along
+                the Karakoram Highway.
+              </p>
+            </div>
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-apricot hover:underline"
+            >
+              @vistagbtours →
+            </a>
+          </div>
+
+          <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+            {galleryImages.map((image, index) => (
+              <div
+                key={image.src}
+                className={`relative overflow-hidden rounded-xl ${index === 0 || index === 5
+                    ? "aspect-square md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[360px]"
+                    : "aspect-square"
+                  }`}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-700 hover:scale-105"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs */}
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-3xl px-6 md:px-10">
+          <p className="coord-label mb-3">Before You Go</p>
+          <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
+            Frequently Asked Questions
+          </h2>
+          <p className="mt-4 text-ice">
+            Practical answers for planning your first Gilgit-Baltistan trip.
+          </p>
+          <div className="mt-12">
+            <FaqAccordion items={faqs} />
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
       <section className="relative overflow-hidden bg-slate py-20 md:py-28">
-        <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse at top, rgba(217,142,74,0.18), transparent 55%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">
           <p className="coord-label mb-4">Ready When You Are</p>
           <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
             Your journey through the Karakoram starts with one message.
           </h2>
           <p className="mt-4 text-ice">
-            Tell us your dates and the valleys you&apos;re curious about — we&apos;ll
-            build a route around them.
+            Tell us your dates and the valleys you&apos;re curious about —
+            we&apos;ll build a route around them.
           </p>
-          <Button
-            href="/contact"
-            className="mt-8 inline-block rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
-          >
-            Get in Touch
-          </Button>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button
+              href="/contact"
+              className="inline-block rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
+            >
+              Get in Touch
+            </Button>
+            <Button
+              href="/destinations"
+              className="inline-block rounded-full border border-ice/40 px-8 py-3 text-sm font-medium text-glacier transition-colors hover:border-apricot hover:text-apricot"
+            >
+              Browse Destinations
+            </Button>
+          </div>
         </div>
       </section>
     </div>
