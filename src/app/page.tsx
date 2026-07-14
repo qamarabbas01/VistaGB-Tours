@@ -52,12 +52,13 @@ function SectionDivider() {
   );
 }
 
-export default async function Home() {
-  const popularDestinations = regions.slice(0, 6);
-  const latestPosts = [...blogPosts]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 3);
+const popularDestinations = regions.slice(0, 6);
 
+const latestPosts = [...blogPosts]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 3);
+
+export default async function Home() {
   let latestNews: Awaited<ReturnType<typeof fetchNewsPage>>["items"] = [];
   try {
     const news = await fetchNewsPage(1);
@@ -225,14 +226,20 @@ export default async function Home() {
               <Link
                 key={item.slug}
                 href={`/destinations/${item.slug}`}
-                className={`group relative min-h-[300px] overflow-hidden rounded-2xl lg:min-h-[340px] ${index === 0 ? "sm:col-span-2 lg:col-span-2" : ""
-                  }`}
+                className={
+                  "group relative min-h-[300px] overflow-hidden rounded-2xl lg:min-h-[340px] " +
+                  (index === 0 ? "sm:col-span-2 lg:col-span-2" : "")
+                }
               >
                 <Image
                   src={item.image}
                   alt={item.name}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 66vw"
+                  sizes={
+                    index === 0
+                      ? "(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw"
+                      : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  }
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-transparent" />
@@ -667,10 +674,12 @@ export default async function Home() {
             {galleryImages.map((image, index) => (
               <div
                 key={image.src}
-                className={`relative overflow-hidden rounded-xl ${index === 0 || index === 5
+                className={
+                  "relative overflow-hidden rounded-xl " +
+                  (index === 0 || index === 5
                     ? "aspect-square md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[360px]"
-                    : "aspect-square"
-                  }`}
+                    : "aspect-square")
+                }
               >
                 <Image
                   src={image.src}
