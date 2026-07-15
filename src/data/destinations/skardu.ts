@@ -1,4 +1,5 @@
 import type { RegionDestination } from "../types";
+import { skarduGuide } from "../guides/skardu";
 import { skarduPlaceSlugs } from "../places/skardu";
 
 export const skarduDestination: RegionDestination = {
@@ -43,4 +44,5 @@ export const skarduDestination: RegionDestination = {
   altitude: "2,228M",
   majorValleys: ["Skardu town", "Shigar", "Basho", "Deosai plateau", "Baltoro approach"],
   placeSlugs: skarduPlaceSlugs,
+  guide: skarduGuide,
 };

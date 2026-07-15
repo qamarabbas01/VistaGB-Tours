@@ -10,10 +10,14 @@ export { blogPosts } from "./blog";
 
 export type {
   BlogPost,
+  DestinationFaq,
   GalleryImage,
+  GuideListing,
+  ItineraryDay,
   Place,
   PlaceType,
   RegionDestination,
+  RegionGuide,
   Destination,
   TravelLocation,
   SearchResult,
@@ -116,6 +120,7 @@ function placeSearchText(place: Place): string {
 }
 
 function regionSearchText(region: RegionDestination): string {
+  const guide = region.guide;
   return [
     region.name,
     region.region,
@@ -125,7 +130,22 @@ function regionSearchText(region: RegionDestination): string {
     ...(region.majorValleys ?? []),
     ...region.highlights,
     ...region.placeSlugs,
-  ].join(" ");
+    guide?.history,
+    guide?.culture,
+    guide?.weather,
+    guide?.population,
+    ...(guide?.languages ?? []),
+    ...(guide?.activities ?? []),
+    ...(guide?.localTips ?? []),
+    ...(guide?.famousFoods?.map((f) => `${f.name} ${f.detail}`) ?? []),
+    ...(guide?.hotels?.map((h) => h.name) ?? []),
+    ...(guide?.restaurants?.map((r) => r.name) ?? []),
+    ...(guide?.trekkingRoutes?.map((t) => t.name) ?? []),
+    ...(guide?.nearbyDestinations?.map((n) => n.name) ?? []),
+    ...(guide?.faqs?.map((f) => `${f.question} ${f.answer}`) ?? []),
+  ]
+    .filter(Boolean)
+    .join(" ");
 }
 
 /** Search regions and places — expanding matched regions to include all child places */

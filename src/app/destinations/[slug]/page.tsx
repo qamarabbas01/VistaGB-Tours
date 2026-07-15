@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DestinationGallery from "@/components/DestinationGallery";
+import DestinationGuide from "@/components/DestinationGuide";
 import PlaceCard from "@/components/PlaceCard";
 import {
   getAllStaticSlugs,
@@ -11,12 +12,75 @@ import {
   isPlace,
   regions,
   type Place,
+  type PlaceType,
   type RegionDestination,
 } from "@/data";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
+
+const PLACE_GROUP_ORDER: { type: PlaceType; label: string }[] = [
+  { type: "Town", label: "Towns" },
+  { type: "Village", label: "Villages" },
+  { type: "Valley", label: "Valleys" },
+  { type: "Lake", label: "Lakes" },
+  { type: "Waterfall", label: "Waterfalls" },
+  { type: "Fort", label: "Forts & heritage" },
+  { type: "Viewpoint", label: "Viewpoints" },
+  { type: "Pass", label: "Passes" },
+  { type: "Glacier", label: "Glaciers" },
+  { type: "Bridge", label: "Bridges" },
+  { type: "Meadow", label: "Meadows" },
+  { type: "Desert", label: "Deserts" },
+];
+
+function groupPlacesByType(places: Place[]) {
+  const byType = new Map<PlaceType, Place[]>();
+  for (const place of places) {
+    const list = byType.get(place.type) ?? [];
+    list.push(place);
+    byType.set(place.type, list);
+  }
+
+  const groups = PLACE_GROUP_ORDER.filter(
+    (g) => (byType.get(g.type)?.length ?? 0) > 0,
+  ).map((g) => ({
+    type: g.type as string,
+    label: g.label,
+    places: byType.get(g.type)!,
+  }));
+
+  const matchedTypes = new Set<string>(PLACE_GROUP_ORDER.map((g) => g.type));
+  const unmatchedPlaces = places.filter((p) => !matchedTypes.has(p.type));
+
+  if (unmatchedPlaces.length > 0) {
+    groups.push({
+      type: "Other",
+      label: "Other Attractions",
+      places: unmatchedPlaces,
+    });
+  }
+
+  return groups;
+}
+
+/** Prefer guide nearby destinations that are regions; fill with remaining regions. */
+function getRelatedRegions(region: RegionDestination): RegionDestination[] {
+  const nearbyRegions =
+    region.guide?.nearbyDestinations
+      ?.map((item) => (item.placeSlug ? getLocationBySlug(item.placeSlug) : undefined))
+      .filter(
+        (loc): loc is RegionDestination =>
+          Boolean(loc && !isPlace(loc) && loc.slug !== region.slug),
+      ) ?? [];
+
+  const seen = new Set(nearbyRegions.map((r) => r.slug));
+  seen.add(region.slug);
+
+  const fillers = regions.filter((r) => !seen.has(r.slug));
+  return [...nearbyRegions, ...fillers].slice(0, 3);
+}
 
 export async function generateStaticParams() {
   return getAllStaticSlugs().map((slug) => ({ slug }));
@@ -226,7 +290,9 @@ function RegionDetailPage({
   region: RegionDestination;
 }) {
   const childPlaces = getPlacesForRegion(region.slug);
-  const otherRegions = regions.filter((r) => r.slug !== region.slug).slice(0, 3);
+  const placeGroups = groupPlacesByType(childPlaces);
+  const otherRegions = getRelatedRegions(region);
+  const guide = region.guide;
 
   return (
     <div>
@@ -301,13 +367,38 @@ function RegionDetailPage({
 
           <aside className="flex flex-col gap-6">
             <div className="rounded-2xl border border-teal/20 bg-slate p-6">
-              <p className="coord-label mb-3">Best Time to Visit</p>
-              <p className="text-sm leading-relaxed text-ice">{region.bestTime}</p>
+              <p className="coord-label mb-4">Quick facts</p>
+              <dl className="space-y-4 text-sm">
+                <div>
+                  <dt className="text-xs uppercase tracking-wider text-teal">Altitude</dt>
+                  <dd className="mt-1 text-ice">{region.altitude}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs uppercase tracking-wider text-teal">
+                    Best time to visit
+                  </dt>
+                  <dd className="mt-1 text-ice">{region.bestTime}</dd>
+                </div>
+                {guide?.population ? (
+                  <div>
+                    <dt className="text-xs uppercase tracking-wider text-teal">Population</dt>
+                    <dd className="mt-1 text-ice">{guide.population}</dd>
+                  </div>
+                ) : null}
+                {guide?.languages && guide.languages.length > 0 ? (
+                  <div>
+                    <dt className="text-xs uppercase tracking-wider text-teal">Languages</dt>
+                    <dd className="mt-1 text-ice">{guide.languages.join(" · ")}</dd>
+                  </div>
+                ) : null}
+              </dl>
             </div>
+
             <div className="rounded-2xl border border-teal/20 bg-slate p-6">
               <p className="coord-label mb-3">Getting There</p>
               <p className="text-sm leading-relaxed text-ice">{region.gettingThere}</p>
             </div>
+
             <div className="rounded-2xl border border-apricot/30 bg-slate p-6">
               <p className="coord-label mb-3">Plan a Trip</p>
               <p className="text-sm leading-relaxed text-ice">
@@ -330,21 +421,27 @@ function RegionDetailPage({
           <div className="mx-auto max-w-7xl px-6 md:px-10">
             <p className="coord-label mb-3">Places in {region.name}</p>
             <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
-              Top attractions
+              Attractions & landscapes
             </h2>
             <p className="mt-3 max-w-2xl text-sm text-ice md:text-base">
-              Every valley, fort, lake, and viewpoint in {region.name} — each with
-              its own photos, activities, and travel details.
+              Towns, forts, lakes, valleys, and viewpoints across {region.name} —
+              each with its own photos, activities, and travel details.
             </p>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {childPlaces.map((place) => (
-                <PlaceCard
-                  key={place.slug}
-                  place={place}
-                  parentName={region.name}
-                />
-              ))}
-            </div>
+
+            {placeGroups.map((group) => (
+              <div key={group.type} className="mt-14">
+                <p className="coord-label mb-4">{group.label}</p>
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {group.places.map((place) => (
+                    <PlaceCard
+                      key={place.slug}
+                      place={place}
+                      parentName={region.name}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       ) : null}
@@ -354,6 +451,8 @@ function RegionDetailPage({
         heroImage={region.image}
         destinationName={region.name}
       />
+
+      {guide ? <DestinationGuide region={region} guide={guide} /> : null}
 
       <section className="border-t border-teal/20 py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">

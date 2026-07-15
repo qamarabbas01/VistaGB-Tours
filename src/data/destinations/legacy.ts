@@ -1,4 +1,11 @@
 import type { RegionDestination } from "../types";
+import {
+  astoreGuide,
+  broghilGuide,
+  fairyMeadowsGuide,
+  ghizerGuide,
+  khapluGuide,
+} from "../guides/legacy";
 
 /** Standalone regions not yet split into place files — still appear on the map */
 export const legacyDestinations: RegionDestination[] = [
@@ -31,6 +38,7 @@ export const legacyDestinations: RegionDestination[] = [
     gettingThere: "4–5 hours by road from Gilgit over the Astore Valley road.",
     altitude: "2,600M",
     placeSlugs: [],
+    guide: astoreGuide,
   },
   {
     kind: "region",
@@ -62,6 +70,7 @@ export const legacyDestinations: RegionDestination[] = [
       "Drive from Chilas to Tato Village, jeep to trailhead, hike 2–3 hours.",
     altitude: "3,300M",
     placeSlugs: [],
+    guide: fairyMeadowsGuide,
   },
   {
     kind: "region",
@@ -93,6 +102,7 @@ export const legacyDestinations: RegionDestination[] = [
     altitude: "2,850M",
     majorValleys: ["Phander", "Yasin", "Gupis", "Ishkoman", "Shandur"],
     placeSlugs: [],
+    guide: ghizerGuide,
   },
   {
     kind: "region",
@@ -102,8 +112,7 @@ export const legacyDestinations: RegionDestination[] = [
     tagline: "Royal palaces and silk-road heritage",
     description:
       "Restored palace, apricot orchards, and trailheads into Hushe and the Saltoro.",
-    image:
-      "/images/commons/3c2d7908aa0f7960.jpg",
+    image: "/images/commons/3c2d7908aa0f7960.jpg",
     gallery: [
       {
         src: "/images/commons/3c2d7908aa0f7960.jpg",
@@ -123,6 +132,7 @@ export const legacyDestinations: RegionDestination[] = [
     gettingThere: "3 hours east from Skardu along the Shyok River.",
     altitude: "2,560M",
     placeSlugs: [],
+    guide: khapluGuide,
   },
   {
     kind: "region",
@@ -133,10 +143,10 @@ export const legacyDestinations: RegionDestination[] = [
     description:
       "High pastures and Karambar Lake where the Hindu Kush, Pamir, and Karakoram meet.",
     image:
-      "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600&auto=format&fit=crop",
     gallery: [
       {
-        src: "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
+        src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600&auto=format&fit=crop",
         title: "Broghil high country",
         caption: "Broghil · ALT 3,300M",
       },
@@ -153,5 +163,6 @@ export const legacyDestinations: RegionDestination[] = [
     gettingThere: "Multi-day approach via Laspur or Darkut with permits.",
     altitude: "3,300M",
     placeSlugs: [],
+    guide: broghilGuide,
   },
 ];
