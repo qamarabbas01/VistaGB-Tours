@@ -261,6 +261,7 @@ export default function DestinationGuide({ region, guide }: Props) {
                 className="h-[360px] w-full md:h-[480px]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin allow-popups"
                 allowFullScreen
               />
             </div>

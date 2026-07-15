@@ -139,7 +139,9 @@ function regionSearchText(region: RegionDestination): string {
     ...(guide?.localTips ?? []),
     ...(guide?.famousFoods?.map((f) => `${f.name} ${f.detail}`) ?? []),
     ...(guide?.hotels?.map((h) => h.name) ?? []),
+    ...(guide?.restaurants?.map((r) => r.name) ?? []),
     ...(guide?.trekkingRoutes?.map((t) => t.name) ?? []),
+    ...(guide?.nearbyDestinations?.map((n) => n.name) ?? []),
     ...(guide?.faqs?.map((f) => `${f.question} ${f.answer}`) ?? []),
   ]
     .filter(Boolean)

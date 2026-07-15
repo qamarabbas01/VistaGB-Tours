@@ -42,12 +42,27 @@ function groupPlacesByType(places: Place[]) {
     list.push(place);
     byType.set(place.type, list);
   }
-  return PLACE_GROUP_ORDER.filter((g) => (byType.get(g.type)?.length ?? 0) > 0).map(
-    (g) => ({
-      ...g,
-      places: byType.get(g.type)!,
-    }),
-  );
+
+  const groups = PLACE_GROUP_ORDER.filter(
+    (g) => (byType.get(g.type)?.length ?? 0) > 0,
+  ).map((g) => ({
+    type: g.type as string,
+    label: g.label,
+    places: byType.get(g.type)!,
+  }));
+
+  const matchedTypes = new Set<string>(PLACE_GROUP_ORDER.map((g) => g.type));
+  const unmatchedPlaces = places.filter((p) => !matchedTypes.has(p.type));
+
+  if (unmatchedPlaces.length > 0) {
+    groups.push({
+      type: "Other",
+      label: "Other Attractions",
+      places: unmatchedPlaces,
+    });
+  }
+
+  return groups;
 }
 
 export async function generateStaticParams() {
