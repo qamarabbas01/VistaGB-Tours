@@ -1,15 +1,37 @@
 import Link from "next/link";
 import FaqAccordion from "@/components/FaqAccordion";
+import { getLocationBySlug } from "@/data";
 import type { GuideListing, RegionDestination, RegionGuide } from "@/data/types";
 
+function isTrustedMapEmbed(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname;
+    const isGoogleMapsHost =
+      host === "maps.google.com" ||
+      host === "www.google.com" ||
+      host === "www.google.co.uk" ||
+      host.endsWith(".google.com");
+    const looksLikeEmbed =
+      parsed.searchParams.get("output") === "embed" ||
+      parsed.pathname.includes("/maps/embed") ||
+      parsed.pathname.includes("/maps");
+    return isGoogleMapsHost && looksLikeEmbed;
+  } catch {
+    return false;
+  }
+}
+
 function GuideLink({ item }: { item: GuideListing }) {
-  if (!item.placeSlug) {
+  const resolved = item.placeSlug ? getLocationBySlug(item.placeSlug) : undefined;
+
+  if (!resolved) {
     return <span className="font-medium text-glacier">{item.name}</span>;
   }
 
   return (
     <Link
-      href={`/destinations/${item.placeSlug}`}
+      href={`/destinations/${resolved.slug}`}
       className="font-medium text-glacier transition-colors hover:text-apricot"
     >
       {item.name}
@@ -38,7 +60,7 @@ function ListingGrid({
         <ul className="mt-10 grid gap-4 sm:grid-cols-2">
           {items.map((item) => (
             <li
-              key={item.name}
+              key={`${item.name}-${item.placeSlug ?? item.detail}`}
               className="rounded-xl border border-teal/20 bg-slate p-5"
             >
               <p className="font-display text-lg text-glacier">
@@ -91,42 +113,58 @@ type Props = {
 };
 
 export default function DestinationGuide({ region, guide }: Props) {
+  const contextSections = [
+    guide.history
+      ? { key: "history", label: "History", body: guide.history }
+      : null,
+    guide.culture
+      ? { key: "culture", label: "Culture", body: guide.culture }
+      : null,
+    guide.weather
+      ? { key: "weather", label: "Weather", body: guide.weather }
+      : null,
+  ].filter((section): section is { key: string; label: string; body: string } =>
+    Boolean(section),
+  );
+
+  const contextGridClass =
+    contextSections.length === 1
+      ? "mt-10 grid gap-10"
+      : contextSections.length === 2
+        ? "mt-10 grid gap-10 md:grid-cols-2"
+        : "mt-10 grid gap-10 md:grid-cols-3";
+
+  const contextHeading =
+    contextSections.length === 1
+      ? contextSections[0].label
+      : contextSections.length === 2
+        ? `${contextSections[0].label} & ${contextSections[1].label}`
+        : "History, culture & weather";
+
   return (
     <>
-      {(guide.history || guide.culture || guide.weather) && (
+      {contextSections.length > 0 ? (
         <section className="border-t border-teal/20 py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 md:px-10">
             <p className="coord-label mb-3">Know the place</p>
             <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
-              History, culture & weather
+              {contextHeading}
             </h2>
-            <div className="mt-10 grid gap-10 md:grid-cols-3">
-              {guide.history ? (
-                <div>
-                  <p className="coord-label mb-3">History</p>
-                  <p className="text-sm leading-relaxed text-ice">{guide.history}</p>
+            <div className={contextGridClass}>
+              {contextSections.map((section) => (
+                <div key={section.key}>
+                  <h3 className="coord-label mb-3">{section.label}</h3>
+                  <p className="text-sm leading-relaxed text-ice">{section.body}</p>
                 </div>
-              ) : null}
-              {guide.culture ? (
-                <div>
-                  <p className="coord-label mb-3">Culture</p>
-                  <p className="text-sm leading-relaxed text-ice">{guide.culture}</p>
-                </div>
-              ) : null}
-              {guide.weather ? (
-                <div>
-                  <p className="coord-label mb-3">Weather</p>
-                  <p className="text-sm leading-relaxed text-ice">{guide.weather}</p>
-                </div>
-              ) : null}
+              ))}
             </div>
           </div>
         </section>
-      )}
+      ) : null}
 
       {guide.famousFoods && guide.famousFoods.length > 0 ? (
         <ListingGrid
-          label="Taste of the valley"
+          label="Local flavours"
           heading="Famous foods"
           items={guide.famousFoods}
         />
@@ -241,13 +279,13 @@ export default function DestinationGuide({ region, guide }: Props) {
 
       {guide.nearbyDestinations && guide.nearbyDestinations.length > 0 ? (
         <ListingGrid
-          label="Beyond the valley"
+          label="Keep exploring"
           heading="Nearby places"
           items={guide.nearbyDestinations}
         />
       ) : null}
 
-      {guide.mapEmbedUrl ? (
+      {guide.mapEmbedUrl && isTrustedMapEmbed(guide.mapEmbedUrl) ? (
         <section className="border-t border-teal/20 bg-slate py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 md:px-10">
             <p className="coord-label mb-3">Orientation</p>

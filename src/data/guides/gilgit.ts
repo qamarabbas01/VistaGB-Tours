@@ -8,7 +8,7 @@ export const gilgitGuide: RegionGuide = {
   weather:
     "Lower altitude (~1,500 m) means hotter summers than Hunza or Skardu. Spring and autumn are pleasant. Winters are cold but usually milder than high valleys. Naltar nearby holds snow for skiing in season.",
   population: "Gilgit city and surrounds form one of GB's largest urban populations (city proper roughly 200,000+ in the wider urban area).",
-  languages: ["Shina", "Urdu", "Brushaski (visitors)", "Wakhi (through traffic)", "English"],
+  languages: ["Shina", "Urdu", "Burushaski (visitors)", "Wakhi (through traffic)", "English"],
   famousFoods: [
     {
       name: "Gilgit food street & BBQ",

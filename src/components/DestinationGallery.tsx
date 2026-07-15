@@ -15,7 +15,13 @@ export default function DestinationGallery({
   heroImage,
   destinationName,
 }: Props) {
-  const galleryImages = images.filter((item) => item.src !== heroImage);
+  const distinctImages = images.filter((item) => item.src !== heroImage);
+  const galleryImages =
+    distinctImages.length > 0
+      ? distinctImages
+      : images.length > 0
+        ? images
+        : [{ src: heroImage, title: destinationName }];
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const activeImage =
@@ -68,8 +74,8 @@ export default function DestinationGallery({
             Scenes from {destinationName}
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ice md:text-base">
-            Landmarks, viewpoints, and moments from the valley — tap any photo
-            to view it full size.
+            Landmarks, viewpoints, and local scenery — tap any photo to view it
+            full size.
           </p>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

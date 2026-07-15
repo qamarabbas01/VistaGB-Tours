@@ -65,6 +65,23 @@ function groupPlacesByType(places: Place[]) {
   return groups;
 }
 
+/** Prefer guide nearby destinations that are regions; fill with remaining regions. */
+function getRelatedRegions(region: RegionDestination): RegionDestination[] {
+  const nearbyRegions =
+    region.guide?.nearbyDestinations
+      ?.map((item) => (item.placeSlug ? getLocationBySlug(item.placeSlug) : undefined))
+      .filter(
+        (loc): loc is RegionDestination =>
+          Boolean(loc && !isPlace(loc) && loc.slug !== region.slug),
+      ) ?? [];
+
+  const seen = new Set(nearbyRegions.map((r) => r.slug));
+  seen.add(region.slug);
+
+  const fillers = regions.filter((r) => !seen.has(r.slug));
+  return [...nearbyRegions, ...fillers].slice(0, 3);
+}
+
 export async function generateStaticParams() {
   return getAllStaticSlugs().map((slug) => ({ slug }));
 }
@@ -274,7 +291,7 @@ function RegionDetailPage({
 }) {
   const childPlaces = getPlacesForRegion(region.slug);
   const placeGroups = groupPlacesByType(childPlaces);
-  const otherRegions = regions.filter((r) => r.slug !== region.slug).slice(0, 3);
+  const otherRegions = getRelatedRegions(region);
   const guide = region.guide;
 
   return (

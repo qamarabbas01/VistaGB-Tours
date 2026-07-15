@@ -143,10 +143,10 @@ export const legacyDestinations: RegionDestination[] = [
     description:
       "High pastures and Karambar Lake where the Hindu Kush, Pamir, and Karakoram meet.",
     image:
-      "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600&auto=format&fit=crop",
     gallery: [
       {
-        src: "https://www.shutterstock.com/image-photo/fascinating-view-sheosar-lake-deosai-260nw-1354546721.jpg",
+        src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600&auto=format&fit=crop",
         title: "Broghil high country",
         caption: "Broghil · ALT 3,300M",
       },
