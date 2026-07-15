@@ -1,4 +1,5 @@
 import type { RegionDestination } from "../types";
+import { nagarGuide } from "../guides/nagar";
 import { nagarPlaceSlugs } from "../places/nagar";
 
 export const nagarDestination: RegionDestination = {
@@ -32,4 +33,5 @@ export const nagarDestination: RegionDestination = {
   altitude: "2,700M",
   majorValleys: ["Nagar Khas", "Hopper", "Minapin", "Rush Lake trek"],
   placeSlugs: nagarPlaceSlugs,
+  guide: nagarGuide,
 };

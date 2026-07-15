@@ -1,4 +1,5 @@
 import type { RegionDestination } from "../types";
+import { gilgitGuide } from "../guides/gilgit";
 import { gilgitPlaceSlugs } from "../places/gilgit";
 
 export const gilgitDestination: RegionDestination = {
@@ -37,4 +38,5 @@ export const gilgitDestination: RegionDestination = {
   altitude: "1,500M",
   majorValleys: ["Gilgit town", "Naltar", "Bagrote", "Danyor"],
   placeSlugs: gilgitPlaceSlugs,
+  guide: gilgitGuide,
 };

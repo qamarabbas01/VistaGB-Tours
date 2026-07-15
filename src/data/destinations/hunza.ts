@@ -1,4 +1,5 @@
 import type { RegionDestination } from "../types";
+import { hunzaGuide } from "../guides/hunza";
 import { hunzaPlaceSlugs } from "../places/hunza";
 
 export const hunzaDestination: RegionDestination = {
@@ -55,4 +56,5 @@ export const hunzaDestination: RegionDestination = {
     "Misgar",
   ],
   placeSlugs: hunzaPlaceSlugs,
+  guide: hunzaGuide,
 };

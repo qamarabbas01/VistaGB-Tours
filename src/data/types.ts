@@ -40,6 +40,46 @@ export type Place = {
   nearby: string[];
 };
 
+export type DestinationFaq = {
+  question: string;
+  answer: string;
+};
+
+/** Named listing with optional link to a place page */
+export type GuideListing = {
+  name: string;
+  detail: string;
+  placeSlug?: string;
+};
+
+export type ItineraryDay = {
+  day: string;
+  title: string;
+  summary: string;
+  stops?: string[];
+};
+
+/** Rich travel guide content for a region destination page */
+export type RegionGuide = {
+  history?: string;
+  culture?: string;
+  weather?: string;
+  population?: string;
+  languages?: string[];
+  famousFoods?: GuideListing[];
+  hotels?: GuideListing[];
+  restaurants?: GuideListing[];
+  trekkingRoutes?: GuideListing[];
+  activities?: string[];
+  localTips?: string[];
+  nearbyDestinations?: GuideListing[];
+  /** Google Maps embed URL (output=embed) */
+  mapEmbedUrl?: string;
+  travelDuration?: string;
+  suggestedItinerary?: ItineraryDay[];
+  faqs?: DestinationFaq[];
+};
+
 export type RegionDestination = {
   kind: "region";
   slug: string;
@@ -56,6 +96,7 @@ export type RegionDestination = {
   altitude: string;
   majorValleys?: string[];
   placeSlugs: string[];
+  guide?: RegionGuide;
 };
 
 /** @deprecated Use RegionDestination — kept for gradual migration */
