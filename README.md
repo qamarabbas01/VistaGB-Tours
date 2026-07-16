@@ -46,9 +46,11 @@ See `.env.example`:
 
 ## Notes
 
-- Destination images that previously hotlinked Wikimedia Commons are mirrored
-  under `public/images/commons/` to avoid upstream `429` rate limits.
-- Other place images may still use third-party hosts; replace with your own
-  photography or a CDN you control for production.
+- Destination and marketing images are hosted under `public/images/commons/` —
+  Wikimedia Commons photos mirrored locally to avoid hotlink/`429` failures.
+- Prefer replacing Commons placeholders over time with your own photography,
+  official tourism images (with permission), or other properly licensed content
+  you control (CDN or `/public`). High-quality owned shots make the biggest
+  difference for production.
 - Contact form includes a honeypot field and per-IP rate limiting.
 - News is fetched from https://visitgilgitbaltistan.gov.pk and revalidated hourly.

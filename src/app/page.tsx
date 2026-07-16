@@ -13,6 +13,7 @@ import {
 } from "@/data/hero";
 import Button from "@/components/Button";
 import FaqAccordion from "@/components/FaqAccordion";
+import TravelMapSection from "@/components/TravelMapSection";
 import { fetchNewsPage } from "@/lib/news/scraper";
 
 export const revalidate = 3600;
@@ -72,7 +73,7 @@ export default async function Home() {
       {/* Hero */}
       <section className="relative flex min-h-[92vh] items-center overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=2400&auto=format&fit=crop"
+          src="/images/commons/bd7ddfea0e6ee033.jpg"
           alt="Snow-capped peaks of the Karakoram range above Hunza Valley"
           fill
           priority
@@ -419,7 +420,7 @@ export default async function Home() {
       {/* Travel Statistics */}
       <section className="relative overflow-hidden py-20 md:py-28">
         <Image
-          src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2400&auto=format&fit=crop"
+          src="/images/commons/112aa7ad11d28437.jpg"
           alt=""
           fill
           sizes="100vw"
@@ -448,74 +449,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Travel Map */}
-      <section className="bg-slate py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.2fr]">
-            <div>
-              <p className="coord-label mb-3">The Region</p>
-              <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
-                Travel Map
-              </h2>
-              <p className="mt-4 max-w-md text-ice">
-                Trace the valleys we operate across — from Ghizer in the west to
-                Baltistan in the east, and up the Karakoram Highway to the China
-                border.
-              </p>
-              <ul className="mt-8 space-y-3">
-                {mapPins.map((pin) => (
-                  <li key={pin.slug}>
-                    <Link
-                      href={`/destinations/${pin.slug}`}
-                      className="group flex items-baseline justify-between gap-4 border-b border-teal/15 py-2 transition-colors hover:border-apricot/40"
-                    >
-                      <span className="font-display text-lg text-glacier group-hover:text-apricot">
-                        {pin.name}
-                      </span>
-                      <span className="coord-label shrink-0">{pin.alt}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-teal/20 md:aspect-[5/4]">
-              <Image
-                src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=1600&auto=format&fit=crop"
-                alt="Topographic atmosphere over northern Pakistan"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover opacity-60"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-night/70 via-slate/40 to-night/80" />
-              <div
-                className="absolute inset-0 opacity-30"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(159,179,194,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(159,179,194,0.15) 1px, transparent 1px)",
-                  backgroundSize: "48px 48px",
-                }}
-              />
-              <p className="absolute left-6 top-6 coord-label">
-                GILGIT-BALTISTAN · LIVE ROUTES
-              </p>
-              {mapPins.map((pin) => (
-                <Link
-                  key={pin.slug}
-                  href={`/destinations/${pin.slug}`}
-                  className="group absolute -translate-x-1/2 -translate-y-1/2"
-                  style={{ top: pin.top, left: pin.left }}
-                >
-                  <span className="map-pin-dot block h-3 w-3 rounded-full bg-apricot" />
-                  <span className="absolute left-5 top-1/2 -translate-y-1/2 whitespace-nowrap font-display text-sm font-semibold text-glacier opacity-90 transition-colors group-hover:text-apricot">
-                    {pin.name}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <TravelMapSection locations={mapPins} />
 
       {/* Latest News */}
       <section className="py-20 md:py-28">
@@ -688,6 +622,10 @@ export default async function Home() {
                   sizes="(max-width: 768px) 50vw, 25vw"
                   className="object-cover transition-transform duration-700 hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-end justify-between gap-2">
+                  <p className="coord-label">{image.alt}</p>
+                </div>
               </div>
             ))}
           </div>
