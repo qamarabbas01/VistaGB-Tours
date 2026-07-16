@@ -276,7 +276,7 @@ export const hunzaPlaces: Place[] = [
     tagline: "The Cathedral peaks of the Karakoram",
     description:
       "Serrated spires rising above Passu village — among the most photographed peaks in Pakistan.",
-    image: "/images/commons/988e06319b75f6d9.jpg",
+    image: "/images/commons/5c94f723e71aac65.jpg",
     gallery: [],
     overview:
       "The Passu Cones (Passu Cathedral) are a cluster of jagged peaks visible from Passu village and the Karakoram Highway. Sunrise and sunset light turn the spires gold and pink — photographers often shoot from the road or guesthouse rooftops.",
