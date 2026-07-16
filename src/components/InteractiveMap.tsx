@@ -24,7 +24,7 @@ export type MapLocation = {
 type InteractiveMapProps = {
   locations: readonly MapLocation[];
   activeSlug?: string | null;
-  onSelect?: (slug: string) => void;
+  onSelect?: (value: string | null | ((prev: string | null) => string | null)) => void;
 };
 
 const GB_CENTER: [number, number] = [35.55, 75.15];
