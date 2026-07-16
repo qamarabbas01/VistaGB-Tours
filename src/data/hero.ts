@@ -39,7 +39,7 @@ export const experiences = [
       name: "Passu Cones",
       tagline: "Cathedral peaks of Upper Hunza",
       region: "Gojal",
-      image: "/images/commons/988e06319b75f6d9.jpg",
+      image: "/images/commons/5c94f723e71aac65.jpg",
     },
   ] as const;
   
