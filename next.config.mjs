@@ -2,16 +2,10 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "res.cloudinary.com" },
-      { protocol: "https", hostname: "i.brecorder.com" },
       { protocol: "https", hostname: "dynamic-media-cdn.tripadvisor.com" },
       { protocol: "https", hostname: "media-cdn.tripadvisor.com" },
       { protocol: "https", hostname: "i.dawn.com" },
       { protocol: "https", hostname: "flypakistan.pk" },
-      { protocol: "https", hostname: "hunzaguidespakistan.com" },
-      { protocol: "https", hostname: "gulmitcontinentalhotel.com" },
-      { protocol: "https", hostname: "globerovers.com" },
       { protocol: "https", hostname: "blogger.googleusercontent.com" },
       { protocol: "https", hostname: "naturehikepakistan.pk" },
       { protocol: "https", hostname: "www.imusafir.pk" },
@@ -25,6 +19,8 @@ const nextConfig = {
       { protocol: "https", hostname: "vepakistan.com" },
       { protocol: "https", hostname: "visitsilkroad.org" },
       { protocol: "https", hostname: "cdn.prod.rexby.com" },
+      { protocol: "https", hostname: "i.brecorder.com" },
+      { protocol: "https", hostname: "globerovers.com" },
     ],
   },
 };

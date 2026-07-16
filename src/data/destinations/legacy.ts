@@ -17,13 +17,17 @@ export const legacyDestinations: RegionDestination[] = [
     tagline: "Gateway to Rama, Deosai, and Nanga Parbat",
     description:
       "A broad green valley south of the Karakoram — meadows, pine forests, and the road to Fairy Meadows.",
-    image:
-      "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+    image: "/images/commons/f3d428b69be1ff4c.jpg",
     gallery: [
       {
-        src: "https://images.unsplash.com/photo-1663076255844-899903badedc?q=80&w=1600&auto=format&fit=crop",
+        src: "/images/commons/f3d428b69be1ff4c.jpg",
         title: "Astore Valley",
         caption: "Astore · ALT 2,600M",
+      },
+      {
+        src: "/images/commons/6d10e280381dc28e.jpg",
+        title: "Rama Lake",
+        caption: "Astore · ALT 3,500M",
       },
     ],
     overview:
@@ -48,12 +52,16 @@ export const legacyDestinations: RegionDestination[] = [
     tagline: "Base camp views of Nanga Parbat",
     description:
       "Pine-fringed meadows facing the sheer Rupal Face — one of the most iconic views in the Himalaya.",
-    image:
-      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+    image: "/images/commons/bf2171654d99937a.jpg",
     gallery: [
       {
-        src: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
-        title: "Nanga Parbat Rupal Face",
+        src: "/images/commons/bf2171654d99937a.jpg",
+        title: "Nanga Parbat from Fairy Meadows",
+        caption: "Fairy Meadows · ALT 3,300M",
+      },
+      {
+        src: "/images/commons/4f5d8c42e41eb43e.jpg",
+        title: "Reflection lake trail",
         caption: "Fairy Meadows · ALT 3,300M",
       },
     ],
@@ -80,12 +88,11 @@ export const legacyDestinations: RegionDestination[] = [
     tagline: "Emerald valleys west of Gilgit",
     description:
       "Phander, Yasin, Gupis, and Ishkoman — trout lakes and Khowar villages in western Gilgit-Baltistan.",
-    image:
-      "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
+    image: "/images/commons/0f9b73f6df21d8d7.jpg",
     gallery: [
       {
-        src: "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1600&auto=format&fit=crop",
-        title: "Ghizer Valley",
+        src: "/images/commons/0f9b73f6df21d8d7.jpg",
+        title: "Phander Lake",
         caption: "Ghizer",
       },
     ],
@@ -142,13 +149,17 @@ export const legacyDestinations: RegionDestination[] = [
     tagline: "Meadows at the edge of the Wakhan",
     description:
       "High pastures and Karambar Lake where the Hindu Kush, Pamir, and Karakoram meet.",
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600&auto=format&fit=crop",
+    image: "/images/commons/c75f51bdff0ce7b1.jpg",
     gallery: [
       {
-        src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600&auto=format&fit=crop",
+        src: "/images/commons/c75f51bdff0ce7b1.jpg",
         title: "Broghil high country",
         caption: "Broghil · ALT 3,300M",
+      },
+      {
+        src: "/images/commons/38e4771870c40695.jpg",
+        title: "Karambar Lake",
+        caption: "Broghil · ALT 4,200M",
       },
     ],
     overview:

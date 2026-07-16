@@ -4,32 +4,28 @@ export const experiences = [
       name: "Attabad Lake",
       tagline: "Turquoise water on the Karakoram Highway",
       region: "Hunza · Gojal",
-      image:
-        "https://hunzaguidespakistan.com/wp-content/uploads/2023/12/Attabad-Lake.jpg",
+      image: "/images/commons/4680a3d14ca1af46.jpg",
     },
     {
       slug: "fairy-meadows",
       name: "Fairy Meadows",
       tagline: "Pine meadows beneath Nanga Parbat",
       region: "Diamer",
-      image:
-        "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+      image: "/images/commons/bf2171654d99937a.jpg",
     },
     {
       slug: "eagle-nest",
       name: "Eagle's Nest",
       tagline: "Sunset ridge above Hunza Valley",
       region: "Hunza",
-      image:
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600&auto=format&fit=crop",
+      image: "/images/commons/24a764cb8976da0d.jpg",
     },
     {
       slug: "deosai-plains",
       name: "Deosai Plains",
       tagline: "The Land of Giants at 4,000 metres",
       region: "Skardu",
-      image:
-        "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1600&auto=format&fit=crop",
+      image: "/images/commons/b1292e3b1646570c.jpg",
     },
     {
       slug: "baltit-fort",
@@ -43,8 +39,7 @@ export const experiences = [
       name: "Passu Cones",
       tagline: "Cathedral peaks of Upper Hunza",
       region: "Gojal",
-      image:
-        "https://gulmitcontinentalhotel.com/wp-content/uploads/2022/10/passu-8.jpg",
+      image: "/images/commons/5c94f723e71aac65.jpg",
     },
   ] as const;
   
@@ -53,16 +48,14 @@ export const experiences = [
       title: "Trekking",
       detail:
         "Day hikes to multi-week Baltoro and Rakaposhi base-camp routes, with guides and porters arranged.",
-      image:
-        "https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=1600&auto=format&fit=crop",
+      image: "/images/commons/ba4b0d53d291cba4.jpg",
       mark: "01",
     },
     {
       title: "Jeep Safaris",
       detail:
         "4x4 journeys along the Karakoram Highway, Deosai plateau tracks, and high valley roads.",
-      image:
-        "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1600&auto=format&fit=crop",
+      image: "/images/commons/4e0000c8d4bbe492.jpg",
       mark: "02",
     },
     {
@@ -76,8 +69,7 @@ export const experiences = [
       title: "Photography Tours",
       detail:
         "Golden-hour ridges, glacial lakes, and night skies planned around light and season.",
-      image:
-        "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop",
+      image: "/images/commons/4f5d8c42e41eb43e.jpg",
       mark: "04",
     },
   ] as const;
@@ -90,8 +82,7 @@ export const experiences = [
       summary:
         "Karimabad forts, Attabad Lake, Passu Cones, and Eagle's Nest sunset — the classic first trip north.",
       includes: ["Private jeep", "Homestays", "Local guide"],
-      image:
-        "https://res.cloudinary.com/jerrick/image/upload/c_scale,f_jpg,q_auto/643599b38d0197001d05f18f.jpg",
+      image: "/images/commons/bd7ddfea0e6ee033.jpg",
     },
     {
       name: "Skardu & Deosai",
@@ -100,8 +91,7 @@ export const experiences = [
       summary:
         "Shangrila, cold deserts, Shigar Fort, and a full day on the Deosai Plains when the plateau is open.",
       includes: ["4x4 transport", "Lodges", "Permits"],
-      image:
-        "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?q=80&w=1600&auto=format&fit=crop",
+      image: "/images/commons/a4e211a59b3e995d.jpg",
     },
     {
       name: "Fairy Meadows Escape",
@@ -110,8 +100,7 @@ export const experiences = [
       summary:
         "Jeep to Tato, forest hike to pine meadows, and nights facing the Rupal Face of Nanga Parbat.",
       includes: ["Jeep & hike support", "Mountain lodge", "Meals"],
-      image:
-        "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1600&auto=format&fit=crop",
+      image: "/images/commons/bf2171654d99937a.jpg",
     },
     {
       name: "Karakoram Grand Circuit",
@@ -120,8 +109,7 @@ export const experiences = [
       summary:
         "Gilgit to Hunza, Nagar, Skardu, and Ghizer — a full arc of valleys for travellers with time.",
       includes: ["Custom itinerary", "Drivers & guides", "All stays"],
-      image:
-        "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1600&auto=format&fit=crop",
+      image: "/images/commons/5b4d6e89dc2760ac.jpg",
     },
   ] as const;
   
@@ -157,13 +145,14 @@ export const experiences = [
   ] as const;
   
   export const mapPins = [
-    { name: "Hunza", slug: "hunza-valley", top: "22%", left: "58%", alt: "2,438M" },
-    { name: "Nagar", slug: "nagar", top: "30%", left: "52%", alt: "2,700M" },
-    { name: "Gilgit", slug: "gilgit", top: "42%", left: "48%", alt: "1,500M" },
-    { name: "Skardu", slug: "skardu", top: "48%", left: "68%", alt: "2,228M" },
-    { name: "Astore", slug: "astore-valley", top: "58%", left: "55%", alt: "2,600M" },
-    { name: "Fairy Meadows", slug: "fairy-meadows", top: "62%", left: "42%", alt: "3,300M" },
-    { name: "Ghizer", slug: "ghizer", top: "38%", left: "32%", alt: "2,200M" },
+    { name: "Hunza", slug: "hunza-valley", lat: 36.3167, lng: 74.65, alt: "2,438M" },
+    { name: "Nagar", slug: "nagar", lat: 36.2667, lng: 74.7833, alt: "2,700M" },
+    { name: "Skardu", slug: "skardu", lat: 35.2971, lng: 75.6335, alt: "2,228M" },
+    { name: "Shigar", slug: "shigar-valley", lat: 35.4222, lng: 75.7333, alt: "2,300M" },
+    { name: "Khaplu", slug: "khaplu", lat: 35.1547, lng: 76.3375, alt: "2,600M" },
+    { name: "Deosai", slug: "deosai-plains", lat: 34.9833, lng: 75.4, alt: "4,114M" },
+    { name: "Astore", slug: "astore-valley", lat: 35.3583, lng: 74.8556, alt: "2,600M" },
+    { name: "Fairy Meadows", slug: "fairy-meadows", lat: 35.3889, lng: 74.5856, alt: "3,300M" },
   ] as const;
   
   export const galleryImages = [
@@ -180,8 +169,20 @@ export const experiences = [
       alt: "View over Karimabad",
     },
     {
-      src: "/images/commons/3c2d7908aa0f7960.jpg",
-      alt: "Mountain valley light",
+      src: "/images/commons/bf2171654d99937a.jpg",
+      alt: "Nanga Parbat from Fairy Meadows",
+    },
+    {
+      src: "/images/commons/4f5d8c42e41eb43e.jpg",
+      alt: "Reflection lake trail",
+    },
+    {
+      src: "/images/commons/0f9b73f6df21d8d7.jpg",
+      alt: "Phander Lake",
+    },
+    {
+      src: "/images/commons/c75f51bdff0ce7b1.jpg",
+      alt: "Broghil Valley",
     },
     {
       src: "/images/commons/9df8326eb5be0e2f.jpg",
@@ -192,13 +193,26 @@ export const experiences = [
       alt: "Glacial landscape",
     },
     {
-      src: "/images/commons/bc57aaad67839099.jpg",
-      alt: "Road through the Karakoram",
+      src: "/images/commons/0f9b73f6df21d8d7.jpg",
+      alt: "Phander Lake in Ghizer",
     },
     {
-      src: "/images/commons/c79f4f12881921ba.jpg",
-      alt: "Valley orchards and ridges",
+      src: "/images/commons/b1292e3b1646570c.jpg",
+      alt: "Deosai Plains",
     },
+    {
+      src: "/images/commons/9ffbf7caa77b300f.jpg",
+      alt: "Fort exterior in Hunza",
+    },
+    {
+      src: "/images/commons/bd7ddfea0e6ee033.jpg",
+      alt: "View over Karimabad",
+    },
+    {
+      src: "/images/commons/bf2171654d99937a.jpg",
+      alt: "Nanga Parbat from Fairy Meadows",
+    },
+
   ] as const;
   
   export const faqs = [

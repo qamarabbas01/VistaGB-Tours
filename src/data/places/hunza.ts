@@ -208,7 +208,7 @@ export const hunzaPlaces: Place[] = [
       "/images/commons/4680a3d14ca1af46.jpg",
     gallery: [
       {
-        src: "https://hunzaguidespakistan.com/wp-content/uploads/2023/12/Attabad-Lake.jpg",
+        src: "/images/commons/4680a3d14ca1af46.jpg",
         title: "Attabad Lake panorama",
         caption: "Gojal · ALT 2,560M",
       },
@@ -244,7 +244,7 @@ export const hunzaPlaces: Place[] = [
     image: "/images/commons/988e06319b75f6d9.jpg",
     gallery: [
       {
-        src: "https://gulmitcontinentalhotel.com/wp-content/uploads/2022/10/passu-8.jpg",
+        src: "/images/commons/988e06319b75f6d9.jpg",
         title: "Passu Cones",
         caption: "Passu · ALT 2,500M",
       },
@@ -276,7 +276,7 @@ export const hunzaPlaces: Place[] = [
     tagline: "The Cathedral peaks of the Karakoram",
     description:
       "Serrated spires rising above Passu village — among the most photographed peaks in Pakistan.",
-    image: "https://gulmitcontinentalhotel.com/wp-content/uploads/2022/10/passu-8.jpg",
+    image: "/images/commons/5c94f723e71aac65.jpg",
     gallery: [],
     overview:
       "The Passu Cones (Passu Cathedral) are a cluster of jagged peaks visible from Passu village and the Karakoram Highway. Sunrise and sunset light turn the spires gold and pink — photographers often shoot from the road or guesthouse rooftops.",
@@ -343,7 +343,7 @@ export const hunzaPlaces: Place[] = [
       "/images/commons/48f585baebd979ab.jpg",
     gallery: [
       {
-        src: "https://globerovers.com/wp-content/uploads/2022/08/Pakistan-Gulmit-Hunza-Valley-4.jpg",
+        src: "/images/commons/48f585baebd979ab.jpg",
         title: "Gulmit and Passu peaks",
         caption: "Gojal · ALT 2,800M",
       },
@@ -468,10 +468,10 @@ export const hunzaPlaces: Place[] = [
     description:
       "The highest paved international border crossing — yaks, snow, and Karakoram drama at 4,693m.",
     image:
-      "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+      "/images/commons/67c2efc2a2cbcdef.jpg",
     gallery: [
       {
-        src: "https://visitsilkroad.org/wp-content/uploads/2023/06/Khunjerab-Pass-featured_image.jpg.jpg",
+        src: "/images/commons/67c2efc2a2cbcdef.jpg",
         title: "Khunjerab border gate",
         caption: "ALT 4,693M",
       },

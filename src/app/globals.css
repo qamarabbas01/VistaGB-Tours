@@ -150,10 +150,115 @@ button:focus-visible {
   animation: pin-pulse 2.8s ease-out infinite;
 }
 
+/* Interactive Leaflet map */
+.vista-map .leaflet-container {
+  font-family: inherit;
+  background: var(--night);
+}
+
+.vista-map .leaflet-control-attribution {
+  background: rgba(11, 15, 20, 0.75) !important;
+  color: var(--ice);
+  font-size: 10px;
+}
+
+.vista-map .leaflet-control-attribution a {
+  color: var(--apricot);
+}
+
+.vista-map .leaflet-control-zoom a {
+  background: var(--slate) !important;
+  border-color: rgba(92, 122, 138, 0.4) !important;
+  color: var(--glacier) !important;
+}
+
+.vista-map .leaflet-control-zoom a:hover {
+  background: var(--night) !important;
+  color: var(--apricot) !important;
+}
+
+.vista-map-pin {
+  background: transparent !important;
+  border: none !important;
+}
+
+.vista-map-pin__dot {
+  display: block;
+  width: var(--pin-size, 14px);
+  height: var(--pin-size, 14px);
+  border-radius: 9999px;
+  background: var(--apricot);
+  box-shadow: 0 0 0 2px rgba(11, 15, 20, 0.85),
+    0 0 var(--pin-ring, 6px) rgba(217, 142, 74, 0.45);
+  animation: pin-pulse 2.8s ease-out infinite;
+}
+
+.vista-map-pin__dot.is-active {
+  background: var(--glacier);
+  box-shadow: 0 0 0 2px rgba(11, 15, 20, 0.9),
+    0 0 14px rgba(217, 142, 74, 0.7);
+}
+
+.vista-map .leaflet-popup-content-wrapper {
+  background: var(--slate);
+  border: 1px solid rgba(92, 122, 138, 0.35);
+  border-radius: 12px;
+  color: var(--glacier);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.vista-map .leaflet-popup-tip {
+  background: var(--slate);
+  border: none;
+}
+
+.vista-map .leaflet-popup-content {
+  margin: 12px 14px;
+}
+
+.vista-map .leaflet-popup-close-button {
+  color: var(--ice) !important;
+}
+
+.vista-map-popup__name {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--glacier);
+  margin: 0;
+}
+
+.vista-map-popup__meta {
+  margin: 4px 0 0;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--apricot);
+}
+
+.vista-map-popup__link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--apricot) !important;
+  text-decoration: none;
+}
+
+.vista-map-popup__link:hover {
+  text-decoration: underline;
+  color: var(--glacier) !important;
+}
+
+.vista-map .leaflet-popup a {
+  color: var(--apricot);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-media,
   .rise-in,
-  .map-pin-dot {
+  .map-pin-dot,
+  .vista-map-pin__dot {
     animation: none !important;
   }
 }

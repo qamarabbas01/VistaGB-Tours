@@ -99,9 +99,9 @@ export const skarduPlaces: Place[] = [
     type: "Fort",
     tagline: "Fort ruins above the Indus in Skardu",
     description: "Historic fort on a hilltop overlooking Skardu town and the Indus River.",
-    image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop",
+    image: "/images/commons/e6db600e9067679f.jpg",
     gallery: [
-      { src: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1600&auto=format&fit=crop", title: "Kharpocho Fort views", caption: "Skardu · ALT 2,300M" },
+      { src: "/images/commons/e6db600e9067679f.jpg", title: "Kharpocho Fort views", caption: "Skardu · ALT 2,300M" },
     ],
     overview: "Kharpocho (Skardu Fort) crowns the hill above the Indus confluence. A short climb rewards with town and river panoramas — best at sunset.",
     highlights: ["Indus and town panoramas", "Historic Balti fort ruins", "Sunset viewpoint", "Short climb from town"],
