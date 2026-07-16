@@ -28,7 +28,7 @@ export const hunzaDestination: RegionDestination = {
       caption: "Gojal",
     },
     {
-      src: "/images/commons/988e06319b75f6d9.jpg",
+      src: "/images/commons/5c94f723e71aac65.jpg",
       title: "Passu Cones",
       caption: "Upper Hunza",
     },
