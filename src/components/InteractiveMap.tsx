@@ -11,6 +11,7 @@ import {
 } from "react-leaflet";
 import type { Marker as LeafletMarker } from "leaflet";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 export type MapLocation = {
   name: string;
