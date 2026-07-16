@@ -84,13 +84,18 @@ function DestinationMarker({
   location: MapLocation;
   icon: L.DivIcon;
   isActive: boolean;
-  onSelect?: (slug: string) => void;
+  onSelect?: (value: string | null | ((prev: string | null) => string | null)) => void;
 }) {
   const markerRef = useRef<LeafletMarker | null>(null);
 
   useEffect(() => {
+    const marker = markerRef.current;
+    if (!marker) return;
+
     if (isActive) {
-      markerRef.current?.openPopup();
+      marker.openPopup();
+    } else if (marker.isPopupOpen()) {
+      marker.closePopup();
     }
   }, [isActive]);
 
@@ -101,6 +106,9 @@ function DestinationMarker({
       icon={icon}
       eventHandlers={{
         click: () => onSelect?.(location.slug),
+        popupclose: () => {
+          onSelect?.((prev) => (prev === location.slug ? null : prev));
+        },
       }}
     >
       <Popup>
