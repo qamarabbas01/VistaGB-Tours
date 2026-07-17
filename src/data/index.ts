@@ -159,29 +159,6 @@ export function searchLocations(query: string): SearchResult {
     return { query, regions: [], places: [], placesByRegion: {} };
   }
 
-  const taggedRegions = regions.filter((region) =>
-    region.searchTags?.some((tag) => tag.toLowerCase() === q),
-  );
-  const taggedPlaces = places.filter((place) =>
-    place.searchTags?.some((tag) => tag.toLowerCase() === q),
-  );
-
-  // Exact curated categories intentionally take precedence over incidental
-  // mentions in prose (for example, a town that merely overlooks a fort).
-  if (taggedRegions.length > 0 || taggedPlaces.length > 0) {
-    return {
-      query,
-      regions: taggedRegions,
-      places: taggedPlaces,
-      placesByRegion: Object.fromEntries(
-        taggedRegions.map((region) => [
-          region.slug,
-          getPlacesForRegion(region.slug),
-        ]),
-      ),
-    };
-  }
-
   const placeType = places.find(
     (place) => place.type.toLowerCase() === q,
   )?.type;
@@ -200,6 +177,29 @@ export function searchLocations(query: string): SearchResult {
       places: places.filter((place) => place.type === placeType),
       placesByRegion: Object.fromEntries(
         typedRegions.map((region) => [
+          region.slug,
+          getPlacesForRegion(region.slug),
+        ]),
+      ),
+    };
+  }
+
+  const taggedRegions = regions.filter((region) =>
+    region.searchTags?.some((tag) => tag.toLowerCase() === q),
+  );
+  const taggedPlaces = places.filter((place) =>
+    place.searchTags?.some((tag) => tag.toLowerCase() === q),
+  );
+
+  // Exact curated categories intentionally take precedence over incidental
+  // mentions in prose (for example, a town that merely overlooks a fort).
+  if (taggedRegions.length > 0 || taggedPlaces.length > 0) {
+    return {
+      query,
+      regions: taggedRegions,
+      places: taggedPlaces,
+      placesByRegion: Object.fromEntries(
+        taggedRegions.map((region) => [
           region.slug,
           getPlacesForRegion(region.slug),
         ]),
