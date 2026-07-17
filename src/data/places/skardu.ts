@@ -6,9 +6,10 @@ const HUB = "Skardu town";
 export const skarduPlaces: Place[] = [
   {
     slug: "shangrila-resort",
-    name: "Shangrila Resort",
+    name: "Lower Kachura Lake (Shangrila)",
     parentSlug: PARENT,
     type: "Lake",
+    searchTags: ["lake", "lower kachura", "lower kachura lake"],
     tagline: "Lower Kachura Lake and the famous Shangrila resort",
     description: "Turquoise Lower Kachura Lake with the iconic Shangrila resort and restaurant on the shore.",
     image: "https://vepakistan.com/wp-content/uploads/2014/12/shangrila-fall.jpg",
@@ -31,6 +32,7 @@ export const skarduPlaces: Place[] = [
     name: "Upper Kachura Lake",
     parentSlug: PARENT,
     type: "Lake",
+    searchTags: ["lake"],
     tagline: "Serene alpine lake hidden by forest",
     description: "Crystal-clear deep blue waters surrounded by forest — quieter than Lower Kachura.",
     image: "https://vepakistan.com/wp-content/uploads/2014/12/shangrila-fall.jpg",
@@ -119,6 +121,7 @@ export const skarduPlaces: Place[] = [
     name: "Shigar Valley",
     parentSlug: PARENT,
     type: "Valley",
+    searchTags: ["fort", "shigar fort"],
     tagline: "Gateway to the mountains beyond Skardu",
     description: "Apricot orchards, Shigar Fort, and the road toward Askole and K2.",
     image:
