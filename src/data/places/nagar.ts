@@ -96,6 +96,7 @@ export const nagarPlaces: Place[] = [
     name: "Rush Lake",
     parentSlug: PARENT,
     type: "Lake",
+    searchTags: ["lake"],
     tagline: "One of the world's highest alpine lakes",
     description: "Turquoise tarn reached via multi-day trek from Hopper Valley.",
     image: "/images/commons/9df8326eb5be0e2f.jpg",

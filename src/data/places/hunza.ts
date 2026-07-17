@@ -55,6 +55,7 @@ export const hunzaPlaces: Place[] = [
     name: "Baltit Fort",
     parentSlug: PARENT,
     type: "Fort",
+    searchTags: ["fort"],
     tagline: "700 years of royal Hunza heritage above Karimabad",
     description:
       "A restored hilltop fort with museum rooms, carved timber, and panoramic views over Karimabad and the Hunza River.",
@@ -95,6 +96,7 @@ export const hunzaPlaces: Place[] = [
     name: "Altit Fort",
     parentSlug: PARENT,
     type: "Fort",
+    searchTags: ["fort"],
     tagline: "Hunza's oldest fort in the village of Altit",
     description:
       "A 900-year-old fort and village at the confluence of the Hunza and Altit rivers — older than Baltit and deeply atmospheric.",
@@ -201,6 +203,7 @@ export const hunzaPlaces: Place[] = [
     name: "Attabad Lake",
     parentSlug: PARENT,
     type: "Lake",
+    searchTags: ["lake"],
     tagline: "Turquoise water born from a landslide",
     description:
       "A surreal blue lake formed in 2010, framed by sheer rock walls — boating and lakeside cafes.",
@@ -406,6 +409,7 @@ export const hunzaPlaces: Place[] = [
     name: "Borith Lake",
     parentSlug: PARENT,
     type: "Lake",
+    searchTags: ["lake"],
     tagline: "High pasture lake beneath Passu peaks",
     description:
       "A quiet glacial lake on a yak pasture above Gulmit — turquoise water and Passu Cones backdrop.",

@@ -113,6 +113,7 @@ function placeSearchText(place: Place): string {
     place.description,
     place.overview,
     place.type,
+    ...(place.searchTags ?? []),
     ...place.highlights,
     ...place.activities,
     place.parentSlug,
@@ -127,6 +128,7 @@ function regionSearchText(region: RegionDestination): string {
     region.tagline,
     region.description,
     region.overview,
+    ...(region.searchTags ?? []),
     ...(region.majorValleys ?? []),
     ...region.highlights,
     ...region.placeSlugs,
@@ -140,7 +142,9 @@ function regionSearchText(region: RegionDestination): string {
     ...(guide?.famousFoods?.map((f) => `${f.name} ${f.detail}`) ?? []),
     ...(guide?.hotels?.map((h) => h.name) ?? []),
     ...(guide?.restaurants?.map((r) => r.name) ?? []),
-    ...(guide?.trekkingRoutes?.map((t) => t.name) ?? []),
+    ...(guide?.trekkingRoutes?.map(
+      (t) => `${t.name} ${t.detail} ${t.placeSlug ?? ""}`,
+    ) ?? []),
     ...(guide?.nearbyDestinations?.map((n) => n.name) ?? []),
     ...(guide?.faqs?.map((f) => `${f.question} ${f.answer}`) ?? []),
   ]
@@ -148,11 +152,59 @@ function regionSearchText(region: RegionDestination): string {
     .join(" ");
 }
 
-/** Search regions and places — expanding matched regions to include all child places */
+/** Search regions and places by names, categories, guide content, and keywords */
 export function searchLocations(query: string): SearchResult {
   const q = query.trim().toLowerCase();
   if (!q) {
     return { query, regions: [], places: [], placesByRegion: {} };
+  }
+
+  const taggedRegions = regions.filter((region) =>
+    region.searchTags?.some((tag) => tag.toLowerCase() === q),
+  );
+  const taggedPlaces = places.filter((place) =>
+    place.searchTags?.some((tag) => tag.toLowerCase() === q),
+  );
+
+  // Exact curated categories intentionally take precedence over incidental
+  // mentions in prose (for example, a town that merely overlooks a fort).
+  if (taggedRegions.length > 0 || taggedPlaces.length > 0) {
+    return {
+      query,
+      regions: taggedRegions,
+      places: taggedPlaces,
+      placesByRegion: Object.fromEntries(
+        taggedRegions.map((region) => [
+          region.slug,
+          getPlacesForRegion(region.slug),
+        ]),
+      ),
+    };
+  }
+
+  const placeType = places.find(
+    (place) => place.type.toLowerCase() === q,
+  )?.type;
+
+  if (placeType) {
+    const typedRegions =
+      q === "valley"
+        ? regions.filter((region) =>
+            region.name.toLowerCase().includes("valley"),
+          )
+        : [];
+
+    return {
+      query,
+      regions: typedRegions,
+      places: places.filter((place) => place.type === placeType),
+      placesByRegion: Object.fromEntries(
+        typedRegions.map((region) => [
+          region.slug,
+          getPlacesForRegion(region.slug),
+        ]),
+      ),
+    };
   }
 
   const aliasSlugs = new Set<string>();
@@ -172,12 +224,9 @@ export function searchLocations(query: string): SearchResult {
         scoreMatch(regionSearchText(b), q) - scoreMatch(regionSearchText(a), q),
     );
 
-  const matchedRegionSlugs = new Set(matchedRegions.map((r) => r.slug));
-
   const matchedPlaces = places
     .filter((p) => {
       if (aliasSlugs.has(p.slug)) return true;
-      if (matchedRegionSlugs.has(p.parentSlug)) return true;
       return scoreMatch(placeSearchText(p), q) > 0;
     })
     .sort(

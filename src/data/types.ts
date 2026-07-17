@@ -23,6 +23,8 @@ export type Place = {
   name: string;
   parentSlug: string;
   type: PlaceType;
+  /** Curated categories and alternate terms used by destination search */
+  searchTags?: string[];
   tagline: string;
   description: string;
   image: string;
@@ -85,6 +87,8 @@ export type RegionDestination = {
   slug: string;
   name: string;
   region: string;
+  /** Curated categories and alternate terms used by destination search */
+  searchTags?: string[];
   tagline: string;
   description: string;
   image: string;
