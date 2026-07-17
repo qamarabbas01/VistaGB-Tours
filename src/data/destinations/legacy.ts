@@ -116,6 +116,7 @@ export const legacyDestinations: RegionDestination[] = [
     slug: "khaplu",
     name: "Khaplu",
     region: "Baltistan",
+    searchTags: ["fort", "khaplu fort", "palace"],
     tagline: "Royal palaces and silk-road heritage",
     description:
       "Restored palace, apricot orchards, and trailheads into Hushe and the Saltoro.",
