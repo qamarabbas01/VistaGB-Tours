@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import DestinationGallery from "@/components/DestinationGallery";
 import DestinationGuide from "@/components/DestinationGuide";
+import DestinationWeather from "@/components/DestinationWeather";
 import PlaceCard from "@/components/PlaceCard";
+import { getCoordinatesForSlug } from "@/data/coordinates";
 import {
   getAllStaticSlugs,
   getLocationBySlug,
@@ -122,6 +124,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
   const nearbyPlaces = place.nearby
     .map((s) => getLocationBySlug(s))
     .filter((loc): loc is Place => Boolean(loc && isPlace(loc)));
+  const weatherPoint = getCoordinatesForSlug(place.slug);
 
   return (
     <div>
@@ -211,6 +214,13 @@ function PlaceDetailPage({ place }: { place: Place }) {
           </div>
 
           <aside className="flex flex-col gap-6">
+            {weatherPoint ? (
+              <DestinationWeather
+                slug={place.slug}
+                locationName={weatherPoint.label}
+              />
+            ) : null}
+
             <div className="rounded-2xl border border-teal/20 bg-slate p-6">
               <p className="coord-label mb-3">Best Time to Visit</p>
               <p className="text-sm leading-relaxed text-ice">{place.bestTime}</p>
@@ -293,6 +303,7 @@ function RegionDetailPage({
   const placeGroups = groupPlacesByType(childPlaces);
   const otherRegions = getRelatedRegions(region);
   const guide = region.guide;
+  const weatherPoint = getCoordinatesForSlug(region.slug);
 
   return (
     <div>
@@ -366,6 +377,13 @@ function RegionDetailPage({
           </div>
 
           <aside className="flex flex-col gap-6">
+            {weatherPoint ? (
+              <DestinationWeather
+                slug={region.slug}
+                locationName={weatherPoint.label}
+              />
+            ) : null}
+
             <div className="rounded-2xl border border-teal/20 bg-slate p-6">
               <p className="coord-label mb-4">Quick facts</p>
               <dl className="space-y-4 text-sm">
