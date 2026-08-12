@@ -420,15 +420,24 @@ function RegionDetailPage({
             <div className="rounded-2xl border border-apricot/30 bg-slate p-6">
               <p className="coord-label mb-3">Plan a Trip</p>
               <p className="text-sm leading-relaxed text-ice">
-                Want an itinerary built around {region.name}? Tell us your dates
-                and we&apos;ll put a route together.
+                Want an itinerary built around {region.name}? Ask the travel
+                assistant, or tell us your dates and we&apos;ll put a route
+                together.
               </p>
-              <Link
-                href="/contact"
-                className="mt-4 inline-block text-sm font-medium text-apricot hover:underline"
-              >
-                Contact us →
-              </Link>
+              <div className="mt-4 flex flex-col gap-2">
+                <Link
+                  href={`/assistant?destination=${region.slug}`}
+                  className="text-sm font-medium text-apricot hover:underline"
+                >
+                  Ask the AI assistant →
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-sm font-medium text-ice hover:text-apricot hover:underline"
+                >
+                  Contact us →
+                </Link>
+              </div>
             </div>
           </aside>
         </div>

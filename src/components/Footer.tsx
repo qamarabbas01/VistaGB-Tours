@@ -22,6 +22,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-2 text-sm text-ice">
               <li><Link href="/" className="hover:text-apricot">Home</Link></li>
               <li><Link href="/destinations" className="hover:text-apricot">Destinations</Link></li>
+              <li><Link href="/assistant" className="hover:text-apricot">AI Assistant</Link></li>
               <li><Link href="/blog" className="hover:text-apricot">Blog</Link></li>
               <li><Link href="/news" className="hover:text-apricot">News</Link></li>
             </ul>
