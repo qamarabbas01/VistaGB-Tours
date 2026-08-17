@@ -1,7 +1,60 @@
+export const GALLERY_CATEGORIES = [
+  "mountains",
+  "lakes",
+  "villages",
+  "food",
+  "festivals",
+  "culture",
+  "hotels",
+  "trekking",
+] as const;
+
+export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
+
+export const GALLERY_CATEGORY_LABELS: Record<GalleryCategory, string> = {
+  mountains: "Mountains",
+  lakes: "Lakes",
+  villages: "Villages",
+  food: "Local food",
+  festivals: "Festivals",
+  culture: "Culture",
+  hotels: "Hotels",
+  trekking: "Trekking routes",
+};
+
 export type GalleryImage = {
   src: string;
   title: string;
   caption?: string;
+  category?: GalleryCategory;
+};
+
+export const VIDEO_THEMES = [
+  "drone",
+  "trekking",
+  "jeep",
+  "snowfall",
+  "blossom",
+  "autumn",
+] as const;
+
+export type VideoTheme = (typeof VIDEO_THEMES)[number];
+
+export const VIDEO_THEME_LABELS: Record<VideoTheme, string> = {
+  drone: "Drone footage",
+  trekking: "Trekking",
+  jeep: "Jeep safari",
+  snowfall: "Snowfall",
+  blossom: "Cherry blossom",
+  autumn: "Autumn colours",
+};
+
+export type DestinationVideo = {
+  youtubeId: string;
+  title: string;
+  caption?: string;
+  theme: VideoTheme;
+  poster?: string;
 };
 
 export type PlaceType =
@@ -93,6 +146,7 @@ export type RegionDestination = {
   description: string;
   image: string;
   gallery: GalleryImage[];
+  videos?: DestinationVideo[];
   overview: string;
   highlights: string[];
   bestTime: string;

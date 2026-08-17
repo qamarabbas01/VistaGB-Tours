@@ -3,9 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import DestinationGallery from "@/components/DestinationGallery";
 import DestinationGuide from "@/components/DestinationGuide";
+import DestinationVideos from "@/components/DestinationVideos";
 import DestinationWeather from "@/components/DestinationWeather";
 import PlaceCard from "@/components/PlaceCard";
 import { getCoordinatesForSlug } from "@/data/coordinates";
+import { composeRegionGallery } from "@/data/gallery";
 import {
   getAllStaticSlugs,
   getLocationBySlug,
@@ -474,10 +476,17 @@ function RegionDetailPage({
       ) : null}
 
       <DestinationGallery
-        images={region.gallery}
+        images={composeRegionGallery(region.gallery, childPlaces)}
         heroImage={region.image}
         destinationName={region.name}
       />
+
+      {region.videos && region.videos.length > 0 ? (
+        <DestinationVideos
+          videos={region.videos}
+          destinationName={region.name}
+        />
+      ) : null}
 
       {guide ? <DestinationGuide region={region} guide={guide} /> : null}
 

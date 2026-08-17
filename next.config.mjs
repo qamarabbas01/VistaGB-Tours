@@ -21,6 +21,8 @@ const nextConfig = {
       { protocol: "https", hostname: "cdn.prod.rexby.com" },
       { protocol: "https", hostname: "i.brecorder.com" },
       { protocol: "https", hostname: "globerovers.com" },
+      { protocol: "https", hostname: "i.ytimg.com" },
+      { protocol: "https", hostname: "img.youtube.com" },
     ],
   },
 };

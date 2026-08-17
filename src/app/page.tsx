@@ -11,7 +11,9 @@ import {
   reviews,
   statistics,
 } from "@/data/hero";
+import { featuredVideos } from "@/data/videos";
 import Button from "@/components/Button";
+import DestinationVideos from "@/components/DestinationVideos";
 import FaqAccordion from "@/components/FaqAccordion";
 import TravelMapSection from "@/components/TravelMapSection";
 import { fetchNewsPage } from "@/lib/news/scraper";
@@ -580,14 +582,21 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Instagram Gallery */}
-      <section className="bg-slate py-20 md:py-28">
+      <DestinationVideos
+        videos={featuredVideos}
+        label="On Film"
+        heading="Short films from the Karakoram"
+        intro="Drone views, trekking clips, jeep safari, snowfall, cherry blossom, and autumn colour — a sense of the road before you go."
+      />
+
+      {/* Photo stills */}
+      <section className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="coord-label mb-3">On Film</p>
+              <p className="coord-label mb-3">Stills</p>
               <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
-                Instagram Gallery
+                From the road
               </h2>
               <p className="mt-4 max-w-xl text-ice">
                 Frames from the valleys — forts, glaciers, and road light along
