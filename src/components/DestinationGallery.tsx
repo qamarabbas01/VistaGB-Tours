@@ -1,8 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
-import type { GalleryImage } from "@/data/types";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  GALLERY_CATEGORIES,
+  GALLERY_CATEGORY_LABELS,
+  type GalleryCategory,
+  type GalleryImage,
+} from "@/data/types";
 
 type Props = {
   images: GalleryImage[];
@@ -15,17 +20,34 @@ export default function DestinationGallery({
   heroImage,
   destinationName,
 }: Props) {
-  const distinctImages = images.filter((item) => item.src !== heroImage);
-  const galleryImages =
-    distinctImages.length > 0
-      ? distinctImages
-      : images.length > 0
+  const galleryImages = useMemo(
+    () =>
+      images.length > 0
         ? images
-        : [{ src: heroImage, title: destinationName }];
+        : [{ src: heroImage, title: destinationName }],
+    [images, heroImage, destinationName],
+  );
+
+  const availableCategories = useMemo(
+    () =>
+      GALLERY_CATEGORIES.filter((category) =>
+        galleryImages.some((image) => image.category === category),
+      ),
+    [galleryImages],
+  );
+
+  const [activeCategory, setActiveCategory] = useState<GalleryCategory | "all">(
+    "all",
+  );
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+  const visibleImages =
+    activeCategory === "all"
+      ? galleryImages
+      : galleryImages.filter((image) => image.category === activeCategory);
+
   const activeImage =
-    activeIndex !== null ? galleryImages[activeIndex] : null;
+    activeIndex !== null ? visibleImages[activeIndex] : null;
 
   const closeLightbox = useCallback(() => setActiveIndex(null), []);
 
@@ -33,15 +55,19 @@ export default function DestinationGallery({
     setActiveIndex((current) =>
       current === null
         ? null
-        : (current - 1 + galleryImages.length) % galleryImages.length,
+        : (current - 1 + visibleImages.length) % visibleImages.length,
     );
-  }, [galleryImages.length]);
+  }, [visibleImages.length]);
 
   const showNext = useCallback(() => {
     setActiveIndex((current) =>
-      current === null ? null : (current + 1) % galleryImages.length,
+      current === null ? null : (current + 1) % visibleImages.length,
     );
-  }, [galleryImages.length]);
+  }, [visibleImages.length]);
+
+  useEffect(() => {
+    setActiveIndex(null);
+  }, [activeCategory]);
 
   useEffect(() => {
     if (activeIndex === null) return;
@@ -63,7 +89,8 @@ export default function DestinationGallery({
 
   if (galleryImages.length === 0) return null;
 
-  const [featured, ...rest] = galleryImages;
+  const [featured, ...rest] = visibleImages;
+  const showFilters = availableCategories.length >= 2;
 
   return (
     <>
@@ -74,27 +101,57 @@ export default function DestinationGallery({
             Scenes from {destinationName}
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ice md:text-base">
-            Landmarks, viewpoints, and local scenery — tap any photo to view it
-            full size.
+            Mountains, lakes, villages, food, festivals, culture, hotels, and
+            trekking routes — tap any photo to view it full size.
           </p>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <GalleryCard
-              image={featured}
-              destinationName={destinationName}
-              featured
-              onOpen={() => setActiveIndex(0)}
-            />
-
-            {rest.map((image, index) => (
-              <GalleryCard
-                key={image.src}
-                image={image}
-                destinationName={destinationName}
-                onOpen={() => setActiveIndex(index + 1)}
+          {showFilters ? (
+            <div
+              className="mt-8 flex flex-wrap gap-2"
+              role="tablist"
+              aria-label="Gallery categories"
+            >
+              <FilterChip
+                label="All"
+                active={activeCategory === "all"}
+                onClick={() => setActiveCategory("all")}
               />
-            ))}
-          </div>
+              {availableCategories.map((category) => (
+                <FilterChip
+                  key={category}
+                  label={GALLERY_CATEGORY_LABELS[category]}
+                  active={activeCategory === category}
+                  onClick={() => setActiveCategory(category)}
+                />
+              ))}
+            </div>
+          ) : null}
+
+          {visibleImages.length === 0 ? (
+            <p className="mt-10 text-sm text-ice">
+              No photos in this category yet.
+            </p>
+          ) : (
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {featured ? (
+                <GalleryCard
+                  image={featured}
+                  destinationName={destinationName}
+                  featured
+                  onOpen={() => setActiveIndex(0)}
+                />
+              ) : null}
+
+              {rest.map((image, index) => (
+                <GalleryCard
+                  key={`${image.src}-${image.title}-${index}`}
+                  image={image}
+                  destinationName={destinationName}
+                  onOpen={() => setActiveIndex(index + 1)}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -115,7 +172,7 @@ export default function DestinationGallery({
             Close
           </button>
 
-          {galleryImages.length > 1 ? (
+          {visibleImages.length > 1 ? (
             <>
               <button
                 type="button"
@@ -165,10 +222,15 @@ export default function DestinationGallery({
                 {activeImage.caption ? (
                   <p className="coord-label mt-2">{activeImage.caption}</p>
                 ) : null}
+                {activeImage.category ? (
+                  <p className="mt-2 text-sm text-ice">
+                    {GALLERY_CATEGORY_LABELS[activeImage.category]}
+                  </p>
+                ) : null}
               </div>
-              {galleryImages.length > 1 ? (
+              {visibleImages.length > 1 ? (
                 <p className="coord-label text-ice">
-                  {activeIndex + 1} / {galleryImages.length}
+                  {activeIndex + 1} / {visibleImages.length}
                 </p>
               ) : null}
             </div>
@@ -176,6 +238,32 @@ export default function DestinationGallery({
         </div>
       ) : null}
     </>
+  );
+}
+
+function FilterChip({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={active}
+      onClick={onClick}
+      className={`rounded-full border px-4 py-2 text-sm transition-colors ${
+        active
+          ? "border-apricot/60 bg-apricot/15 text-glacier"
+          : "border-teal/30 bg-slate text-ice hover:border-apricot/40 hover:text-apricot"
+      }`}
+    >
+      {label}
+    </button>
   );
 }
 
@@ -218,11 +306,16 @@ function GalleryCard({
       </div>
 
       <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
+        {image.category ? (
+          <p className="coord-label mb-1.5 text-[0.6rem] text-apricot/90">
+            {GALLERY_CATEGORY_LABELS[image.category]}
+          </p>
+        ) : null}
         <p className="font-display text-base font-semibold text-glacier md:text-lg">
           {image.title}
         </p>
         {image.caption ? (
-          <p className="coord-label mt-1.5 text-[0.65rem] text-apricot/90">
+          <p className="coord-label mt-1.5 text-[0.65rem] text-ice">
             {image.caption}
           </p>
         ) : null}

@@ -11,6 +11,8 @@ export { blogPosts } from "./blog";
 export type {
   BlogPost,
   DestinationFaq,
+  DestinationVideo,
+  GalleryCategory,
   GalleryImage,
   GuideListing,
   ItineraryDay,
@@ -21,6 +23,7 @@ export type {
   Destination,
   TravelLocation,
   SearchResult,
+  VideoTheme,
 } from "./types";
 
 /** Top-level region hubs shown on the destinations map */
