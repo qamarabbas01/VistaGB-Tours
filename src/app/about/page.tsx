@@ -1,10 +1,37 @@
-export const metadata = {
+import JsonLd from "@/components/JsonLd";
+import {
+  breadcrumbJsonLd,
+  buildPageMetadata,
+  webPageJsonLd,
+  withJsonLdContext,
+} from "@/lib/seo";
+
+const ABOUT_DESCRIPTION =
+  "VistaGB Tours is a Skardu-based operator guiding travelers through Hunza, Baltistan, and the high valleys of Gilgit-Baltistan with local knowledge and tailored itineraries.";
+
+export const metadata = buildPageMetadata({
   title: "About Us",
-};
+  description: ABOUT_DESCRIPTION,
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
     <div>
+      <JsonLd
+        data={withJsonLdContext([
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "About Us", path: "/about" },
+          ]),
+          webPageJsonLd({
+            type: "AboutPage",
+            name: "About VistaGB Tours",
+            description: ABOUT_DESCRIPTION,
+            path: "/about",
+          }),
+        ])}
+      />
       <section className="border-b border-teal/20 bg-slate py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <p className="coord-label mb-3">Who We Are</p>

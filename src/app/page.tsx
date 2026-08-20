@@ -15,8 +15,10 @@ import { featuredVideos } from "@/data/videos";
 import Button from "@/components/Button";
 import DestinationVideos from "@/components/DestinationVideos";
 import FaqAccordion from "@/components/FaqAccordion";
+import JsonLd from "@/components/JsonLd";
 import TravelMapSection from "@/components/TravelMapSection";
 import { fetchNewsPage } from "@/lib/news/scraper";
+import { faqJsonLd, withJsonLdContext } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -96,6 +98,8 @@ export default async function Home() {
 
   return (
     <div>
+      <JsonLd data={withJsonLdContext(faqJsonLd(faqs))} />
+
       {/* Hero */}
       <section className="relative flex min-h-[92vh] items-center overflow-hidden">
         <Image

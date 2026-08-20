@@ -1,15 +1,27 @@
 import Link from "next/link";
 import DestinationCard from "@/components/DestinationCard";
+import JsonLd from "@/components/JsonLd";
 import Pagination from "@/components/Pagination";
 import {
   regions,
   searchLocations,
   type TravelLocation,
 } from "@/data";
+import {
+  breadcrumbJsonLd,
+  buildPageMetadata,
+  collectionJsonLd,
+  withJsonLdContext,
+} from "@/lib/seo";
 
-export const metadata = {
+const DESTINATIONS_DESCRIPTION =
+  "Explore Hunza, Skardu, Gilgit, Nagar, Fairy Meadows and more — valleys, lakes, forts, and treks across Gilgit-Baltistan.";
+
+export const metadata = buildPageMetadata({
   title: "Destinations",
-};
+  description: DESTINATIONS_DESCRIPTION,
+  path: "/destinations",
+});
 
 const ITEMS_PER_PAGE = 9;
 
@@ -45,6 +57,23 @@ export default function DestinationsPage({ searchParams }: Props) {
 
   return (
     <div>
+      <JsonLd
+        data={withJsonLdContext([
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Destinations", path: "/destinations" },
+          ]),
+          collectionJsonLd({
+            name: "Destinations",
+            description: DESTINATIONS_DESCRIPTION,
+            path: "/destinations",
+            items: regions.map((region) => ({
+              name: region.name,
+              path: `/destinations/${region.slug}`,
+            })),
+          }),
+        ])}
+      />
       <section className="border-b border-teal/20 bg-slate py-12 md:py-16">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <p className="coord-label mb-3">The Map</p>

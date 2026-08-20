@@ -1,12 +1,36 @@
+import JsonLd from "@/components/JsonLd";
 import { contact } from "@/config/contact";
+import {
+  breadcrumbJsonLd,
+  buildPageMetadata,
+  webPageJsonLd,
+  withJsonLdContext,
+} from "@/lib/seo";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Privacy Policy",
-};
+  description:
+    "How VistaGB Tours collects, uses, and protects personal information from trip inquiries and website visits.",
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
     <div>
+      <JsonLd
+        data={withJsonLdContext([
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Privacy Policy", path: "/privacy" },
+          ]),
+          webPageJsonLd({
+            name: "Privacy Policy",
+            description:
+              "How VistaGB Tours collects, uses, and protects personal information from trip inquiries and website visits.",
+            path: "/privacy",
+          }),
+        ])}
+      />
       <section className="border-b border-teal/20 bg-slate py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <p className="coord-label mb-3">Legal</p>
