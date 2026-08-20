@@ -8,9 +8,10 @@ import type { MapLocation } from "@/components/InteractiveMap";
 const InteractiveMap = dynamic(() => import("@/components/InteractiveMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-full min-h-[360px] items-center justify-center rounded-2xl border border-teal/20 bg-night">
-      <p className="coord-label">Loading map…</p>
-    </div>
+    <div
+      className="skeleton h-full min-h-[360px] rounded-2xl"
+      aria-label="Loading map"
+    />
   ),
 });
 

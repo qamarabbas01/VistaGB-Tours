@@ -1,4 +1,4 @@
-import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import Link from "next/link";
 import {
   getParentRegion,
@@ -23,7 +23,7 @@ export default function DestinationCard({ location }: Props) {
       className="group overflow-hidden rounded-2xl border border-teal/20 bg-slate transition-colors hover:border-apricot/50"
     >
       <div className="relative h-56 w-full overflow-hidden">
-        <Image
+        <OptimizedImage
           src={location.image}
           alt={location.name}
           fill

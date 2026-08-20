@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import { useState } from "react";
 import { VIDEO_THEME_LABELS, type DestinationVideo } from "@/data/types";
 
@@ -73,7 +73,7 @@ function VideoCard({ video }: { video: DestinationVideo }) {
             className="group relative block h-full w-full"
             aria-label={`Play ${video.title}`}
           >
-            <Image
+            <OptimizedImage
               src={poster}
               alt=""
               fill
