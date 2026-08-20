@@ -1,10 +1,24 @@
 import Image from "next/image";
+import JsonLd from "@/components/JsonLd";
 import Pagination from "@/components/Pagination";
 import { blogPosts } from "@/data";
+import {
+  breadcrumbJsonLd,
+  buildPageMetadata,
+  collectionJsonLd,
+  withJsonLdContext,
+} from "@/lib/seo";
 
-export const metadata = {
+const BLOG_DESCRIPTION =
+  "Guides, season tips, and stories from the road across Gilgit-Baltistan — written by VistaGB guides and travelers.";
+
+export const metadata = buildPageMetadata({
   title: "Blog",
-};
+  description: BLOG_DESCRIPTION,
+  path: "/blog",
+  image: "/images/commons/24a764cb8976da0d.jpg",
+  imageAlt: "Eagle's Nest sunset above Hunza Valley",
+});
 
 const ITEMS_PER_PAGE = 9;
 
@@ -28,6 +42,23 @@ export default function BlogPage({ searchParams }: Props) {
 
   return (
     <div>
+      <JsonLd
+        data={withJsonLdContext([
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+          ]),
+          collectionJsonLd({
+            name: "The VistaGB Blog",
+            description: BLOG_DESCRIPTION,
+            path: "/blog",
+            items: sortedPosts.map((post) => ({
+              name: post.title,
+              path: "/blog",
+            })),
+          }),
+        ])}
+      />
       <section className="border-b border-teal/20 bg-slate py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <p className="coord-label mb-3">Field Notes</p>

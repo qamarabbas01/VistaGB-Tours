@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import DestinationGallery from "@/components/DestinationGallery";
 import DestinationGuide from "@/components/DestinationGuide";
 import DestinationVideos from "@/components/DestinationVideos";
 import DestinationWeather from "@/components/DestinationWeather";
+import JsonLd from "@/components/JsonLd";
 import PlaceCard from "@/components/PlaceCard";
 import { getCoordinatesForSlug } from "@/data/coordinates";
 import { composeRegionGallery } from "@/data/gallery";
@@ -19,6 +21,13 @@ import {
   type PlaceType,
   type RegionDestination,
 } from "@/data";
+import {
+  breadcrumbJsonLd,
+  buildPageMetadata,
+  faqJsonLd,
+  touristPlaceJsonLd,
+  withJsonLdContext,
+} from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -90,20 +99,26 @@ export async function generateStaticParams() {
   return getAllStaticSlugs().map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const location = getLocationBySlug(slug);
 
   if (!location) {
-    return { title: "Destination Not Found" };
+    return buildPageMetadata({
+      title: "Destination Not Found",
+      description: "This destination could not be found.",
+      path: "/destinations",
+      robots: { index: false, follow: false },
+    });
   }
 
-  const name = location.name;
-
-  return {
-    title: name,
+  return buildPageMetadata({
+    title: location.name,
     description: location.description,
-  };
+    path: `/destinations/${location.slug}`,
+    image: location.image,
+    imageAlt: `${location.name} — ${location.tagline}`,
+  });
 }
 
 export default async function DestinationDetailPage({ params }: Props) {
@@ -127,9 +142,38 @@ function PlaceDetailPage({ place }: { place: Place }) {
     .map((s) => getLocationBySlug(s))
     .filter((loc): loc is Place => Boolean(loc && isPlace(loc)));
   const weatherPoint = getCoordinatesForSlug(place.slug);
+  const crumbs = [
+    { name: "Home", path: "/" },
+    { name: "Destinations", path: "/destinations" },
+    ...(parent
+      ? [{ name: parent.name, path: `/destinations/${parent.slug}` }]
+      : []),
+    { name: place.name, path: `/destinations/${place.slug}` },
+  ];
 
   return (
     <div>
+      <JsonLd
+        data={withJsonLdContext([
+          breadcrumbJsonLd(crumbs),
+          touristPlaceJsonLd({
+            type: "TouristAttraction",
+            name: place.name,
+            description: place.description,
+            path: `/destinations/${place.slug}`,
+            image: place.image,
+            geo: weatherPoint
+              ? { lat: weatherPoint.lat, lng: weatherPoint.lng }
+              : undefined,
+            containedIn: parent
+              ? {
+                  name: parent.name,
+                  path: `/destinations/${parent.slug}`,
+                }
+              : undefined,
+          }),
+        ])}
+      />
       <section className="relative h-[45vh] min-h-[320px] w-full overflow-hidden md:h-[55vh]">
         <Image
           src={place.image}
@@ -306,9 +350,28 @@ function RegionDetailPage({
   const otherRegions = getRelatedRegions(region);
   const guide = region.guide;
   const weatherPoint = getCoordinatesForSlug(region.slug);
+  const schemaNodes = [
+    breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Destinations", path: "/destinations" },
+      { name: region.name, path: `/destinations/${region.slug}` },
+    ]),
+    touristPlaceJsonLd({
+      type: "TouristDestination",
+      name: region.name,
+      description: region.description,
+      path: `/destinations/${region.slug}`,
+      image: region.image,
+      geo: weatherPoint
+        ? { lat: weatherPoint.lat, lng: weatherPoint.lng }
+        : undefined,
+    }),
+    ...(guide?.faqs && guide.faqs.length > 0 ? [faqJsonLd(guide.faqs)] : []),
+  ];
 
   return (
     <div>
+      <JsonLd data={withJsonLdContext(schemaNodes)} />
       <section className="relative h-[50vh] min-h-[360px] w-full overflow-hidden md:h-[60vh]">
         <Image
           src={region.image}

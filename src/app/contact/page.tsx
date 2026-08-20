@@ -1,13 +1,25 @@
 import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
+import JsonLd from "@/components/JsonLd";
 import { contact } from "@/config/contact";
 import { getPlacesForRegion, regions } from "@/data";
+import {
+  breadcrumbJsonLd,
+  buildPageMetadata,
+  webPageJsonLd,
+  withJsonLdContext,
+} from "@/lib/seo";
 
-export const metadata = {
+const CONTACT_DESCRIPTION =
+  "Plan your Gilgit-Baltistan trip with VistaGB Tours. Send an inquiry and we'll reply with a custom route, timeline, and quote.";
+
+export const metadata = buildPageMetadata({
   title: "Contact",
-  description:
-    "Plan your Gilgit-Baltistan trip with VistaGB Tours. Send an inquiry and we'll reply with a custom route, timeline, and quote.",
-};
+  description: CONTACT_DESCRIPTION,
+  path: "/contact",
+  image: "/images/commons/1a2b77e8ff37f557.jpg",
+  imageAlt: "Karakoram peaks above Skardu valley",
+});
 
 const steps = [
   {
@@ -49,6 +61,20 @@ const heroImage =
 export default function ContactPage() {
   return (
     <div>
+      <JsonLd
+        data={withJsonLdContext([
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+          webPageJsonLd({
+            type: "ContactPage",
+            name: "Contact VistaGB Tours",
+            description: CONTACT_DESCRIPTION,
+            path: "/contact",
+          }),
+        ])}
+      />
       <section className="relative flex min-h-[52vh] items-end overflow-hidden">
         <Image
           src={heroImage}

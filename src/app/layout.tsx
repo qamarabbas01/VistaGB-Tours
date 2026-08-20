@@ -3,6 +3,14 @@ import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
+import {
+  absoluteUrl,
+  organizationJsonLd,
+  websiteJsonLd,
+  withJsonLdContext,
+} from "@/lib/seo";
+import { site } from "@/config/site";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -24,28 +32,44 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://vista-gb-tours.vercel.app",
-  ),
+  metadataBase: new URL(absoluteUrl("/")),
   title: {
-    default: "VistaGB Tours — Gilgit-Baltistan",
+    default: site.title,
     template: "%s — VistaGB Tours",
   },
-  description:
-    "Discover the Karakoram, Hunza, Skardu and the high valleys of Gilgit-Baltistan with VistaGB Tours — curated journeys, treks and stays across northern Pakistan.",
+  description: site.description,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
-    locale: "en_PK",
-    siteName: "VistaGB Tours",
-    title: "VistaGB Tours — Gilgit-Baltistan",
-    description:
-      "Curated journeys through the Karakoram, Hunza, Skardu and the high valleys of Gilgit-Baltistan.",
+    locale: site.locale,
+    url: "/",
+    siteName: site.name,
+    title: site.title,
+    description: site.ogDescription,
+    images: [
+      {
+        url: site.defaultOgImage,
+        width: 1200,
+        height: 630,
+        alt: site.defaultOgAlt,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "VistaGB Tours — Gilgit-Baltistan",
-    description:
-      "Curated journeys through the Karakoram, Hunza, Skardu and the high valleys of Gilgit-Baltistan.",
+    title: site.title,
+    description: site.ogDescription,
+    images: [site.defaultOgImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
@@ -67,6 +91,9 @@ export default function RootLayout({
       <body
         className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} font-body bg-night text-glacier antialiased`}
       >
+        <JsonLd
+          data={withJsonLdContext([organizationJsonLd(), websiteJsonLd()])}
+        />
         <Navbar />
         <main>{children}</main>
         <Footer />

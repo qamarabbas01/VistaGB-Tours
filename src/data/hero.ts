@@ -115,11 +115,23 @@ export const experiences = [
   
   export const reviews = [
     {
+      quote: "Amazing experience with VistaGB Tours.",
+      name: "Fatima S.",
+      from: "Islamabad",
+      trip: "Karakoram Grand Circuit",
+      rating: 5,
+      photo: "/images/commons/bd7ddfea0e6ee033.jpg",
+      photoAlt: "Terraced orchards and peaks above Karimabad, Hunza",
+    },
+    {
       quote:
         "Our Hunza trip felt completely personal — no rushed bus stops, just the valleys we asked for and guides who knew every turn.",
       name: "Sara K.",
       from: "Lahore",
       trip: "Hunza Highlights",
+      rating: 5,
+      photo: "/images/commons/4680a3d14ca1af46.jpg",
+      photoAlt: "Attabad Lake in upper Hunza",
     },
     {
       quote:
@@ -127,6 +139,9 @@ export const experiences = [
       name: "James & Priya",
       from: "London",
       trip: "Skardu & Deosai",
+      rating: 5,
+      photo: "/images/commons/a4e211a59b3e995d.jpg",
+      photoAlt: "Jeep stop beside a high lake on the Deosai plateau",
     },
     {
       quote:
@@ -134,6 +149,29 @@ export const experiences = [
       name: "Ahmed R.",
       from: "Karachi",
       trip: "Fairy Meadows Escape",
+      rating: 5,
+      photo: "/images/commons/bf2171654d99937a.jpg",
+      photoAlt: "Nanga Parbat from Fairy Meadows",
+    },
+    {
+      quote:
+        "Cherry season in Nagar was everything we hoped for. Homestays, glacier views, and a guide who treated us like family.",
+      name: "Nadia & Omar",
+      from: "Dubai",
+      trip: "Nagar orchards",
+      rating: 5,
+      photo: "/images/commons/9df8326eb5be0e2f.jpg",
+      photoAlt: "Hopper Valley orchards and peaks in Nagar",
+    },
+    {
+      quote:
+        "From Baltit Fort to Passu, every day was paced right. We would book VistaGB again without thinking twice.",
+      name: "Michael T.",
+      from: "Toronto",
+      trip: "Hunza Highlights",
+      rating: 5,
+      photo: "/images/commons/92ff9643469e41ed.jpg",
+      photoAlt: "Baltit Fort above Karimabad",
     },
   ] as const;
   

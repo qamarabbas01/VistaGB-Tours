@@ -1,17 +1,47 @@
 import Image from "next/image";
+import JsonLd from "@/components/JsonLd";
 import Pagination from "@/components/Pagination";
 import { fetchNewsPage } from "@/lib/news/scraper";
 import type { NewsPageResult } from "@/lib/news/types";
+import {
+  breadcrumbJsonLd,
+  buildPageMetadata,
+  webPageJsonLd,
+  withJsonLdContext,
+} from "@/lib/seo";
 
-export const metadata = {
+const NEWS_DESCRIPTION =
+  "Festivals, events, and developments from across Gilgit-Baltistan, sourced from the regional tourism department.";
+
+export const metadata = buildPageMetadata({
   title: "News",
-};
+  description: NEWS_DESCRIPTION,
+  path: "/news",
+});
 
 export const revalidate = 3600;
 
 type Props = {
   searchParams?: Promise<{ page?: string | string[] }>;
 };
+
+function NewsSchema() {
+  return (
+    <JsonLd
+      data={withJsonLdContext([
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "News", path: "/news" },
+        ]),
+        webPageJsonLd({
+          name: "News from Gilgit-Baltistan",
+          description: NEWS_DESCRIPTION,
+          path: "/news",
+        }),
+      ])}
+    />
+  );
+}
 
 export default async function NewsPage({ searchParams }: Props) {
   const resolvedSearchParams = await searchParams;
@@ -30,6 +60,7 @@ export default async function NewsPage({ searchParams }: Props) {
   if (!newsData || newsData.items.length === 0) {
     return (
       <div>
+        <NewsSchema />
         <section className="border-b border-teal/20 bg-slate py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 md:px-10">
             <p className="coord-label mb-3">Regional Updates</p>
@@ -55,6 +86,7 @@ export default async function NewsPage({ searchParams }: Props) {
 
   return (
     <div>
+      <NewsSchema />
       <section className="border-b border-teal/20 bg-slate py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <p className="coord-label mb-3">Regional Updates</p>
