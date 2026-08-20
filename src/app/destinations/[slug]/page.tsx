@@ -1,4 +1,4 @@
-import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -175,7 +175,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
         ])}
       />
       <section className="relative h-[45vh] min-h-[320px] w-full overflow-hidden md:h-[55vh]">
-        <Image
+        <OptimizedImage
           src={place.image}
           alt={place.name}
           fill
@@ -373,7 +373,7 @@ function RegionDetailPage({
     <div>
       <JsonLd data={withJsonLdContext(schemaNodes)} />
       <section className="relative h-[50vh] min-h-[360px] w-full overflow-hidden md:h-[60vh]">
-        <Image
+        <OptimizedImage
           src={region.image}
           alt={region.name}
           fill
@@ -567,7 +567,7 @@ function RegionDetailPage({
                 className="group overflow-hidden rounded-2xl border border-teal/20 bg-night transition-colors hover:border-apricot/50"
               >
                 <div className="relative h-40 w-full overflow-hidden">
-                  <Image
+                  <OptimizedImage
                     src={other.image}
                     alt={other.name}
                     fill

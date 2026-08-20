@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   GALLERY_CATEGORIES,
@@ -204,7 +204,7 @@ export default function DestinationGallery({
             onClick={(event) => event.stopPropagation()}
           >
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-teal/20">
-              <Image
+              <OptimizedImage
                 src={activeImage.src}
                 alt={activeImage.title}
                 fill
@@ -291,7 +291,7 @@ function GalleryCard({
           featured ? "aspect-[21/9] sm:aspect-[2/1]" : "aspect-[4/3]"
         }`}
       >
-        <Image
+        <OptimizedImage
           src={image.src}
           alt={`${image.title} — ${destinationName}`}
           fill

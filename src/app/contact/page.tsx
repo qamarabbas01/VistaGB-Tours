@@ -1,4 +1,4 @@
-import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import ContactForm from "@/components/ContactForm";
 import JsonLd from "@/components/JsonLd";
 import { contact } from "@/config/contact";
@@ -76,7 +76,7 @@ export default function ContactPage() {
         ])}
       />
       <section className="relative flex min-h-[52vh] items-end overflow-hidden">
-        <Image
+        <OptimizedImage
           src={heroImage}
           alt="Karakoram peaks above Skardu valley"
           fill

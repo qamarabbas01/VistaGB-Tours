@@ -1,4 +1,4 @@
-import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import Link from "next/link";
 import { blogPosts, regions } from "@/data";
 import {
@@ -102,7 +102,7 @@ export default async function Home() {
 
       {/* Hero */}
       <section className="relative flex min-h-[92vh] items-center overflow-hidden">
-        <Image
+        <OptimizedImage
           src="/images/commons/bd7ddfea0e6ee033.jpg"
           alt="Snow-capped peaks of the Karakoram range above Hunza Valley"
           fill
@@ -207,7 +207,7 @@ export default async function Home() {
                 key={dest.slug}
                 className="group relative h-[420px] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl md:w-[340px]"
               >
-                <Image
+                <OptimizedImage
                   src={dest.image}
                   alt={dest.name}
                   fill
@@ -262,7 +262,7 @@ export default async function Home() {
                   (index === 0 ? "sm:col-span-2 lg:col-span-2" : "")
                 }
               >
-                <Image
+                <OptimizedImage
                   src={item.image}
                   alt={item.name}
                   fill
@@ -312,7 +312,7 @@ export default async function Home() {
                 key={activity.title}
                 className="group relative min-h-[280px] overflow-hidden rounded-2xl"
               >
-                <Image
+                <OptimizedImage
                   src={activity.image}
                   alt={activity.title}
                   fill
@@ -364,7 +364,7 @@ export default async function Home() {
                 className="overflow-hidden rounded-2xl border border-teal/20 bg-slate transition-colors hover:border-apricot/40"
               >
                 <div className="relative h-56 w-full overflow-hidden">
-                  <Image
+                  <OptimizedImage
                     src={pkg.image}
                     alt={pkg.name}
                     fill
@@ -428,7 +428,7 @@ export default async function Home() {
                 className="overflow-hidden rounded-2xl border border-teal/20 bg-slate"
               >
                 <div className="relative h-48 w-full overflow-hidden">
-                  <Image
+                  <OptimizedImage
                     src={review.photo}
                     alt={review.photoAlt}
                     fill
@@ -467,7 +467,7 @@ export default async function Home() {
 
       {/* Travel Statistics */}
       <section className="relative overflow-hidden py-20 md:py-28">
-        <Image
+        <OptimizedImage
           src="/images/commons/112aa7ad11d28437.jpg"
           alt=""
           fill
@@ -532,7 +532,7 @@ export default async function Home() {
                 >
                   {item.image ? (
                     <div className="relative h-44 w-full overflow-hidden">
-                      <Image
+                      <OptimizedImage
                         src={item.image}
                         alt={item.title}
                         fill
@@ -603,7 +603,7 @@ export default async function Home() {
                 className="group overflow-hidden rounded-2xl border border-teal/20 bg-slate"
               >
                 <div className="relative h-48 w-full overflow-hidden">
-                  <Image
+                  <OptimizedImage
                     src={post.image}
                     alt={post.title}
                     fill
@@ -670,7 +670,7 @@ export default async function Home() {
                     : "aspect-square")
                 }
               >
-                <Image
+                <OptimizedImage
                   src={image.src}
                   alt={image.alt}
                   fill

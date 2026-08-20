@@ -1,4 +1,4 @@
-import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import Link from "next/link";
 import type { Place } from "@/data/types";
 
@@ -25,7 +25,7 @@ export default function PlaceCard({
             compact ? "aspect-[16/10]" : "aspect-[4/3]"
           }`}
         >
-          <Image
+          <OptimizedImage
             src={place.image}
             alt={place.name}
             fill

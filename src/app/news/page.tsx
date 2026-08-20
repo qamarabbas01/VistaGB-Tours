@@ -1,5 +1,6 @@
-import Image from "next/image";
 import JsonLd from "@/components/JsonLd";
+import NewsCard from "@/components/NewsCard";
+import NewsInfiniteRest from "@/components/NewsInfiniteRest";
 import Pagination from "@/components/Pagination";
 import { fetchNewsPage } from "@/lib/news/scraper";
 import type { NewsPageResult } from "@/lib/news/types";
@@ -105,49 +106,23 @@ export default async function NewsPage({ searchParams }: Props) {
         <div className="mx-auto max-w-4xl px-6 md:px-10">
           <div className="flex flex-col gap-6">
             {items.map((item) => (
-              <a
-                key={item.id}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block overflow-hidden rounded-2xl border border-teal/20 bg-slate transition-colors hover:border-apricot/50"
-              >
-                {item.image && (
-                  <div className="relative h-48 w-full overflow-hidden md:h-56">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 896px"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                )}
-                <div className="p-6 md:p-8">
-                  <p className="coord-label mb-3">
-                    {item.date}
-                    {item.time ? ` · ${item.time}` : ""}
-                  </p>
-                  <h2 className="font-display text-xl font-semibold leading-snug text-glacier transition-colors group-hover:text-apricot md:text-2xl">
-                    {item.title}
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-ice">
-                    {item.summary}
-                  </p>
-                  <span className="mt-4 inline-block text-sm font-medium text-apricot">
-                    Read full story →
-                  </span>
-                </div>
-              </a>
+              <NewsCard key={item.id} item={item} />
             ))}
           </div>
 
-          <Pagination
-            currentPage={currentPage}
-            totalPages={newsData.totalPages}
-            basePath="/news"
-            className="mt-12"
-          />
+          {currentPage === 1 ? (
+            <NewsInfiniteRest
+              nextPage={2}
+              totalPages={newsData.totalPages}
+            />
+          ) : (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={newsData.totalPages}
+              basePath="/news"
+              className="mt-12"
+            />
+          )}
 
           <p className="mt-10 text-center text-xs text-ice">
             Source:{" "}
