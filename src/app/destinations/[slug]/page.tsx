@@ -2,6 +2,7 @@ import OptimizedImage from "@/components/OptimizedImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import DestinationActions from "@/components/DestinationActions";
 import DestinationGallery from "@/components/DestinationGallery";
 import DestinationGuide from "@/components/DestinationGuide";
 import DestinationVideos from "@/components/DestinationVideos";
@@ -183,7 +184,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/50 to-night/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/50 to-scrim/20" />
         <div className="absolute inset-0 flex flex-col justify-end">
           <div className="mx-auto w-full max-w-7xl px-6 pb-12 md:px-10 md:pb-16">
             {parent ? (
@@ -217,6 +218,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
             <p className="mt-2 text-lg font-medium text-apricot md:text-xl">
               {place.tagline}
             </p>
+            <DestinationActions slug={place.slug} name={place.name} />
           </div>
         </div>
       </section>
@@ -381,7 +383,7 @@ function RegionDetailPage({
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/50 to-night/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/50 to-scrim/20" />
         <div className="absolute inset-0 flex flex-col justify-end">
           <div className="mx-auto w-full max-w-7xl px-6 pb-12 md:px-10 md:pb-16">
             <Link
@@ -399,6 +401,7 @@ function RegionDetailPage({
             <p className="mt-2 text-lg font-medium text-apricot md:text-xl">
               {region.tagline}
             </p>
+            <DestinationActions slug={region.slug} name={region.name} isRegion />
           </div>
         </div>
       </section>
@@ -491,8 +494,20 @@ function RegionDetailPage({
               </p>
               <div className="mt-4 flex flex-col gap-2">
                 <Link
-                  href={`/assistant?destination=${region.slug}`}
+                  href={`/plan?region=${region.slug}`}
                   className="text-sm font-medium text-apricot hover:underline"
+                >
+                  Open trip planner →
+                </Link>
+                <Link
+                  href={`/book?region=${region.slug}`}
+                  className="text-sm font-medium text-apricot hover:underline"
+                >
+                  Request dates →
+                </Link>
+                <Link
+                  href={`/assistant?destination=${region.slug}`}
+                  className="text-sm font-medium text-ice hover:text-apricot hover:underline"
                 >
                   Ask the AI assistant →
                 </Link>

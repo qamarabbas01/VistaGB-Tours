@@ -104,7 +104,7 @@ export default function DestinationsPage({ searchParams }: Props) {
             />
             <button
               type="submit"
-              className="rounded-xl bg-apricot px-7 py-3 font-semibold text-night transition-colors hover:bg-glacier"
+              className="rounded-xl bg-apricot px-7 py-3 font-semibold text-ink transition-opacity hover:opacity-90"
             >
               Search
             </button>

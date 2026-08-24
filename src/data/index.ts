@@ -23,6 +23,7 @@ export type {
   Destination,
   TravelLocation,
   SearchResult,
+  TrekDifficulty,
   VideoTheme,
 } from "./types";
 

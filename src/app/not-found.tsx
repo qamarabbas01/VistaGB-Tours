@@ -20,13 +20,13 @@ export default function NotFound() {
       <div className="mt-8 flex flex-wrap gap-4">
         <Link
           href="/"
-          className="rounded-full bg-apricot px-6 py-3 text-sm font-semibold text-night transition-transform hover:scale-[1.02]"
+          className="rounded-full bg-apricot px-6 py-3 text-sm font-semibold text-ink transition-transform hover:scale-[1.02]"
         >
           Back home
         </Link>
         <Link
           href="/destinations"
-          className="rounded-full border border-apricot px-6 py-3 text-sm font-medium text-apricot transition-colors hover:bg-apricot hover:text-night"
+          className="rounded-full border border-apricot px-6 py-3 text-sm font-medium text-apricot transition-colors hover:bg-apricot hover:text-ink"
         >
           Browse destinations
         </Link>

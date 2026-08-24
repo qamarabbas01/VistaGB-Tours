@@ -2,13 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --night: #0b0f14;
-  --slate: #16202b;
-  --glacier: #e8ecef;
-  --ice: #9fb3c2;
-  --apricot: #d98e4a;
-  --teal: #5c7a8a;
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --c-night: 11 15 20;
+  --c-slate: 22 32 43;
+  --c-glacier: 232 236 239;
+  --c-ice: 159 179 194;
+  --c-apricot: 217 142 74;
+  --c-teal: 92 122 138;
+  --c-ink: 11 15 20;
+  --c-scrim: 11 15 20;
+  --night: rgb(var(--c-night));
+  --slate: rgb(var(--c-slate));
+  --glacier: rgb(var(--c-glacier));
+  --ice: rgb(var(--c-ice));
+  --apricot: rgb(var(--c-apricot));
+  --teal: rgb(var(--c-teal));
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --c-night: 246 242 236;
+  --c-slate: 255 255 255;
+  --c-glacier: 22 32 43;
+  --c-ice: 90 108 122;
+  --c-apricot: 196 118 48;
+  --c-teal: 74 102 116;
+  --c-ink: 11 15 20;
+  --c-scrim: 11 15 20;
+  --night: rgb(var(--c-night));
+  --slate: rgb(var(--c-slate));
+  --glacier: rgb(var(--c-glacier));
+  --ice: rgb(var(--c-ice));
+  --apricot: rgb(var(--c-apricot));
+  --teal: rgb(var(--c-teal));
 }
 
 html {
@@ -287,5 +315,31 @@ button:focus-visible {
   .map-pin-dot,
   .vista-map-pin__dot {
     animation: none !important;
+  }
+}
+
+[data-theme="light"] .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(22, 32, 43, 0.08),
+    transparent
+  );
+}
+
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: #12202b !important;
+  }
+
+  a {
+    text-decoration: none !important;
   }
 }

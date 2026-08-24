@@ -428,7 +428,7 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
       <Button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-night transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="w-full rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-ink transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {submitting ? "Sending…" : "Send Inquiry"}
       </Button>

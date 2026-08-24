@@ -1,15 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import AlertBanner from "@/components/AlertBanner";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
+import LiveChat from "@/components/LiveChat";
+import Navbar from "@/components/Navbar";
+import { PreferencesProvider } from "@/components/PreferencesProvider";
 import {
   absoluteUrl,
   organizationJsonLd,
   websiteJsonLd,
   withJsonLdContext,
 } from "@/lib/seo";
+import { THEME_BOOTSTRAP } from "@/lib/theme-script";
 import { site } from "@/config/site";
 
 const fraunces = Fraunces({
@@ -96,16 +101,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
       <body
         className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} font-body bg-night text-glacier antialiased`}
       >
-        <JsonLd
-          data={withJsonLdContext([organizationJsonLd(), websiteJsonLd()])}
-        />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <Script id="vistagb-theme" strategy="beforeInteractive">
+          {THEME_BOOTSTRAP}
+        </Script>
+        <PreferencesProvider>
+          <JsonLd
+            data={withJsonLdContext([organizationJsonLd(), websiteJsonLd()])}
+          />
+          <AlertBanner />
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <LiveChat />
+        </PreferencesProvider>
       </body>
     </html>
   );

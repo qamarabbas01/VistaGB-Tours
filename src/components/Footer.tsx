@@ -22,6 +22,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-2 text-sm text-ice">
               <li><Link href="/" className="hover:text-apricot">Home</Link></li>
               <li><Link href="/destinations" className="hover:text-apricot">Destinations</Link></li>
+              <li><Link href="/tools" className="hover:text-apricot">Tools</Link></li>
               <li><Link href="/assistant" className="hover:text-apricot">AI Assistant</Link></li>
               <li><Link href="/blog" className="hover:text-apricot">Blog</Link></li>
               <li><Link href="/news" className="hover:text-apricot">News</Link></li>
@@ -31,8 +32,10 @@ export default function Footer() {
           <div>
             <p className="coord-label mb-4">Company</p>
             <ul className="flex flex-col gap-2 text-sm text-ice">
+              <li><Link href="/book" className="hover:text-apricot">Book a trip</Link></li>
               <li><Link href="/contact" className="hover:text-apricot">Contact</Link></li>
               <li><Link href="/about" className="hover:text-apricot">About Us</Link></li>
+              <li><Link href="/alerts" className="hover:text-apricot">Alerts & roads</Link></li>
               <li><Link href="/privacy" className="hover:text-apricot">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:text-apricot">Terms of Service</Link></li>
             </ul>

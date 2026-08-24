@@ -87,30 +87,35 @@ export const hunzaGuide: RegionGuide = {
       detail:
         "Day hikes above Karimabad toward Ultar Glacier and Ladyfinger Peak viewpoints.",
       placeSlug: "karimabad",
+      difficulty: "moderate",
     },
     {
       name: "Passu Glacier & Borith Lake",
       detail:
         "Valley floor walks to Passu Glacier snout and the lakes near Ghulkin.",
       placeSlug: "borith-lake",
+      difficulty: "easy",
     },
     {
       name: "Shimshal Valley trek",
       detail:
         "Multi-day jeep-and-trek into one of Hunza's most remote side valleys.",
       placeSlug: "shimshal-valley",
+      difficulty: "strenuous",
     },
     {
       name: "Chipursan & Misgar",
       detail:
         "Remote highland valleys toward the Afghan corridor — guide and permits advisable.",
       placeSlug: "chipursan-valley",
+      difficulty: "challenging",
     },
     {
       name: "Hopper & Rush Lake (via Nagar)",
       detail:
         "Cross the river to Nagar for glacier walks and the high alpine Rush Lake trek. Hopper is in Nagar, often combined with Hunza itineraries.",
       placeSlug: "hopper-valley",
+      difficulty: "strenuous",
     },
   ],
   activities: [

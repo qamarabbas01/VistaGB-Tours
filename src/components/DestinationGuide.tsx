@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FaqAccordion from "@/components/FaqAccordion";
+import TrekDifficultyBadge from "@/components/TrekDifficultyBadge";
 import { getLocationBySlug } from "@/data";
 import type { GuideListing, RegionDestination, RegionGuide } from "@/data/types";
 
@@ -66,6 +67,11 @@ function ListingGrid({
               <p className="font-display text-lg text-glacier">
                 <GuideLink item={item} />
               </p>
+              {item.difficulty ? (
+                <p className="mt-2">
+                  <TrekDifficultyBadge difficulty={item.difficulty} />
+                </p>
+              ) : null}
               <p className="mt-2 text-sm leading-relaxed text-ice">{item.detail}</p>
             </li>
           ))}
@@ -214,10 +220,28 @@ export default function DestinationGuide({ region, guide }: Props) {
       {guide.suggestedItinerary && guide.suggestedItinerary.length > 0 ? (
         <section className="border-t border-teal/20 bg-slate py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 md:px-10">
-            <p className="coord-label mb-3">Plan your days</p>
-            <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
-              Suggested itinerary
-            </h2>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="coord-label mb-3">Plan your days</p>
+                <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
+                  Suggested itinerary
+                </h2>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href={`/plan?region=${region.slug}`}
+                  className="text-sm font-medium text-apricot hover:underline"
+                >
+                  Open in trip planner →
+                </Link>
+                <Link
+                  href={`/book?region=${region.slug}`}
+                  className="text-sm font-medium text-ice hover:text-apricot hover:underline"
+                >
+                  Request dates
+                </Link>
+              </div>
+            </div>
             {guide.travelDuration ? (
               <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ice md:text-base">
                 {guide.travelDuration}

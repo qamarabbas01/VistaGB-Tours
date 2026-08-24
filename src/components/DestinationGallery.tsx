@@ -302,7 +302,7 @@ function GalleryCard({
           }
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/20 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/20 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
       </div>
 
       <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">

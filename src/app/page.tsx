@@ -110,8 +110,8 @@ export default async function Home() {
           sizes="100vw"
           className="hero-media object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/70 to-night/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-night/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/70 to-scrim/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-scrim/60 via-transparent to-transparent" />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-10">
           <p className="coord-label rise-in mb-6">
@@ -130,12 +130,12 @@ export default async function Home() {
           <div className="rise-in rise-in-delay-3 mt-10 flex flex-col gap-4 sm:flex-row">
             <Button
               href="/destinations"
-              className="rounded-full bg-apricot px-8 py-3 text-center text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
+              className="rounded-full bg-apricot px-8 py-3 text-center text-sm font-semibold text-ink transition-transform hover:scale-[1.03]"
             >
               Explore Destinations
             </Button>
             <Button
-              href="/contact"
+              href="/book"
               className="rounded-full border border-ice/40 px-8 py-3 text-center text-sm font-medium text-glacier transition-colors hover:border-apricot hover:text-apricot"
             >
               Plan Your Trip
@@ -214,7 +214,7 @@ export default async function Home() {
                   sizes="(max-width: 768px) 300px, 340px"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-night via-night/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/30 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <p className="coord-label mb-2">
                     {dest.region} · ALT {dest.altitude}
@@ -230,7 +230,7 @@ export default async function Home() {
           <div className="mt-8 flex justify-center md:hidden">
             <Link
               href="/destinations"
-              className="rounded-full bg-apricot px-6 py-2 text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
+              className="rounded-full bg-apricot px-6 py-2 text-sm font-semibold text-ink transition-transform hover:scale-[1.03]"
             >
               View all destinations
             </Link>
@@ -273,7 +273,7 @@ export default async function Home() {
                   }
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/40 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <p className="coord-label mb-2">{item.region}</p>
                   <h3 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
@@ -319,7 +319,7 @@ export default async function Home() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-night via-night/75 to-night/20" />
+                <div className="absolute inset-0 bg-gradient-to-r from-scrim via-scrim/75 to-scrim/20" />
                 <div className="relative flex h-full min-h-[280px] flex-col justify-end p-8">
                   <p className="coord-label mb-3">{activity.mark}</p>
                   <h3 className="font-display text-3xl font-semibold text-glacier">
@@ -633,6 +633,8 @@ export default async function Home() {
         label="On Film"
         heading="Short films from the Karakoram"
         intro="Drone views, trekking clips, jeep safari, snowfall, cherry blossom, and autumn colour — a sense of the road before you go."
+        moreHref="/videos"
+        moreLabel="YouTube travel videos →"
       />
 
       {/* Photo stills */}
@@ -640,13 +642,14 @@ export default async function Home() {
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="coord-label mb-3">Stills</p>
+              <p className="coord-label mb-3">Instagram</p>
               <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
                 From the road
               </h2>
               <p className="mt-4 max-w-xl text-ice">
-                Frames from the valleys — forts, glaciers, and road light along
-                the Karakoram Highway.
+                A curated photo feed from the same valleys — forts, glaciers, and
+                highway light. We don&apos;t pipe the Instagram API here; follow
+                the account for new frames.
               </p>
             </div>
             <a
@@ -723,10 +726,10 @@ export default async function Home() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button
-              href="/contact"
-              className="inline-block rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
+              href="/book"
+              className="inline-block rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-ink transition-transform hover:scale-[1.03]"
             >
-              Get in Touch
+              Request dates
             </Button>
             <Button
               href="/destinations"

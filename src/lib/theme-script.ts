@@ -1,0 +1,2 @@
+/** Runs before paint to avoid a theme/locale flash. */
+export const THEME_BOOTSTRAP = `(function(){try{var t=localStorage.getItem("vistagb-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}else{document.documentElement.setAttribute("data-theme","dark");}var l=localStorage.getItem("vistagb-locale");if(l==="ur"){document.documentElement.lang="ur";document.documentElement.dir="rtl";document.documentElement.setAttribute("data-locale","ur");}}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`;
