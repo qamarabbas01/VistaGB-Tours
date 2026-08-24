@@ -12,6 +12,7 @@ import {
 import type { Marker as LeafletMarker } from "leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { usePreferences } from "@/components/PreferencesProvider";
 
 export type MapLocation = {
   name: string;
@@ -132,6 +133,11 @@ export default function InteractiveMap({
   activeSlug = null,
   onSelect,
 }: InteractiveMapProps) {
+  const { theme } = usePreferences();
+  const tileUrl =
+    theme === "light"
+      ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+      : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
   const icons = useMemo(
     () => ({
       idle: createPinIcon(false),
@@ -143,6 +149,7 @@ export default function InteractiveMap({
   return (
     <div className="vista-map relative h-full min-h-[360px] w-full overflow-hidden rounded-2xl border border-teal/20">
       <MapContainer
+        key={theme}
         center={GB_CENTER}
         zoom={DEFAULT_ZOOM}
         scrollWheelZoom={false}
@@ -151,7 +158,7 @@ export default function InteractiveMap({
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          url={tileUrl}
         />
         <FitBounds locations={locations} />
         <FlyToActive locations={locations} activeSlug={activeSlug} />

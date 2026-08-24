@@ -35,15 +35,18 @@ export const astoreGuide: RegionGuide = {
     {
       name: "Rama Meadow & Rama Lake",
       detail: "Classic meadow walks with optional lake approaches.",
+      difficulty: "easy",
     },
     {
       name: "Southern Deosai via Chilim",
       detail: "Seasonal jeep link toward the plateau.",
+      difficulty: "moderate",
     },
     {
       name: "Fairy Meadows via Tato",
       detail: "Jeep and hike to the iconic Nanga Parbat pasture.",
       placeSlug: "fairy-meadows",
+      difficulty: "moderate",
     },
   ],
   activities: [
@@ -141,10 +144,12 @@ export const fairyMeadowsGuide: RegionGuide = {
     {
       name: "Tato to Fairy Meadows",
       detail: "Jeep to trailhead, then 2–3 hour forest hike.",
+      difficulty: "moderate",
     },
     {
       name: "Beyal Camp",
       detail: "Further alpine pasture toward closer mountain views.",
+      difficulty: "challenging",
     },
   ],
   activities: [
@@ -243,10 +248,12 @@ export const ghizerGuide: RegionGuide = {
     {
       name: "Ishkoman remote treks",
       detail: "Less-travelled highland routes — guide recommended.",
+      difficulty: "challenging",
     },
     {
       name: "Shandur approach",
       detail: "High pass toward Chitral with panoramic pasture country.",
+      difficulty: "moderate",
     },
   ],
   activities: [
@@ -334,6 +341,7 @@ export const khapluGuide: RegionGuide = {
     {
       name: "Hushe Valley approaches",
       detail: "Trailhead region for Masherbrum and surrounding peaks.",
+      difficulty: "challenging",
     },
   ],
   activities: [
@@ -411,10 +419,12 @@ export const broghilGuide: RegionGuide = {
     {
       name: "Karambar Lake approaches",
       detail: "High alpine lake objectives with serious logistics.",
+      difficulty: "strenuous",
     },
     {
       name: "Laspur / Darkut approaches",
       detail: "Multi-day access routes requiring permits and guidance.",
+      difficulty: "strenuous",
     },
   ],
   activities: [

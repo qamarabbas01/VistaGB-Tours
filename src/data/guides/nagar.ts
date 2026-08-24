@@ -52,17 +52,20 @@ export const nagarGuide: RegionGuide = {
       name: "Hopper Glacier viewpoints",
       detail: "Short walks to dramatic icefall vistas above Hopper Valley.",
       placeSlug: "hopper-valley",
+      difficulty: "moderate",
     },
     {
       name: "Rakaposhi base camp",
       detail: "Classic multi-day trek from Minapin with towering north-face views.",
       placeSlug: "rakaposhi-base-camp",
+      difficulty: "challenging",
     },
     {
       name: "Rush Lake",
       detail:
         "One of the world's highest alpine lakes — serious trekking fitness and season required.",
       placeSlug: "rush-lake",
+      difficulty: "strenuous",
     },
   ],
   activities: [

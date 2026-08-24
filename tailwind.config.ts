@@ -9,12 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        night: "#0B0F14",
-        slate: "#16202B",
-        glacier: "#E8ECEF",
-        ice: "#9FB3C2",
-        apricot: "#D98E4A",
-        teal: "#5C7A8A",
+        night: "rgb(var(--c-night) / <alpha-value>)",
+        slate: "rgb(var(--c-slate) / <alpha-value>)",
+        glacier: "rgb(var(--c-glacier) / <alpha-value>)",
+        ice: "rgb(var(--c-ice) / <alpha-value>)",
+        apricot: "rgb(var(--c-apricot) / <alpha-value>)",
+        teal: "rgb(var(--c-teal) / <alpha-value>)",
+        ink: "rgb(var(--c-ink) / <alpha-value>)",
+        scrim: "rgb(var(--c-scrim) / <alpha-value>)",
       },
       fontFamily: {
         display: ["var(--font-fraunces)"],

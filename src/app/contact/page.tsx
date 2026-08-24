@@ -84,8 +84,8 @@ export default function ContactPage() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/80 to-night/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-night/70 via-night/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/80 to-scrim/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-scrim/70 via-scrim/30 to-transparent" />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-14 pt-28 md:px-10 md:pb-20">
           <p className="coord-label mb-3">{contact.location.coords}</p>

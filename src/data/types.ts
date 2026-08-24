@@ -100,11 +100,28 @@ export type DestinationFaq = {
   answer: string;
 };
 
+export const TREK_DIFFICULTIES = [
+  "easy",
+  "moderate",
+  "challenging",
+  "strenuous",
+] as const;
+
+export type TrekDifficulty = (typeof TREK_DIFFICULTIES)[number];
+
+export const TREK_DIFFICULTY_LABELS: Record<TrekDifficulty, string> = {
+  easy: "Easy",
+  moderate: "Moderate",
+  challenging: "Challenging",
+  strenuous: "Strenuous",
+};
+
 /** Named listing with optional link to a place page */
 export type GuideListing = {
   name: string;
   detail: string;
   placeSlug?: string;
+  difficulty?: TrekDifficulty;
 };
 
 export type ItineraryDay = {

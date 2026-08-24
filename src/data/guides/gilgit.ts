@@ -54,16 +54,19 @@ export const gilgitGuide: RegionGuide = {
       name: "Naltar Valley lakes",
       detail: "Jeep access with short walks among pine forests and coloured lakes.",
       placeSlug: "naltar-valley",
+      difficulty: "easy",
     },
     {
       name: "Bagrote Valley orchards",
       detail: "Day hikes and village walks in a classic side valley.",
       placeSlug: "bagrote-valley",
+      difficulty: "easy",
     },
     {
       name: "Kargah Buddha trail",
       detail: "Short walk to the ancient rock carving west of town.",
       placeSlug: "kargah-buddha",
+      difficulty: "easy",
     },
   ],
   activities: [

@@ -2,6 +2,7 @@
 
 import OptimizedImage from "@/components/OptimizedImage";
 import { useState } from "react";
+import Link from "next/link";
 import { VIDEO_THEME_LABELS, type DestinationVideo } from "@/data/types";
 
 type Props = {
@@ -10,6 +11,8 @@ type Props = {
   label?: string;
   heading?: string;
   intro?: string;
+  moreHref?: string;
+  moreLabel?: string;
 };
 
 export default function DestinationVideos({
@@ -18,6 +21,8 @@ export default function DestinationVideos({
   label = "On film",
   heading,
   intro,
+  moreHref,
+  moreLabel = "All videos →",
 }: Props) {
   if (videos.length === 0) return null;
 
@@ -38,6 +43,14 @@ export default function DestinationVideos({
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ice md:text-base">
           {description}
         </p>
+        {moreHref ? (
+          <Link
+            href={moreHref}
+            className="mt-3 inline-block text-sm font-medium text-apricot hover:underline"
+          >
+            {moreLabel}
+          </Link>
+        ) : null}
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {videos.map((video) => (

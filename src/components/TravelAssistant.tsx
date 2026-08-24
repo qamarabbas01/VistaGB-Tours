@@ -25,6 +25,7 @@ const SUGGESTIONS = [
 type Props = {
   destinationSlug?: string;
   destinationName?: string;
+  variant?: "page" | "widget";
 };
 
 function newId() {
@@ -34,7 +35,9 @@ function newId() {
 export default function TravelAssistant({
   destinationSlug,
   destinationName,
+  variant = "page",
 }: Props) {
+  const isWidget = variant === "widget";
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -149,7 +152,14 @@ export default function TravelAssistant({
   const showSuggestions = messages.length === 0 && !loading;
 
   return (
-    <div className="flex min-h-[70vh] flex-col overflow-hidden rounded-3xl border border-teal/25 bg-slate shadow-2xl shadow-black/20">
+    <div
+      className={`flex flex-col overflow-hidden border border-teal/25 bg-slate ${
+        isWidget
+          ? "h-full min-h-0 rounded-none border-0"
+          : "min-h-[70vh] rounded-3xl shadow-2xl shadow-black/20"
+      }`}
+    >
+      {!isWidget ? (
       <div className="border-b border-teal/20 px-5 py-4 md:px-6">
         <p className="coord-label mb-1">AI Travel Assistant</p>
         <h2 className="font-display text-xl font-semibold text-glacier md:text-2xl">
@@ -168,6 +178,7 @@ export default function TravelAssistant({
           .
         </p>
       </div>
+      ) : null}
 
       <div className="flex-1 space-y-4 overflow-y-auto px-5 py-5 md:px-6">
         {showSuggestions ? (
@@ -178,7 +189,7 @@ export default function TravelAssistant({
               pulls in when you ask.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {SUGGESTIONS.map((suggestion) => (
+              {(isWidget ? SUGGESTIONS.slice(0, 4) : SUGGESTIONS).map((suggestion) => (
                 <button
                   key={suggestion}
                   type="button"
@@ -202,7 +213,7 @@ export default function TravelAssistant({
             <div
               className={`max-w-[92%] rounded-2xl px-4 py-3 text-sm leading-relaxed md:max-w-[80%] ${
                 message.role === "user"
-                  ? "bg-apricot text-night"
+                  ? "bg-apricot text-ink"
                   : "border border-teal/25 bg-night/50 text-glacier"
               }`}
             >
@@ -245,7 +256,7 @@ export default function TravelAssistant({
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="rounded-xl bg-apricot px-6 py-3 text-sm font-semibold text-night transition-colors hover:bg-glacier disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-xl bg-apricot px-6 py-3 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? "…" : "Ask"}
           </button>

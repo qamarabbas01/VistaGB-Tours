@@ -64,21 +64,25 @@ export const skarduGuide: RegionGuide = {
       name: "Askole to Baltoro / Concordia",
       detail: "Classic expedition approach toward K2 — requires permits, porters, and season planning.",
       placeSlug: "askole",
+      difficulty: "strenuous",
     },
     {
       name: "Deosai Plains crossing",
       detail: "Jeep and short hikes across the 'Land of Giants' to Sheosar Lake.",
       placeSlug: "deosai-plains",
+      difficulty: "moderate",
     },
     {
       name: "Basho Valley walks",
       detail: "Forest and waterfall day trips west of Skardu.",
       placeSlug: "basho-valley",
+      difficulty: "easy",
     },
     {
       name: "Shigar Valley & fort approaches",
       detail: "Gentler heritage and orchard walks with palace stays.",
       placeSlug: "shigar-valley",
+      difficulty: "easy",
     },
   ],
   activities: [
