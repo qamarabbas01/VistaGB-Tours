@@ -1,7 +1,10 @@
 import { contact } from "@/config/contact";
 import { getClientIp, rateLimit } from "@/lib/rate-limit";
+import { getContactMailEnv } from "@/lib/server-env";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+
+export const runtime = "nodejs";
 
 type ContactPayload = {
   name: string;
@@ -231,9 +234,10 @@ export async function POST(request: Request) {
     message: message.trim(),
   };
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM_EMAIL;
-  const to = process.env.CONTACT_EMAIL_TO ?? contact.email;
+  const mail = getContactMailEnv();
+  const apiKey = mail.apiKey;
+  const from = mail.from;
+  const to = mail.to || contact.email;
 
   if (!apiKey || !from) {
     console.error(
