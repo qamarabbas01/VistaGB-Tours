@@ -1,3 +1,5 @@
+process.env.NEXT_IGNORE_INCORRECT_LOCKFILE = "1";
+
 const nextJest = require("next/jest");
 
 const createJestConfig = nextJest({
