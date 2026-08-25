@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "audit": "npm audit --audit-level=critical",
+    "check:secrets": "node scripts/check-client-secrets.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:e2e": "playwright test"
@@ -18,7 +18,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-leaflet": "4.2.1",
-    "resend": "^6.12.4"
+    "resend": "^6.12.4",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",

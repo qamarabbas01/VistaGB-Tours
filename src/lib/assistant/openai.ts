@@ -49,11 +49,12 @@ type ChatMessage = { role: "user" | "assistant" | "system"; content: string };
 
 export async function streamOpenAIAnswer(options: {
   apiKey: string;
+  model?: string;
   context: TravelContext;
   userMessage: string;
   history?: ChatMessage[];
 }): Promise<ReadableStream<Uint8Array>> {
-  const { apiKey, context, userMessage, history = [] } = options;
+  const { apiKey, model = "gpt-4o-mini", context, userMessage, history = [] } = options;
 
   const messages: ChatMessage[] = [
     { role: "system", content: ASSISTANT_SYSTEM_PROMPT },
@@ -68,7 +69,7 @@ export async function streamOpenAIAnswer(options: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+      model,
       temperature: 0.4,
       stream: true,
       messages,
