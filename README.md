@@ -35,14 +35,19 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Environment
 
-See `.env.example`:
+See `.env.example`. Copy it to `.env.local` (gitignored). **Mail and LLM keys are
+server-only** — never prefix them with `NEXT_PUBLIC_`. They are read from API
+routes through `src/lib/server-env.ts` (`import "server-only"`), so a client
+import fails the Next.js build. CI also runs `npm run check:secrets`.
 
-| Variable | Purpose |
-|----------|---------|
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL for sitemap / OG |
-| `RESEND_API_KEY` | Resend API key for contact emails |
-| `RESEND_FROM_EMAIL` | Verified from address |
-| `CONTACT_EMAIL_TO` | Optional inbox override |
+| Variable | Scope | Purpose |
+|----------|-------|---------|
+| `NEXT_PUBLIC_SITE_URL` | Public | Canonical site URL for sitemap / OG |
+| `RESEND_API_KEY` | Server | Resend API key for contact emails |
+| `RESEND_FROM_EMAIL` | Server | Verified from address |
+| `CONTACT_EMAIL_TO` | Server | Optional inbox override |
+| `OPENAI_API_KEY` | Server | Optional AI assistant key |
+| `OPENAI_MODEL` | Server | Optional model override |
 
 ## Notes
 

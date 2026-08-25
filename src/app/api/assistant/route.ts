@@ -6,6 +6,7 @@ import {
 } from "@/lib/assistant/openai";
 import { buildTravelContext } from "@/lib/assistant/retrieve";
 import { getClientIp, rateLimit } from "@/lib/rate-limit";
+import { getAssistantEnv } from "@/lib/server-env";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -94,7 +95,7 @@ export async function POST(request: Request) {
 
   const query = lastUser.content.trim();
   const context = await buildTravelContext(query, destinationSlug);
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  const { apiKey, model } = getAssistantEnv();
 
   try {
     if (apiKey) {
@@ -104,6 +105,7 @@ export async function POST(request: Request) {
       }));
       const stream = await streamOpenAIAnswer({
         apiKey,
+        model,
         context,
         userMessage: query,
         history,
