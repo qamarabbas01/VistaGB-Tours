@@ -59,3 +59,5 @@ import fails the Next.js build. CI also runs `npm run check:secrets`.
   difference for production.
 - Contact form includes a honeypot field and per-IP rate limiting.
 - News is fetched from https://visitgilgitbaltistan.gov.pk and revalidated hourly.
+- Dependencies: Dependabot opens weekly npm and GitHub Actions update PRs.
+  `npm run audit` (and CI) fail on **critical** vulnerabilities.
