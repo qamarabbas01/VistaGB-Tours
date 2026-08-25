@@ -73,7 +73,7 @@ export default function Navbar() {
             ) : null}
           </Link>
           <ThemeToggle />
-          <LanguageToggle />
+          {/* <LanguageToggle /> */}
           <Link
             href="/book"
             className="hidden rounded-full border border-apricot px-5 py-2 text-sm font-medium text-apricot transition-colors hover:bg-apricot hover:text-ink md:inline-flex"
