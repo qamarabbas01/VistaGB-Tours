@@ -1,5 +1,3 @@
-"use client";
-
 import type { NewsItem } from "@/lib/news/types";
 import OptimizedImage from "@/components/OptimizedImage";
 

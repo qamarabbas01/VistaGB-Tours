@@ -1,5 +1,3 @@
-"use client";
-
 import type { BlogPost } from "@/data/types";
 import OptimizedImage from "@/components/OptimizedImage";
 

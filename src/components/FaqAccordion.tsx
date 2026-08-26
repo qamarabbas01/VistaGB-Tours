@@ -46,7 +46,7 @@ export default function FaqAccordion({ items }: Props) {
               role="region"
               aria-labelledby={"faq-btn-" + index}
               aria-hidden={!isOpen}
-              inert={!isOpen ? true : undefined}
+              inert={!isOpen || undefined}
               className={
                 "grid transition-[grid-template-rows] duration-300 ease-out " +
                 (isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")

@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "check:secrets": "node scripts/check-client-secrets.js",
+    "check:bundle": "node scripts/check-bundle-budget.js",
+    "analyze": "ANALYZE=true next build",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -23,6 +25,7 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.2.35",
     "@playwright/test": "^1.55.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",

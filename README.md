@@ -25,10 +25,10 @@ a travel operator in Gilgit-Baltistan, Pakistan.
 ## Setup
 
 ```bash
-yarn install
+npm ci
 cp .env.example .env.local
 # fill in public contact details plus RESEND_API_KEY and RESEND_FROM_EMAIL
-yarn dev
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -73,7 +73,13 @@ import fails the Next.js build. CI also runs `npm run check:secrets`.
 - Contact form includes a honeypot field and per-IP rate limiting.
 - News is fetched from https://visitgilgitbaltistan.gov.pk and revalidated hourly.
 - CI (`.github/workflows/ci.yml`) runs on pull requests and pushes to `main`:
-  lint, typecheck, unit tests, production build, and Playwright smoke tests.
-  Install with `npm ci` (the repo lockfile is `package-lock.json`).
+  lint, typecheck, unit tests, production build, first-load JS gzip budgets
+  (`npm run check:bundle`), and Playwright smoke tests. Install with
+  `npm ci` (the repo lockfile is `package-lock.json`).
+- Bundle analysis: `npm run analyze` (sets `ANALYZE=true`) opens an
+  interactive report via `@next/bundle-analyzer` after a production build.
+- Large interactive widgets (map, gallery, weather, travel assistant, live
+  chat, FAQ accordion) load through `next/dynamic` so the initial client
+  bundle stays smaller.
 - Dependencies: Dependabot opens weekly npm and GitHub Actions update PRs.
   `npm run audit` fails on **critical** vulnerabilities.

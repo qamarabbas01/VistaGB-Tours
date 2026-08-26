@@ -1,117 +1,10 @@
-import Link from "next/link";
-import FaqAccordion from "@/components/FaqAccordion";
-import TrekDifficultyBadge from "@/components/TrekDifficultyBadge";
-import { getLocationBySlug } from "@/data";
-import type { GuideListing, RegionDestination, RegionGuide } from "@/data/types";
-
-function isTrustedMapEmbed(url: string): boolean {
-  try {
-    const parsed = new URL(url);
-    const host = parsed.hostname;
-    const isGoogleMapsHost =
-      host === "maps.google.com" ||
-      host === "www.google.com" ||
-      host === "www.google.co.uk" ||
-      host.endsWith(".google.com");
-    const looksLikeEmbed =
-      parsed.searchParams.get("output") === "embed" ||
-      parsed.pathname.includes("/maps/embed") ||
-      parsed.pathname.includes("/maps");
-    return isGoogleMapsHost && looksLikeEmbed;
-  } catch {
-    return false;
-  }
-}
-
-function GuideLink({ item }: { item: GuideListing }) {
-  const resolved = item.placeSlug ? getLocationBySlug(item.placeSlug) : undefined;
-
-  if (!resolved) {
-    return <span className="font-medium text-glacier">{item.name}</span>;
-  }
-
-  return (
-    <Link
-      href={`/destinations/${resolved.slug}`}
-      className="font-medium text-glacier transition-colors hover:text-apricot"
-    >
-      {item.name}
-    </Link>
-  );
-}
-
-function ListingGrid({
-  label,
-  heading,
-  items,
-}: {
-  label: string;
-  heading: string;
-  items: GuideListing[];
-}) {
-  if (items.length === 0) return null;
-
-  return (
-    <section className="border-t border-teal/20 py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <p className="coord-label mb-3">{label}</p>
-        <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
-          {heading}
-        </h2>
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-          {items.map((item) => (
-            <li
-              key={`${item.name}-${item.placeSlug ?? item.detail}`}
-              className="rounded-xl border border-teal/20 bg-slate p-5"
-            >
-              <p className="font-display text-lg text-glacier">
-                <GuideLink item={item} />
-              </p>
-              {item.difficulty ? (
-                <p className="mt-2">
-                  <TrekDifficultyBadge difficulty={item.difficulty} />
-                </p>
-              ) : null}
-              <p className="mt-2 text-sm leading-relaxed text-ice">{item.detail}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-function ProseSection({
-  label,
-  heading,
-  body,
-  alternate,
-}: {
-  label: string;
-  heading: string;
-  body: string;
-  alternate?: boolean;
-}) {
-  return (
-    <section
-      className={
-        alternate
-          ? "border-t border-teal/20 bg-slate py-16 md:py-24"
-          : "border-t border-teal/20 py-16 md:py-24"
-      }
-    >
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <p className="coord-label mb-3">{label}</p>
-        <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
-          {heading}
-        </h2>
-        <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ice md:text-base">
-          {body}
-        </p>
-      </div>
-    </section>
-  );
-}
+import { ContextSection } from "@/components/destination-guide/ContextSection";
+import { ItinerarySection } from "@/components/destination-guide/ItinerarySection";
+import { ListingGrid } from "@/components/destination-guide/ListingGrid";
+import { ProseSection } from "@/components/destination-guide/ProseSection";
+import { isTrustedMapEmbed } from "@/components/destination-guide/map-embed";
+import { LazyFaqAccordion } from "@/components/lazy/FaqAccordion";
+import type { RegionDestination, RegionGuide } from "@/data/types";
 
 type Props = {
   region: RegionDestination;
@@ -133,40 +26,9 @@ export default function DestinationGuide({ region, guide }: Props) {
     Boolean(section),
   );
 
-  const contextGridClass =
-    contextSections.length === 1
-      ? "mt-10 grid gap-10"
-      : contextSections.length === 2
-        ? "mt-10 grid gap-10 md:grid-cols-2"
-        : "mt-10 grid gap-10 md:grid-cols-3";
-
-  const contextHeading =
-    contextSections.length === 1
-      ? contextSections[0].label
-      : contextSections.length === 2
-        ? `${contextSections[0].label} & ${contextSections[1].label}`
-        : "History, culture & weather";
-
   return (
     <>
-      {contextSections.length > 0 ? (
-        <section className="border-t border-teal/20 py-16 md:py-24">
-          <div className="mx-auto max-w-7xl px-6 md:px-10">
-            <p className="coord-label mb-3">Know the place</p>
-            <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
-              {contextHeading}
-            </h2>
-            <div className={contextGridClass}>
-              {contextSections.map((section) => (
-                <div key={section.key}>
-                  <h3 className="coord-label mb-3">{section.label}</h3>
-                  <p className="text-sm leading-relaxed text-ice">{section.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
+      <ContextSection sections={contextSections} />
 
       {guide.famousFoods && guide.famousFoods.length > 0 ? (
         <ListingGrid
@@ -218,58 +80,11 @@ export default function DestinationGuide({ region, guide }: Props) {
       ) : null}
 
       {guide.suggestedItinerary && guide.suggestedItinerary.length > 0 ? (
-        <section className="border-t border-teal/20 bg-slate py-16 md:py-24">
-          <div className="mx-auto max-w-7xl px-6 md:px-10">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="coord-label mb-3">Plan your days</p>
-                <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
-                  Suggested itinerary
-                </h2>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href={`/plan?region=${region.slug}`}
-                  className="text-sm font-medium text-apricot hover:underline"
-                >
-                  Open in trip planner →
-                </Link>
-                <Link
-                  href={`/book?region=${region.slug}`}
-                  className="text-sm font-medium text-ice hover:text-apricot hover:underline"
-                >
-                  Request dates
-                </Link>
-              </div>
-            </div>
-            {guide.travelDuration ? (
-              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ice md:text-base">
-                {guide.travelDuration}
-              </p>
-            ) : null}
-            <ol className="mt-10 space-y-4">
-              {guide.suggestedItinerary.map((day) => (
-                <li
-                  key={day.day + day.title}
-                  className="grid gap-4 rounded-xl border border-teal/20 bg-night p-5 md:grid-cols-[7rem_1fr]"
-                >
-                  <p className="coord-label pt-1">{day.day}</p>
-                  <div>
-                    <h3 className="font-display text-lg font-semibold text-glacier">
-                      {day.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ice">{day.summary}</p>
-                    {day.stops && day.stops.length > 0 ? (
-                      <p className="mt-3 text-xs text-apricot">
-                        {day.stops.join(" · ")}
-                      </p>
-                    ) : null}
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+        <ItinerarySection
+          region={region}
+          days={guide.suggestedItinerary}
+          travelDuration={guide.travelDuration}
+        />
       ) : guide.travelDuration ? (
         <ProseSection
           label="How long"
@@ -338,7 +153,7 @@ export default function DestinationGuide({ region, guide }: Props) {
             <h2 className="mb-10 font-display text-2xl font-semibold text-glacier md:text-3xl">
               FAQ — {region.name}
             </h2>
-            <FaqAccordion items={guide.faqs} />
+            <LazyFaqAccordion items={guide.faqs} />
           </div>
         </section>
       ) : null}

@@ -5,7 +5,7 @@ import "./globals.css";
 import AlertBanner from "@/components/AlertBanner";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
-import LiveChat from "@/components/LiveChat";
+import { LazyLiveChat } from "@/components/lazy/LiveChat";
 import Navbar from "@/components/Navbar";
 import { PreferencesProvider } from "@/components/PreferencesProvider";
 import {
@@ -116,7 +116,7 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
-          <LiveChat />
+          <LazyLiveChat />
         </PreferencesProvider>
       </body>
     </html>
