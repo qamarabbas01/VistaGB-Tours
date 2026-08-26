@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "check:secrets": "node scripts/check-client-secrets.js",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:e2e": "playwright test"
