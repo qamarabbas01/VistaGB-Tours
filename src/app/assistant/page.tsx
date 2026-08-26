@@ -1,5 +1,5 @@
-import TravelAssistant from "@/components/TravelAssistant";
 import JsonLd from "@/components/JsonLd";
+import { LazyTravelAssistant } from "@/components/lazy/TravelAssistant";
 import { getLocationBySlug } from "@/data";
 import {
   breadcrumbJsonLd,
@@ -59,7 +59,7 @@ export default function AssistantPage({ searchParams }: Props) {
 
       <section className="py-10 md:py-14">
         <div className="mx-auto max-w-4xl px-6 md:px-10">
-          <TravelAssistant
+          <LazyTravelAssistant
             destinationSlug={location?.slug}
             destinationName={location?.name}
           />

@@ -1,9 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import TravelAssistant from "@/components/TravelAssistant";
 import { usePreferences } from "@/components/PreferencesProvider";
+
+const TravelAssistant = dynamic(() => import("@/components/TravelAssistant"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full items-center justify-center px-4 text-sm text-ice">
+      Loading assistant…
+    </div>
+  ),
+});
 
 export default function LiveChat() {
   const pathname = usePathname();

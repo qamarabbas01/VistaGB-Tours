@@ -3,11 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import DestinationActions from "@/components/DestinationActions";
-import DestinationGallery from "@/components/DestinationGallery";
 import DestinationGuide from "@/components/DestinationGuide";
 import DestinationVideos from "@/components/DestinationVideos";
-import DestinationWeather from "@/components/DestinationWeather";
 import JsonLd from "@/components/JsonLd";
+import { LazyDestinationGallery } from "@/components/lazy/DestinationGallery";
+import { LazyDestinationWeather } from "@/components/lazy/DestinationWeather";
 import PlaceCard from "@/components/PlaceCard";
 import { getCoordinatesForSlug } from "@/data/coordinates";
 import { composeRegionGallery } from "@/data/gallery";
@@ -263,7 +263,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
 
           <aside className="flex flex-col gap-6">
             {weatherPoint ? (
-              <DestinationWeather
+              <LazyDestinationWeather
                 slug={place.slug}
                 locationName={weatherPoint.label}
               />
@@ -312,7 +312,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
         </div>
       </section>
 
-      <DestinationGallery
+      <LazyDestinationGallery
         images={place.gallery}
         heroImage={place.image}
         destinationName={place.name}
@@ -446,7 +446,7 @@ function RegionDetailPage({
 
           <aside className="flex flex-col gap-6">
             {weatherPoint ? (
-              <DestinationWeather
+              <LazyDestinationWeather
                 slug={region.slug}
                 locationName={weatherPoint.label}
               />
@@ -553,7 +553,7 @@ function RegionDetailPage({
         </section>
       ) : null}
 
-      <DestinationGallery
+      <LazyDestinationGallery
         images={composeRegionGallery(region.gallery, childPlaces)}
         heroImage={region.image}
         destinationName={region.name}
