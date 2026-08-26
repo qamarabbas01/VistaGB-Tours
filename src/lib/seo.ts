@@ -89,7 +89,7 @@ export function withJsonLdContext(
 }
 
 export function organizationJsonLd(): Record<string, unknown> {
-  return {
+  const organization: Record<string, unknown> = {
     "@type": "TravelAgency",
     "@id": `${SITE_URL}/#organization`,
     name: site.name,
@@ -97,21 +97,24 @@ export function organizationJsonLd(): Record<string, unknown> {
     image: absoluteUrl(site.defaultOgImage),
     logo: absoluteUrl("/favicon.svg"),
     description: site.description,
-    email: contact.email,
-    telephone: contact.phone.tel,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Yadgar Chowk",
-      addressLocality: "Skardu",
-      addressRegion: "Gilgit-Baltistan",
-      addressCountry: "PK",
+      ...(contact.streetAddress ? { streetAddress: contact.streetAddress } : {}),
+      ...(contact.city ? { addressLocality: contact.city } : {}),
+      ...(contact.region ? { addressRegion: contact.region } : {}),
+      addressCountry: contact.country,
     },
     areaServed: {
       "@type": "AdministrativeArea",
-      name: "Gilgit-Baltistan",
+      name: contact.region || "Gilgit-Baltistan",
     },
-    sameAs: [contact.whatsappUrl],
   };
+
+  if (contact.email) organization.email = contact.email;
+  if (contact.phone.tel) organization.telephone = contact.phone.tel;
+  if (contact.whatsappUrl) organization.sameAs = [contact.whatsappUrl];
+
+  return organization;
 }
 
 export function websiteJsonLd(): Record<string, unknown> {

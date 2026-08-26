@@ -1,5 +1,5 @@
 import JsonLd from "@/components/JsonLd";
-import { contact } from "@/config/contact";
+import { contactEmailHref, contactEmailLabel } from "@/config/contact";
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
@@ -62,10 +62,10 @@ export default function TermsPage() {
             Cancellation and refund policies are provided at the time of booking.
             For questions, contact{" "}
             <a
-              href={`mailto:${contact.email}`}
+              href={contactEmailHref()}
               className="text-apricot hover:underline"
             >
-              {contact.email}
+              {contactEmailLabel()}
             </a>
             .
           </p>
