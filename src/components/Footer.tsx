@@ -44,17 +44,28 @@ export default function Footer() {
           <div>
             <p className="coord-label mb-4">Reach Us</p>
             <ul className="flex flex-col gap-2 text-sm text-ice">
-              <li>Skardu, Gilgit-Baltistan, Pakistan</li>
-              <li>
-                <a href={`mailto:${contact.email}`} className="hover:text-apricot">
-                  {contact.email}
-                </a>
-              </li>
-              <li>
-                <a href={`tel:${contact.phone.tel}`} className="hover:text-apricot">
-                  {contact.phone.display}
-                </a>
-              </li>
+              {contact.location.label ? <li>{contact.location.label}</li> : null}
+              {contact.email ? (
+                <li>
+                  <a href={`mailto:${contact.email}`} className="hover:text-apricot">
+                    {contact.email}
+                  </a>
+                </li>
+              ) : null}
+              {contact.phone.display && contact.phone.tel ? (
+                <li>
+                  <a href={`tel:${contact.phone.tel}`} className="hover:text-apricot">
+                    {contact.phone.display}
+                  </a>
+                </li>
+              ) : null}
+              {!contact.location.label && !contact.email && !contact.phone.display ? (
+                <li>
+                  <Link href="/contact" className="hover:text-apricot">
+                    Contact
+                  </Link>
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>
@@ -63,7 +74,9 @@ export default function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 text-xs text-ice md:flex-row">
           <p>&copy; {new Date().getFullYear()} VistaGB Tours. All rights reserved.</p>
-          <p className="coord-label">35.8°N · 75.5°E · ALT 2228M</p>
+          {contact.location.coords ? (
+            <p className="coord-label">{contact.location.coords}</p>
+          ) : null}
         </div>
       </div>
     </footer>

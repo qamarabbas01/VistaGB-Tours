@@ -239,9 +239,9 @@ export async function POST(request: Request) {
   const from = mail.from;
   const to = mail.to || contact.email;
 
-  if (!apiKey || !from) {
+  if (!apiKey || !from || !to) {
     console.error(
-      "Contact email is not configured (set RESEND_API_KEY and RESEND_FROM_EMAIL).",
+      "Contact email is not configured (set RESEND_API_KEY, RESEND_FROM_EMAIL, and CONTACT_EMAIL_TO or NEXT_PUBLIC_CONTACT_EMAIL).",
     );
     return NextResponse.json(
       {

@@ -1,5 +1,5 @@
 import JsonLd from "@/components/JsonLd";
-import { contact } from "@/config/contact";
+import { contactEmailHref, contactEmailLabel } from "@/config/contact";
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
@@ -72,12 +72,12 @@ export default function PrivacyPage() {
             Data Retention & Deletion
           </h2>
           <p>
-            We may retain correspondence and booking details for business records, support, or legal compliance. You may request deletion of your data at any time by emailing{" "}
+            We may retain correspondence and booking details for business records, support, or legal compliance. You may request deletion of your data at any time by contacting us at{" "}
             <a
-              href={`mailto:${contact.email}`}
+              href={contactEmailHref()}
               className="text-apricot hover:underline"
             >
-              {contact.email}
+              {contactEmailLabel()}
             </a>
             . We will confirm deletion within a reasonable period, except information required to fulfill legal obligations or resolve disputes.
           </p>
@@ -130,10 +130,10 @@ export default function PrivacyPage() {
           <p>
             If you have questions or concerns about this Privacy Policy, please contact us at{" "}
             <a
-              href={`mailto:${contact.email}`}
+              href={contactEmailHref()}
               className="text-apricot hover:underline"
             >
-              {contact.email}
+              {contactEmailLabel()}
             </a>
             .
           </p>
