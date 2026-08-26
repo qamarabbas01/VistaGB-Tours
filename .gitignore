@@ -5,7 +5,7 @@ out
 .env*.local
 .DS_Store
 *.log
-tsconfig.tsbuildinfo
+*.tsbuildinfo
 yarn.lock
 coverage
 test-results

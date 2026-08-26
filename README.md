@@ -72,5 +72,8 @@ import fails the Next.js build. CI also runs `npm run check:secrets`.
   difference for production.
 - Contact form includes a honeypot field and per-IP rate limiting.
 - News is fetched from https://visitgilgitbaltistan.gov.pk and revalidated hourly.
+- CI (`.github/workflows/ci.yml`) runs on pull requests and pushes to `main`:
+  lint, typecheck, unit tests, production build, and Playwright smoke tests.
+  Install with `npm ci` (the repo lockfile is `package-lock.json`).
 - Dependencies: Dependabot opens weekly npm and GitHub Actions update PRs.
-  `npm run audit` (and CI) fail on **critical** vulnerabilities.
+  `npm run audit` fails on **critical** vulnerabilities.
