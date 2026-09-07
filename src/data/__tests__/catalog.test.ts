@@ -73,4 +73,34 @@ describe('destination data modules', () => {
     expect(searchLocations('zzzznotarealplace').regions).toEqual([]);
     expect(searchLocations('zzzznotarealplace').places).toEqual([]);
   });
+
+  it('resolves Explore by Experience categories to matching places or regions', () => {
+    const mountains = searchLocations('mountains');
+    expect(
+      mountains.places.length + mountains.regions.length,
+    ).toBeGreaterThan(0);
+
+    const lakes = searchLocations('lakes');
+    expect(lakes.places.length).toBeGreaterThan(0);
+    expect(lakes.places.every((place) => place.type === 'Lake')).toBe(true);
+
+    const forts = searchLocations('forts');
+    expect(forts.places.some((place) => place.type === 'Fort')).toBe(true);
+
+    const polo = searchLocations('polo');
+    expect(polo.regions.some((region) => region.slug === 'ghizer')).toBe(
+      true,
+    );
+
+    const trekking = searchLocations('trekking');
+    expect(trekking.places.length).toBeGreaterThan(0);
+
+    const camping = searchLocations('camping');
+    expect(
+      camping.places.length + camping.regions.length,
+    ).toBeGreaterThan(0);
+
+    const photography = searchLocations('photography');
+    expect(photography.places.length).toBeGreaterThan(0);
+  });
 });

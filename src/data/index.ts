@@ -10,8 +10,20 @@ import { gilgitDestination } from './destinations/gilgit';
 import { nagarDestination } from './destinations/nagar';
 import { legacyDestinations } from './destinations/legacy';
 import { allPlaces } from './places';
+import {
+  matchExperienceLocations,
+  resolveExperienceSlug,
+} from './experiences';
 
 export { blogPosts } from './blog';
+export {
+  EXPERIENCE_CATEGORIES,
+  experienceHref,
+  getExperienceCategory,
+  resolveExperienceSlug,
+  type ExperienceCategory,
+  type ExperienceSlug,
+} from './experiences';
 
 export type {
   BlogPost,
@@ -168,6 +180,22 @@ export function searchLocations(query: string): SearchResult {
   const q = query.trim().toLowerCase();
   if (!q) {
     return { query, regions: [], places: [], placesByRegion: {} };
+  }
+
+  const experienceSlug = resolveExperienceSlug(q);
+  if (experienceSlug) {
+    const matched = matchExperienceLocations(experienceSlug, regions, places);
+    return {
+      query,
+      regions: matched.regions,
+      places: matched.places,
+      placesByRegion: Object.fromEntries(
+        matched.regions.map((region) => [
+          region.slug,
+          getPlacesForRegion(region.slug),
+        ]),
+      ),
+    };
   }
 
   const placeType = places.find(

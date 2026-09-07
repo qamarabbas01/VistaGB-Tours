@@ -5,6 +5,10 @@ import {
   travelAlerts,
 } from '@/data/alerts';
 import { blogPosts } from '@/data/blog';
+import {
+  EXPERIENCE_CATEGORIES,
+  resolveExperienceSlug,
+} from '@/data/experiences';
 import { composeRegionGallery } from '@/data/gallery';
 import { packingSections } from '@/data/packing';
 import {
@@ -26,6 +30,24 @@ describe('supporting data modules', () => {
     expect(TREK_DIFFICULTIES.every((key) => TREK_DIFFICULTY_LABELS[key])).toBe(
       true,
     );
+  });
+
+  it('keeps experience categories unique and searchable', () => {
+    const slugs = EXPERIENCE_CATEGORIES.map((category) => category.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+    expect(slugs).toEqual([
+      'mountains',
+      'valleys',
+      'lakes',
+      'trekking',
+      'camping',
+      'forts',
+      'polo',
+      'photography',
+    ]);
+    expect(resolveExperienceSlug('Forts & Heritage')).toBeUndefined();
+    expect(resolveExperienceSlug('heritage')).toBe('forts');
+    expect(resolveExperienceSlug('trekking route')).toBe('trekking');
   });
 
   it('keeps packing list ids unique and non-empty', () => {
