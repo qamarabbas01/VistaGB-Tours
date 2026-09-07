@@ -6,10 +6,18 @@ test.describe('core visitor flows', () => {
     await expect(page).toHaveTitle(/VistaGB/i);
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     await expect(page.getByRole('heading', { level: 1 })).toContainText(
-      /vistagb/i,
+      /discover gilgit-baltistan/i,
     );
     await expect(
-      page.getByText(/where the karakoram meets the sky/i),
+      page.getByText(
+        /explore destinations, plan your journey, discover hidden places, and experience the mountains/i,
+      ),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Explore Destinations' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Plan Your Trip' }),
     ).toBeVisible();
   });
 
