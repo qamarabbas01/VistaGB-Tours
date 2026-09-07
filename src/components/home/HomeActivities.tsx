@@ -1,5 +1,5 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import type { activities } from "@/data/hero";
+import OptimizedImage from '@/components/OptimizedImage';
+import type { activities } from '@/data/hero';
 
 type Activity = (typeof activities)[number];
 
@@ -10,7 +10,7 @@ export function HomeActivities({ items }: { items: readonly Activity[] }) {
         className="pointer-events-none absolute inset-0 opacity-[0.07]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 20% 20%, #d98e4a 0%, transparent 40%), radial-gradient(circle at 80% 80%, #5c7a8a 0%, transparent 45%)",
+            'radial-gradient(circle at 20% 20%, #d98e4a 0%, transparent 40%), radial-gradient(circle at 80% 80%, #5c7a8a 0%, transparent 45%)',
         }}
       />
       <div className="relative mx-auto max-w-7xl px-6 md:px-10">

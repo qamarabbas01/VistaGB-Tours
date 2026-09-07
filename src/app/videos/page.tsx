@@ -1,21 +1,21 @@
-import DestinationVideos from "@/components/DestinationVideos";
-import JsonLd from "@/components/JsonLd";
-import PageHeader from "@/components/PageHeader";
-import { regions } from "@/data";
-import { featuredVideos } from "@/data/videos";
-import type { DestinationVideo } from "@/data/types";
+import DestinationVideos from '@/components/DestinationVideos';
+import JsonLd from '@/components/JsonLd';
+import PageHeader from '@/components/PageHeader';
+import { regions } from '@/data';
+import { featuredVideos } from '@/data/videos';
+import type { DestinationVideo } from '@/data/types';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   webPageJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: "Travel videos",
+  title: 'Travel videos',
   description:
-    "YouTube films from Gilgit-Baltistan — drone footage, trekking, jeep safari, snowfall, cherry blossom, and autumn colour.",
-  path: "/videos",
+    'YouTube films from Gilgit-Baltistan — drone footage, trekking, jeep safari, snowfall, cherry blossom, and autumn colour.',
+  path: '/videos',
 });
 
 function collectVideos() {
@@ -44,14 +44,14 @@ export default function VideosPage() {
       <JsonLd
         data={withJsonLdContext([
           breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "Tools", path: "/tools" },
-            { name: "Videos", path: "/videos" },
+            { name: 'Home', path: '/' },
+            { name: 'Tools', path: '/tools' },
+            { name: 'Videos', path: '/videos' },
           ]),
           webPageJsonLd({
-            name: "Travel videos",
-            description: "YouTube travel films from Gilgit-Baltistan.",
-            path: "/videos",
+            name: 'Travel videos',
+            description: 'YouTube travel films from Gilgit-Baltistan.',
+            path: '/videos',
           }),
         ])}
       />

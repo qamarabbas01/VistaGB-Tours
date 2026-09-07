@@ -1,10 +1,10 @@
-import { TREK_DIFFICULTY_LABELS, type TrekDifficulty } from "@/data/types";
+import { TREK_DIFFICULTY_LABELS, type TrekDifficulty } from '@/data/types';
 
 const STYLES: Record<TrekDifficulty, string> = {
-  easy: "border-teal/40 text-ice",
-  moderate: "border-apricot/50 text-apricot",
-  challenging: "border-apricot bg-apricot/10 text-apricot",
-  strenuous: "border-glacier/40 bg-glacier/10 text-glacier",
+  easy: 'border-teal/40 text-ice',
+  moderate: 'border-apricot/50 text-apricot',
+  challenging: 'border-apricot bg-apricot/10 text-apricot',
+  strenuous: 'border-glacier/40 bg-glacier/10 text-glacier',
 };
 
 export default function TrekDifficultyBadge({

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { usePreferences } from "@/components/PreferencesProvider";
+import { useState } from 'react';
+import { usePreferences } from '@/components/PreferencesProvider';
 
 type Props = {
   slug: string;
@@ -28,17 +28,19 @@ export default function CompareButton({ slug, compact = false }: Props) {
         }
       }}
       aria-pressed={active}
-      aria-label={full ? t.compare.full : active ? t.compare.added : t.compare.add}
+      aria-label={
+        full ? t.compare.full : active ? t.compare.added : t.compare.add
+      }
       title={full ? t.compare.full : active ? t.compare.added : t.compare.add}
       className={`inline-flex items-center justify-center rounded-full border backdrop-blur-md transition-colors ${
         active
-          ? "border-apricot/70 bg-apricot text-ink"
-          : "border-teal/40 bg-night/70 text-glacier hover:border-apricot hover:text-apricot"
-      } ${compact ? "h-9 w-9" : "h-10 w-10"}`}
+          ? 'border-apricot/70 bg-apricot text-ink'
+          : 'border-teal/40 bg-night/70 text-glacier hover:border-apricot hover:text-apricot'
+      } ${compact ? 'h-9 w-9' : 'h-10 w-10'}`}
     >
       <svg
         viewBox="0 0 24 24"
-        className={compact ? "h-4 w-4" : "h-5 w-5"}
+        className={compact ? 'h-4 w-4' : 'h-5 w-5'}
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"

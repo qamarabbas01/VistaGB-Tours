@@ -1,5 +1,5 @@
-import type { NewsItem } from "@/lib/news/types";
-import OptimizedImage from "@/components/OptimizedImage";
+import type { NewsItem } from '@/lib/news/types';
+import OptimizedImage from '@/components/OptimizedImage';
 
 export default function NewsCard({ item }: { item: NewsItem }) {
   return (
@@ -23,13 +23,15 @@ export default function NewsCard({ item }: { item: NewsItem }) {
       <div className="p-6 md:p-8">
         <p className="coord-label mb-3">
           {item.date}
-          {item.time ? ` · ${item.time}` : ""}
+          {item.time ? ` · ${item.time}` : ''}
         </p>
         <h2 className="font-display text-xl font-semibold leading-snug text-glacier transition-colors group-hover:text-apricot md:text-2xl">
           {item.title}
         </h2>
         {item.summary ? (
-          <p className="mt-3 text-sm leading-relaxed text-ice">{item.summary}</p>
+          <p className="mt-3 text-sm leading-relaxed text-ice">
+            {item.summary}
+          </p>
         ) : null}
         <span className="mt-4 inline-block text-sm font-medium text-apricot">
           Read full story →

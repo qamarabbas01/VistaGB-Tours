@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import DestinationCard from "@/components/DestinationCard";
-import { usePreferences } from "@/components/PreferencesProvider";
-import Link from "next/link";
-import type { TravelLocation } from "@/data/types";
+import DestinationCard from '@/components/DestinationCard';
+import { usePreferences } from '@/components/PreferencesProvider';
+import Link from 'next/link';
+import type { TravelLocation } from '@/data/types';
 
 export default function WishlistView({
   locations,
@@ -11,7 +11,9 @@ export default function WishlistView({
   locations: TravelLocation[];
 }) {
   const { wishlist, ready, t } = usePreferences();
-  const items = locations.filter((location) => wishlist.includes(location.slug));
+  const items = locations.filter((location) =>
+    wishlist.includes(location.slug),
+  );
 
   if (!ready) {
     return <p className="text-ice">Loading saved places…</p>;

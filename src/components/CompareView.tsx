@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import OptimizedImage from "@/components/OptimizedImage";
-import { usePreferences } from "@/components/PreferencesProvider";
-import type { RegionDestination } from "@/data/types";
+import Link from 'next/link';
+import OptimizedImage from '@/components/OptimizedImage';
+import { usePreferences } from '@/components/PreferencesProvider';
+import type { RegionDestination } from '@/data/types';
 
 type Props = {
   regions: RegionDestination[];
@@ -21,7 +21,8 @@ export default function CompareView({ regions }: Props) {
     return (
       <div className="rounded-2xl border border-teal/20 bg-slate p-8">
         <p className="text-ice">
-          Add up to three regions from a destination page or card, then return here.
+          Add up to three regions from a destination page or card, then return
+          here.
         </p>
         <Link
           href="/destinations"
@@ -33,21 +34,24 @@ export default function CompareView({ regions }: Props) {
     );
   }
 
-  const rows: { label: string; value: (region: RegionDestination) => string }[] = [
-    { label: "Tagline", value: (region) => region.tagline },
-    { label: "Altitude", value: (region) => region.altitude },
-    { label: "Best time", value: (region) => region.bestTime },
-    { label: "Getting there", value: (region) => region.gettingThere },
+  const rows: {
+    label: string;
+    value: (region: RegionDestination) => string;
+  }[] = [
+    { label: 'Tagline', value: (region) => region.tagline },
+    { label: 'Altitude', value: (region) => region.altitude },
+    { label: 'Best time', value: (region) => region.bestTime },
+    { label: 'Getting there', value: (region) => region.gettingThere },
     {
-      label: "Places inside",
+      label: 'Places inside',
       value: (region) => String(region.placeSlugs.length),
     },
     {
-      label: "Treks listed",
+      label: 'Treks listed',
       value: (region) => String(region.guide?.trekkingRoutes?.length ?? 0),
     },
     {
-      label: "Itinerary days",
+      label: 'Itinerary days',
       value: (region) => String(region.guide?.suggestedItinerary?.length ?? 0),
     },
   ];
@@ -93,7 +97,10 @@ export default function CompareView({ regions }: Props) {
                 {row.label}
               </th>
               {selected.map((region) => (
-                <td key={region.slug} className="p-3 align-top leading-relaxed text-ice">
+                <td
+                  key={region.slug}
+                  className="p-3 align-top leading-relaxed text-ice"
+                >
                   {row.value(region)}
                 </td>
               ))}
@@ -116,11 +123,11 @@ export default function CompareView({ regions }: Props) {
         </tbody>
       </table>
       <p className="mt-6 text-sm text-ice">
-        Ready to go?{" "}
+        Ready to go?{' '}
         <Link href="/plan" className="text-apricot hover:underline">
           Build an itinerary
-        </Link>{" "}
-        or{" "}
+        </Link>{' '}
+        or{' '}
         <Link href="/book" className="text-apricot hover:underline">
           request dates
         </Link>

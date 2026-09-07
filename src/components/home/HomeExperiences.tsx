@@ -1,14 +1,10 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import Link from "next/link";
-import type { experiences } from "@/data/hero";
+import OptimizedImage from '@/components/OptimizedImage';
+import Link from 'next/link';
+import type { experiences } from '@/data/hero';
 
 type Experience = (typeof experiences)[number];
 
-export function HomeExperiences({
-  items,
-}: {
-  items: readonly Experience[];
-}) {
+export function HomeExperiences({ items }: { items: readonly Experience[] }) {
   return (
     <section className="py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
@@ -17,8 +13,8 @@ export function HomeExperiences({
           Top Experiences
         </h2>
         <p className="mt-4 max-w-xl text-ice">
-          Places our travelers ask for again — lakes, forts, meadows, and
-          ridges that stay with you.
+          Places our travelers ask for again — lakes, forts, meadows, and ridges
+          that stay with you.
         </p>
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -27,8 +23,8 @@ export function HomeExperiences({
               key={item.slug}
               href={`/destinations/${item.slug}`}
               className={
-                "group relative min-h-[300px] overflow-hidden rounded-2xl lg:min-h-[340px] " +
-                (index === 0 ? "sm:col-span-2 lg:col-span-2" : "")
+                'group relative min-h-[300px] overflow-hidden rounded-2xl lg:min-h-[340px] ' +
+                (index === 0 ? 'sm:col-span-2 lg:col-span-2' : '')
               }
             >
               <OptimizedImage
@@ -37,8 +33,8 @@ export function HomeExperiences({
                 fill
                 sizes={
                   index === 0
-                    ? "(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw"
-                    : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    ? '(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw'
+                    : '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
                 }
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />

@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { FilterChip } from "@/components/destination-gallery/FilterChip";
-import { GalleryCard } from "@/components/destination-gallery/GalleryCard";
-import { GalleryLightbox } from "@/components/destination-gallery/GalleryLightbox";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { FilterChip } from '@/components/destination-gallery/FilterChip';
+import { GalleryCard } from '@/components/destination-gallery/GalleryCard';
+import { GalleryLightbox } from '@/components/destination-gallery/GalleryLightbox';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   GALLERY_CATEGORIES,
   GALLERY_CATEGORY_LABELS,
   type GalleryCategory,
   type GalleryImage,
-} from "@/data/types";
+} from '@/data/types';
 
 type Props = {
   images: GalleryImage[];
@@ -24,9 +24,7 @@ export default function DestinationGallery({
 }: Props) {
   const galleryImages = useMemo(
     () =>
-      images.length > 0
-        ? images
-        : [{ src: heroImage, title: destinationName }],
+      images.length > 0 ? images : [{ src: heroImage, title: destinationName }],
     [images, heroImage, destinationName],
   );
 
@@ -38,18 +36,17 @@ export default function DestinationGallery({
     [galleryImages],
   );
 
-  const [activeCategory, setActiveCategory] = useState<GalleryCategory | "all">(
-    "all",
+  const [activeCategory, setActiveCategory] = useState<GalleryCategory | 'all'>(
+    'all',
   );
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const visibleImages =
-    activeCategory === "all"
+    activeCategory === 'all'
       ? galleryImages
       : galleryImages.filter((image) => image.category === activeCategory);
 
-  const activeImage =
-    activeIndex !== null ? visibleImages[activeIndex] : null;
+  const activeImage = activeIndex !== null ? visibleImages[activeIndex] : null;
 
   const closeLightbox = useCallback(() => setActiveIndex(null), []);
 
@@ -75,17 +72,17 @@ export default function DestinationGallery({
     if (activeIndex === null) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeLightbox();
-      if (event.key === "ArrowLeft") showPrevious();
-      if (event.key === "ArrowRight") showNext();
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') showPrevious();
+      if (event.key === 'ArrowRight') showNext();
     };
 
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKeyDown);
 
     return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKeyDown);
     };
   }, [activeIndex, closeLightbox, showNext, showPrevious]);
 
@@ -115,8 +112,8 @@ export default function DestinationGallery({
             >
               <FilterChip
                 label="All"
-                active={activeCategory === "all"}
-                onClick={() => setActiveCategory("all")}
+                active={activeCategory === 'all'}
+                onClick={() => setActiveCategory('all')}
               />
               {availableCategories.map((category) => (
                 <FilterChip

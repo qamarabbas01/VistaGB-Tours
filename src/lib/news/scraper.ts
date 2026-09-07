@@ -1,25 +1,29 @@
-import type { NewsItem, NewsPageResult } from "./types";
+import type { NewsItem, NewsPageResult } from './types';
 
-const NEWS_BASE_URL =
-  "https://visitgilgitbaltistan.gov.pk/public/pages/news";
+const NEWS_BASE_URL = 'https://visitgilgitbaltistan.gov.pk/public/pages/news';
 
 function decodeHtmlEntities(text: string): string {
   return text
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&#039;/g, "'")
     .replace(/&apos;/g, "'")
     .replace(/&#(?:x([\da-fA-F]+)|(\d+));/g, (_, hex, dec) =>
       String.fromCharCode(hex ? parseInt(hex, 16) : parseInt(dec, 10)),
     )
-    .replace(/\s+/g, " ")
+    .replace(/\s+/g, ' ')
     .trim();
 }
 
 function stripTags(text: string): string {
-  return decodeHtmlEntities(text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
+  return decodeHtmlEntities(
+    text
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim(),
+  );
 }
 
 function parseTotalPages(html: string): number {
@@ -44,29 +48,31 @@ function parseNewsItems(html: string): NewsItem[] {
     if (!titleMatch) continue;
 
     const rawUrl = titleMatch[1];
-    const url = rawUrl ? new URL(rawUrl, NEWS_BASE_URL).href : "";
+    const url = rawUrl ? new URL(rawUrl, NEWS_BASE_URL).href : '';
     const title = stripTags(titleMatch[2]);
     const id = url.match(/\/news\/(\d+)/)?.[1] ?? url;
 
     const imageMatch = block.match(/<img[^>]+src="([^"]+)"/);
     const image = imageMatch?.[1]
       ? new URL(imageMatch[1], NEWS_BASE_URL).href
-      : "";
+      : '';
 
     const summaryMatch = block.match(
       /<div class="blog-meta[^"]*">[\s\S]*?<p>([\s\S]*?)<\/p>/,
     );
-    const summary = summaryMatch ? stripTags(summaryMatch[1]) : "";
+    const summary = summaryMatch ? stripTags(summaryMatch[1]) : '';
 
-    const metaMatch = block.match(/<div class="blog-meta[^"]*">([\s\S]*?)<\/div>/);
-    const metaBlock = metaMatch?.[1] ?? "";
-    const smallLinks = [...metaBlock.matchAll(/<small>\s*<a[^>]*>([\s\S]*?)<\/a>/g)].map(
-      (smallMatch) => stripTags(smallMatch[1]),
+    const metaMatch = block.match(
+      /<div class="blog-meta[^"]*">([\s\S]*?)<\/div>/,
     );
+    const metaBlock = metaMatch?.[1] ?? '';
+    const smallLinks = [
+      ...metaBlock.matchAll(/<small>\s*<a[^>]*>([\s\S]*?)<\/a>/g),
+    ].map((smallMatch) => stripTags(smallMatch[1]));
 
-    const date = smallLinks[0] ?? "";
-    const time = smallLinks[1] ?? "";
-    const views = Number(smallLinks[2]?.replace(/[^\d]/g, "") || 0);
+    const date = smallLinks[0] ?? '';
+    const time = smallLinks[1] ?? '';
+    const views = Number(smallLinks[2]?.replace(/[^\d]/g, '') || 0);
 
     items.push({
       id,
@@ -88,8 +94,8 @@ export async function fetchNewsPage(page = 1): Promise<NewsPageResult> {
 
   const response = await fetch(url, {
     headers: {
-      "User-Agent": "VistaGB-Tours/1.0 (news aggregator)",
-      Accept: "text/html",
+      'User-Agent': 'VistaGB-Tours/1.0 (news aggregator)',
+      Accept: 'text/html',
     },
     next: { revalidate: 3600 },
   });

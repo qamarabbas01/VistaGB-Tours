@@ -1,5 +1,5 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import Button from "@/components/Button";
+import OptimizedImage from '@/components/OptimizedImage';
+import Button from '@/components/Button';
 
 export function HomeHero() {
   return (

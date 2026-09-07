@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
 export const LazyDestinationGallery = dynamic(
-  () => import("@/components/DestinationGallery"),
+  () => import('@/components/DestinationGallery'),
   {
     loading: () => (
       <div

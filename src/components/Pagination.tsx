@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 type PaginationProps = {
   currentPage: number;
@@ -11,9 +11,9 @@ type PaginationProps = {
 function buildPageHref(
   basePath: string,
   page: number,
-  pageParam: string
+  pageParam: string,
 ): string {
-  const [path, search] = basePath.split("?");
+  const [path, search] = basePath.split('?');
   const params = new URLSearchParams(search);
   if (page <= 1) {
     params.delete(pageParam);
@@ -26,16 +26,16 @@ function buildPageHref(
 
 function getVisiblePages(
   currentPage: number,
-  totalPages: number
-): (number | "ellipsis")[] {
+  totalPages: number,
+): (number | 'ellipsis')[] {
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }
 
-  const pages: (number | "ellipsis")[] = [1];
+  const pages: (number | 'ellipsis')[] = [1];
 
   if (currentPage > 3) {
-    pages.push("ellipsis");
+    pages.push('ellipsis');
   }
 
   const start = Math.max(2, currentPage - 1);
@@ -46,7 +46,7 @@ function getVisiblePages(
   }
 
   if (currentPage < totalPages - 2) {
-    pages.push("ellipsis");
+    pages.push('ellipsis');
   }
 
   pages.push(totalPages);
@@ -57,8 +57,8 @@ export default function Pagination({
   currentPage,
   totalPages,
   basePath,
-  pageParam = "page",
-  className = "",
+  pageParam = 'page',
+  className = '',
 }: PaginationProps) {
   if (totalPages <= 1) return null;
 
@@ -90,7 +90,7 @@ export default function Pagination({
 
       <div className="flex items-center gap-1">
         {visiblePages.map((page, index) =>
-          page === "ellipsis" ? (
+          page === 'ellipsis' ? (
             <span
               key={`ellipsis-${index}`}
               className="px-2 text-sm text-ice/60"
@@ -115,7 +115,7 @@ export default function Pagination({
             >
               {page}
             </Link>
-          )
+          ),
         )}
       </div>
 

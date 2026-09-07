@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { contact } from "@/config/contact";
+import Link from 'next/link';
+import { contact } from '@/config/contact';
 
 export default function Footer() {
   return (
@@ -12,54 +12,112 @@ export default function Footer() {
             </p>
             <p className="coord-label mt-1">Tours</p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ice">
-              Curated journeys through the Karakoram, Hunza, Skardu and the
-              high valleys of Gilgit-Baltistan.
+              Curated journeys through the Karakoram, Hunza, Skardu and the high
+              valleys of Gilgit-Baltistan.
             </p>
           </div>
 
           <div>
             <p className="coord-label mb-4">Explore</p>
             <ul className="flex flex-col gap-2 text-sm text-ice">
-              <li><Link href="/" className="hover:text-apricot">Home</Link></li>
-              <li><Link href="/destinations" className="hover:text-apricot">Destinations</Link></li>
-              <li><Link href="/tools" className="hover:text-apricot">Tools</Link></li>
-              <li><Link href="/assistant" className="hover:text-apricot">AI Assistant</Link></li>
-              <li><Link href="/blog" className="hover:text-apricot">Blog</Link></li>
-              <li><Link href="/news" className="hover:text-apricot">News</Link></li>
+              <li>
+                <Link href="/" className="hover:text-apricot">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/destinations" className="hover:text-apricot">
+                  Destinations
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools" className="hover:text-apricot">
+                  Tools
+                </Link>
+              </li>
+              <li>
+                <Link href="/assistant" className="hover:text-apricot">
+                  AI Assistant
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-apricot">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/news" className="hover:text-apricot">
+                  News
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <p className="coord-label mb-4">Company</p>
             <ul className="flex flex-col gap-2 text-sm text-ice">
-              <li><Link href="/book" className="hover:text-apricot">Book a trip</Link></li>
-              <li><Link href="/contact" className="hover:text-apricot">Contact</Link></li>
-              <li><Link href="/about" className="hover:text-apricot">About Us</Link></li>
-              <li><Link href="/alerts" className="hover:text-apricot">Alerts & roads</Link></li>
-              <li><Link href="/privacy" className="hover:text-apricot">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-apricot">Terms of Service</Link></li>
+              <li>
+                <Link href="/book" className="hover:text-apricot">
+                  Book a trip
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-apricot">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-apricot">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/alerts" className="hover:text-apricot">
+                  Alerts & roads
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="hover:text-apricot">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="hover:text-apricot">
+                  Terms of Service
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <p className="coord-label mb-4">Reach Us</p>
             <ul className="flex flex-col gap-2 text-sm text-ice">
-              {contact.location.label ? <li>{contact.location.label}</li> : null}
+              {contact.location.label ? (
+                <li>{contact.location.label}</li>
+              ) : null}
               {contact.email ? (
                 <li>
-                  <a href={`mailto:${contact.email}`} className="hover:text-apricot">
+                  <a
+                    href={`mailto:${contact.email}`}
+                    className="hover:text-apricot"
+                  >
                     {contact.email}
                   </a>
                 </li>
               ) : null}
               {contact.phone.display && contact.phone.tel ? (
                 <li>
-                  <a href={`tel:${contact.phone.tel}`} className="hover:text-apricot">
+                  <a
+                    href={`tel:${contact.phone.tel}`}
+                    className="hover:text-apricot"
+                  >
                     {contact.phone.display}
                   </a>
                 </li>
               ) : null}
-              {!contact.location.label && !contact.email && !contact.phone.display ? (
+              {!contact.location.label &&
+              !contact.email &&
+              !contact.phone.display ? (
                 <li>
                   <Link href="/contact" className="hover:text-apricot">
                     Contact
@@ -73,7 +131,10 @@ export default function Footer() {
         <div className="altitude-line my-8" />
 
         <div className="flex flex-col items-center justify-between gap-4 text-xs text-ice md:flex-row">
-          <p>&copy; {new Date().getFullYear()} VistaGB Tours. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} VistaGB Tours. All rights
+            reserved.
+          </p>
           {contact.location.coords ? (
             <p className="coord-label">{contact.location.coords}</p>
           ) : null}

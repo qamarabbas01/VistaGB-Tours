@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import OptimizedImage from "@/components/OptimizedImage";
-import { useState } from "react";
-import { VIDEO_THEME_LABELS, type DestinationVideo } from "@/data/types";
+import OptimizedImage from '@/components/OptimizedImage';
+import { useState } from 'react';
+import { VIDEO_THEME_LABELS, type DestinationVideo } from '@/data/types';
 
 export function VideoCard({ video }: { video: DestinationVideo }) {
   const [playing, setPlaying] = useState(false);
@@ -50,7 +50,9 @@ export function VideoCard({ video }: { video: DestinationVideo }) {
           {video.title}
         </h3>
         {video.caption ? (
-          <p className="mt-2 text-sm leading-relaxed text-ice">{video.caption}</p>
+          <p className="mt-2 text-sm leading-relaxed text-ice">
+            {video.caption}
+          </p>
         ) : null}
       </div>
     </article>

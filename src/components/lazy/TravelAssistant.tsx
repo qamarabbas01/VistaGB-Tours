@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
 export const LazyTravelAssistant = dynamic(
-  () => import("@/components/TravelAssistant"),
+  () => import('@/components/TravelAssistant'),
   {
     ssr: false,
     loading: () => (

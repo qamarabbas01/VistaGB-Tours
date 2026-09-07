@@ -1,7 +1,7 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import Link from "next/link";
-import WishlistButton from "@/components/WishlistButton";
-import type { Place } from "@/data/types";
+import OptimizedImage from '@/components/OptimizedImage';
+import Link from 'next/link';
+import WishlistButton from '@/components/WishlistButton';
+import type { Place } from '@/data/types';
 
 type Props = {
   place: Place;
@@ -17,7 +17,7 @@ export default function PlaceCard({
   return (
     <article
       className={`relative overflow-hidden rounded-2xl border border-teal/20 bg-slate transition-colors hover:border-apricot/50 ${
-        compact ? "" : "flex flex-col"
+        compact ? '' : 'flex flex-col'
       }`}
     >
       <div className="absolute right-3 top-3 z-10">
@@ -26,7 +26,7 @@ export default function PlaceCard({
       <Link href={`/destinations/${place.slug}`} className="group block">
         <div
           className={`relative w-full overflow-hidden ${
-            compact ? "aspect-[16/10]" : "aspect-[4/3]"
+            compact ? 'aspect-[16/10]' : 'aspect-[4/3]'
           }`}
         >
           <OptimizedImage
@@ -43,7 +43,7 @@ export default function PlaceCard({
         </div>
       </Link>
 
-      <div className={compact ? "p-4" : "flex flex-1 flex-col p-5"}>
+      <div className={compact ? 'p-4' : 'flex flex-1 flex-col p-5'}>
         <p className="coord-label mb-1 text-[0.65rem]">
           {parentName} · ALT {place.altitude}
         </p>

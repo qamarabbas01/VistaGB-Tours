@@ -1,6 +1,6 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import Link from "next/link";
-import type { NewsItem } from "@/lib/news/types";
+import OptimizedImage from '@/components/OptimizedImage';
+import Link from 'next/link';
+import type { NewsItem } from '@/lib/news/types';
 
 export function HomeNews({ items }: { items: readonly NewsItem[] }) {
   return (
@@ -48,7 +48,7 @@ export function HomeNews({ items }: { items: readonly NewsItem[] }) {
                 <div className="p-6">
                   <p className="coord-label mb-2">
                     {item.date}
-                    {item.time ? ` · ${item.time}` : ""}
+                    {item.time ? ` · ${item.time}` : ''}
                   </p>
                   <h3 className="font-display text-xl font-semibold leading-snug text-glacier transition-colors group-hover:text-apricot">
                     {item.title}
@@ -65,7 +65,7 @@ export function HomeNews({ items }: { items: readonly NewsItem[] }) {
         ) : (
           <div className="mt-14 rounded-2xl border border-teal/20 bg-slate p-10 text-center">
             <p className="text-ice">
-              News is temporarily unavailable.{" "}
+              News is temporarily unavailable.{' '}
               <Link href="/news" className="text-apricot hover:underline">
                 Try the news page
               </Link>

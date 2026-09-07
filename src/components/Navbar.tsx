@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useState } from "react";
-import LanguageToggle from "@/components/LanguageToggle";
-import ThemeToggle from "@/components/ThemeToggle";
-import { usePreferences } from "@/components/PreferencesProvider";
+import Link from 'next/link';
+import { useState } from 'react';
+import LanguageToggle from '@/components/LanguageToggle';
+import ThemeToggle from '@/components/ThemeToggle';
+import { usePreferences } from '@/components/PreferencesProvider';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { t, wishlist, compare } = usePreferences();
 
   const links = [
-    { href: "/", label: t.nav.home },
-    { href: "/destinations", label: t.nav.destinations },
-    { href: "/tools", label: t.nav.tools },
-    { href: "/assistant", label: t.nav.assistant },
-    { href: "/about", label: t.nav.about },
-    { href: "/blog", label: t.nav.blog },
-    { href: "/news", label: t.nav.news },
-    { href: "/contact", label: t.nav.contact },
+    { href: '/', label: t.nav.home },
+    { href: '/destinations', label: t.nav.destinations },
+    { href: '/tools', label: t.nav.tools },
+    { href: '/assistant', label: t.nav.assistant },
+    { href: '/about', label: t.nav.about },
+    { href: '/blog', label: t.nav.blog },
+    { href: '/news', label: t.nav.news },
+    { href: '/contact', label: t.nav.contact },
   ];
 
   return (
@@ -49,7 +49,14 @@ export default function Navbar() {
             aria-label={t.nav.wishlist}
             className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-teal/30 text-ice hover:border-apricot hover:text-apricot"
           >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              aria-hidden
+            >
               <path d="M12 21s-6.2-4.35-9.15-8.4C.9 10.05 1.2 6.6 3.75 5.1 6.05 3.75 8.55 4.5 12 7.35 15.45 4.5 17.95 3.75 20.25 5.1c2.55 1.5 2.85 4.95.9 7.5C18.2 16.65 12 21 12 21z" />
             </svg>
             {wishlist.length > 0 ? (
@@ -63,7 +70,14 @@ export default function Navbar() {
             aria-label="Compare destinations"
             className="relative hidden h-9 w-9 items-center justify-center rounded-full border border-teal/30 text-ice hover:border-apricot hover:text-apricot sm:inline-flex"
           >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+            <svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              aria-hidden
+            >
               <path d="M7 4v16M17 4v16M4 8h6M14 16h6" strokeLinecap="round" />
             </svg>
             {compare.length > 0 ? (
@@ -86,9 +100,15 @@ export default function Navbar() {
             onClick={() => setOpen((value) => !value)}
             className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 lg:hidden"
           >
-            <span className={`h-px w-6 bg-glacier transition-all ${open ? "translate-y-[7px] rotate-45" : ""}`} />
-            <span className={`h-px w-6 bg-glacier transition-opacity ${open ? "opacity-0" : ""}`} />
-            <span className={`h-px w-6 bg-glacier transition-all ${open ? "-translate-y-[7px] -rotate-45" : ""}`} />
+            <span
+              className={`h-px w-6 bg-glacier transition-all ${open ? 'translate-y-[7px] rotate-45' : ''}`}
+            />
+            <span
+              className={`h-px w-6 bg-glacier transition-opacity ${open ? 'opacity-0' : ''}`}
+            />
+            <span
+              className={`h-px w-6 bg-glacier transition-all ${open ? '-translate-y-[7px] -rotate-45' : ''}`}
+            />
           </button>
         </div>
       </div>

@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { FormEvent, useEffect, useState } from "react";
-import Button from "@/components/Button";
-import { ContactFormFields } from "@/components/contact-form/ContactFormFields";
+import { FormEvent, useEffect, useState } from 'react';
+import Button from '@/components/Button';
+import { ContactFormFields } from '@/components/contact-form/ContactFormFields';
 import {
   buildMonthOptions,
   placesSummary,
   type RegionFormOption,
   validateInquiry,
-} from "@/components/contact-form/inquiry";
+} from '@/components/contact-form/inquiry';
 
 export type { RegionFormOption };
 
@@ -21,7 +21,7 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedRegionSlug, setSelectedRegionSlug] = useState(
-    regionOptions[0]?.slug ?? "",
+    regionOptions[0]?.slug ?? '',
   );
   const [selectedPlaces, setSelectedPlaces] = useState<string[]>([]);
   const [placesFlexible, setPlacesFlexible] = useState(false);
@@ -60,11 +60,11 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
     setError(null);
 
     const formData = new FormData(event.currentTarget);
-    const travelFrom = String(formData.get("travelFrom") ?? "").trim();
-    const travelTo = String(formData.get("travelTo") ?? "").trim();
-    const travelMonth = String(formData.get("travelMonth") ?? "").trim();
-    const duration = String(formData.get("duration") ?? "").trim();
-    const groupSize = String(formData.get("groupSize") ?? "").trim();
+    const travelFrom = String(formData.get('travelFrom') ?? '').trim();
+    const travelTo = String(formData.get('travelTo') ?? '').trim();
+    const travelMonth = String(formData.get('travelMonth') ?? '').trim();
+    const duration = String(formData.get('duration') ?? '').trim();
+    const groupSize = String(formData.get('groupSize') ?? '').trim();
 
     const validationError = validateInquiry({
       duration,
@@ -79,35 +79,35 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
     }
 
     const payload = {
-      name: String(formData.get("name") ?? "").trim(),
-      email: String(formData.get("email") ?? "").trim(),
-      destination: selectedRegion?.name ?? "",
+      name: String(formData.get('name') ?? '').trim(),
+      email: String(formData.get('email') ?? '').trim(),
+      destination: selectedRegion?.name ?? '',
       places: placesSummary({
         placesFlexible,
         selectedPlaces,
         hasPlaces,
       }),
-      travelFrom: datesFlexible ? "" : travelFrom,
-      travelTo: datesFlexible ? "" : travelTo,
-      datesFlexible: datesFlexible ? "yes" : "no",
-      travelMonth: datesFlexible ? travelMonth : "",
+      travelFrom: datesFlexible ? '' : travelFrom,
+      travelTo: datesFlexible ? '' : travelTo,
+      datesFlexible: datesFlexible ? 'yes' : 'no',
+      travelMonth: datesFlexible ? travelMonth : '',
       duration,
       groupSize,
-      message: String(formData.get("message") ?? "").trim(),
-      website: String(formData.get("website") ?? ""),
+      message: String(formData.get('message') ?? '').trim(),
+      website: String(formData.get('website') ?? ''),
     };
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
         const result = await response.json().catch(() => null);
         throw new Error(
-          result?.error ?? "Something went wrong. Please try again.",
+          result?.error ?? 'Something went wrong. Please try again.',
         );
       }
 
@@ -116,7 +116,7 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
       setError(
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again.",
+          : 'Something went wrong. Please try again.',
       );
     } finally {
       setSubmitting(false);
@@ -174,7 +174,7 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
         disabled={submitting}
         className="w-full rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-ink transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        {submitting ? "Sending…" : "Send Inquiry"}
+        {submitting ? 'Sending…' : 'Send Inquiry'}
       </Button>
     </form>
   );

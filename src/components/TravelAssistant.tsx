@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import Link from 'next/link';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 
 export type ChatMessage = {
   id: string;
-  role: "user" | "assistant";
+  role: 'user' | 'assistant';
   content: string;
 };
 
 const SUGGESTIONS = [
-  "Tell me about Hunza",
-  "5-day itinerary for Skardu",
-  "Best hotels in Hunza",
-  "Famous food in Gilgit",
-  "Best time to visit Nagar",
-  "Weather in Hunza",
-  "Budget for a week in GB",
-  "Road conditions to Hunza",
-  "Packing list for Deosai",
-  "Nearby destinations from Skardu",
+  'Tell me about Hunza',
+  '5-day itinerary for Skardu',
+  'Best hotels in Hunza',
+  'Famous food in Gilgit',
+  'Best time to visit Nagar',
+  'Weather in Hunza',
+  'Budget for a week in GB',
+  'Road conditions to Hunza',
+  'Packing list for Deosai',
+  'Nearby destinations from Skardu',
 ] as const;
 
 type Props = {
   destinationSlug?: string;
   destinationName?: string;
-  variant?: "page" | "widget";
+  variant?: 'page' | 'widget';
 };
 
 function newId() {
@@ -35,18 +35,18 @@ function newId() {
 export default function TravelAssistant({
   destinationSlug,
   destinationName,
-  variant = "page",
+  variant = 'page',
 }: Props) {
-  const isWidget = variant === "widget";
+  const isWidget = variant === 'widget';
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages, loading]);
 
   useEffect(() => {
@@ -58,11 +58,11 @@ export default function TravelAssistant({
     if (!text || loading) return;
 
     setError(null);
-    setInput("");
+    setInput('');
 
     const userMessage: ChatMessage = {
       id: newId(),
-      role: "user",
+      role: 'user',
       content: text,
     };
     const assistantId = newId();
@@ -74,7 +74,7 @@ export default function TravelAssistant({
     setMessages((prev) => [
       ...prev,
       userMessage,
-      { id: assistantId, role: "assistant", content: "" },
+      { id: assistantId, role: 'assistant', content: '' },
     ]);
     setLoading(true);
 
@@ -82,9 +82,9 @@ export default function TravelAssistant({
     abortRef.current = controller;
 
     try {
-      const response = await fetch("/api/assistant", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/assistant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
         body: JSON.stringify({
           messages: historyForApi,
@@ -96,14 +96,14 @@ export default function TravelAssistant({
         const payload = (await response.json().catch(() => null)) as {
           error?: string;
         } | null;
-        throw new Error(payload?.error || "Assistant is unavailable right now");
+        throw new Error(payload?.error || 'Assistant is unavailable right now');
       }
 
       const reader = response.body?.getReader();
-      if (!reader) throw new Error("No response stream");
+      if (!reader) throw new Error('No response stream');
 
       const decoder = new TextDecoder();
-      let assembled = "";
+      let assembled = '';
 
       while (true) {
         const { done, value } = await reader.read();
@@ -133,7 +133,7 @@ export default function TravelAssistant({
     } catch (err) {
       if (controller.signal.aborted) return;
       const message =
-        err instanceof Error ? err.message : "Something went wrong";
+        err instanceof Error ? err.message : 'Something went wrong';
       setError(message);
       setMessages((prev) =>
         prev.filter((m) => m.id !== assistantId || m.content.trim()),
@@ -155,29 +155,29 @@ export default function TravelAssistant({
     <div
       className={`flex flex-col overflow-hidden border border-teal/25 bg-slate ${
         isWidget
-          ? "h-full min-h-0 rounded-none border-0"
-          : "min-h-[70vh] rounded-3xl shadow-2xl shadow-black/20"
+          ? 'h-full min-h-0 rounded-none border-0'
+          : 'min-h-[70vh] rounded-3xl shadow-2xl shadow-black/20'
       }`}
     >
       {!isWidget ? (
-      <div className="border-b border-teal/20 px-5 py-4 md:px-6">
-        <p className="coord-label mb-1">AI Travel Assistant</p>
-        <h2 className="font-display text-xl font-semibold text-glacier md:text-2xl">
-          Plan Gilgit-Baltistan with VistaGB
-        </h2>
-        <p className="mt-1 text-sm text-ice">
-          Ask about valleys, itineraries, hotels, food, weather, roads, packing,
-          and budgets
-          {destinationName ? (
-            <>
-              {" "}
-              — currently focused on{" "}
-              <span className="text-apricot">{destinationName}</span>
-            </>
-          ) : null}
-          .
-        </p>
-      </div>
+        <div className="border-b border-teal/20 px-5 py-4 md:px-6">
+          <p className="coord-label mb-1">AI Travel Assistant</p>
+          <h2 className="font-display text-xl font-semibold text-glacier md:text-2xl">
+            Plan Gilgit-Baltistan with VistaGB
+          </h2>
+          <p className="mt-1 text-sm text-ice">
+            Ask about valleys, itineraries, hotels, food, weather, roads,
+            packing, and budgets
+            {destinationName ? (
+              <>
+                {' '}
+                — currently focused on{' '}
+                <span className="text-apricot">{destinationName}</span>
+              </>
+            ) : null}
+            .
+          </p>
+        </div>
       ) : null}
 
       <div className="flex-1 space-y-4 overflow-y-auto px-5 py-5 md:px-6">
@@ -185,20 +185,22 @@ export default function TravelAssistant({
           <div className="mx-auto max-w-2xl py-6 text-center">
             <p className="text-sm leading-relaxed text-ice">
               Grounded in VistaGB destination guides
-              {destinationName ? ` and ${destinationName}` : ""}. Live weather
+              {destinationName ? ` and ${destinationName}` : ''}. Live weather
               pulls in when you ask.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {(isWidget ? SUGGESTIONS.slice(0, 4) : SUGGESTIONS).map((suggestion) => (
-                <button
-                  key={suggestion}
-                  type="button"
-                  onClick={() => void sendMessage(suggestion)}
-                  className="rounded-full border border-teal/30 bg-night/40 px-3.5 py-2 text-left text-xs text-ice transition-colors hover:border-apricot/60 hover:text-apricot md:text-sm"
-                >
-                  {suggestion}
-                </button>
-              ))}
+              {(isWidget ? SUGGESTIONS.slice(0, 4) : SUGGESTIONS).map(
+                (suggestion) => (
+                  <button
+                    key={suggestion}
+                    type="button"
+                    onClick={() => void sendMessage(suggestion)}
+                    className="rounded-full border border-teal/30 bg-night/40 px-3.5 py-2 text-left text-xs text-ice transition-colors hover:border-apricot/60 hover:text-apricot md:text-sm"
+                  >
+                    {suggestion}
+                  </button>
+                ),
+              )}
             </div>
           </div>
         ) : null}
@@ -207,17 +209,17 @@ export default function TravelAssistant({
           <div
             key={message.id}
             className={`flex ${
-              message.role === "user" ? "justify-end" : "justify-start"
+              message.role === 'user' ? 'justify-end' : 'justify-start'
             }`}
           >
             <div
               className={`max-w-[92%] rounded-2xl px-4 py-3 text-sm leading-relaxed md:max-w-[80%] ${
-                message.role === "user"
-                  ? "bg-apricot text-ink"
-                  : "border border-teal/25 bg-night/50 text-glacier"
+                message.role === 'user'
+                  ? 'bg-apricot text-ink'
+                  : 'border border-teal/25 bg-night/50 text-glacier'
               }`}
             >
-              {message.role === "assistant" && !message.content ? (
+              {message.role === 'assistant' && !message.content ? (
                 <span className="inline-flex items-center gap-1 text-ice">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-apricot" />
                   Thinking…
@@ -258,14 +260,14 @@ export default function TravelAssistant({
             disabled={loading || !input.trim()}
             className="rounded-xl bg-apricot px-6 py-3 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {loading ? "…" : "Ask"}
+            {loading ? '…' : 'Ask'}
           </button>
         </form>
         <p className="mt-3 text-xs text-ice/60">
-          Planning a private trip?{" "}
+          Planning a private trip?{' '}
           <Link href="/contact" className="text-apricot hover:underline">
             Contact VistaGB
-          </Link>{" "}
+          </Link>{' '}
           for a custom quote.
         </p>
       </div>

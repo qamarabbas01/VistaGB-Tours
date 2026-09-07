@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { FormEvent, useMemo, useState } from "react";
-import type { RegionFormOption } from "@/components/ContactForm";
+import { FormEvent, useMemo, useState } from 'react';
+import type { RegionFormOption } from '@/components/ContactForm';
 
-const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 function toIso(date: Date) {
   const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
   return `${y}-${m}-${d}`;
 }
 
@@ -37,7 +37,10 @@ function MonthGrid({
     ...Array.from({ length: startPad }, () => null),
     ...Array.from({ length: count }, (_, i) => i + 1),
   ];
-  const label = first.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
+  const label = first.toLocaleDateString('en-GB', {
+    month: 'long',
+    year: 'numeric',
+  });
 
   return (
     <div>
@@ -62,12 +65,12 @@ function MonthGrid({
               onClick={() => onPick(iso)}
               className={`rounded-lg py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-30 ${
                 selected
-                  ? "bg-apricot text-ink"
+                  ? 'bg-apricot text-ink'
                   : inRange
-                    ? "bg-apricot/20 text-glacier"
+                    ? 'bg-apricot/20 text-glacier'
                     : isPeakMonth(month)
-                      ? "bg-night text-glacier hover:bg-apricot/20"
-                      : "text-glacier hover:bg-night"
+                      ? 'bg-night text-glacier hover:bg-apricot/20'
+                      : 'text-glacier hover:bg-night'
               }`}
             >
               {day}
@@ -96,14 +99,16 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
     [],
   );
 
-  const [start, setStart] = useState("");
-  const [end, setEnd] = useState("");
-  const [region, setRegion] = useState(defaultRegion || regionOptions[0]?.slug || "");
-  const [groupSize, setGroupSize] = useState("2");
-  const [duration, setDuration] = useState("6–7 days");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [start, setStart] = useState('');
+  const [end, setEnd] = useState('');
+  const [region, setRegion] = useState(
+    defaultRegion || regionOptions[0]?.slug || '',
+  );
+  const [groupSize, setGroupSize] = useState('2');
+  const [duration, setDuration] = useState('6–7 days');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -111,7 +116,7 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
   function pickDate(iso: string) {
     if (!start || (start && end)) {
       setStart(iso);
-      setEnd("");
+      setEnd('');
       return;
     }
     if (iso < start) {
@@ -131,33 +136,33 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
     const destination = selected?.name ?? region;
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name,
           email,
           destination,
-          places: "",
+          places: '',
           travelFrom: start,
           travelTo: end,
-          datesFlexible: "no",
-          travelMonth: "",
+          datesFlexible: 'no',
+          travelMonth: '',
           duration,
           groupSize,
           message: message.trim()
             ? `[Online booking request]\n${message}`
-            : "[Online booking request]",
+            : '[Online booking request]',
         }),
       });
       const data = (await response.json()) as { error?: string };
       if (!response.ok) {
-        setError(data.error ?? "Unable to send your request.");
+        setError(data.error ?? 'Unable to send your request.');
         return;
       }
       setSubmitted(true);
     } catch {
-      setError("Unable to send your request. Please try again.");
+      setError('Unable to send your request. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -171,8 +176,9 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
           We will confirm availability
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-ice">
-          Thanks — this is a private-tour inquiry, not an instant ticket. VistaGB
-          will reply with a route, lodge options, and a quote for your dates.
+          Thanks — this is a private-tour inquiry, not an instant ticket.
+          VistaGB will reply with a route, lodge options, and a quote for your
+          dates.
         </p>
       </div>
     );
@@ -186,8 +192,9 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
           Choose travel dates
         </h2>
         <p className="mt-2 text-sm text-ice">
-          Tap a start date, then an end date. June–September days are highlighted
-          as peak season. We confirm lodges and jeeps after we receive the request.
+          Tap a start date, then an end date. June–September days are
+          highlighted as peak season. We confirm lodges and jeeps after we
+          receive the request.
         </p>
         <div className="mt-8 grid gap-8 lg:grid-cols-3">
           {months.map((item) => (
@@ -206,7 +213,7 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
             ? end
               ? `${start} → ${end}`
               : `Starting ${start} — pick an end date`
-            : "No dates selected yet"}
+            : 'No dates selected yet'}
         </p>
       </div>
 
@@ -235,13 +242,18 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
               onChange={(event) => setDuration(event.target.value)}
               className="mt-2 w-full rounded-xl border border-teal/30 bg-night px-4 py-3 text-glacier outline-none focus:border-apricot"
             >
-              {["3 days", "4–5 days", "6–7 days", "8–10 days", "11–14 days", "2+ weeks"].map(
-                (value) => (
-                  <option key={value} value={value}>
-                    {value}
-                  </option>
-                ),
-              )}
+              {[
+                '3 days',
+                '4–5 days',
+                '6–7 days',
+                '8–10 days',
+                '11–14 days',
+                '2+ weeks',
+              ].map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
             </select>
           </label>
           <label className="text-sm text-ice">
@@ -299,11 +311,11 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
           disabled={submitting || !start}
           className="mt-6 rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {submitting ? "Sending…" : "Request this booking"}
+          {submitting ? 'Sending…' : 'Request this booking'}
         </button>
         <p className="mt-3 text-xs text-ice">
-          No card payment on this site — we confirm the itinerary and send a quote
-          before anything is booked.
+          No card payment on this site — we confirm the itinerary and send a
+          quote before anything is booked.
         </p>
       </div>
     </form>

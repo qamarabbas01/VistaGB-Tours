@@ -1,10 +1,12 @@
-import Link from "next/link";
-import TrekDifficultyBadge from "@/components/TrekDifficultyBadge";
-import { getLocationBySlug } from "@/data";
-import type { GuideListing } from "@/data/types";
+import Link from 'next/link';
+import TrekDifficultyBadge from '@/components/TrekDifficultyBadge';
+import { getLocationBySlug } from '@/data';
+import type { GuideListing } from '@/data/types';
 
 function GuideLink({ item }: { item: GuideListing }) {
-  const resolved = item.placeSlug ? getLocationBySlug(item.placeSlug) : undefined;
+  const resolved = item.placeSlug
+    ? getLocationBySlug(item.placeSlug)
+    : undefined;
 
   if (!resolved) {
     return <span className="font-medium text-glacier">{item.name}</span>;
@@ -52,7 +54,9 @@ export function ListingGrid({
                   <TrekDifficultyBadge difficulty={item.difficulty} />
                 </p>
               ) : null}
-              <p className="mt-2 text-sm leading-relaxed text-ice">{item.detail}</p>
+              <p className="mt-2 text-sm leading-relaxed text-ice">
+                {item.detail}
+              </p>
             </li>
           ))}
         </ul>

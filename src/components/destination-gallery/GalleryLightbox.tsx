@@ -1,10 +1,7 @@
-"use client";
+'use client';
 
-import OptimizedImage from "@/components/OptimizedImage";
-import {
-  GALLERY_CATEGORY_LABELS,
-  type GalleryImage,
-} from "@/data/types";
+import OptimizedImage from '@/components/OptimizedImage';
+import { GALLERY_CATEGORY_LABELS, type GalleryImage } from '@/data/types';
 
 export function GalleryLightbox({
   image,

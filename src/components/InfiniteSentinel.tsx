@@ -1,13 +1,16 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 type Props = {
   onVisible: () => void;
   disabled?: boolean;
 };
 
-export default function InfiniteSentinel({ onVisible, disabled = false }: Props) {
+export default function InfiniteSentinel({
+  onVisible,
+  disabled = false,
+}: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const onVisibleRef = useRef(onVisible);
   onVisibleRef.current = onVisible;
@@ -21,7 +24,7 @@ export default function InfiniteSentinel({ onVisible, disabled = false }: Props)
       (entries) => {
         if (entries[0]?.isIntersecting) onVisibleRef.current();
       },
-      { rootMargin: "400px 0px" },
+      { rootMargin: '400px 0px' },
     );
 
     observer.observe(node);

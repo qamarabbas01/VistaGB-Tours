@@ -13,7 +13,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
           cache: npm
 
       - run: npm ci
@@ -23,7 +23,7 @@ jobs:
       - run: npm test
       - run: npm run build
         env:
-          NEXT_TELEMETRY_DISABLED: "1"
+          NEXT_TELEMETRY_DISABLED: '1'
           NEXT_PUBLIC_SITE_URL: https://vista-gb-tours.vercel.app
       - run: npm run check:bundle
 
@@ -35,7 +35,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
           cache: npm
 
       - run: npm ci
@@ -43,7 +43,7 @@ jobs:
       - run: npm run test:e2e
         env:
           CI: true
-          NEXT_TELEMETRY_DISABLED: "1"
+          NEXT_TELEMETRY_DISABLED: '1'
           NEXT_PUBLIC_SITE_URL: https://vista-gb-tours.vercel.app
 
       - uses: actions/upload-artifact@v4

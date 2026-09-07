@@ -1,25 +1,25 @@
 export const GALLERY_CATEGORIES = [
-  "mountains",
-  "lakes",
-  "villages",
-  "food",
-  "festivals",
-  "culture",
-  "hotels",
-  "trekking",
+  'mountains',
+  'lakes',
+  'villages',
+  'food',
+  'festivals',
+  'culture',
+  'hotels',
+  'trekking',
 ] as const;
 
 export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
 
 export const GALLERY_CATEGORY_LABELS: Record<GalleryCategory, string> = {
-  mountains: "Mountains",
-  lakes: "Lakes",
-  villages: "Villages",
-  food: "Local food",
-  festivals: "Festivals",
-  culture: "Culture",
-  hotels: "Hotels",
-  trekking: "Trekking routes",
+  mountains: 'Mountains',
+  lakes: 'Lakes',
+  villages: 'Villages',
+  food: 'Local food',
+  festivals: 'Festivals',
+  culture: 'Culture',
+  hotels: 'Hotels',
+  trekking: 'Trekking routes',
 };
 
 export type GalleryImage = {
@@ -30,23 +30,23 @@ export type GalleryImage = {
 };
 
 export const VIDEO_THEMES = [
-  "drone",
-  "trekking",
-  "jeep",
-  "snowfall",
-  "blossom",
-  "autumn",
+  'drone',
+  'trekking',
+  'jeep',
+  'snowfall',
+  'blossom',
+  'autumn',
 ] as const;
 
 export type VideoTheme = (typeof VIDEO_THEMES)[number];
 
 export const VIDEO_THEME_LABELS: Record<VideoTheme, string> = {
-  drone: "Drone footage",
-  trekking: "Trekking",
-  jeep: "Jeep safari",
-  snowfall: "Snowfall",
-  blossom: "Cherry blossom",
-  autumn: "Autumn colours",
+  drone: 'Drone footage',
+  trekking: 'Trekking',
+  jeep: 'Jeep safari',
+  snowfall: 'Snowfall',
+  blossom: 'Cherry blossom',
+  autumn: 'Autumn colours',
 };
 
 export type DestinationVideo = {
@@ -58,18 +58,18 @@ export type DestinationVideo = {
 };
 
 export type PlaceType =
-  | "Town"
-  | "Fort"
-  | "Viewpoint"
-  | "Lake"
-  | "Village"
-  | "Valley"
-  | "Pass"
-  | "Glacier"
-  | "Bridge"
-  | "Meadow"
-  | "Desert"
-  | "Waterfall";
+  | 'Town'
+  | 'Fort'
+  | 'Viewpoint'
+  | 'Lake'
+  | 'Village'
+  | 'Valley'
+  | 'Pass'
+  | 'Glacier'
+  | 'Bridge'
+  | 'Meadow'
+  | 'Desert'
+  | 'Waterfall';
 
 export type Place = {
   slug: string;
@@ -101,19 +101,19 @@ export type DestinationFaq = {
 };
 
 export const TREK_DIFFICULTIES = [
-  "easy",
-  "moderate",
-  "challenging",
-  "strenuous",
+  'easy',
+  'moderate',
+  'challenging',
+  'strenuous',
 ] as const;
 
 export type TrekDifficulty = (typeof TREK_DIFFICULTIES)[number];
 
 export const TREK_DIFFICULTY_LABELS: Record<TrekDifficulty, string> = {
-  easy: "Easy",
-  moderate: "Moderate",
-  challenging: "Challenging",
-  strenuous: "Strenuous",
+  easy: 'Easy',
+  moderate: 'Moderate',
+  challenging: 'Challenging',
+  strenuous: 'Strenuous',
 };
 
 /** Named listing with optional link to a place page */
@@ -153,7 +153,7 @@ export type RegionGuide = {
 };
 
 export type RegionDestination = {
-  kind: "region";
+  kind: 'region';
   slug: string;
   name: string;
   region: string;

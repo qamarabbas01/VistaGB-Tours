@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { contact } from "@/config/contact";
-import { SITE_URL, site } from "@/config/site";
+import type { Metadata } from 'next';
+import { contact } from '@/config/contact';
+import { SITE_URL, site } from '@/config/site';
 
 export { SITE_URL, site };
 
@@ -14,10 +14,10 @@ export type FaqItem = {
   answer: string;
 };
 
-export function absoluteUrl(pathOrUrl = "/"): string {
+export function absoluteUrl(pathOrUrl = '/'): string {
   if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
-  const path = pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`;
-  if (path === "/") return SITE_URL;
+  const path = pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`;
+  if (path === '/') return SITE_URL;
   return `${SITE_URL}${path}`;
 }
 
@@ -34,11 +34,13 @@ export function buildPageMetadata({
   path: string;
   image?: string;
   imageAlt?: string;
-  robots?: Metadata["robots"];
+  robots?: Metadata['robots'];
 }): Metadata {
   const url = absoluteUrl(path);
   const imageUrl = absoluteUrl(image);
-  const fullTitle = title.includes(site.name) ? title : `${title} — ${site.name}`;
+  const fullTitle = title.includes(site.name)
+    ? title
+    : `${title} — ${site.name}`;
 
   return {
     title,
@@ -47,7 +49,7 @@ export function buildPageMetadata({
       canonical: url,
     },
     openGraph: {
-      type: "website",
+      type: 'website',
       locale: site.locale,
       siteName: site.name,
       url,
@@ -63,7 +65,7 @@ export function buildPageMetadata({
       ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: fullTitle,
       description,
       images: [imageUrl],
@@ -77,36 +79,38 @@ export function withJsonLdContext(
 ): Record<string, unknown> {
   if (Array.isArray(node)) {
     return {
-      "@context": "https://schema.org",
-      "@graph": node,
+      '@context': 'https://schema.org',
+      '@graph': node,
     };
   }
 
   return {
-    "@context": "https://schema.org",
+    '@context': 'https://schema.org',
     ...node,
   };
 }
 
 export function organizationJsonLd(): Record<string, unknown> {
   const organization: Record<string, unknown> = {
-    "@type": "TravelAgency",
-    "@id": `${SITE_URL}/#organization`,
+    '@type': 'TravelAgency',
+    '@id': `${SITE_URL}/#organization`,
     name: site.name,
     url: SITE_URL,
     image: absoluteUrl(site.defaultOgImage),
-    logo: absoluteUrl("/favicon.svg"),
+    logo: absoluteUrl('/favicon.svg'),
     description: site.description,
     address: {
-      "@type": "PostalAddress",
-      ...(contact.streetAddress ? { streetAddress: contact.streetAddress } : {}),
+      '@type': 'PostalAddress',
+      ...(contact.streetAddress
+        ? { streetAddress: contact.streetAddress }
+        : {}),
       ...(contact.city ? { addressLocality: contact.city } : {}),
       ...(contact.region ? { addressRegion: contact.region } : {}),
       addressCountry: contact.country,
     },
     areaServed: {
-      "@type": "AdministrativeArea",
-      name: contact.region || "Gilgit-Baltistan",
+      '@type': 'AdministrativeArea',
+      name: contact.region || 'Gilgit-Baltistan',
     },
   };
 
@@ -119,22 +123,22 @@ export function organizationJsonLd(): Record<string, unknown> {
 
 export function websiteJsonLd(): Record<string, unknown> {
   return {
-    "@type": "WebSite",
-    "@id": `${SITE_URL}/#website`,
+    '@type': 'WebSite',
+    '@id': `${SITE_URL}/#website`,
     name: site.name,
     url: SITE_URL,
     description: site.description,
-    inLanguage: "en",
+    inLanguage: 'en',
     publisher: {
-      "@id": `${SITE_URL}/#organization`,
+      '@id': `${SITE_URL}/#organization`,
     },
     potentialAction: {
-      "@type": "SearchAction",
+      '@type': 'SearchAction',
       target: {
-        "@type": "EntryPoint",
+        '@type': 'EntryPoint',
         urlTemplate: `${SITE_URL}/destinations?q={search_term_string}`,
       },
-      "query-input": "required name=search_term_string",
+      'query-input': 'required name=search_term_string',
     },
   };
 }
@@ -143,9 +147,9 @@ export function breadcrumbJsonLd(
   items: BreadcrumbItem[],
 ): Record<string, unknown> {
   return {
-    "@type": "BreadcrumbList",
+    '@type': 'BreadcrumbList',
     itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: index + 1,
       name: item.name,
       item: absoluteUrl(item.path),
@@ -155,12 +159,12 @@ export function breadcrumbJsonLd(
 
 export function faqJsonLd(faqs: readonly FaqItem[]): Record<string, unknown> {
   return {
-    "@type": "FAQPage",
+    '@type': 'FAQPage',
     mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
+      '@type': 'Question',
       name: faq.question,
       acceptedAnswer: {
-        "@type": "Answer",
+        '@type': 'Answer',
         text: faq.answer,
       },
     })),
@@ -179,14 +183,14 @@ export function collectionJsonLd({
   items: { name: string; path: string }[];
 }): Record<string, unknown> {
   return {
-    "@type": "CollectionPage",
+    '@type': 'CollectionPage',
     name,
     description,
     url: absoluteUrl(path),
     mainEntity: {
-      "@type": "ItemList",
+      '@type': 'ItemList',
       itemListElement: items.map((item, index) => ({
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: index + 1,
         name: item.name,
         url: absoluteUrl(item.path),
@@ -204,7 +208,7 @@ export function touristPlaceJsonLd({
   geo,
   containedIn,
 }: {
-  type: "TouristDestination" | "TouristAttraction";
+  type: 'TouristDestination' | 'TouristAttraction';
   name: string;
   description: string;
   path: string;
@@ -213,7 +217,7 @@ export function touristPlaceJsonLd({
   containedIn?: { name: string; path: string };
 }): Record<string, unknown> {
   const node: Record<string, unknown> = {
-    "@type": type,
+    '@type': type,
     name,
     description,
     url: absoluteUrl(path),
@@ -222,7 +226,7 @@ export function touristPlaceJsonLd({
 
   if (geo) {
     node.geo = {
-      "@type": "GeoCoordinates",
+      '@type': 'GeoCoordinates',
       latitude: geo.lat,
       longitude: geo.lng,
     };
@@ -230,7 +234,7 @@ export function touristPlaceJsonLd({
 
   if (containedIn) {
     node.containedInPlace = {
-      "@type": "TouristDestination",
+      '@type': 'TouristDestination',
       name: containedIn.name,
       url: absoluteUrl(containedIn.path),
     };
@@ -240,23 +244,23 @@ export function touristPlaceJsonLd({
 }
 
 export function webPageJsonLd({
-  type = "WebPage",
+  type = 'WebPage',
   name,
   description,
   path,
 }: {
-  type?: "WebPage" | "AboutPage" | "ContactPage";
+  type?: 'WebPage' | 'AboutPage' | 'ContactPage';
   name: string;
   description: string;
   path: string;
 }): Record<string, unknown> {
   return {
-    "@type": type,
+    '@type': type,
     name,
     description,
     url: absoluteUrl(path),
     isPartOf: {
-      "@id": `${SITE_URL}/#website`,
+      '@id': `${SITE_URL}/#website`,
     },
   };
 }

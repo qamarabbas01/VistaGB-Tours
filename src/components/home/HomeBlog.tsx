@@ -1,6 +1,6 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import Link from "next/link";
-import type { BlogPost } from "@/data/types";
+import OptimizedImage from '@/components/OptimizedImage';
+import Link from 'next/link';
+import type { BlogPost } from '@/data/types';
 
 export function HomeBlog({ posts }: { posts: readonly BlogPost[] }) {
   return (

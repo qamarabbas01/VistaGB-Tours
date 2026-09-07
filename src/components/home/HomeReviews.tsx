@@ -1,15 +1,15 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import type { reviews } from "@/data/hero";
+import OptimizedImage from '@/components/OptimizedImage';
+import type { reviews } from '@/data/hero';
 
 type Review = (typeof reviews)[number];
 
 function reviewerInitials(name: string) {
-  const parts = name.replace(/&/g, " ").split(/\s+/).filter(Boolean);
+  const parts = name.replace(/&/g, ' ').split(/\s+/).filter(Boolean);
   const letters = parts
     .filter((part) => /^[A-Za-z]/.test(part))
     .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase() ?? "");
-  return letters.join("") || name.slice(0, 1).toUpperCase();
+    .map((part) => part[0]?.toUpperCase() ?? '');
+  return letters.join('') || name.slice(0, 1).toUpperCase();
 }
 
 function StarRating({ rating }: { rating: number }) {
@@ -20,7 +20,7 @@ function StarRating({ rating }: { rating: number }) {
     >
       {Array.from({ length: 5 }, (_, index) => (
         <span key={index} aria-hidden>
-          {index < rating ? "★" : "☆"}
+          {index < rating ? '★' : '☆'}
         </span>
       ))}
     </p>
@@ -36,8 +36,8 @@ export function HomeReviews({ items }: { items: readonly Review[] }) {
           Customer Reviews
         </h2>
         <p className="mt-4 max-w-xl text-ice">
-          Words — and frames — from travelers who trusted us with their first
-          — or return — journey north.
+          Words — and frames — from travelers who trusted us with their first —
+          or return — journey north.
         </p>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

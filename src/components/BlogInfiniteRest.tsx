@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useCallback, useState } from "react";
-import BlogCard from "@/components/BlogCard";
-import InfiniteSentinel from "@/components/InfiniteSentinel";
-import type { BlogPost } from "@/data/types";
+import { useCallback, useState } from 'react';
+import BlogCard from '@/components/BlogCard';
+import InfiniteSentinel from '@/components/InfiniteSentinel';
+import type { BlogPost } from '@/data/types';
 
 const BATCH = 9;
 

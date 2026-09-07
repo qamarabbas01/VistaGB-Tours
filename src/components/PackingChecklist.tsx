@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { packingSections } from "@/data/packing";
+import { useEffect, useState } from 'react';
+import { packingSections } from '@/data/packing';
 
-const STORAGE_KEY = "vistagb-packing";
+const STORAGE_KEY = 'vistagb-packing';
 
 export default function PackingChecklist() {
   const [checked, setChecked] = useState<string[]>([]);
@@ -15,7 +15,9 @@ export default function PackingChecklist() {
       if (raw) {
         const parsed = JSON.parse(raw) as unknown;
         if (Array.isArray(parsed)) {
-          setChecked(parsed.filter((item): item is string => typeof item === "string"));
+          setChecked(
+            parsed.filter((item): item is string => typeof item === 'string'),
+          );
         }
       }
     } catch {
@@ -34,7 +36,10 @@ export default function PackingChecklist() {
     });
   }
 
-  const total = packingSections.reduce((sum, section) => sum + section.items.length, 0);
+  const total = packingSections.reduce(
+    (sum, section) => sum + section.items.length,
+    0,
+  );
 
   return (
     <div className="rounded-2xl border border-teal/20 bg-slate p-6">
@@ -43,9 +48,9 @@ export default function PackingChecklist() {
         Packing checklist
       </h2>
       <p className="mt-2 text-sm text-ice">
-        Altitude and big day/night swings — tick items as you pack. Saved on this
-        device.
-        {ready ? ` ${checked.length} of ${total} packed.` : ""}
+        Altitude and big day/night swings — tick items as you pack. Saved on
+        this device.
+        {ready ? ` ${checked.length} of ${total} packed.` : ''}
       </p>
 
       <div className="mt-6 space-y-8">
@@ -64,7 +69,11 @@ export default function PackingChecklist() {
                         onChange={() => toggle(item.id)}
                         className="mt-0.5 accent-apricot"
                       />
-                      <span className={on ? "text-glacier line-through opacity-70" : ""}>
+                      <span
+                        className={
+                          on ? 'text-glacier line-through opacity-70' : ''
+                        }
+                      >
                         {item.label}
                       </span>
                     </label>

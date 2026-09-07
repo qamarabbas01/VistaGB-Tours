@@ -1,5 +1,5 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import type { galleryImages } from "@/data/hero";
+import OptimizedImage from '@/components/OptimizedImage';
+import type { galleryImages } from '@/data/hero';
 
 type GalleryImage = (typeof galleryImages)[number];
 
@@ -34,10 +34,10 @@ export function HomeInstagram({ images }: { images: readonly GalleryImage[] }) {
             <div
               key={image.src}
               className={
-                "relative overflow-hidden rounded-xl " +
+                'relative overflow-hidden rounded-xl ' +
                 (index === 0 || index === 5
-                  ? "aspect-square md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[360px]"
-                  : "aspect-square")
+                  ? 'aspect-square md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[360px]'
+                  : 'aspect-square')
               }
             >
               <OptimizedImage

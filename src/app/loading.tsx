@@ -1,4 +1,4 @@
-import { CardGridSkeleton } from "@/components/skeletons";
+import { CardGridSkeleton } from '@/components/skeletons';
 
 export default function HomeLoading() {
   return (

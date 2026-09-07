@@ -7,25 +7,25 @@ import {
   type Place,
   type RegionDestination,
   type TravelLocation,
-} from "@/data";
-import { fetchDestinationWeather } from "@/lib/weather/fetch";
-import type { DestinationWeather } from "@/lib/weather/types";
+} from '@/data';
+import { fetchDestinationWeather } from '@/lib/weather/fetch';
+import type { DestinationWeather } from '@/lib/weather/types';
 
 export type TravelIntent =
-  | "overview"
-  | "itinerary"
-  | "hotels"
-  | "food"
-  | "best_time"
-  | "weather"
-  | "budget"
-  | "roads"
-  | "packing"
-  | "nearby"
-  | "general";
+  | 'overview'
+  | 'itinerary'
+  | 'hotels'
+  | 'food'
+  | 'best_time'
+  | 'weather'
+  | 'budget'
+  | 'roads'
+  | 'packing'
+  | 'nearby'
+  | 'general';
 
 export type RetrievedDestination = {
-  kind: "region" | "place";
+  kind: 'region' | 'place';
   slug: string;
   name: string;
   tagline: string;
@@ -38,7 +38,7 @@ export type RetrievedDestination = {
   parentName?: string;
   placeType?: string;
   activities?: string[];
-  guide?: RegionDestination["guide"];
+  guide?: RegionDestination['guide'];
   childPlaceNames?: string[];
 };
 
@@ -47,34 +47,68 @@ export type TravelContext = {
   intent: TravelIntent;
   destinations: RetrievedDestination[];
   weather: DestinationWeather | null;
-  generalTopics: Array<"budget" | "roads" | "packing">;
+  generalTopics: Array<'budget' | 'roads' | 'packing'>;
 };
 
 const INTENT_PATTERNS: Array<{ intent: TravelIntent; pattern: RegExp }> = [
-  { intent: "itinerary", pattern: /\b(itinerar(?:y|ies)|day[- ]?by[- ]?day|5[- ]?day|7[- ]?day|schedule)\b/i },
-  { intent: "hotels", pattern: /\b(hotels?|lodges?|stays?|accommodation|guesthouses?|where to stay)\b/i },
-  { intent: "food", pattern: /\b(foods?|cuisine|eat|restaurants?|dishes?|famous food|what to eat)\b/i },
-  { intent: "best_time", pattern: /\b(best time|when to (go|visit)|seasons?|which month)\b/i },
-  { intent: "weather", pattern: /\b(weather|temperature|forecast|snowfall|raining|sunrise|sunset)\b/i },
-  { intent: "budget", pattern: /\b(budget|costs?|prices?|expensive|cheap|how much|spend)\b/i },
-  { intent: "roads", pattern: /\b(roads?|kkh|highway|landslides?|drive|jeep|access)\b/i },
-  { intent: "packing", pattern: /\b(packs?|packing|what to (bring|wear)|gear|layers|clothes)\b/i },
-  { intent: "nearby", pattern: /\b(nearby|near|around|close to|side trips?|from here)\b/i },
-  { intent: "overview", pattern: /\b(tell me about|about|overview|introduce|what is)\b/i },
+  {
+    intent: 'itinerary',
+    pattern:
+      /\b(itinerar(?:y|ies)|day[- ]?by[- ]?day|5[- ]?day|7[- ]?day|schedule)\b/i,
+  },
+  {
+    intent: 'hotels',
+    pattern:
+      /\b(hotels?|lodges?|stays?|accommodation|guesthouses?|where to stay)\b/i,
+  },
+  {
+    intent: 'food',
+    pattern:
+      /\b(foods?|cuisine|eat|restaurants?|dishes?|famous food|what to eat)\b/i,
+  },
+  {
+    intent: 'best_time',
+    pattern: /\b(best time|when to (go|visit)|seasons?|which month)\b/i,
+  },
+  {
+    intent: 'weather',
+    pattern:
+      /\b(weather|temperature|forecast|snowfall|raining|sunrise|sunset)\b/i,
+  },
+  {
+    intent: 'budget',
+    pattern: /\b(budget|costs?|prices?|expensive|cheap|how much|spend)\b/i,
+  },
+  {
+    intent: 'roads',
+    pattern: /\b(roads?|kkh|highway|landslides?|drive|jeep|access)\b/i,
+  },
+  {
+    intent: 'packing',
+    pattern: /\b(packs?|packing|what to (bring|wear)|gear|layers|clothes)\b/i,
+  },
+  {
+    intent: 'nearby',
+    pattern: /\b(nearby|near|around|close to|side trips?|from here)\b/i,
+  },
+  {
+    intent: 'overview',
+    pattern: /\b(tell me about|about|overview|introduce|what is)\b/i,
+  },
 ];
 
 export function detectIntent(query: string): TravelIntent {
   for (const { intent, pattern } of INTENT_PATTERNS) {
     if (pattern.test(query)) return intent;
   }
-  return "general";
+  return 'general';
 }
 
 function toRetrieved(location: TravelLocation): RetrievedDestination {
   if (isPlace(location)) {
     const parent = getParentRegion(location);
     return {
-      kind: "place",
+      kind: 'place',
       slug: location.slug,
       name: location.name,
       tagline: location.tagline,
@@ -92,7 +126,7 @@ function toRetrieved(location: TravelLocation): RetrievedDestination {
 
   const children = getPlacesForRegion(location.slug);
   return {
-    kind: "region",
+    kind: 'region',
     slug: location.slug,
     name: location.name,
     tagline: location.tagline,
@@ -140,16 +174,16 @@ export async function buildTravelContext(
 
   // Common aliases that search may miss as short names
   const aliasMap: Record<string, string> = {
-    hunza: "hunza-valley",
-    skardu: "skardu",
-    gilgit: "gilgit",
-    nagar: "nagar",
-    khaplu: "khaplu",
-    astore: "astore-valley",
-    "fairy meadows": "fairy-meadows",
-    deosai: "deosai-plains",
-    ghizer: "ghizer",
-    broghil: "broghil-valley",
+    hunza: 'hunza-valley',
+    skardu: 'skardu',
+    gilgit: 'gilgit',
+    nagar: 'nagar',
+    khaplu: 'khaplu',
+    astore: 'astore-valley',
+    'fairy meadows': 'fairy-meadows',
+    deosai: 'deosai-plains',
+    ghizer: 'ghizer',
+    broghil: 'broghil-valley',
   };
 
   const lower = query.toLowerCase();
@@ -165,7 +199,7 @@ export async function buildTravelContext(
   unique.sort((a, b) => {
     const score = (d: RetrievedDestination) => {
       const name = d.name.toLowerCase();
-      const slugWords = d.slug.replace(/-/g, " ");
+      const slugWords = d.slug.replace(/-/g, ' ');
       if (lowerName.includes(name)) return 0;
       if (name.split(/\s+/).some((w) => w.length > 3 && lowerName.includes(w)))
         return 1;
@@ -177,7 +211,10 @@ export async function buildTravelContext(
   const ranked = unique.slice(0, 4);
 
   let weather: DestinationWeather | null = null;
-  if (intent === "weather" || /\b(weather|forecast|temperature)\b/i.test(query)) {
+  if (
+    intent === 'weather' ||
+    /\b(weather|forecast|temperature)\b/i.test(query)
+  ) {
     const weatherSlug = ranked[0]?.slug ?? destinationSlug;
     if (weatherSlug) {
       try {
@@ -188,10 +225,13 @@ export async function buildTravelContext(
     }
   }
 
-  const generalTopics: TravelContext["generalTopics"] = [];
-  if (intent === "budget" || /\bbudget\b/i.test(query)) generalTopics.push("budget");
-  if (intent === "roads" || /\broad\b/i.test(query)) generalTopics.push("roads");
-  if (intent === "packing" || /\bpack/i.test(query)) generalTopics.push("packing");
+  const generalTopics: TravelContext['generalTopics'] = [];
+  if (intent === 'budget' || /\bbudget\b/i.test(query))
+    generalTopics.push('budget');
+  if (intent === 'roads' || /\broad\b/i.test(query))
+    generalTopics.push('roads');
+  if (intent === 'packing' || /\bpack/i.test(query))
+    generalTopics.push('packing');
 
   return {
     query,
@@ -216,16 +256,16 @@ export function formatContextForPrompt(ctx: TravelContext): string {
       `Best time: ${dest.bestTime}`,
       `Overview: ${dest.overview}`,
       `Getting there: ${dest.gettingThere}`,
-      `Highlights: ${dest.highlights.join("; ")}`,
+      `Highlights: ${dest.highlights.join('; ')}`,
     ];
 
     if (dest.parentName) block.push(`Parent region: ${dest.parentName}`);
     if (dest.placeType) block.push(`Type: ${dest.placeType}`);
     if (dest.activities?.length) {
-      block.push(`Activities: ${dest.activities.join("; ")}`);
+      block.push(`Activities: ${dest.activities.join('; ')}`);
     }
     if (dest.childPlaceNames?.length) {
-      block.push(`Places inside: ${dest.childPlaceNames.join(", ")}`);
+      block.push(`Places inside: ${dest.childPlaceNames.join(', ')}`);
     }
 
     const guide = dest.guide;
@@ -237,21 +277,21 @@ export function formatContextForPrompt(ctx: TravelContext): string {
         block.push(
           `Famous foods: ${guide.famousFoods
             .map((f) => `${f.name} — ${f.detail}`)
-            .join(" | ")}`,
+            .join(' | ')}`,
         );
       }
       if (guide.hotels?.length) {
         block.push(
           `Hotels & lodges: ${guide.hotels
             .map((h) => `${h.name} — ${h.detail}`)
-            .join(" | ")}`,
+            .join(' | ')}`,
         );
       }
       if (guide.restaurants?.length) {
         block.push(
           `Restaurants: ${guide.restaurants
             .map((r) => `${r.name} — ${r.detail}`)
-            .join(" | ")}`,
+            .join(' | ')}`,
         );
       }
       if (guide.suggestedItinerary?.length) {
@@ -260,27 +300,27 @@ export function formatContextForPrompt(ctx: TravelContext): string {
             .map(
               (d) =>
                 `${d.day}: ${d.title} — ${d.summary}${
-                  d.stops?.length ? ` (stops: ${d.stops.join(", ")})` : ""
+                  d.stops?.length ? ` (stops: ${d.stops.join(', ')})` : ''
                 }`,
             )
-            .join(" | ")}`,
+            .join(' | ')}`,
         );
       }
       if (guide.trekkingRoutes?.length) {
         block.push(
           `Treks: ${guide.trekkingRoutes
             .map((t) => `${t.name} — ${t.detail}`)
-            .join(" | ")}`,
+            .join(' | ')}`,
         );
       }
       if (guide.localTips?.length) {
-        block.push(`Local tips: ${guide.localTips.join("; ")}`);
+        block.push(`Local tips: ${guide.localTips.join('; ')}`);
       }
       if (guide.nearbyDestinations?.length) {
         block.push(
           `Nearby destinations: ${guide.nearbyDestinations
             .map((n) => `${n.name} — ${n.detail}`)
-            .join(" | ")}`,
+            .join(' | ')}`,
         );
       }
       if (guide.faqs?.length) {
@@ -288,7 +328,7 @@ export function formatContextForPrompt(ctx: TravelContext): string {
           `FAQs: ${guide.faqs
             .slice(0, 6)
             .map((f) => `Q: ${f.question} A: ${f.answer}`)
-            .join(" | ")}`,
+            .join(' | ')}`,
         );
       }
       if (guide.travelDuration) {
@@ -296,7 +336,7 @@ export function formatContextForPrompt(ctx: TravelContext): string {
       }
     }
 
-    parts.push(block.join("\n"));
+    parts.push(block.join('\n'));
   }
 
   if (ctx.weather) {
@@ -311,10 +351,10 @@ export function formatContextForPrompt(ctx: TravelContext): string {
             (d) =>
               `${d.date}: ${d.tempMinC}–${d.tempMaxC}°C, ${d.condition}, rain ${d.rainMm} mm, snow ${d.snowfallCm} cm`,
           )
-          .join(" | ")}`,
-      ].join("\n"),
+          .join(' | ')}`,
+      ].join('\n'),
     );
   }
 
-  return parts.join("\n\n").slice(0, 12000);
+  return parts.join('\n\n').slice(0, 12000);
 }

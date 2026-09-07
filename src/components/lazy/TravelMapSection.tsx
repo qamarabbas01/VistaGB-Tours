@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
 export const LazyTravelMapSection = dynamic(
-  () => import("@/components/TravelMapSection"),
+  () => import('@/components/TravelMapSection'),
   {
     ssr: false,
     loading: () => (

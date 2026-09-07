@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { usePreferences } from "@/components/PreferencesProvider";
+import { useEffect, useState } from 'react';
+import { usePreferences } from '@/components/PreferencesProvider';
 import {
   CURRENCIES,
   convert,
@@ -10,13 +10,15 @@ import {
   formatMoney,
   type CurrencyCode,
   type RateTable,
-} from "@/lib/currency";
+} from '@/lib/currency';
 
 export default function CurrencyConverter() {
   const { currency, setCurrency } = usePreferences();
-  const [amount, setAmount] = useState("25000");
-  const [from, setFrom] = useState<CurrencyCode>("PKR");
-  const [to, setTo] = useState<CurrencyCode>(currency === "PKR" ? "USD" : currency);
+  const [amount, setAmount] = useState('25000');
+  const [from, setFrom] = useState<CurrencyCode>('PKR');
+  const [to, setTo] = useState<CurrencyCode>(
+    currency === 'PKR' ? 'USD' : currency,
+  );
   const [rates, setRates] = useState<RateTable>(fallbackRates);
   const [live, setLive] = useState(false);
 
@@ -32,7 +34,7 @@ export default function CurrencyConverter() {
     };
   }, []);
 
-  const numeric = Number.parseFloat(amount.replace(/,/g, "")) || 0;
+  const numeric = Number.parseFloat(amount.replace(/,/g, '')) || 0;
   const converted = convert(numeric, from, to, rates);
 
   return (
@@ -42,8 +44,10 @@ export default function CurrencyConverter() {
         Converter
       </h2>
       <p className="mt-2 text-sm text-ice">
-        Useful for lodge quotes and jeep day rates.{" "}
-        {live ? "Live mid-market rates." : "Using fallback mid-market estimates."}
+        Useful for lodge quotes and jeep day rates.{' '}
+        {live
+          ? 'Live mid-market rates.'
+          : 'Using fallback mid-market estimates.'}
       </p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">

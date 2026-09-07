@@ -1,29 +1,53 @@
-import Link from "next/link";
-import JsonLd from "@/components/JsonLd";
-import CurrencyConverter from "@/components/CurrencyConverter";
-import CostCalculator from "@/components/CostCalculator";
-import PackingChecklist from "@/components/PackingChecklist";
+import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
+import CurrencyConverter from '@/components/CurrencyConverter';
+import CostCalculator from '@/components/CostCalculator';
+import PackingChecklist from '@/components/PackingChecklist';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   webPageJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: "Travel tools",
+  title: 'Travel tools',
   description:
-    "Wishlist, compare destinations, trip planner, booking calendar, currency converter, cost calculator, packing checklist, alerts, and videos for Gilgit-Baltistan.",
-  path: "/tools",
+    'Wishlist, compare destinations, trip planner, booking calendar, currency converter, cost calculator, packing checklist, alerts, and videos for Gilgit-Baltistan.',
+  path: '/tools',
 });
 
 const tools = [
-  { href: "/wishlist", label: "Wishlist", detail: "Save favourite valleys and places." },
-  { href: "/compare", label: "Compare destinations", detail: "Side-by-side for up to three regions." },
-  { href: "/plan", label: "Trip planner", detail: "Shape a day-by-day itinerary and print a PDF." },
-  { href: "/book", label: "Booking calendar", detail: "Pick dates and request a private tour." },
-  { href: "/alerts", label: "Alerts & roads", detail: "Travel notices and seasonal road status." },
-  { href: "/videos", label: "YouTube videos", detail: "Drone, trekking, jeep, snow, blossom, autumn." },
+  {
+    href: '/wishlist',
+    label: 'Wishlist',
+    detail: 'Save favourite valleys and places.',
+  },
+  {
+    href: '/compare',
+    label: 'Compare destinations',
+    detail: 'Side-by-side for up to three regions.',
+  },
+  {
+    href: '/plan',
+    label: 'Trip planner',
+    detail: 'Shape a day-by-day itinerary and print a PDF.',
+  },
+  {
+    href: '/book',
+    label: 'Booking calendar',
+    detail: 'Pick dates and request a private tour.',
+  },
+  {
+    href: '/alerts',
+    label: 'Alerts & roads',
+    detail: 'Travel notices and seasonal road status.',
+  },
+  {
+    href: '/videos',
+    label: 'YouTube videos',
+    detail: 'Drone, trekking, jeep, snow, blossom, autumn.',
+  },
 ];
 
 export default function ToolsPage() {
@@ -32,14 +56,14 @@ export default function ToolsPage() {
       <JsonLd
         data={withJsonLdContext([
           breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "Tools", path: "/tools" },
+            { name: 'Home', path: '/' },
+            { name: 'Tools', path: '/tools' },
           ]),
           webPageJsonLd({
-            name: "Travel tools",
+            name: 'Travel tools',
             description:
-              "Planning tools for Gilgit-Baltistan trips with VistaGB Tours.",
-            path: "/tools",
+              'Planning tools for Gilgit-Baltistan trips with VistaGB Tours.',
+            path: '/tools',
           }),
         ])}
       />
@@ -50,8 +74,9 @@ export default function ToolsPage() {
             Travel tools
           </h1>
           <p className="mt-4 max-w-2xl text-ice">
-            Wishlist, compare, plan, and budget a Gilgit-Baltistan trip — then send
-            dates to VistaGB. Chat is in the corner if you want a quick answer.
+            Wishlist, compare, plan, and budget a Gilgit-Baltistan trip — then
+            send dates to VistaGB. Chat is in the corner if you want a quick
+            answer.
           </p>
         </div>
       </section>

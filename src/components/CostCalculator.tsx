@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useState } from "react";
-import { usePreferences } from "@/components/PreferencesProvider";
+import { useEffect, useMemo, useState } from 'react';
+import { usePreferences } from '@/components/PreferencesProvider';
 import {
   costDestinationOptions,
   estimateTripCostPkr,
   TRAVEL_STYLE_META,
   TRAVEL_STYLES,
   type TravelStyle,
-} from "@/lib/cost";
+} from '@/lib/cost';
 import {
   convert,
   fallbackRates,
   fetchLiveRates,
   formatMoney,
   type RateTable,
-} from "@/lib/currency";
+} from '@/lib/currency';
 
 export default function CostCalculator() {
   const { currency } = usePreferences();
   const destinations = useMemo(() => costDestinationOptions(), []);
   const [days, setDays] = useState(7);
   const [groupSize, setGroupSize] = useState(2);
-  const [style, setStyle] = useState<TravelStyle>("comfortable");
+  const [style, setStyle] = useState<TravelStyle>('comfortable');
   const [destinationSlug, setDestinationSlug] = useState(
-    destinations[0]?.slug ?? "hunza-valley",
+    destinations[0]?.slug ?? 'hunza-valley',
   );
   const [rates, setRates] = useState<RateTable>(fallbackRates);
 
@@ -45,8 +45,8 @@ export default function CostCalculator() {
     style,
     destinationSlug,
   });
-  const min = convert(estimate.min, "PKR", currency, rates);
-  const max = convert(estimate.max, "PKR", currency, rates);
+  const min = convert(estimate.min, 'PKR', currency, rates);
+  const max = convert(estimate.max, 'PKR', currency, rates);
   const meta = TRAVEL_STYLE_META[style];
 
   return (

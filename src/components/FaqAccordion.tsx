@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 type Faq = {
   question: string;
@@ -21,8 +21,8 @@ export default function FaqAccordion({ items }: Props) {
         return (
           <div key={item.question}>
             <button
-              id={"faq-btn-" + index}
-              aria-controls={"faq-panel-" + index}
+              id={'faq-btn-' + index}
+              aria-controls={'faq-panel-' + index}
               type="button"
               aria-expanded={isOpen}
               onClick={() => setOpenIndex(isOpen ? null : index)}
@@ -33,8 +33,8 @@ export default function FaqAccordion({ items }: Props) {
               </span>
               <span
                 className={
-                  "mt-1 shrink-0 font-mono text-sm text-apricot transition-transform duration-300 " +
-                  (isOpen ? "rotate-45" : "")
+                  'mt-1 shrink-0 font-mono text-sm text-apricot transition-transform duration-300 ' +
+                  (isOpen ? 'rotate-45' : '')
                 }
                 aria-hidden
               >
@@ -42,14 +42,14 @@ export default function FaqAccordion({ items }: Props) {
               </span>
             </button>
             <div
-              id={"faq-panel-" + index}
+              id={'faq-panel-' + index}
               role="region"
-              aria-labelledby={"faq-btn-" + index}
+              aria-labelledby={'faq-btn-' + index}
               aria-hidden={!isOpen}
               inert={!isOpen || undefined}
               className={
-                "grid transition-[grid-template-rows] duration-300 ease-out " +
-                (isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")
+                'grid transition-[grid-template-rows] duration-300 ease-out ' +
+                (isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]')
               }
             >
               <div className="overflow-hidden">

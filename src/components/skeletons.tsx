@@ -1,16 +1,12 @@
-export function Skeleton({ className = "" }: { className?: string }) {
+export function Skeleton({ className = '' }: { className?: string }) {
   return <div className={`skeleton ${className}`} aria-hidden />;
 }
 
-export function PageHeroSkeleton({
-  compact = false,
-}: {
-  compact?: boolean;
-}) {
+export function PageHeroSkeleton({ compact = false }: { compact?: boolean }) {
   return (
     <section
       className={`border-b border-teal/20 bg-slate px-6 md:px-10 ${
-        compact ? "py-12 md:py-16" : "py-16 md:py-24"
+        compact ? 'py-12 md:py-16' : 'py-16 md:py-24'
       }`}
     >
       <div className="mx-auto max-w-7xl">
