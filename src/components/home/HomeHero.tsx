@@ -26,7 +26,7 @@ export function HomeHero() {
           id="home-hero-heading"
           className="rise-in rise-in-delay-1 max-w-4xl font-display text-5xl font-semibold leading-[1.08] text-glacier md:text-7xl"
         >
-          Discover
+          Discover{' '}
           <span className="mt-2 block text-4xl italic text-apricot md:text-6xl">
             Gilgit-Baltistan
           </span>

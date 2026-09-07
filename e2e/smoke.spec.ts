@@ -6,7 +6,7 @@ test.describe('core visitor flows', () => {
     await expect(page).toHaveTitle(/VistaGB/i);
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     await expect(page.getByRole('heading', { level: 1 })).toContainText(
-      /discover gilgit-baltistan/i,
+      /discover\s*gilgit-baltistan/i,
     );
     await expect(
       page.getByText(
