@@ -7,6 +7,7 @@ import { HomeInstagram } from '@/components/home/HomeInstagram';
 import { HomeNews } from '@/components/home/HomeNews';
 import { HomePackages } from '@/components/home/HomePackages';
 import { HomePopularDestinations } from '@/components/home/HomePopularDestinations';
+import { HomeExploreByExperience } from '@/components/home/HomeExploreByExperience';
 import { HomeExperiences } from '@/components/home/HomeExperiences';
 import { HomeReviews } from '@/components/home/HomeReviews';
 import { HomeStatistics } from '@/components/home/HomeStatistics';
@@ -52,6 +53,7 @@ export default async function Home() {
       <HomeHero />
       <HomeWhyChoose />
       <HomePopularDestinations destinations={popularDestinations} />
+      <HomeExploreByExperience />
       <SectionDivider />
       <HomeExperiences items={experiences} />
       <HomeActivities items={activities} />

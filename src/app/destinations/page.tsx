@@ -2,7 +2,14 @@ import Link from 'next/link';
 import DestinationCard from '@/components/DestinationCard';
 import JsonLd from '@/components/JsonLd';
 import Pagination from '@/components/Pagination';
-import { regions, searchLocations, type TravelLocation } from '@/data';
+import {
+  EXPERIENCE_CATEGORIES,
+  experienceHref,
+  getExperienceCategory,
+  regions,
+  searchLocations,
+  type TravelLocation,
+} from '@/data';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
@@ -41,6 +48,7 @@ export default function DestinationsPage({ searchParams }: Props) {
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedDestinations = regions.slice(start, start + ITEMS_PER_PAGE);
   const searchResult = query ? searchLocations(query) : null;
+  const experience = query ? getExperienceCategory(query) : undefined;
   const searchLocationsList: TravelLocation[] = searchResult
     ? [...searchResult.regions, ...searchResult.places]
     : [];
@@ -106,15 +114,22 @@ export default function DestinationsPage({ searchParams }: Props) {
             <span className="font-mono uppercase tracking-widest text-ice/60">
               Explore by
             </span>
-            {['fort', 'lake', 'valley', 'trekking route'].map((term) => (
-              <Link
-                key={term}
-                href={`/destinations?q=${encodeURIComponent(term)}`}
-                className="rounded-full border border-teal/30 bg-night/20 px-3 py-1.5 capitalize text-ice transition-colors hover:border-apricot/60 hover:text-apricot"
-              >
-                {term}
-              </Link>
-            ))}
+            {EXPERIENCE_CATEGORIES.map((category) => {
+              const active = experience?.slug === category.slug;
+              return (
+                <Link
+                  key={category.slug}
+                  href={experienceHref(category.slug)}
+                  className={`rounded-full border px-3 py-1.5 transition-colors ${
+                    active
+                      ? 'border-apricot/60 bg-apricot/15 text-glacier'
+                      : 'border-teal/30 bg-night/20 text-ice hover:border-apricot/60 hover:text-apricot'
+                  }`}
+                >
+                  {category.name}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -127,7 +142,7 @@ export default function DestinationsPage({ searchParams }: Props) {
                 {searchLocationsList.length}{' '}
                 {searchLocationsList.length === 1 ? 'result' : 'results'} for{' '}
                 <span className="font-semibold text-glacier">
-                  &ldquo;{query}&rdquo;
+                  {experience ? experience.name : `\u201c${query}\u201d`}
                 </span>
               </p>
               <Link
