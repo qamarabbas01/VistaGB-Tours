@@ -1,4 +1,4 @@
-import { CardGridSkeleton, PageHeroSkeleton } from "@/components/skeletons";
+import { CardGridSkeleton, PageHeroSkeleton } from '@/components/skeletons';
 
 export default function BlogLoading() {
   return (

@@ -1,10 +1,10 @@
-import { contact } from "@/config/contact";
-import { getClientIp, rateLimit } from "@/lib/rate-limit";
-import { getContactMailEnv } from "@/lib/server-env";
-import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { contact } from '@/config/contact';
+import { getClientIp, rateLimit } from '@/lib/rate-limit';
+import { getContactMailEnv } from '@/lib/server-env';
+import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
-export const runtime = "nodejs";
+export const runtime = 'nodejs';
 
 type ContactPayload = {
   name: string;
@@ -41,17 +41,17 @@ function isValidEmail(email: string) {
 
 function escapeHtml(text: string) {
   return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
 function formatTravelDates(inquiry: ContactPayload) {
-  if (inquiry.datesFlexible === "yes") {
+  if (inquiry.datesFlexible === 'yes') {
     return inquiry.travelMonth
       ? `Flexible — hoping for ${inquiry.travelMonth}`
-      : "Flexible dates";
+      : 'Flexible dates';
   }
 
   if (inquiry.travelFrom && inquiry.travelTo) {
@@ -62,7 +62,7 @@ function formatTravelDates(inquiry: ContactPayload) {
     return `From ${inquiry.travelFrom}`;
   }
 
-  return "Not specified";
+  return 'Not specified';
 }
 
 function buildEmailBody(inquiry: ContactPayload) {
@@ -74,22 +74,22 @@ function buildEmailBody(inquiry: ContactPayload) {
     `Travel dates: ${formatTravelDates(inquiry)}`,
     `Trip length: ${inquiry.duration}`,
     `Travelers: ${inquiry.groupSize}`,
-    inquiry.message ? "" : null,
+    inquiry.message ? '' : null,
     inquiry.message ? inquiry.message : null,
   ].filter((line): line is string => line !== null);
 
-  return lines.join("\n");
+  return lines.join('\n');
 }
 
 function buildEmailHtml(inquiry: ContactPayload) {
   const rows = [
-    ["Name", inquiry.name],
-    ["Email", inquiry.email],
-    ["Region", inquiry.destination],
-    inquiry.places ? ["Places", inquiry.places] : null,
-    ["Travel dates", formatTravelDates(inquiry)],
-    ["Trip length", inquiry.duration],
-    ["Travelers", inquiry.groupSize],
+    ['Name', inquiry.name],
+    ['Email', inquiry.email],
+    ['Region', inquiry.destination],
+    inquiry.places ? ['Places', inquiry.places] : null,
+    ['Travel dates', formatTravelDates(inquiry)],
+    ['Trip length', inquiry.duration],
+    ['Travelers', inquiry.groupSize],
   ].filter((row): row is [string, string] => row !== null);
 
   const tableRows = rows
@@ -97,11 +97,11 @@ function buildEmailHtml(inquiry: ContactPayload) {
       ([label, value]) =>
         `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</p>`,
     )
-    .join("");
+    .join('');
 
   const notes = inquiry.message
-    ? `<p><strong>Additional notes:</strong></p><p>${escapeHtml(inquiry.message).replace(/\n/g, "<br>")}</p>`
-    : "";
+    ? `<p><strong>Additional notes:</strong></p><p>${escapeHtml(inquiry.message).replace(/\n/g, '<br>')}</p>`
+    : '';
 
   return `${tableRows}${notes}`;
 }
@@ -112,13 +112,18 @@ function tooLong(value: string, max: number) {
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
-  const limited = rateLimit(`contact:${ip}`, { limit: 5, windowMs: 60 * 60 * 1000 });
+  const limited = rateLimit(`contact:${ip}`, {
+    limit: 5,
+    windowMs: 60 * 60 * 1000,
+  });
   if (!limited.ok) {
     return NextResponse.json(
-      { error: "Too many inquiries from this network. Please try again later." },
+      {
+        error: 'Too many inquiries from this network. Please try again later.',
+      },
       {
         status: 429,
-        headers: { "Retry-After": String(limited.retryAfterSec) },
+        headers: { 'Retry-After': String(limited.retryAfterSec) },
       },
     );
   }
@@ -129,7 +134,7 @@ export async function POST(request: Request) {
     body = await request.json();
   } catch {
     return NextResponse.json(
-      { error: "Invalid request body." },
+      { error: 'Invalid request body.' },
       { status: 400 },
     );
   }
@@ -138,37 +143,37 @@ export async function POST(request: Request) {
     name,
     email,
     destination,
-    places = "",
-    travelFrom = "",
-    travelTo = "",
-    datesFlexible = "no",
-    travelMonth = "",
+    places = '',
+    travelFrom = '',
+    travelTo = '',
+    datesFlexible = 'no',
+    travelMonth = '',
     duration,
     groupSize,
-    message = "",
-    website = "",
+    message = '',
+    website = '',
   } = body as Partial<ContactPayload> & { website?: string };
 
   // Honeypot: bots fill this hidden field; humans never see it.
-  if (typeof website === "string" && website.trim() !== "") {
+  if (typeof website === 'string' && website.trim() !== '') {
     return NextResponse.json({ ok: true });
   }
 
   if (
-    typeof name !== "string" ||
-    typeof email !== "string" ||
-    typeof destination !== "string" ||
-    typeof duration !== "string" ||
-    typeof groupSize !== "string" ||
-    typeof places !== "string" ||
-    typeof travelFrom !== "string" ||
-    typeof travelTo !== "string" ||
-    typeof datesFlexible !== "string" ||
-    typeof travelMonth !== "string" ||
-    typeof message !== "string"
+    typeof name !== 'string' ||
+    typeof email !== 'string' ||
+    typeof destination !== 'string' ||
+    typeof duration !== 'string' ||
+    typeof groupSize !== 'string' ||
+    typeof places !== 'string' ||
+    typeof travelFrom !== 'string' ||
+    typeof travelTo !== 'string' ||
+    typeof datesFlexible !== 'string' ||
+    typeof travelMonth !== 'string' ||
+    typeof message !== 'string'
   ) {
     return NextResponse.json(
-      { error: "Invalid input: all fields must be text." },
+      { error: 'Invalid input: all fields must be text.' },
       { status: 400 },
     );
   }
@@ -187,35 +192,41 @@ export async function POST(request: Request) {
     tooLong(message, FIELD_LIMITS.message)
   ) {
     return NextResponse.json(
-      { error: "One or more fields are too long." },
+      { error: 'One or more fields are too long.' },
       { status: 400 },
     );
   }
 
-  if (!name.trim() || !email.trim() || !destination.trim() || !duration.trim() || !groupSize.trim()) {
+  if (
+    !name.trim() ||
+    !email.trim() ||
+    !destination.trim() ||
+    !duration.trim() ||
+    !groupSize.trim()
+  ) {
     return NextResponse.json(
-      { error: "Please fill in all required fields." },
+      { error: 'Please fill in all required fields.' },
       { status: 400 },
     );
   }
 
-  if (datesFlexible !== "yes" && !travelFrom.trim()) {
+  if (datesFlexible !== 'yes' && !travelFrom.trim()) {
     return NextResponse.json(
-      { error: "Please choose when you want to travel." },
+      { error: 'Please choose when you want to travel.' },
       { status: 400 },
     );
   }
 
-  if (datesFlexible === "yes" && !travelMonth.trim()) {
+  if (datesFlexible === 'yes' && !travelMonth.trim()) {
     return NextResponse.json(
-      { error: "Please choose the month you are hoping to travel." },
+      { error: 'Please choose the month you are hoping to travel.' },
       { status: 400 },
     );
   }
 
   if (!isValidEmail(email)) {
     return NextResponse.json(
-      { error: "Please provide a valid email address." },
+      { error: 'Please provide a valid email address.' },
       { status: 400 },
     );
   }
@@ -241,12 +252,12 @@ export async function POST(request: Request) {
 
   if (!apiKey || !from || !to) {
     console.error(
-      "Contact email is not configured (set RESEND_API_KEY, RESEND_FROM_EMAIL, and CONTACT_EMAIL_TO or NEXT_PUBLIC_CONTACT_EMAIL).",
+      'Contact email is not configured (set RESEND_API_KEY, RESEND_FROM_EMAIL, and CONTACT_EMAIL_TO or NEXT_PUBLIC_CONTACT_EMAIL).',
     );
     return NextResponse.json(
       {
         error:
-          "Unable to send your message right now. Please try again later or email us directly.",
+          'Unable to send your message right now. Please try again later or email us directly.',
       },
       { status: 503 },
     );
@@ -263,11 +274,11 @@ export async function POST(request: Request) {
   });
 
   if (error) {
-    console.error("Resend error:", error);
+    console.error('Resend error:', error);
     return NextResponse.json(
       {
         error:
-          "Unable to send your message right now. Please try again later or email us directly.",
+          'Unable to send your message right now. Please try again later or email us directly.',
       },
       { status: 500 },
     );

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useCallback, useState } from "react";
-import InfiniteSentinel from "@/components/InfiniteSentinel";
-import NewsCard from "@/components/NewsCard";
-import { NewsListSkeleton } from "@/components/skeletons";
-import type { NewsItem } from "@/lib/news/types";
+import { useCallback, useState } from 'react';
+import InfiniteSentinel from '@/components/InfiniteSentinel';
+import NewsCard from '@/components/NewsCard';
+import { NewsListSkeleton } from '@/components/skeletons';
+import type { NewsItem } from '@/lib/news/types';
 
 type Props = {
   nextPage: number;
@@ -26,7 +26,7 @@ export default function NewsInfiniteRest({ nextPage, totalPages }: Props) {
     try {
       const response = await fetch(`/api/news?page=${page}`);
       if (!response.ok) {
-        throw new Error("Could not load more news.");
+        throw new Error('Could not load more news.');
       }
       const data = (await response.json()) as { items?: NewsItem[] };
       const nextItems = data.items ?? [];
@@ -36,7 +36,9 @@ export default function NewsInfiniteRest({ nextPage, totalPages }: Props) {
       });
       setPage((current) => current + 1);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not load more news.");
+      setError(
+        err instanceof Error ? err.message : 'Could not load more news.',
+      );
     } finally {
       setLoading(false);
     }
@@ -60,7 +62,9 @@ export default function NewsInfiniteRest({ nextPage, totalPages }: Props) {
         </div>
       ) : null}
 
-      {error ? <p className="mt-6 text-center text-sm text-ice">{error}</p> : null}
+      {error ? (
+        <p className="mt-6 text-center text-sm text-ice">{error}</p>
+      ) : null}
 
       {!done ? (
         <div className="mt-10 flex flex-col items-center gap-4">
@@ -71,7 +75,7 @@ export default function NewsInfiniteRest({ nextPage, totalPages }: Props) {
             disabled={loading}
             className="rounded-full border border-teal/20 px-6 py-2 text-sm font-medium text-ice transition-colors hover:border-apricot/50 hover:text-apricot disabled:opacity-50"
           >
-            {loading ? "Loading…" : "Load more news"}
+            {loading ? 'Loading…' : 'Load more news'}
           </button>
         </div>
       ) : null}

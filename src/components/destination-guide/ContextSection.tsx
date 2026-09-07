@@ -5,17 +5,17 @@ export function ContextSection({ sections }: { sections: ContextBlock[] }) {
 
   const gridClass =
     sections.length === 1
-      ? "mt-10 grid gap-10"
+      ? 'mt-10 grid gap-10'
       : sections.length === 2
-        ? "mt-10 grid gap-10 md:grid-cols-2"
-        : "mt-10 grid gap-10 md:grid-cols-3";
+        ? 'mt-10 grid gap-10 md:grid-cols-2'
+        : 'mt-10 grid gap-10 md:grid-cols-3';
 
   const heading =
     sections.length === 1
       ? sections[0].label
       : sections.length === 2
         ? `${sections[0].label} & ${sections[1].label}`
-        : "History, culture & weather";
+        : 'History, culture & weather';
 
   return (
     <section className="border-t border-teal/20 py-16 md:py-24">

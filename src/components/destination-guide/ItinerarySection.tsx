@@ -1,5 +1,5 @@
-import Link from "next/link";
-import type { ItineraryDay, RegionDestination } from "@/data/types";
+import Link from 'next/link';
+import type { ItineraryDay, RegionDestination } from '@/data/types';
 
 export function ItinerarySection({
   region,
@@ -51,10 +51,12 @@ export function ItinerarySection({
                 <h3 className="font-display text-lg font-semibold text-glacier">
                   {day.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-ice">{day.summary}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ice">
+                  {day.summary}
+                </p>
                 {day.stops && day.stops.length > 0 ? (
                   <p className="mt-3 text-xs text-apricot">
-                    {day.stops.join(" · ")}
+                    {day.stops.join(' · ')}
                   </p>
                 ) : null}
               </div>

@@ -1,12 +1,17 @@
-import type { Place, RegionDestination, SearchResult, TravelLocation } from "./types";
-import { hunzaDestination } from "./destinations/hunza";
-import { skarduDestination } from "./destinations/skardu";
-import { gilgitDestination } from "./destinations/gilgit";
-import { nagarDestination } from "./destinations/nagar";
-import { legacyDestinations } from "./destinations/legacy";
-import { allPlaces } from "./places";
+import type {
+  Place,
+  RegionDestination,
+  SearchResult,
+  TravelLocation,
+} from './types';
+import { hunzaDestination } from './destinations/hunza';
+import { skarduDestination } from './destinations/skardu';
+import { gilgitDestination } from './destinations/gilgit';
+import { nagarDestination } from './destinations/nagar';
+import { legacyDestinations } from './destinations/legacy';
+import { allPlaces } from './places';
 
-export { blogPosts } from "./blog";
+export { blogPosts } from './blog';
 
 export type {
   BlogPost,
@@ -25,7 +30,7 @@ export type {
   SearchResult,
   TrekDifficulty,
   VideoTheme,
-} from "./types";
+} from './types';
 
 /** Top-level region hubs shown on the destinations map */
 export const regions: RegionDestination[] = [
@@ -45,7 +50,7 @@ const placeBySlug = new Map(places.map((p) => [p.slug, p]));
 const regionBySlug = new Map(regions.map((r) => [r.slug, r]));
 
 export function isPlace(location: TravelLocation): location is Place {
-  return "parentSlug" in location;
+  return 'parentSlug' in location;
 }
 
 export function getRegionBySlug(slug: string): RegionDestination | undefined {
@@ -58,7 +63,9 @@ export function getLocationBySlug(slug: string): TravelLocation | undefined {
 }
 
 /** @deprecated Use getLocationBySlug */
-export function getDestinationBySlug(slug: string): RegionDestination | undefined {
+export function getDestinationBySlug(
+  slug: string,
+): RegionDestination | undefined {
   return getRegionBySlug(slug);
 }
 
@@ -83,23 +90,23 @@ export function getAllStaticSlugs(): string[] {
 }
 
 const SEARCH_ALIASES: Record<string, string[]> = {
-  hunza: ["hunza-valley"],
-  gojal: ["gojal-valley", "hunza-valley"],
-  karimabad: ["karimabad", "hunza-valley"],
-  baltit: ["baltit-fort", "hunza-valley"],
-  altit: ["altit-fort", "hunza-valley"],
-  attabad: ["attabad-lake", "hunza-valley"],
-  passu: ["passu", "passu-cones", "hunza-valley"],
-  khunjerab: ["khunjerab-pass", "hunza-valley"],
-  hopper: ["hopper-valley", "nagar"],
-  hoper: ["hopper-valley", "nagar"],
-  nagar: ["nagar", "nagar-khas"],
-  skardu: ["skardu"],
-  kachura: ["shangrila-resort", "upper-kachura-lake", "skardu"],
-  shangrila: ["shangrila-resort", "skardu"],
-  deosai: ["deosai-plains", "skardu"],
-  naltar: ["naltar-valley", "gilgit"],
-  gilgit: ["gilgit"],
+  hunza: ['hunza-valley'],
+  gojal: ['gojal-valley', 'hunza-valley'],
+  karimabad: ['karimabad', 'hunza-valley'],
+  baltit: ['baltit-fort', 'hunza-valley'],
+  altit: ['altit-fort', 'hunza-valley'],
+  attabad: ['attabad-lake', 'hunza-valley'],
+  passu: ['passu', 'passu-cones', 'hunza-valley'],
+  khunjerab: ['khunjerab-pass', 'hunza-valley'],
+  hopper: ['hopper-valley', 'nagar'],
+  hoper: ['hopper-valley', 'nagar'],
+  nagar: ['nagar', 'nagar-khas'],
+  skardu: ['skardu'],
+  kachura: ['shangrila-resort', 'upper-kachura-lake', 'skardu'],
+  shangrila: ['shangrila-resort', 'skardu'],
+  deosai: ['deosai-plains', 'skardu'],
+  naltar: ['naltar-valley', 'gilgit'],
+  gilgit: ['gilgit'],
 };
 
 function scoreMatch(text: string, query: string): number {
@@ -121,7 +128,7 @@ function placeSearchText(place: Place): string {
     ...place.highlights,
     ...place.activities,
     place.parentSlug,
-  ].join(" ");
+  ].join(' ');
 }
 
 function regionSearchText(region: RegionDestination): string {
@@ -147,13 +154,13 @@ function regionSearchText(region: RegionDestination): string {
     ...(guide?.hotels?.map((h) => h.name) ?? []),
     ...(guide?.restaurants?.map((r) => r.name) ?? []),
     ...(guide?.trekkingRoutes?.map(
-      (t) => `${t.name} ${t.detail} ${t.placeSlug ?? ""}`,
+      (t) => `${t.name} ${t.detail} ${t.placeSlug ?? ''}`,
     ) ?? []),
     ...(guide?.nearbyDestinations?.map((n) => n.name) ?? []),
     ...(guide?.faqs?.map((f) => `${f.question} ${f.answer}`) ?? []),
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 }
 
 /** Search regions and places by names, categories, guide content, and keywords */
@@ -169,9 +176,9 @@ export function searchLocations(query: string): SearchResult {
 
   if (placeType) {
     const typedRegions =
-      q === "valley"
+      q === 'valley'
         ? regions.filter((region) =>
-            region.name.toLowerCase().includes("valley"),
+            region.name.toLowerCase().includes('valley'),
           )
         : [];
 

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import CompareButton from "@/components/CompareButton";
-import WishlistButton from "@/components/WishlistButton";
+import Link from 'next/link';
+import CompareButton from '@/components/CompareButton';
+import WishlistButton from '@/components/WishlistButton';
 
 type Props = {
   slug: string;
@@ -10,7 +10,11 @@ type Props = {
   isRegion?: boolean;
 };
 
-export default function DestinationActions({ slug, name, isRegion = false }: Props) {
+export default function DestinationActions({
+  slug,
+  name,
+  isRegion = false,
+}: Props) {
   return (
     <div className="mt-5 flex flex-wrap items-center gap-2">
       <WishlistButton slug={slug} />

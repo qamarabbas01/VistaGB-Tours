@@ -1,27 +1,27 @@
 const reasons = [
   {
-    title: "Local Expertise",
+    title: 'Local Expertise',
     detail:
       "Our guides are born and raised across Gilgit-Baltistan — they know the trails, the weather, and the families who'll host you.",
-    mark: "G·B",
+    mark: 'G·B',
   },
   {
-    title: "Tailored Itineraries",
+    title: 'Tailored Itineraries',
     detail:
-      "No fixed bus tours. Every route is built around your pace, season, and the valleys you actually want to see.",
-    mark: "1:1",
+      'No fixed bus tours. Every route is built around your pace, season, and the valleys you actually want to see.',
+    mark: '1:1',
   },
   {
-    title: "Safety First",
+    title: 'Safety First',
     detail:
-      "Licensed drivers, vetted lodges, and trip plans that account for landslide season, altitude, and road conditions.",
-    mark: "✓",
+      'Licensed drivers, vetted lodges, and trip plans that account for landslide season, altitude, and road conditions.',
+    mark: '✓',
   },
   {
-    title: "Fair to Communities",
+    title: 'Fair to Communities',
     detail:
       "We work directly with local homestays, porters, and cooks — your trip supports the valleys you're visiting.",
-    mark: "%",
+    mark: '%',
   },
 ] as const;
 

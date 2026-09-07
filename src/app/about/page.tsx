@@ -1,111 +1,126 @@
-import Link from "next/link";
-import Button from "@/components/Button";
-import JsonLd from "@/components/JsonLd";
-import OptimizedImage from "@/components/OptimizedImage";
-import { SectionDivider } from "@/components/home/SectionDivider";
-import { contact } from "@/config/contact";
-import { getRegionBySlug } from "@/data";
+import Link from 'next/link';
+import Button from '@/components/Button';
+import JsonLd from '@/components/JsonLd';
+import OptimizedImage from '@/components/OptimizedImage';
+import { SectionDivider } from '@/components/home/SectionDivider';
+import { contact } from '@/config/contact';
+import { getRegionBySlug } from '@/data';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   webPageJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 const ABOUT_DESCRIPTION =
-  "VistaGB Tours is a Skardu-based operator guiding travelers through Hunza, Baltistan, and the high valleys of Gilgit-Baltistan with local knowledge and tailored itineraries.";
+  'VistaGB Tours is a Skardu-based operator guiding travelers through Hunza, Baltistan, and the high valleys of Gilgit-Baltistan with local knowledge and tailored itineraries.';
 
-const HERO_IMAGE = "/images/commons/1a2b77e8ff37f557.jpg";
-const STORY_IMAGE = "/images/commons/4e0000c8d4bbe492.jpg";
-const CTA_IMAGE = "/images/commons/bd7ddfea0e6ee033.jpg";
+const HERO_IMAGE = '/images/commons/1a2b77e8ff37f557.jpg';
+const STORY_IMAGE = '/images/commons/4e0000c8d4bbe492.jpg';
+const CTA_IMAGE = '/images/commons/bd7ddfea0e6ee033.jpg';
 
 export const metadata = buildPageMetadata({
-  title: "About Us",
+  title: 'About Us',
   description: ABOUT_DESCRIPTION,
-  path: "/about",
+  path: '/about',
   image: HERO_IMAGE,
-  imageAlt: "Karakoram peaks above Skardu valley",
+  imageAlt: 'Karakoram peaks above Skardu valley',
 });
 
 const facts = [
-  { mark: "SKD", title: "Based in Skardu", detail: "On the road into Baltistan, not a desk in another city." },
-  { mark: "1:1", title: "Private itineraries", detail: "No coach tours. Every route is built around your dates and pace." },
-  { mark: "G·B", title: "Hunza to Diamer", detail: "Hunza, Baltistan, Diamer, and the high roads between them." },
-  { mark: "%", title: "Local partnerships", detail: "Homestays, porters, and lodges paid fairly, booked directly." },
+  {
+    mark: 'SKD',
+    title: 'Based in Skardu',
+    detail: 'On the road into Baltistan, not a desk in another city.',
+  },
+  {
+    mark: '1:1',
+    title: 'Private itineraries',
+    detail: 'No coach tours. Every route is built around your dates and pace.',
+  },
+  {
+    mark: 'G·B',
+    title: 'Hunza to Diamer',
+    detail: 'Hunza, Baltistan, Diamer, and the high roads between them.',
+  },
+  {
+    mark: '%',
+    title: 'Local partnerships',
+    detail: 'Homestays, porters, and lodges paid fairly, booked directly.',
+  },
 ] as const;
 
 const services = [
   {
-    step: "01",
-    title: "Custom road trips",
+    step: '01',
+    title: 'Custom road trips',
     detail:
-      "Jeep days along the Karakoram Highway, Deosai tracks, and high valley roads — paced for weather, not a timetable.",
+      'Jeep days along the Karakoram Highway, Deosai tracks, and high valley roads — paced for weather, not a timetable.',
   },
   {
-    step: "02",
-    title: "Treks and base camps",
+    step: '02',
+    title: 'Treks and base camps',
     detail:
-      "Day hikes to multi-day routes, with licensed guides and porters arranged from the valleys you are walking through.",
+      'Day hikes to multi-day routes, with licensed guides and porters arranged from the valleys you are walking through.',
   },
   {
-    step: "03",
-    title: "Homestays and lodges",
+    step: '03',
+    title: 'Homestays and lodges',
     detail:
-      "Nights with families and vetted guesthouses so your stay supports the communities you visit, not a chain desk.",
+      'Nights with families and vetted guesthouses so your stay supports the communities you visit, not a chain desk.',
   },
   {
-    step: "04",
-    title: "Logistics on the ground",
+    step: '04',
+    title: 'Logistics on the ground',
     detail:
-      "Airport pickups, permits, drivers, and road-status calls — the unglamorous work that keeps a mountain trip moving.",
+      'Airport pickups, permits, drivers, and road-status calls — the unglamorous work that keeps a mountain trip moving.',
   },
 ] as const;
 
 const principles = [
   {
-    mark: "KKH",
-    title: "Born on the highway",
+    mark: 'KKH',
+    title: 'Born on the highway',
     detail:
-      "VistaGB was founded by guides and drivers who grew up along the Karakoram Highway. The routes are not researched — they are home.",
+      'VistaGB was founded by guides and drivers who grew up along the Karakoram Highway. The routes are not researched — they are home.',
   },
   {
-    mark: "1:1",
-    title: "Tailored, never packed",
+    mark: '1:1',
+    title: 'Tailored, never packed',
     detail:
-      "We do not run fixed bus tours. Season, group size, and the valleys you actually want to see decide the itinerary.",
+      'We do not run fixed bus tours. Season, group size, and the valleys you actually want to see decide the itinerary.',
   },
   {
-    mark: "✓",
-    title: "Roads and altitude first",
+    mark: '✓',
+    title: 'Roads and altitude first',
     detail:
-      "Plans account for landslide season, pass closures, and elevation. Licensed drivers and a pace that can change with the weather.",
+      'Plans account for landslide season, pass closures, and elevation. Licensed drivers and a pace that can change with the weather.',
   },
   {
-    mark: "%",
-    title: "Fair to the valleys",
+    mark: '%',
+    title: 'Fair to the valleys',
     detail:
-      "We book directly with local families, porters, and lodges. Your trip should leave money in the places you pass through.",
+      'We book directly with local families, porters, and lodges. Your trip should leave money in the places you pass through.',
   },
 ] as const;
 
 const COVERAGE_SLUGS = [
-  "hunza-valley",
-  "skardu",
-  "gilgit",
-  "nagar",
-  "fairy-meadows",
-  "khaplu",
+  'hunza-valley',
+  'skardu',
+  'gilgit',
+  'nagar',
+  'fairy-meadows',
+  'khaplu',
 ] as const;
 
 function coverageImage(slug: string, fallback: string): string {
   const region = getRegionBySlug(slug);
-  const local = region?.gallery.find((item) => item.src.startsWith("/images/"));
+  const local = region?.gallery.find((item) => item.src.startsWith('/images/'));
   return local?.src ?? region?.image ?? fallback;
 }
 
 export default function AboutPage() {
-  const heroCoords =
-    contact.location.coords || "35.3°N · 75.6°E · SKARDU";
+  const heroCoords = contact.location.coords || '35.3°N · 75.6°E · SKARDU';
   const coverage = COVERAGE_SLUGS.map((slug) => {
     const region = getRegionBySlug(slug);
     if (!region) return null;
@@ -123,14 +138,14 @@ export default function AboutPage() {
       <JsonLd
         data={withJsonLdContext([
           breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "About Us", path: "/about" },
+            { name: 'Home', path: '/' },
+            { name: 'About Us', path: '/about' },
           ]),
           webPageJsonLd({
-            type: "AboutPage",
-            name: "About VistaGB Tours",
+            type: 'AboutPage',
+            name: 'About VistaGB Tours',
             description: ABOUT_DESCRIPTION,
-            path: "/about",
+            path: '/about',
           }),
         ])}
       />

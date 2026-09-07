@@ -1,26 +1,22 @@
-import Link from "next/link";
-import DestinationCard from "@/components/DestinationCard";
-import JsonLd from "@/components/JsonLd";
-import Pagination from "@/components/Pagination";
-import {
-  regions,
-  searchLocations,
-  type TravelLocation,
-} from "@/data";
+import Link from 'next/link';
+import DestinationCard from '@/components/DestinationCard';
+import JsonLd from '@/components/JsonLd';
+import Pagination from '@/components/Pagination';
+import { regions, searchLocations, type TravelLocation } from '@/data';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   collectionJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 const DESTINATIONS_DESCRIPTION =
-  "Explore Hunza, Skardu, Gilgit, Nagar, Fairy Meadows and more — valleys, lakes, forts, and treks across Gilgit-Baltistan.";
+  'Explore Hunza, Skardu, Gilgit, Nagar, Fairy Meadows and more — valleys, lakes, forts, and treks across Gilgit-Baltistan.';
 
 export const metadata = buildPageMetadata({
-  title: "Destinations",
+  title: 'Destinations',
   description: DESTINATIONS_DESCRIPTION,
-  path: "/destinations",
+  path: '/destinations',
 });
 
 const ITEMS_PER_PAGE = 9;
@@ -35,14 +31,11 @@ type Props = {
 export default function DestinationsPage({ searchParams }: Props) {
   const queryParam = searchParams?.q;
   const query = (
-    Array.isArray(queryParam) ? queryParam[0] : queryParam ?? ""
+    Array.isArray(queryParam) ? queryParam[0] : (queryParam ?? '')
   ).trim();
   const pageParam = searchParams?.page;
   const pageStr = Array.isArray(pageParam) ? pageParam[0] : pageParam;
-  const requestedPage = Math.max(
-    1,
-    parseInt(pageStr ?? "1", 10) || 1
-  );
+  const requestedPage = Math.max(1, parseInt(pageStr ?? '1', 10) || 1);
   const totalPages = Math.ceil(regions.length / ITEMS_PER_PAGE);
   const currentPage = Math.min(requestedPage, Math.max(totalPages, 1));
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -60,13 +53,13 @@ export default function DestinationsPage({ searchParams }: Props) {
       <JsonLd
         data={withJsonLdContext([
           breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "Destinations", path: "/destinations" },
+            { name: 'Home', path: '/' },
+            { name: 'Destinations', path: '/destinations' },
           ]),
           collectionJsonLd({
-            name: "Destinations",
+            name: 'Destinations',
             description: DESTINATIONS_DESCRIPTION,
-            path: "/destinations",
+            path: '/destinations',
             items: regions.map((region) => ({
               name: region.name,
               path: `/destinations/${region.slug}`,
@@ -81,8 +74,8 @@ export default function DestinationsPage({ searchParams }: Props) {
             Destinations
           </h1>
           <p className="mt-4 max-w-xl text-ice">
-            From terraced apricot valleys to the cold deserts beneath K2 —
-            these are the places that define a trip to Gilgit-Baltistan.
+            From terraced apricot valleys to the cold deserts beneath K2 — these
+            are the places that define a trip to Gilgit-Baltistan.
           </p>
           <form
             action="/destinations"
@@ -113,7 +106,7 @@ export default function DestinationsPage({ searchParams }: Props) {
             <span className="font-mono uppercase tracking-widest text-ice/60">
               Explore by
             </span>
-            {["fort", "lake", "valley", "trekking route"].map((term) => (
+            {['fort', 'lake', 'valley', 'trekking route'].map((term) => (
               <Link
                 key={term}
                 href={`/destinations?q=${encodeURIComponent(term)}`}
@@ -131,8 +124,8 @@ export default function DestinationsPage({ searchParams }: Props) {
           {searchResult ? (
             <div className="mb-7 flex flex-wrap items-end justify-between gap-3 border-b border-teal/20 pb-5">
               <p className="text-ice">
-                {searchLocationsList.length}{" "}
-                {searchLocationsList.length === 1 ? "result" : "results"} for{" "}
+                {searchLocationsList.length}{' '}
+                {searchLocationsList.length === 1 ? 'result' : 'results'} for{' '}
                 <span className="font-semibold text-glacier">
                   &ldquo;{query}&rdquo;
                 </span>
@@ -149,10 +142,7 @@ export default function DestinationsPage({ searchParams }: Props) {
           {visibleLocations.length > 0 ? (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {visibleLocations.map((location) => (
-                <DestinationCard
-                  key={location.slug}
-                  location={location}
-                />
+                <DestinationCard key={location.slug} location={location} />
               ))}
             </div>
           ) : (

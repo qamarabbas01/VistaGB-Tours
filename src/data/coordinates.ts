@@ -1,4 +1,4 @@
-import { getLocationBySlug, getParentRegion, isPlace } from "@/data";
+import { getLocationBySlug, getParentRegion, isPlace } from '@/data';
 
 export type GeoPoint = {
   lat: number;
@@ -8,17 +8,17 @@ export type GeoPoint = {
 
 /** Approximate hub coordinates for destination weather lookups */
 const DESTINATION_COORDS: Record<string, { lat: number; lng: number }> = {
-  "hunza-valley": { lat: 36.3167, lng: 74.65 },
+  'hunza-valley': { lat: 36.3167, lng: 74.65 },
   nagar: { lat: 36.2667, lng: 74.7833 },
   skardu: { lat: 35.2971, lng: 75.6335 },
-  "shigar-valley": { lat: 35.4222, lng: 75.7333 },
+  'shigar-valley': { lat: 35.4222, lng: 75.7333 },
   khaplu: { lat: 35.1547, lng: 76.3375 },
-  "deosai-plains": { lat: 34.9833, lng: 75.4 },
-  "astore-valley": { lat: 35.3583, lng: 74.8556 },
-  "fairy-meadows": { lat: 35.3889, lng: 74.5856 },
+  'deosai-plains': { lat: 34.9833, lng: 75.4 },
+  'astore-valley': { lat: 35.3583, lng: 74.8556 },
+  'fairy-meadows': { lat: 35.3889, lng: 74.5856 },
   gilgit: { lat: 35.9208, lng: 74.3083 },
   ghizer: { lat: 36.1667, lng: 73.7667 },
-  "broghil-valley": { lat: 36.85, lng: 73.35 },
+  'broghil-valley': { lat: 36.85, lng: 73.35 },
 };
 
 /** Parse display strings like `36.316°N, 74.650°E` */
@@ -35,8 +35,8 @@ export function parseCoordinateString(
   let lng = Number.parseFloat(match[3]);
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
 
-  if (match[2].toUpperCase() === "S") lat = -lat;
-  if (match[4].toUpperCase() === "W") lng = -lng;
+  if (match[2].toUpperCase() === 'S') lat = -lat;
+  if (match[4].toUpperCase() === 'W') lng = -lng;
 
   return { lat, lng };
 }

@@ -1,20 +1,20 @@
-import JsonLd from "@/components/JsonLd";
-import { LazyTravelAssistant } from "@/components/lazy/TravelAssistant";
-import { getLocationBySlug } from "@/data";
+import JsonLd from '@/components/JsonLd';
+import { LazyTravelAssistant } from '@/components/lazy/TravelAssistant';
+import { getLocationBySlug } from '@/data';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   webPageJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 const ASSISTANT_DESCRIPTION =
-  "Ask VistaGB’s travel assistant about Hunza, Skardu, itineraries, hotels, food, weather, roads, packing, and budgets for Gilgit-Baltistan.";
+  'Ask VistaGB’s travel assistant about Hunza, Skardu, itineraries, hotels, food, weather, roads, packing, and budgets for Gilgit-Baltistan.';
 
 export const metadata = buildPageMetadata({
-  title: "AI Travel Assistant",
+  title: 'AI Travel Assistant',
   description: ASSISTANT_DESCRIPTION,
-  path: "/assistant",
+  path: '/assistant',
 });
 
 type Props = {
@@ -25,7 +25,7 @@ type Props = {
 
 export default function AssistantPage({ searchParams }: Props) {
   const raw = searchParams?.destination;
-  const slug = (Array.isArray(raw) ? raw[0] : raw ?? "").trim();
+  const slug = (Array.isArray(raw) ? raw[0] : (raw ?? '')).trim();
   const location = slug ? getLocationBySlug(slug) : undefined;
 
   return (
@@ -33,13 +33,13 @@ export default function AssistantPage({ searchParams }: Props) {
       <JsonLd
         data={withJsonLdContext([
           breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "AI Travel Assistant", path: "/assistant" },
+            { name: 'Home', path: '/' },
+            { name: 'AI Travel Assistant', path: '/assistant' },
           ]),
           webPageJsonLd({
-            name: "AI Travel Assistant",
+            name: 'AI Travel Assistant',
             description: ASSISTANT_DESCRIPTION,
-            path: "/assistant",
+            path: '/assistant',
           }),
         ])}
       />

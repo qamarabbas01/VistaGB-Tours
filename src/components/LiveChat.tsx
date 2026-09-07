@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import dynamic from "next/dynamic";
-import { usePathname } from "next/navigation";
-import { usePreferences } from "@/components/PreferencesProvider";
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
+import { usePreferences } from '@/components/PreferencesProvider';
 
-const TravelAssistant = dynamic(() => import("@/components/TravelAssistant"), {
+const TravelAssistant = dynamic(() => import('@/components/TravelAssistant'), {
   ssr: false,
   loading: () => (
     <div className="flex h-full items-center justify-center px-4 text-sm text-ice">
@@ -19,7 +19,7 @@ export default function LiveChat() {
   const { t } = usePreferences();
   const [open, setOpen] = useState(false);
 
-  if (pathname === "/assistant") return null;
+  if (pathname === '/assistant') return null;
 
   return (
     <div className="no-print fixed bottom-5 right-5 z-[60] flex flex-col items-end gap-3">
@@ -52,8 +52,18 @@ export default function LiveChat() {
         {open ? (
           <span className="text-xl leading-none">×</span>
         ) : (
-          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-            <path d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v7A2.5 2.5 0 0 1 16.5 16H10l-4.5 3.5V6.5z" strokeLinejoin="round" />
+          <svg
+            viewBox="0 0 24 24"
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            aria-hidden
+          >
+            <path
+              d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v7A2.5 2.5 0 0 1 16.5 16H10l-4.5 3.5V6.5z"
+              strokeLinejoin="round"
+            />
           </svg>
         )}
       </button>

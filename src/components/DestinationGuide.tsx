@@ -1,10 +1,10 @@
-import { ContextSection } from "@/components/destination-guide/ContextSection";
-import { ItinerarySection } from "@/components/destination-guide/ItinerarySection";
-import { ListingGrid } from "@/components/destination-guide/ListingGrid";
-import { ProseSection } from "@/components/destination-guide/ProseSection";
-import { isTrustedMapEmbed } from "@/components/destination-guide/map-embed";
-import { LazyFaqAccordion } from "@/components/lazy/FaqAccordion";
-import type { RegionDestination, RegionGuide } from "@/data/types";
+import { ContextSection } from '@/components/destination-guide/ContextSection';
+import { ItinerarySection } from '@/components/destination-guide/ItinerarySection';
+import { ListingGrid } from '@/components/destination-guide/ListingGrid';
+import { ProseSection } from '@/components/destination-guide/ProseSection';
+import { isTrustedMapEmbed } from '@/components/destination-guide/map-embed';
+import { LazyFaqAccordion } from '@/components/lazy/FaqAccordion';
+import type { RegionDestination, RegionGuide } from '@/data/types';
 
 type Props = {
   region: RegionDestination;
@@ -14,13 +14,13 @@ type Props = {
 export default function DestinationGuide({ region, guide }: Props) {
   const contextSections = [
     guide.history
-      ? { key: "history", label: "History", body: guide.history }
+      ? { key: 'history', label: 'History', body: guide.history }
       : null,
     guide.culture
-      ? { key: "culture", label: "Culture", body: guide.culture }
+      ? { key: 'culture', label: 'Culture', body: guide.culture }
       : null,
     guide.weather
-      ? { key: "weather", label: "Weather", body: guide.weather }
+      ? { key: 'weather', label: 'Weather', body: guide.weather }
       : null,
   ].filter((section): section is { key: string; label: string; body: string } =>
     Boolean(section),
@@ -60,7 +60,11 @@ export default function DestinationGuide({ region, guide }: Props) {
       ) : null}
 
       {guide.hotels && guide.hotels.length > 0 ? (
-        <ListingGrid label="Where to stay" heading="Hotels & lodges" items={guide.hotels} />
+        <ListingGrid
+          label="Where to stay"
+          heading="Hotels & lodges"
+          items={guide.hotels}
+        />
       ) : null}
 
       {guide.restaurants && guide.restaurants.length > 0 ? (

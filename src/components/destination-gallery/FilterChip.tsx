@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 export function FilterChip({
   label,
@@ -17,8 +17,8 @@ export function FilterChip({
       onClick={onClick}
       className={`rounded-full border px-4 py-2 text-sm transition-colors ${
         active
-          ? "border-apricot/60 bg-apricot/15 text-glacier"
-          : "border-teal/30 bg-slate text-ice hover:border-apricot/40 hover:text-apricot"
+          ? 'border-apricot/60 bg-apricot/15 text-glacier'
+          : 'border-teal/30 bg-slate text-ice hover:border-apricot/40 hover:text-apricot'
       }`}
     >
       {label}

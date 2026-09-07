@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root,
-[data-theme="dark"] {
+[data-theme='dark'] {
   color-scheme: dark;
   --c-night: 11 15 20;
   --c-slate: 22 32 43;
@@ -21,7 +21,7 @@
   --teal: rgb(var(--c-teal));
 }
 
-[data-theme="light"] {
+[data-theme='light'] {
   color-scheme: light;
   --c-night: 246 242 236;
   --c-slate: 255 255 255;
@@ -77,7 +77,7 @@ body {
 
 .altitude-line::before,
 .altitude-line::after {
-  content: "";
+  content: '';
   position: absolute;
   top: -3px;
   width: 1px;
@@ -115,7 +115,7 @@ button:focus-visible {
 }
 
 .skeleton::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   transform: translateX(-100%);
@@ -243,14 +243,16 @@ button:focus-visible {
   height: var(--pin-size, 14px);
   border-radius: 9999px;
   background: var(--apricot);
-  box-shadow: 0 0 0 2px rgba(11, 15, 20, 0.85),
+  box-shadow:
+    0 0 0 2px rgba(11, 15, 20, 0.85),
     0 0 var(--pin-ring, 6px) rgba(217, 142, 74, 0.45);
   animation: pin-pulse 2.8s ease-out infinite;
 }
 
 .vista-map-pin__dot.is-active {
   background: var(--glacier);
-  box-shadow: 0 0 0 2px rgba(11, 15, 20, 0.9),
+  box-shadow:
+    0 0 0 2px rgba(11, 15, 20, 0.9),
     0 0 14px rgba(217, 142, 74, 0.7);
 }
 
@@ -318,7 +320,7 @@ button:focus-visible {
   }
 }
 
-[data-theme="light"] .skeleton::after {
+[data-theme='light'] .skeleton::after {
   background: linear-gradient(
     90deg,
     transparent,

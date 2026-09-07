@@ -1,23 +1,18 @@
-import type {
-  GalleryCategory,
-  GalleryImage,
-  Place,
-  PlaceType,
-} from "./types";
+import type { GalleryCategory, GalleryImage, Place, PlaceType } from './types';
 
 const PLACE_TYPE_CATEGORY: Record<PlaceType, GalleryCategory> = {
-  Lake: "lakes",
-  Waterfall: "lakes",
-  Village: "villages",
-  Town: "villages",
-  Fort: "culture",
-  Viewpoint: "mountains",
-  Valley: "mountains",
-  Pass: "mountains",
-  Glacier: "mountains",
-  Bridge: "culture",
-  Meadow: "trekking",
-  Desert: "mountains",
+  Lake: 'lakes',
+  Waterfall: 'lakes',
+  Village: 'villages',
+  Town: 'villages',
+  Fort: 'culture',
+  Viewpoint: 'mountains',
+  Valley: 'mountains',
+  Pass: 'mountains',
+  Glacier: 'mountains',
+  Bridge: 'culture',
+  Meadow: 'trekking',
+  Desert: 'mountains',
 };
 
 /** Merge a region's curated gallery with unique photos from its places. */

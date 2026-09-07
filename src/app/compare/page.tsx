@@ -1,19 +1,19 @@
-import CompareView from "@/components/CompareView";
-import JsonLd from "@/components/JsonLd";
-import PageHeader from "@/components/PageHeader";
-import { regions } from "@/data";
+import CompareView from '@/components/CompareView';
+import JsonLd from '@/components/JsonLd';
+import PageHeader from '@/components/PageHeader';
+import { regions } from '@/data';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   webPageJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: "Compare destinations",
+  title: 'Compare destinations',
   description:
-    "Compare Hunza, Skardu, Gilgit, Nagar and other Gilgit-Baltistan regions side by side.",
-  path: "/compare",
+    'Compare Hunza, Skardu, Gilgit, Nagar and other Gilgit-Baltistan regions side by side.',
+  path: '/compare',
 });
 
 export default function ComparePage() {
@@ -22,14 +22,14 @@ export default function ComparePage() {
       <JsonLd
         data={withJsonLdContext([
           breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "Tools", path: "/tools" },
-            { name: "Compare", path: "/compare" },
+            { name: 'Home', path: '/' },
+            { name: 'Tools', path: '/tools' },
+            { name: 'Compare', path: '/compare' },
           ]),
           webPageJsonLd({
-            name: "Compare destinations",
-            description: "Side-by-side comparison of Gilgit-Baltistan regions.",
-            path: "/compare",
+            name: 'Compare destinations',
+            description: 'Side-by-side comparison of Gilgit-Baltistan regions.',
+            path: '/compare',
           }),
         ])}
       />

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
 export const LazyDestinationWeather = dynamic(
-  () => import("@/components/DestinationWeather"),
+  () => import('@/components/DestinationWeather'),
   {
     loading: () => (
       <div

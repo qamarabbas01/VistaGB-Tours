@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Error({
   error,
@@ -19,8 +19,10 @@ export default function Error({
         We hit an unexpected problem loading this page. You can try again, or
         head back to the homepage.
       </p>
-      {process.env.NODE_ENV === "development" && error?.message && (
-        <p className="mt-3 max-w-xl font-mono text-xs text-ice/70">{error.message}</p>
+      {process.env.NODE_ENV === 'development' && error?.message && (
+        <p className="mt-3 max-w-xl font-mono text-xs text-ice/70">
+          {error.message}
+        </p>
       )}
       <div className="mt-8 flex flex-wrap gap-4">
         <button

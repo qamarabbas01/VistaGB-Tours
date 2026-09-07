@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/skeletons";
+import { Skeleton } from '@/components/skeletons';
 
 export default function ContactLoading() {
   return (

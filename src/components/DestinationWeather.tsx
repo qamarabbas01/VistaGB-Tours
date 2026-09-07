@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { WeatherPanel } from "@/components/destination-weather/WeatherPanel";
-import { useEffect, useState } from "react";
-import type { DestinationWeather as WeatherPayload } from "@/lib/weather/types";
+import { WeatherPanel } from '@/components/destination-weather/WeatherPanel';
+import { useEffect, useState } from 'react';
+import type { DestinationWeather as WeatherPayload } from '@/lib/weather/types';
 
 type Props = {
   slug: string;
@@ -33,9 +33,9 @@ export default function DestinationWeather({ slug, locationName }: Props) {
 
         if (!response.ok) {
           throw new Error(
-            "error" in payload && payload.error
+            'error' in payload && payload.error
               ? payload.error
-              : "Unable to load weather",
+              : 'Unable to load weather',
           );
         }
 
@@ -45,9 +45,7 @@ export default function DestinationWeather({ slug, locationName }: Props) {
       } catch (err) {
         if (cancelled || controller.signal.aborted) return;
         setWeather(null);
-        setError(
-          err instanceof Error ? err.message : "Unable to load weather",
-        );
+        setError(err instanceof Error ? err.message : 'Unable to load weather');
       } finally {
         if (!cancelled) setLoading(false);
       }

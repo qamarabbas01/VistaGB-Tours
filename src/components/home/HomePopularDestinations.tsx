@@ -1,6 +1,6 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import Link from "next/link";
-import type { RegionDestination } from "@/data/types";
+import OptimizedImage from '@/components/OptimizedImage';
+import Link from 'next/link';
+import type { RegionDestination } from '@/data/types';
 
 export function HomePopularDestinations({
   destinations,

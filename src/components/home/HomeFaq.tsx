@@ -1,6 +1,6 @@
-import Button from "@/components/Button";
-import { LazyFaqAccordion } from "@/components/lazy/FaqAccordion";
-import type { faqs } from "@/data/hero";
+import Button from '@/components/Button';
+import { LazyFaqAccordion } from '@/components/lazy/FaqAccordion';
+import type { faqs } from '@/data/hero';
 
 type Faq = (typeof faqs)[number];
 
@@ -30,7 +30,7 @@ export function HomeCta() {
         className="pointer-events-none absolute inset-0 opacity-40"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse at top, rgba(217,142,74,0.18), transparent 55%)",
+            'radial-gradient(ellipse at top, rgba(217,142,74,0.18), transparent 55%)',
         }}
       />
       <div className="relative mx-auto max-w-3xl px-6 text-center md:px-10">

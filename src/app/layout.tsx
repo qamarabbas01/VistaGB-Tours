@@ -1,64 +1,64 @@
-import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
-import Script from "next/script";
-import "./globals.css";
-import AlertBanner from "@/components/AlertBanner";
-import Footer from "@/components/Footer";
-import JsonLd from "@/components/JsonLd";
-import { LazyLiveChat } from "@/components/lazy/LiveChat";
-import Navbar from "@/components/Navbar";
-import { PreferencesProvider } from "@/components/PreferencesProvider";
+import type { Metadata, Viewport } from 'next';
+import { Fraunces, Inter, JetBrains_Mono } from 'next/font/google';
+import Script from 'next/script';
+import './globals.css';
+import AlertBanner from '@/components/AlertBanner';
+import Footer from '@/components/Footer';
+import JsonLd from '@/components/JsonLd';
+import { LazyLiveChat } from '@/components/lazy/LiveChat';
+import Navbar from '@/components/Navbar';
+import { PreferencesProvider } from '@/components/PreferencesProvider';
 import {
   absoluteUrl,
   organizationJsonLd,
   websiteJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
-import { THEME_BOOTSTRAP } from "@/lib/theme-script";
-import { site } from "@/config/site";
+} from '@/lib/seo';
+import { THEME_BOOTSTRAP } from '@/lib/theme-script';
+import { site } from '@/config/site';
 
 const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  weight: ["400", "600"],
-  style: ["normal", "italic"],
-  display: "swap",
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  weight: ['400', '600'],
+  style: ['normal', 'italic'],
+  display: 'swap',
   preload: true,
   adjustFontFallback: true,
 });
 
 const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600"],
-  display: "swap",
+  subsets: ['latin'],
+  variable: '--font-inter',
+  weight: ['400', '500', '600'],
+  display: 'swap',
   preload: true,
   adjustFontFallback: true,
 });
 
 const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
-  weight: ["400"],
-  display: "swap",
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
+  weight: ['400'],
+  display: 'swap',
   preload: false,
   adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(absoluteUrl("/")),
+  metadataBase: new URL(absoluteUrl('/')),
   title: {
     default: site.title,
-    template: "%s — VistaGB Tours",
+    template: '%s — VistaGB Tours',
   },
   description: site.description,
   alternates: {
-    canonical: "/",
+    canonical: '/',
   },
   openGraph: {
-    type: "website",
+    type: 'website',
     locale: site.locale,
-    url: "/",
+    url: '/',
     siteName: site.name,
     title: site.title,
     description: site.ogDescription,
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: site.title,
     description: site.ogDescription,
     images: [site.defaultOgImage],
@@ -86,12 +86,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
   },
 };
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
 };
 

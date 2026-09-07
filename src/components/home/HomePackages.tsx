@@ -1,7 +1,7 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import Button from "@/components/Button";
-import Link from "next/link";
-import type { packages } from "@/data/hero";
+import OptimizedImage from '@/components/OptimizedImage';
+import Button from '@/components/Button';
+import Link from 'next/link';
+import type { packages } from '@/data/hero';
 
 type TourPackage = (typeof packages)[number];
 
@@ -16,8 +16,8 @@ export function HomePackages({ items }: { items: readonly TourPackage[] }) {
               Tour Packages
             </h2>
             <p className="mt-4 max-w-xl text-ice">
-              Starting points we tailor to your dates, pace, and the valleys
-              you want most.
+              Starting points we tailor to your dates, pace, and the valleys you
+              want most.
             </p>
           </div>
           <Link

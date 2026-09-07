@@ -1,16 +1,16 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import DestinationActions from "@/components/DestinationActions";
-import DestinationGuide from "@/components/DestinationGuide";
-import DestinationVideos from "@/components/DestinationVideos";
-import JsonLd from "@/components/JsonLd";
-import { LazyDestinationGallery } from "@/components/lazy/DestinationGallery";
-import { LazyDestinationWeather } from "@/components/lazy/DestinationWeather";
-import PlaceCard from "@/components/PlaceCard";
-import { getCoordinatesForSlug } from "@/data/coordinates";
-import { composeRegionGallery } from "@/data/gallery";
+import OptimizedImage from '@/components/OptimizedImage';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import DestinationActions from '@/components/DestinationActions';
+import DestinationGuide from '@/components/DestinationGuide';
+import DestinationVideos from '@/components/DestinationVideos';
+import JsonLd from '@/components/JsonLd';
+import { LazyDestinationGallery } from '@/components/lazy/DestinationGallery';
+import { LazyDestinationWeather } from '@/components/lazy/DestinationWeather';
+import PlaceCard from '@/components/PlaceCard';
+import { getCoordinatesForSlug } from '@/data/coordinates';
+import { composeRegionGallery } from '@/data/gallery';
 import {
   getAllStaticSlugs,
   getLocationBySlug,
@@ -21,32 +21,32 @@ import {
   type Place,
   type PlaceType,
   type RegionDestination,
-} from "@/data";
+} from '@/data';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   faqJsonLd,
   touristPlaceJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 const PLACE_GROUP_ORDER: { type: PlaceType; label: string }[] = [
-  { type: "Town", label: "Towns" },
-  { type: "Village", label: "Villages" },
-  { type: "Valley", label: "Valleys" },
-  { type: "Lake", label: "Lakes" },
-  { type: "Waterfall", label: "Waterfalls" },
-  { type: "Fort", label: "Forts & heritage" },
-  { type: "Viewpoint", label: "Viewpoints" },
-  { type: "Pass", label: "Passes" },
-  { type: "Glacier", label: "Glaciers" },
-  { type: "Bridge", label: "Bridges" },
-  { type: "Meadow", label: "Meadows" },
-  { type: "Desert", label: "Deserts" },
+  { type: 'Town', label: 'Towns' },
+  { type: 'Village', label: 'Villages' },
+  { type: 'Valley', label: 'Valleys' },
+  { type: 'Lake', label: 'Lakes' },
+  { type: 'Waterfall', label: 'Waterfalls' },
+  { type: 'Fort', label: 'Forts & heritage' },
+  { type: 'Viewpoint', label: 'Viewpoints' },
+  { type: 'Pass', label: 'Passes' },
+  { type: 'Glacier', label: 'Glaciers' },
+  { type: 'Bridge', label: 'Bridges' },
+  { type: 'Meadow', label: 'Meadows' },
+  { type: 'Desert', label: 'Deserts' },
 ];
 
 function groupPlacesByType(places: Place[]) {
@@ -70,8 +70,8 @@ function groupPlacesByType(places: Place[]) {
 
   if (unmatchedPlaces.length > 0) {
     groups.push({
-      type: "Other",
-      label: "Other Attractions",
+      type: 'Other',
+      label: 'Other Attractions',
       places: unmatchedPlaces,
     });
   }
@@ -83,10 +83,11 @@ function groupPlacesByType(places: Place[]) {
 function getRelatedRegions(region: RegionDestination): RegionDestination[] {
   const nearbyRegions =
     region.guide?.nearbyDestinations
-      ?.map((item) => (item.placeSlug ? getLocationBySlug(item.placeSlug) : undefined))
-      .filter(
-        (loc): loc is RegionDestination =>
-          Boolean(loc && !isPlace(loc) && loc.slug !== region.slug),
+      ?.map((item) =>
+        item.placeSlug ? getLocationBySlug(item.placeSlug) : undefined,
+      )
+      .filter((loc): loc is RegionDestination =>
+        Boolean(loc && !isPlace(loc) && loc.slug !== region.slug),
       ) ?? [];
 
   const seen = new Set(nearbyRegions.map((r) => r.slug));
@@ -106,9 +107,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!location) {
     return buildPageMetadata({
-      title: "Destination Not Found",
-      description: "This destination could not be found.",
-      path: "/destinations",
+      title: 'Destination Not Found',
+      description: 'This destination could not be found.',
+      path: '/destinations',
       robots: { index: false, follow: false },
     });
   }
@@ -144,8 +145,8 @@ function PlaceDetailPage({ place }: { place: Place }) {
     .filter((loc): loc is Place => Boolean(loc && isPlace(loc)));
   const weatherPoint = getCoordinatesForSlug(place.slug);
   const crumbs = [
-    { name: "Home", path: "/" },
-    { name: "Destinations", path: "/destinations" },
+    { name: 'Home', path: '/' },
+    { name: 'Destinations', path: '/destinations' },
     ...(parent
       ? [{ name: parent.name, path: `/destinations/${parent.slug}` }]
       : []),
@@ -158,7 +159,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
         data={withJsonLdContext([
           breadcrumbJsonLd(crumbs),
           touristPlaceJsonLd({
-            type: "TouristAttraction",
+            type: 'TouristAttraction',
             name: place.name,
             description: place.description,
             path: `/destinations/${place.slug}`,
@@ -189,7 +190,10 @@ function PlaceDetailPage({ place }: { place: Place }) {
           <div className="mx-auto w-full max-w-7xl px-6 pb-12 md:px-10 md:pb-16">
             {parent ? (
               <nav className="coord-label mb-4 flex flex-wrap items-center gap-2 text-ice">
-                <Link href="/destinations" className="transition-colors hover:text-apricot">
+                <Link
+                  href="/destinations"
+                  className="transition-colors hover:text-apricot"
+                >
                   All Destinations
                 </Link>
                 <span>/</span>
@@ -210,7 +214,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
             )}
             <p className="coord-label mb-3">
               {place.type} · ALT {place.altitude}
-              {place.duration ? ` · ${place.duration}` : ""}
+              {place.duration ? ` · ${place.duration}` : ''}
             </p>
             <h1 className="font-display text-4xl font-semibold leading-tight text-glacier md:text-5xl">
               {place.name}
@@ -271,7 +275,9 @@ function PlaceDetailPage({ place }: { place: Place }) {
 
             <div className="rounded-2xl border border-teal/20 bg-slate p-6">
               <p className="coord-label mb-3">Best Time to Visit</p>
-              <p className="text-sm leading-relaxed text-ice">{place.bestTime}</p>
+              <p className="text-sm leading-relaxed text-ice">
+                {place.bestTime}
+              </p>
             </div>
 
             {place.distanceFromHub ? (
@@ -279,7 +285,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
                 <p className="coord-label mb-3">Distance</p>
                 <p className="text-sm leading-relaxed text-ice">
                   {place.distanceFromHub}
-                  {place.hubName ? ` from ${place.hubName}` : ""}
+                  {place.hubName ? ` from ${place.hubName}` : ''}
                 </p>
               </div>
             ) : null}
@@ -287,13 +293,17 @@ function PlaceDetailPage({ place }: { place: Place }) {
             {place.coordinates ? (
               <div className="rounded-2xl border border-teal/20 bg-slate p-6">
                 <p className="coord-label mb-3">Coordinates</p>
-                <p className="text-sm leading-relaxed text-ice">{place.coordinates}</p>
+                <p className="text-sm leading-relaxed text-ice">
+                  {place.coordinates}
+                </p>
               </div>
             ) : null}
 
             <div className="rounded-2xl border border-teal/20 bg-slate p-6">
               <p className="coord-label mb-3">Getting There</p>
-              <p className="text-sm leading-relaxed text-ice">{place.gettingThere}</p>
+              <p className="text-sm leading-relaxed text-ice">
+                {place.gettingThere}
+              </p>
             </div>
 
             {parent ? (
@@ -330,7 +340,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
                 <PlaceCard
                   key={nearby.slug}
                   place={nearby}
-                  parentName={parent?.name ?? "Gilgit-Baltistan"}
+                  parentName={parent?.name ?? 'Gilgit-Baltistan'}
                   compact
                 />
               ))}
@@ -342,11 +352,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
   );
 }
 
-function RegionDetailPage({
-  region,
-}: {
-  region: RegionDestination;
-}) {
+function RegionDetailPage({ region }: { region: RegionDestination }) {
   const childPlaces = getPlacesForRegion(region.slug);
   const placeGroups = groupPlacesByType(childPlaces);
   const otherRegions = getRelatedRegions(region);
@@ -354,12 +360,12 @@ function RegionDetailPage({
   const weatherPoint = getCoordinatesForSlug(region.slug);
   const schemaNodes = [
     breadcrumbJsonLd([
-      { name: "Home", path: "/" },
-      { name: "Destinations", path: "/destinations" },
+      { name: 'Home', path: '/' },
+      { name: 'Destinations', path: '/destinations' },
       { name: region.name, path: `/destinations/${region.slug}` },
     ]),
     touristPlaceJsonLd({
-      type: "TouristDestination",
+      type: 'TouristDestination',
       name: region.name,
       description: region.description,
       path: `/destinations/${region.slug}`,
@@ -401,7 +407,11 @@ function RegionDetailPage({
             <p className="mt-2 text-lg font-medium text-apricot md:text-xl">
               {region.tagline}
             </p>
-            <DestinationActions slug={region.slug} name={region.name} isRegion />
+            <DestinationActions
+              slug={region.slug}
+              name={region.name}
+              isRegion
+            />
           </div>
         </div>
       </section>
@@ -456,7 +466,9 @@ function RegionDetailPage({
               <p className="coord-label mb-4">Quick facts</p>
               <dl className="space-y-4 text-sm">
                 <div>
-                  <dt className="text-xs uppercase tracking-wider text-teal">Altitude</dt>
+                  <dt className="text-xs uppercase tracking-wider text-teal">
+                    Altitude
+                  </dt>
                   <dd className="mt-1 text-ice">{region.altitude}</dd>
                 </div>
                 <div>
@@ -467,14 +479,20 @@ function RegionDetailPage({
                 </div>
                 {guide?.population ? (
                   <div>
-                    <dt className="text-xs uppercase tracking-wider text-teal">Population</dt>
+                    <dt className="text-xs uppercase tracking-wider text-teal">
+                      Population
+                    </dt>
                     <dd className="mt-1 text-ice">{guide.population}</dd>
                   </div>
                 ) : null}
                 {guide?.languages && guide.languages.length > 0 ? (
                   <div>
-                    <dt className="text-xs uppercase tracking-wider text-teal">Languages</dt>
-                    <dd className="mt-1 text-ice">{guide.languages.join(" · ")}</dd>
+                    <dt className="text-xs uppercase tracking-wider text-teal">
+                      Languages
+                    </dt>
+                    <dd className="mt-1 text-ice">
+                      {guide.languages.join(' · ')}
+                    </dd>
                   </div>
                 ) : null}
               </dl>
@@ -482,7 +500,9 @@ function RegionDetailPage({
 
             <div className="rounded-2xl border border-teal/20 bg-slate p-6">
               <p className="coord-label mb-3">Getting There</p>
-              <p className="text-sm leading-relaxed text-ice">{region.gettingThere}</p>
+              <p className="text-sm leading-relaxed text-ice">
+                {region.gettingThere}
+              </p>
             </div>
 
             <div className="rounded-2xl border border-apricot/30 bg-slate p-6">
@@ -531,8 +551,8 @@ function RegionDetailPage({
               Attractions & landscapes
             </h2>
             <p className="mt-3 max-w-2xl text-sm text-ice md:text-base">
-              Towns, forts, lakes, valleys, and viewpoints across {region.name} —
-              each with its own photos, activities, and travel details.
+              Towns, forts, lakes, valleys, and viewpoints across {region.name}{' '}
+              — each with its own photos, activities, and travel details.
             </p>
 
             {placeGroups.map((group) => (

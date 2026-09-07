@@ -13,8 +13,8 @@ export function ProseSection({
     <section
       className={
         alternate
-          ? "border-t border-teal/20 bg-slate py-16 md:py-24"
-          : "border-t border-teal/20 py-16 md:py-24"
+          ? 'border-t border-teal/20 bg-slate py-16 md:py-24'
+          : 'border-t border-teal/20 py-16 md:py-24'
       }
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10">

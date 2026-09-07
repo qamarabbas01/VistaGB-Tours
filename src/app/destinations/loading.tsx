@@ -1,4 +1,4 @@
-import { PageHeroSkeleton, CardGridSkeleton } from "@/components/skeletons";
+import { PageHeroSkeleton, CardGridSkeleton } from '@/components/skeletons';
 
 export default function DestinationsLoading() {
   return (

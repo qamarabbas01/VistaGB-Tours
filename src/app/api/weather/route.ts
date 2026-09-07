@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { getCoordinatesForSlug } from "@/data/coordinates";
-import { fetchDestinationWeather } from "@/lib/weather/fetch";
-import { getClientIp, rateLimit } from "@/lib/rate-limit";
+import { NextResponse } from 'next/server';
+import { getCoordinatesForSlug } from '@/data/coordinates';
+import { fetchDestinationWeather } from '@/lib/weather/fetch';
+import { getClientIp, rateLimit } from '@/lib/rate-limit';
 
 export const revalidate = 1800;
 
@@ -14,16 +14,16 @@ export async function GET(request: Request) {
 
   if (!limited.ok) {
     return NextResponse.json(
-      { error: "Too many requests. Please try again shortly." },
+      { error: 'Too many requests. Please try again shortly.' },
       {
         status: 429,
-        headers: { "Retry-After": String(limited.retryAfterSec) },
+        headers: { 'Retry-After': String(limited.retryAfterSec) },
       },
     );
   }
 
   const { searchParams } = new URL(request.url);
-  const slug = (searchParams.get("slug") ?? "").trim();
+  const slug = (searchParams.get('slug') ?? '').trim();
 
   if (!slug) {
     return NextResponse.json(
@@ -33,12 +33,15 @@ export async function GET(request: Request) {
   }
 
   if (slug.length > 80 || !/^[a-z0-9-]+$/i.test(slug)) {
-    return NextResponse.json({ error: "Invalid destination slug" }, { status: 400 });
+    return NextResponse.json(
+      { error: 'Invalid destination slug' },
+      { status: 400 },
+    );
   }
 
   if (!getCoordinatesForSlug(slug)) {
     return NextResponse.json(
-      { error: "Weather is not available for this destination yet" },
+      { error: 'Weather is not available for this destination yet' },
       { status: 404 },
     );
   }
@@ -47,12 +50,12 @@ export async function GET(request: Request) {
     const weather = await fetchDestinationWeather(slug);
     return NextResponse.json(weather, {
       headers: {
-        "Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600",
+        'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=3600',
       },
     });
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load weather";
+      error instanceof Error ? error.message : 'Failed to load weather';
     return NextResponse.json({ error: message }, { status: 502 });
   }
 }

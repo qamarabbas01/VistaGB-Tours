@@ -1,23 +1,23 @@
-import JsonLd from "@/components/JsonLd";
-import NewsCard from "@/components/NewsCard";
-import NewsInfiniteRest from "@/components/NewsInfiniteRest";
-import Pagination from "@/components/Pagination";
-import { fetchNewsPage } from "@/lib/news/scraper";
-import type { NewsPageResult } from "@/lib/news/types";
+import JsonLd from '@/components/JsonLd';
+import NewsCard from '@/components/NewsCard';
+import NewsInfiniteRest from '@/components/NewsInfiniteRest';
+import Pagination from '@/components/Pagination';
+import { fetchNewsPage } from '@/lib/news/scraper';
+import type { NewsPageResult } from '@/lib/news/types';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   webPageJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 const NEWS_DESCRIPTION =
-  "Festivals, events, and developments from across Gilgit-Baltistan, sourced from the regional tourism department.";
+  'Festivals, events, and developments from across Gilgit-Baltistan, sourced from the regional tourism department.';
 
 export const metadata = buildPageMetadata({
-  title: "News",
+  title: 'News',
   description: NEWS_DESCRIPTION,
-  path: "/news",
+  path: '/news',
 });
 
 export const revalidate = 3600;
@@ -31,13 +31,13 @@ function NewsSchema() {
     <JsonLd
       data={withJsonLdContext([
         breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "News", path: "/news" },
+          { name: 'Home', path: '/' },
+          { name: 'News', path: '/news' },
         ]),
         webPageJsonLd({
-          name: "News from Gilgit-Baltistan",
+          name: 'News from Gilgit-Baltistan',
           description: NEWS_DESCRIPTION,
-          path: "/news",
+          path: '/news',
         }),
       ])}
     />
@@ -48,7 +48,7 @@ export default async function NewsPage({ searchParams }: Props) {
   const resolvedSearchParams = await searchParams;
   const pageParam = resolvedSearchParams?.page;
   const pageStr = Array.isArray(pageParam) ? pageParam[0] : pageParam;
-  const requestedPage = Math.max(1, parseInt(pageStr ?? "1", 10) || 1);
+  const requestedPage = Math.max(1, parseInt(pageStr ?? '1', 10) || 1);
 
   let newsData: NewsPageResult | null = null;
 
@@ -79,10 +79,7 @@ export default async function NewsPage({ searchParams }: Props) {
     );
   }
 
-  const currentPage = Math.min(
-    requestedPage,
-    Math.max(newsData.totalPages, 1),
-  );
+  const currentPage = Math.min(requestedPage, Math.max(newsData.totalPages, 1));
   const { items } = newsData;
 
   return (
@@ -95,9 +92,9 @@ export default async function NewsPage({ searchParams }: Props) {
             News from Gilgit-Baltistan
           </h1>
           <p className="mt-4 max-w-xl text-ice">
-            Festivals, events, and developments from across the region,
-            sourced from the Gilgit-Baltistan Tourism, Sports, Culture,
-            Archaeology &amp; Museums Department.
+            Festivals, events, and developments from across the region, sourced
+            from the Gilgit-Baltistan Tourism, Sports, Culture, Archaeology
+            &amp; Museums Department.
           </p>
         </div>
       </section>
@@ -111,10 +108,7 @@ export default async function NewsPage({ searchParams }: Props) {
           </div>
 
           {currentPage === 1 ? (
-            <NewsInfiniteRest
-              nextPage={2}
-              totalPages={newsData.totalPages}
-            />
+            <NewsInfiniteRest nextPage={2} totalPages={newsData.totalPages} />
           ) : (
             <Pagination
               currentPage={currentPage}
@@ -125,7 +119,7 @@ export default async function NewsPage({ searchParams }: Props) {
           )}
 
           <p className="mt-10 text-center text-xs text-ice">
-            Source:{" "}
+            Source:{' '}
             <a
               href="https://visitgilgitbaltistan.gov.pk/public/pages/news"
               target="_blank"

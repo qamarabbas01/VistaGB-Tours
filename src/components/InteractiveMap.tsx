@@ -1,18 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useRef } from "react";
-import Link from "next/link";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMap,
-} from "react-leaflet";
-import type { Marker as LeafletMarker } from "leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-import { usePreferences } from "@/components/PreferencesProvider";
+import { useEffect, useMemo, useRef } from 'react';
+import Link from 'next/link';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import type { Marker as LeafletMarker } from 'leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { usePreferences } from '@/components/PreferencesProvider';
 
 export type MapLocation = {
   name: string;
@@ -25,7 +19,9 @@ export type MapLocation = {
 type InteractiveMapProps = {
   locations: readonly MapLocation[];
   activeSlug?: string | null;
-  onSelect?: (value: string | null | ((prev: string | null) => string | null)) => void;
+  onSelect?: (
+    value: string | null | ((prev: string | null) => string | null),
+  ) => void;
 };
 
 const GB_CENTER: [number, number] = [35.55, 75.15];
@@ -35,8 +31,8 @@ function createPinIcon(active: boolean) {
   const size = active ? 18 : 14;
   const ring = active ? 10 : 6;
   return L.divIcon({
-    className: "vista-map-pin",
-    html: `<span class="vista-map-pin__dot${active ? " is-active" : ""}" style="--pin-size:${size}px;--pin-ring:${ring}px"></span>`,
+    className: 'vista-map-pin',
+    html: `<span class="vista-map-pin__dot${active ? ' is-active' : ''}" style="--pin-size:${size}px;--pin-ring:${ring}px"></span>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
     popupAnchor: [0, -size / 2 - 4],
@@ -85,7 +81,9 @@ function DestinationMarker({
   location: MapLocation;
   icon: L.DivIcon;
   isActive: boolean;
-  onSelect?: (value: string | null | ((prev: string | null) => string | null)) => void;
+  onSelect?: (
+    value: string | null | ((prev: string | null) => string | null),
+  ) => void;
 }) {
   const markerRef = useRef<LeafletMarker | null>(null);
 
@@ -135,9 +133,9 @@ export default function InteractiveMap({
 }: InteractiveMapProps) {
   const { theme } = usePreferences();
   const tileUrl =
-    theme === "light"
-      ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-      : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+    theme === 'light'
+      ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+      : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
   const icons = useMemo(
     () => ({
       idle: createPinIcon(false),
@@ -154,7 +152,7 @@ export default function InteractiveMap({
         zoom={DEFAULT_ZOOM}
         scrollWheelZoom={false}
         className="h-full w-full bg-night"
-        style={{ background: "var(--night)" }}
+        style={{ background: 'var(--night)' }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'

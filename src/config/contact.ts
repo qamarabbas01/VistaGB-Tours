@@ -7,17 +7,17 @@
  */
 
 function readPublic(value: string | undefined): string {
-  return value?.trim() ?? "";
+  return value?.trim() ?? '';
 }
 
 function telFromDisplay(display: string): string {
-  const digits = display.replace(/\D/g, "");
-  return digits ? `+${digits}` : "";
+  const digits = display.replace(/\D/g, '');
+  return digits ? `+${digits}` : '';
 }
 
 function whatsappFromTel(tel: string): string {
-  const digits = tel.replace(/\D/g, "");
-  return digits ? `https://wa.me/${digits}` : "";
+  const digits = tel.replace(/\D/g, '');
+  return digits ? `https://wa.me/${digits}` : '';
 }
 
 export type ContactConfig = {
@@ -58,7 +58,7 @@ export function getContact(): ContactConfig {
     streetAddress: readPublic(process.env.NEXT_PUBLIC_CONTACT_STREET),
     city: readPublic(process.env.NEXT_PUBLIC_CONTACT_CITY),
     region: readPublic(process.env.NEXT_PUBLIC_CONTACT_REGION),
-    country: readPublic(process.env.NEXT_PUBLIC_CONTACT_COUNTRY) || "PK",
+    country: readPublic(process.env.NEXT_PUBLIC_CONTACT_COUNTRY) || 'PK',
     location: {
       label: readPublic(process.env.NEXT_PUBLIC_CONTACT_LOCATION_LABEL),
       coords: readPublic(process.env.NEXT_PUBLIC_CONTACT_LOCATION_COORDS),
@@ -69,11 +69,11 @@ export function getContact(): ContactConfig {
 
 export function contactEmailHref(): string {
   const email = getContact().email;
-  return email ? `mailto:${email}` : "/contact";
+  return email ? `mailto:${email}` : '/contact';
 }
 
 export function contactEmailLabel(): string {
-  return getContact().email || "the contact page";
+  return getContact().email || 'the contact page';
 }
 
 /** Live getters so tests can change env between cases. */

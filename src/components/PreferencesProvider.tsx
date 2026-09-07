@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   createContext,
@@ -8,17 +8,17 @@ import {
   useMemo,
   useState,
   type ReactNode,
-} from "react";
-import { LOCALE_META, messages, type Locale, type Messages } from "@/lib/i18n";
-import type { CurrencyCode } from "@/lib/currency";
+} from 'react';
+import { LOCALE_META, messages, type Locale, type Messages } from '@/lib/i18n';
+import type { CurrencyCode } from '@/lib/currency';
 
-export type ThemeMode = "dark" | "light";
+export type ThemeMode = 'dark' | 'light';
 
-const THEME_KEY = "vistagb-theme";
-const LOCALE_KEY = "vistagb-locale";
-const WISHLIST_KEY = "vistagb-wishlist";
-const COMPARE_KEY = "vistagb-compare";
-const CURRENCY_KEY = "vistagb-currency";
+const THEME_KEY = 'vistagb-theme';
+const LOCALE_KEY = 'vistagb-locale';
+const WISHLIST_KEY = 'vistagb-wishlist';
+const COMPARE_KEY = 'vistagb-compare';
+const CURRENCY_KEY = 'vistagb-currency';
 const MAX_COMPARE = 3;
 
 type PreferencesContextValue = {
@@ -46,7 +46,7 @@ function readList(key: string): string[] {
     if (!raw) return [];
     const parsed = JSON.parse(raw) as unknown;
     return Array.isArray(parsed)
-      ? parsed.filter((item): item is string => typeof item === "string")
+      ? parsed.filter((item): item is string => typeof item === 'string')
       : [];
   } catch {
     return [];
@@ -54,21 +54,21 @@ function readList(key: string): string[] {
 }
 
 function applyTheme(theme: ThemeMode) {
-  document.documentElement.setAttribute("data-theme", theme);
+  document.documentElement.setAttribute('data-theme', theme);
 }
 
 function applyLocale(locale: Locale) {
   const meta = LOCALE_META[locale];
   document.documentElement.lang = meta.htmlLang;
   document.documentElement.dir = meta.dir;
-  document.documentElement.setAttribute("data-locale", locale);
+  document.documentElement.setAttribute('data-locale', locale);
 }
 
 export function PreferencesProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
-  const [theme, setThemeState] = useState<ThemeMode>("dark");
-  const [locale, setLocaleState] = useState<Locale>("en");
-  const [currency, setCurrencyState] = useState<CurrencyCode>("PKR");
+  const [theme, setThemeState] = useState<ThemeMode>('dark');
+  const [locale, setLocaleState] = useState<Locale>('en');
+  const [currency, setCurrencyState] = useState<CurrencyCode>('PKR');
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [compare, setCompare] = useState<string[]>([]);
 
@@ -77,23 +77,23 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     const storedLocale = localStorage.getItem(LOCALE_KEY);
     const storedCurrency = localStorage.getItem(CURRENCY_KEY);
 
-    if (storedTheme === "light" || storedTheme === "dark") {
+    if (storedTheme === 'light' || storedTheme === 'dark') {
       setThemeState(storedTheme);
       applyTheme(storedTheme);
     } else {
-      applyTheme("dark");
+      applyTheme('dark');
     }
 
-    if (storedLocale === "en" || storedLocale === "ur") {
+    if (storedLocale === 'en' || storedLocale === 'ur') {
       setLocaleState(storedLocale);
       applyLocale(storedLocale);
     }
 
     if (
-      storedCurrency === "PKR" ||
-      storedCurrency === "USD" ||
-      storedCurrency === "EUR" ||
-      storedCurrency === "GBP"
+      storedCurrency === 'PKR' ||
+      storedCurrency === 'USD' ||
+      storedCurrency === 'EUR' ||
+      storedCurrency === 'GBP'
     ) {
       setCurrencyState(storedCurrency);
     }
@@ -203,7 +203,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
 export function usePreferences() {
   const context = useContext(PreferencesContext);
   if (!context) {
-    throw new Error("usePreferences must be used within PreferencesProvider");
+    throw new Error('usePreferences must be used within PreferencesProvider');
   }
   return context;
 }

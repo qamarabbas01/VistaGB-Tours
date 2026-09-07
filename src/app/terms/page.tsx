@@ -1,17 +1,17 @@
-import JsonLd from "@/components/JsonLd";
-import { contactEmailHref, contactEmailLabel } from "@/config/contact";
+import JsonLd from '@/components/JsonLd';
+import { contactEmailHref, contactEmailLabel } from '@/config/contact';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   webPageJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: "Terms of Service",
+  title: 'Terms of Service',
   description:
-    "Terms for booking and traveling with VistaGB Tours across Gilgit-Baltistan.",
-  path: "/terms",
+    'Terms for booking and traveling with VistaGB Tours across Gilgit-Baltistan.',
+  path: '/terms',
 });
 
 export default function TermsPage() {
@@ -20,14 +20,14 @@ export default function TermsPage() {
       <JsonLd
         data={withJsonLdContext([
           breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "Terms of Service", path: "/terms" },
+            { name: 'Home', path: '/' },
+            { name: 'Terms of Service', path: '/terms' },
           ]),
           webPageJsonLd({
-            name: "Terms of Service",
+            name: 'Terms of Service',
             description:
-              "Terms for booking and traveling with VistaGB Tours across Gilgit-Baltistan.",
-            path: "/terms",
+              'Terms for booking and traveling with VistaGB Tours across Gilgit-Baltistan.',
+            path: '/terms',
           }),
         ])}
       />
@@ -59,8 +59,8 @@ export default function TermsPage() {
             itinerary.
           </p>
           <p>
-            Cancellation and refund policies are provided at the time of booking.
-            For questions, contact{" "}
+            Cancellation and refund policies are provided at the time of
+            booking. For questions, contact{' '}
             <a
               href={contactEmailHref()}
               className="text-apricot hover:underline"
@@ -73,54 +73,69 @@ export default function TermsPage() {
             Booking & Payment
           </h2>
           <p>
-            Bookings are only confirmed upon receipt of a deposit, as stated in your trip proposal.
-            Final payment schedules and methods will be detailed in your booking confirmation. Failure to pay
-            remaining balances by the specified deadline may result in cancellation of your trip and forfeiture of your deposit.
+            Bookings are only confirmed upon receipt of a deposit, as stated in
+            your trip proposal. Final payment schedules and methods will be
+            detailed in your booking confirmation. Failure to pay remaining
+            balances by the specified deadline may result in cancellation of
+            your trip and forfeiture of your deposit.
           </p>
           <h2 className="mt-8 font-display text-base font-semibold text-glacier">
             Changes & Cancellations by VistaGB Tours
           </h2>
           <p>
-            In rare cases, we may have to modify itineraries due to operational requirements,
-            weather, road conditions, government travel advisories, or circumstances beyond our control.
-            We will do our utmost to offer a comparable experience or alternative dates. If we cancel your trip due to unforeseen events
-            (e.g. natural disasters, political unrest), you will be entitled to a refund of recoverable costs, minus incurred expenses.
+            In rare cases, we may have to modify itineraries due to operational
+            requirements, weather, road conditions, government travel
+            advisories, or circumstances beyond our control. We will do our
+            utmost to offer a comparable experience or alternative dates. If we
+            cancel your trip due to unforeseen events (e.g. natural disasters,
+            political unrest), you will be entitled to a refund of recoverable
+            costs, minus incurred expenses.
           </p>
           <h2 className="mt-8 font-display text-base font-semibold text-glacier">
             Client Responsibilities
           </h2>
           <p>
-            Clients must provide accurate information on health, dietary needs, and personal circumstances that may impact travel.
-            You are responsible for complying with local laws, customs, and respecting the environment and communities visited.
-            Any disruption caused by failure to follow local or guide instructions may result in removal from the tour without refund.
+            Clients must provide accurate information on health, dietary needs,
+            and personal circumstances that may impact travel. You are
+            responsible for complying with local laws, customs, and respecting
+            the environment and communities visited. Any disruption caused by
+            failure to follow local or guide instructions may result in removal
+            from the tour without refund.
           </p>
           <h2 className="mt-8 font-display text-base font-semibold text-glacier">
             Liability Waiver
           </h2>
           <p>
-            By travelling with us, you acknowledge that adventure travel involves potential hazards.
-            VistaGB Tours, its staff, and partners are not liable for injuries, illness, loss, damage to property, delays, or expenses arising
-            from circumstances beyond our reasonable control. We strongly advise comprehensive
-            travel insurance covering medical emergencies, evacuations, cancellations, and personal belongings.
+            By travelling with us, you acknowledge that adventure travel
+            involves potential hazards. VistaGB Tours, its staff, and partners
+            are not liable for injuries, illness, loss, damage to property,
+            delays, or expenses arising from circumstances beyond our reasonable
+            control. We strongly advise comprehensive travel insurance covering
+            medical emergencies, evacuations, cancellations, and personal
+            belongings.
           </p>
           <h2 className="mt-8 font-display text-base font-semibold text-glacier">
             Privacy & Data Protection
           </h2>
           <p>
-            Personal information collected for bookings will only be used for service delivery, permits,
-            and emergency contact as required by law. We do not sell or share your data with third parties
-            except as needed to provide travel arrangements.
+            Personal information collected for bookings will only be used for
+            service delivery, permits, and emergency contact as required by law.
+            We do not sell or share your data with third parties except as
+            needed to provide travel arrangements.
           </p>
           <h2 className="mt-8 font-display text-base font-semibold text-glacier">
             Governing Law
           </h2>
           <p>
-            These terms are governed by the laws of Gilgit-Baltistan, Pakistan. Any disputes arising from travel services or website use shall
-            be subject to the exclusive jurisdiction of the courts in Gilgit-Baltistan.
+            These terms are governed by the laws of Gilgit-Baltistan, Pakistan.
+            Any disputes arising from travel services or website use shall be
+            subject to the exclusive jurisdiction of the courts in
+            Gilgit-Baltistan.
           </p>
           <p>
-            VistaGB Tours reserves the right to update these terms at any time. Continued use of our website or services constitutes acceptance of the
-            latest terms.
+            VistaGB Tours reserves the right to update these terms at any time.
+            Continued use of our website or services constitutes acceptance of
+            the latest terms.
           </p>
         </div>
       </section>

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { VideoCard } from "@/components/VideoCard";
-import type { DestinationVideo } from "@/data/types";
+import Link from 'next/link';
+import { VideoCard } from '@/components/VideoCard';
+import type { DestinationVideo } from '@/data/types';
 
 type Props = {
   videos: DestinationVideo[];
@@ -15,20 +15,22 @@ type Props = {
 export default function DestinationVideos({
   videos,
   destinationName,
-  label = "On film",
+  label = 'On film',
   heading,
   intro,
   moreHref,
-  moreLabel = "All videos →",
+  moreLabel = 'All videos →',
 }: Props) {
   if (videos.length === 0) return null;
 
   const title =
     heading ??
-    (destinationName ? `${destinationName} on film` : "Gilgit-Baltistan on film");
+    (destinationName
+      ? `${destinationName} on film`
+      : 'Gilgit-Baltistan on film');
   const description =
     intro ??
-    "Short clips — drone views, treks, jeep tracks, snow, blossom, and autumn colour.";
+    'Short clips — drone views, treks, jeep tracks, snow, blossom, and autumn colour.';
 
   return (
     <section className="border-t border-teal/20 bg-slate py-16 md:py-24">
@@ -51,7 +53,10 @@ export default function DestinationVideos({
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {videos.map((video) => (
-            <VideoCard key={`${video.theme}-${video.youtubeId}`} video={video} />
+            <VideoCard
+              key={`${video.theme}-${video.youtubeId}`}
+              video={video}
+            />
           ))}
         </div>
       </div>

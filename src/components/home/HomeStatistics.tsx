@@ -1,5 +1,5 @@
-import OptimizedImage from "@/components/OptimizedImage";
-import type { statistics } from "@/data/hero";
+import OptimizedImage from '@/components/OptimizedImage';
+import type { statistics } from '@/data/hero';
 
 type Statistic = (typeof statistics)[number];
 

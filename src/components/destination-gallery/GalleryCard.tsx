@@ -1,10 +1,7 @@
-"use client";
+'use client';
 
-import OptimizedImage from "@/components/OptimizedImage";
-import {
-  GALLERY_CATEGORY_LABELS,
-  type GalleryImage,
-} from "@/data/types";
+import OptimizedImage from '@/components/OptimizedImage';
+import { GALLERY_CATEGORY_LABELS, type GalleryImage } from '@/data/types';
 
 export function GalleryCard({
   image,
@@ -22,12 +19,12 @@ export function GalleryCard({
       type="button"
       onClick={onOpen}
       className={`group relative overflow-hidden rounded-2xl border border-teal/20 bg-slate text-left transition-colors hover:border-apricot/50 ${
-        featured ? "sm:col-span-2 lg:col-span-2" : ""
+        featured ? 'sm:col-span-2 lg:col-span-2' : ''
       }`}
     >
       <div
         className={`relative w-full overflow-hidden ${
-          featured ? "aspect-[21/9] sm:aspect-[2/1]" : "aspect-[4/3]"
+          featured ? 'aspect-[21/9] sm:aspect-[2/1]' : 'aspect-[4/3]'
         }`}
       >
         <OptimizedImage
@@ -36,8 +33,8 @@ export function GalleryCard({
           fill
           sizes={
             featured
-              ? "(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 66vw"
-              : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              ? '(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 66vw'
+              : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
           }
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />

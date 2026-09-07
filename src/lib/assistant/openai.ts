@@ -1,8 +1,8 @@
-import { generalKnowledgeFor } from "@/lib/assistant/knowledge";
+import { generalKnowledgeFor } from '@/lib/assistant/knowledge';
 import {
   formatContextForPrompt,
   type TravelContext,
-} from "@/lib/assistant/retrieve";
+} from '@/lib/assistant/retrieve';
 
 export const ASSISTANT_SYSTEM_PROMPT = `You are VistaGB Tours' AI Travel Assistant for Gilgit-Baltistan, Pakistan.
 
@@ -26,26 +26,26 @@ export function buildUserPrompt(
   const general = generalKnowledgeFor(
     ctx.generalTopics.length
       ? ctx.generalTopics
-      : ctx.intent === "budget"
-        ? ["budget"]
-        : ctx.intent === "roads"
-          ? ["roads"]
-          : ctx.intent === "packing"
-            ? ["packing"]
+      : ctx.intent === 'budget'
+        ? ['budget']
+        : ctx.intent === 'roads'
+          ? ['roads']
+          : ctx.intent === 'packing'
+            ? ['packing']
             : [],
   );
 
   return [
-    "DESTINATION CONTEXT:",
-    formatContextForPrompt(ctx) || "(no specific destination matched)",
-    general ? `\nGENERAL KNOWLEDGE:\n${general}` : "",
+    'DESTINATION CONTEXT:',
+    formatContextForPrompt(ctx) || '(no specific destination matched)',
+    general ? `\nGENERAL KNOWLEDGE:\n${general}` : '',
     `\nTRAVELLER QUESTION:\n${userMessage}`,
   ]
     .filter(Boolean)
-    .join("\n");
+    .join('\n');
 }
 
-type ChatMessage = { role: "user" | "assistant" | "system"; content: string };
+type ChatMessage = { role: 'user' | 'assistant' | 'system'; content: string };
 
 export async function streamOpenAIAnswer(options: {
   apiKey: string;
@@ -54,19 +54,25 @@ export async function streamOpenAIAnswer(options: {
   userMessage: string;
   history?: ChatMessage[];
 }): Promise<ReadableStream<Uint8Array>> {
-  const { apiKey, model = "gpt-4o-mini", context, userMessage, history = [] } = options;
+  const {
+    apiKey,
+    model = 'gpt-4o-mini',
+    context,
+    userMessage,
+    history = [],
+  } = options;
 
   const messages: ChatMessage[] = [
-    { role: "system", content: ASSISTANT_SYSTEM_PROMPT },
-    ...history.slice(-8).filter((m) => m.role !== "system"),
-    { role: "user", content: buildUserPrompt(context, userMessage) },
+    { role: 'system', content: ASSISTANT_SYSTEM_PROMPT },
+    ...history.slice(-8).filter((m) => m.role !== 'system'),
+    { role: 'user', content: buildUserPrompt(context, userMessage) },
   ];
 
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       model,
@@ -77,9 +83,9 @@ export async function streamOpenAIAnswer(options: {
   });
 
   if (!response.ok || !response.body) {
-    const detail = await response.text().catch(() => "");
+    const detail = await response.text().catch(() => '');
     throw new Error(
-      `OpenAI error ${response.status}${detail ? `: ${detail.slice(0, 200)}` : ""}`,
+      `OpenAI error ${response.status}${detail ? `: ${detail.slice(0, 200)}` : ''}`,
     );
   }
 
@@ -89,20 +95,20 @@ export async function streamOpenAIAnswer(options: {
 
   return new ReadableStream<Uint8Array>({
     async start(controller) {
-      let buffer = "";
+      let buffer = '';
       try {
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
           buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split("\n");
-          buffer = lines.pop() ?? "";
+          const lines = buffer.split('\n');
+          buffer = lines.pop() ?? '';
 
           for (const line of lines) {
             const trimmed = line.trim();
-            if (!trimmed.startsWith("data:")) continue;
+            if (!trimmed.startsWith('data:')) continue;
             const data = trimmed.slice(5).trim();
-            if (data === "[DONE]") {
+            if (data === '[DONE]') {
               controller.close();
               return;
             }

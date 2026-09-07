@@ -1,4 +1,4 @@
-import { PageHeroSkeleton, Skeleton } from "@/components/skeletons";
+import { PageHeroSkeleton, Skeleton } from '@/components/skeletons';
 
 export default function AssistantLoading() {
   return (

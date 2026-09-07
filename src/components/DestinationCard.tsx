@@ -1,14 +1,10 @@
-"use client";
+'use client';
 
-import OptimizedImage from "@/components/OptimizedImage";
-import Link from "next/link";
-import CompareButton from "@/components/CompareButton";
-import WishlistButton from "@/components/WishlistButton";
-import {
-  getParentRegion,
-  isPlace,
-  type TravelLocation,
-} from "@/data";
+import OptimizedImage from '@/components/OptimizedImage';
+import Link from 'next/link';
+import CompareButton from '@/components/CompareButton';
+import WishlistButton from '@/components/WishlistButton';
+import { getParentRegion, isPlace, type TravelLocation } from '@/data';
 
 type Props = {
   location: TravelLocation;
@@ -18,7 +14,7 @@ export default function DestinationCard({ location }: Props) {
   const place = isPlace(location);
   const parentRegion = place ? getParentRegion(location) : undefined;
   const label = place
-    ? `${location.type}${parentRegion ? ` · ${parentRegion.name}` : ""}`
+    ? `${location.type}${parentRegion ? ` · ${parentRegion.name}` : ''}`
     : `${location.region} · ALT ${location.altitude}`;
 
   return (

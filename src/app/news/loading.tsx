@@ -1,4 +1,4 @@
-import { NewsListSkeleton, PageHeroSkeleton } from "@/components/skeletons";
+import { NewsListSkeleton, PageHeroSkeleton } from '@/components/skeletons';
 
 export default function NewsLoading() {
   return (

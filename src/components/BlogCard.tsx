@@ -1,5 +1,5 @@
-import type { BlogPost } from "@/data/types";
-import OptimizedImage from "@/components/OptimizedImage";
+import type { BlogPost } from '@/data/types';
+import OptimizedImage from '@/components/OptimizedImage';
 
 export default function BlogCard({ post }: { post: BlogPost }) {
   return (

@@ -1,19 +1,19 @@
-import BookingForm from "@/components/BookingForm";
-import JsonLd from "@/components/JsonLd";
-import PageHeader from "@/components/PageHeader";
-import { getPlacesForRegion, regions } from "@/data";
+import BookingForm from '@/components/BookingForm';
+import JsonLd from '@/components/JsonLd';
+import PageHeader from '@/components/PageHeader';
+import { getPlacesForRegion, regions } from '@/data';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   webPageJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: "Book a trip",
+  title: 'Book a trip',
   description:
-    "Request dates for a private Gilgit-Baltistan tour. VistaGB confirms lodges, jeeps, and a quote — no card payment on this site.",
-  path: "/book",
+    'Request dates for a private Gilgit-Baltistan tour. VistaGB confirms lodges, jeeps, and a quote — no card payment on this site.',
+  path: '/book',
 });
 
 const regionOptions = [
@@ -23,8 +23,8 @@ const regionOptions = [
     places: getPlacesForRegion(region.slug).map((place) => place.name),
   })),
   {
-    slug: "not-sure",
-    name: "Not sure yet — help me decide",
+    slug: 'not-sure',
+    name: 'Not sure yet — help me decide',
     places: [],
   },
 ];
@@ -35,21 +35,21 @@ type Props = {
 
 export default function BookPage({ searchParams }: Props) {
   const raw = searchParams?.region;
-  const defaultRegion = (Array.isArray(raw) ? raw[0] : raw ?? "").trim();
+  const defaultRegion = (Array.isArray(raw) ? raw[0] : (raw ?? '')).trim();
 
   return (
     <div>
       <JsonLd
         data={withJsonLdContext([
           breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "Tools", path: "/tools" },
-            { name: "Book", path: "/book" },
+            { name: 'Home', path: '/' },
+            { name: 'Tools', path: '/tools' },
+            { name: 'Book', path: '/book' },
           ]),
           webPageJsonLd({
-            name: "Book a trip",
-            description: "Request dates for a private VistaGB tour.",
-            path: "/book",
+            name: 'Book a trip',
+            description: 'Request dates for a private VistaGB tour.',
+            path: '/book',
           }),
         ])}
       />

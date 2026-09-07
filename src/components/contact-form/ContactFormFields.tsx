@@ -2,7 +2,7 @@ import {
   CONTACT_INPUT_CLASS,
   DURATION_OPTIONS,
   type RegionFormOption,
-} from "@/components/contact-form/inquiry";
+} from '@/components/contact-form/inquiry';
 
 type MonthOption = { value: string; label: string };
 
@@ -87,7 +87,8 @@ export function ContactFormFields({
                 Specific places in {selectedRegion?.name}
               </p>
               <p className="text-xs text-ice/80">
-                Pick as many as you like — we&apos;ll shape the route around them.
+                Pick as many as you like — we&apos;ll shape the route around
+                them.
               </p>
             </div>
 
@@ -270,7 +271,7 @@ export function ContactFormFields({
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="message" className="text-sm text-ice">
-            Anything else?{" "}
+            Anything else?{' '}
             <span className="text-xs text-ice/70">(optional)</span>
           </label>
           <textarea

@@ -1,10 +1,10 @@
-import { Metric } from "@/components/destination-weather/Metric";
+import { Metric } from '@/components/destination-weather/Metric';
 import {
   formatClock,
   formatDayLabel,
   formatTemp,
-} from "@/components/destination-weather/format";
-import type { DestinationWeather as WeatherPayload } from "@/lib/weather/types";
+} from '@/components/destination-weather/format';
+import type { DestinationWeather as WeatherPayload } from '@/lib/weather/types';
 
 export function WeatherPanel({ weather }: { weather: WeatherPayload }) {
   return (
@@ -16,7 +16,7 @@ export function WeatherPanel({ weather }: { weather: WeatherPayload }) {
         </p>
         <p className="mt-1 text-sm text-apricot">{weather.current.condition}</p>
         <p className="mt-1 text-xs text-ice">
-          Today {formatTemp(weather.today.tempMinC)} –{" "}
+          Today {formatTemp(weather.today.tempMinC)} –{' '}
           {formatTemp(weather.today.tempMaxC)}
         </p>
       </div>
@@ -48,7 +48,7 @@ export function WeatherPanel({ weather }: { weather: WeatherPayload }) {
               </div>
               <div className="shrink-0 text-right">
                 <p className="text-glacier">
-                  {formatTemp(day.tempMaxC)}{" "}
+                  {formatTemp(day.tempMaxC)}{' '}
                   <span className="text-ice">/ {formatTemp(day.tempMinC)}</span>
                 </p>
                 <p className="text-[11px] text-ice">

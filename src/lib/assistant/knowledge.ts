@@ -46,11 +46,11 @@ Documents
 Skip overpacking formal wear — practical layers beat bulky suitcases on jeep roads.`;
 
 export function generalKnowledgeFor(
-  topics: Array<"budget" | "roads" | "packing">,
+  topics: Array<'budget' | 'roads' | 'packing'>,
 ): string {
   const chunks: string[] = [];
-  if (topics.includes("budget")) chunks.push(GB_BUDGET);
-  if (topics.includes("roads")) chunks.push(GB_ROADS);
-  if (topics.includes("packing")) chunks.push(GB_PACKING);
-  return chunks.join("\n\n");
+  if (topics.includes('budget')) chunks.push(GB_BUDGET);
+  if (topics.includes('roads')) chunks.push(GB_ROADS);
+  if (topics.includes('packing')) chunks.push(GB_PACKING);
+  return chunks.join('\n\n');
 }

@@ -1,13 +1,18 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useMemo, useState } from "react";
-import type { ItineraryDay } from "@/data/types";
+import Link from 'next/link';
+import { useMemo, useState } from 'react';
+import type { ItineraryDay } from '@/data/types';
 
 type PlannerDay = ItineraryDay & { included: boolean; notes: string };
 
 type Props = {
-  regions: { slug: string; name: string; itinerary: ItineraryDay[]; duration?: string }[];
+  regions: {
+    slug: string;
+    name: string;
+    itinerary: ItineraryDay[];
+    duration?: string;
+  }[];
   initialSlug?: string;
 };
 
@@ -15,7 +20,7 @@ export default function TripPlanner({ regions: options, initialSlug }: Props) {
   const [slug, setSlug] = useState(
     options.some((item) => item.slug === initialSlug)
       ? initialSlug!
-      : options[0]?.slug || "",
+      : options[0]?.slug || '',
   );
   const selected = options.find((item) => item.slug === slug) ?? options[0];
 
@@ -24,12 +29,12 @@ export default function TripPlanner({ regions: options, initialSlug }: Props) {
       (selected?.itinerary ?? []).map((day) => ({
         ...day,
         included: true,
-        notes: "",
+        notes: '',
       })),
     [selected],
   );
   const [days, setDays] = useState<PlannerDay[]>(seed);
-  const [customTitle, setCustomTitle] = useState("");
+  const [customTitle, setCustomTitle] = useState('');
 
   function loadRegion(nextSlug: string) {
     setSlug(nextSlug);
@@ -38,24 +43,24 @@ export default function TripPlanner({ regions: options, initialSlug }: Props) {
       (next?.itinerary ?? []).map((day) => ({
         ...day,
         included: true,
-        notes: "",
+        notes: '',
       })),
     );
   }
 
   function addDay() {
-    const title = customTitle.trim() || "Open day";
+    const title = customTitle.trim() || 'Open day';
     setDays((current) => [
       ...current,
       {
         day: `Day ${current.length + 1}`,
         title,
-        summary: "Add stops, lodges, or a rest morning here.",
+        summary: 'Add stops, lodges, or a rest morning here.',
         included: true,
-        notes: "",
+        notes: '',
       },
     ]);
-    setCustomTitle("");
+    setCustomTitle('');
   }
 
   const included = days.filter((day) => day.included);
@@ -97,7 +102,7 @@ export default function TripPlanner({ regions: options, initialSlug }: Props) {
       <article className="print-itinerary">
         <p className="coord-label mb-2">VistaGB itinerary</p>
         <h2 className="font-display text-3xl font-semibold text-glacier">
-          {selected?.name ?? "Custom trip"}
+          {selected?.name ?? 'Custom trip'}
         </h2>
         {selected?.duration ? (
           <p className="mt-3 max-w-2xl text-sm text-ice">{selected.duration}</p>
@@ -108,7 +113,7 @@ export default function TripPlanner({ regions: options, initialSlug }: Props) {
             <li
               key={`${day.day}-${index}`}
               className={`grid gap-4 rounded-xl border border-teal/20 bg-slate p-5 md:grid-cols-[7rem_1fr] ${
-                day.included ? "" : "opacity-40"
+                day.included ? '' : 'opacity-40'
               }`}
             >
               <div>
@@ -120,7 +125,9 @@ export default function TripPlanner({ regions: options, initialSlug }: Props) {
                     onChange={() =>
                       setDays((current) =>
                         current.map((item, i) =>
-                          i === index ? { ...item, included: !item.included } : item,
+                          i === index
+                            ? { ...item, included: !item.included }
+                            : item,
                         ),
                       )
                     }
@@ -133,16 +140,22 @@ export default function TripPlanner({ regions: options, initialSlug }: Props) {
                 <h3 className="font-display text-lg font-semibold text-glacier">
                   {day.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-ice">{day.summary}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ice">
+                  {day.summary}
+                </p>
                 {day.stops && day.stops.length > 0 ? (
-                  <p className="mt-3 text-xs text-apricot">{day.stops.join(" · ")}</p>
+                  <p className="mt-3 text-xs text-apricot">
+                    {day.stops.join(' · ')}
+                  </p>
                 ) : null}
                 <textarea
                   value={day.notes}
                   onChange={(event) =>
                     setDays((current) =>
                       current.map((item, i) =>
-                        i === index ? { ...item, notes: event.target.value } : item,
+                        i === index
+                          ? { ...item, notes: event.target.value }
+                          : item,
                       ),
                     )
                   }
@@ -172,7 +185,7 @@ export default function TripPlanner({ regions: options, initialSlug }: Props) {
         </div>
 
         <p className="mt-6 text-sm text-ice">
-          {included.length} day{included.length === 1 ? "" : "s"} in this draft.
+          {included.length} day{included.length === 1 ? '' : 's'} in this draft.
         </p>
       </article>
     </div>

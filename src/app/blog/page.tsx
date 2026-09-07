@@ -1,23 +1,23 @@
-import JsonLd from "@/components/JsonLd";
-import BlogCard from "@/components/BlogCard";
-import BlogInfiniteRest from "@/components/BlogInfiniteRest";
-import Pagination from "@/components/Pagination";
-import { blogPosts } from "@/data";
+import JsonLd from '@/components/JsonLd';
+import BlogCard from '@/components/BlogCard';
+import BlogInfiniteRest from '@/components/BlogInfiniteRest';
+import Pagination from '@/components/Pagination';
+import { blogPosts } from '@/data';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
   collectionJsonLd,
   withJsonLdContext,
-} from "@/lib/seo";
+} from '@/lib/seo';
 
 const BLOG_DESCRIPTION =
-  "Guides, season tips, and stories from the road across Gilgit-Baltistan — written by VistaGB guides and travelers.";
+  'Guides, season tips, and stories from the road across Gilgit-Baltistan — written by VistaGB guides and travelers.';
 
 export const metadata = buildPageMetadata({
-  title: "Blog",
+  title: 'Blog',
   description: BLOG_DESCRIPTION,
-  path: "/blog",
-  image: "/images/commons/24a764cb8976da0d.jpg",
+  path: '/blog',
+  image: '/images/commons/24a764cb8976da0d.jpg',
   imageAlt: "Eagle's Nest sunset above Hunza Valley",
 });
 
@@ -34,7 +34,7 @@ const sortedPosts = [...blogPosts].sort(
 export default function BlogPage({ searchParams }: Props) {
   const pageParam = searchParams?.page;
   const pageStr = Array.isArray(pageParam) ? pageParam[0] : pageParam;
-  const requestedPage = Math.max(1, parseInt(pageStr ?? "1", 10) || 1);
+  const requestedPage = Math.max(1, parseInt(pageStr ?? '1', 10) || 1);
 
   const totalPages = Math.ceil(sortedPosts.length / ITEMS_PER_PAGE);
   const currentPage = Math.min(requestedPage, Math.max(totalPages, 1));
@@ -48,16 +48,16 @@ export default function BlogPage({ searchParams }: Props) {
       <JsonLd
         data={withJsonLdContext([
           breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "Blog", path: "/blog" },
+            { name: 'Home', path: '/' },
+            { name: 'Blog', path: '/blog' },
           ]),
           collectionJsonLd({
-            name: "The VistaGB Blog",
+            name: 'The VistaGB Blog',
             description: BLOG_DESCRIPTION,
-            path: "/blog",
+            path: '/blog',
             items: sortedPosts.map((post) => ({
               name: post.title,
-              path: "/blog",
+              path: '/blog',
             })),
           }),
         ])}
