@@ -24,6 +24,12 @@ export {
   type ExperienceCategory,
   type ExperienceSlug,
 } from './experiences';
+export {
+  SEASON_FEATURES,
+  getFeaturedSeason,
+  type SeasonFeature,
+  type SeasonId,
+} from './seasons';
 
 export type {
   BlogPost,

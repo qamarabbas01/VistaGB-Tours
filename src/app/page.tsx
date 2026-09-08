@@ -8,6 +8,7 @@ import { HomeNews } from '@/components/home/HomeNews';
 import { HomePackages } from '@/components/home/HomePackages';
 import { HomePopularDestinations } from '@/components/home/HomePopularDestinations';
 import { HomeExploreByExperience } from '@/components/home/HomeExploreByExperience';
+import { HomeFeaturedSeason } from '@/components/home/HomeFeaturedSeason';
 import { HomeExperiences } from '@/components/home/HomeExperiences';
 import { HomeReviews } from '@/components/home/HomeReviews';
 import { HomeStatistics } from '@/components/home/HomeStatistics';
@@ -15,7 +16,7 @@ import { HomeWhyChoose } from '@/components/home/HomeWhyChoose';
 import { SectionDivider } from '@/components/home/SectionDivider';
 import { LazyTravelMapSection } from '@/components/lazy/TravelMapSection';
 import DestinationVideos from '@/components/DestinationVideos';
-import { blogPosts, regions } from '@/data';
+import { blogPosts, getFeaturedSeason, getRegionBySlug, regions } from '@/data';
 import {
   activities,
   experiences,
@@ -33,6 +34,11 @@ import { faqJsonLd, withJsonLdContext } from '@/lib/seo';
 export const revalidate = 3600;
 
 const popularDestinations = regions.slice(0, 6);
+
+const featuredSeason = getFeaturedSeason();
+const featuredSeasonDestinations = featuredSeason.destinationSlugs
+  .map((slug) => getRegionBySlug(slug))
+  .filter((region) => region != null);
 
 const latestPosts = [...blogPosts]
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -52,6 +58,10 @@ export default async function Home() {
       <JsonLd data={withJsonLdContext(faqJsonLd(faqs))} />
       <HomeHero />
       <HomeWhyChoose />
+      <HomeFeaturedSeason
+        season={featuredSeason}
+        destinations={featuredSeasonDestinations}
+      />
       <HomePopularDestinations destinations={popularDestinations} />
       <HomeExploreByExperience />
       <SectionDivider />
