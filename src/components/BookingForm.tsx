@@ -1,86 +1,13 @@
 'use client';
 
-import { FormEvent, useMemo, useState } from 'react';
+import { FormEvent, useState } from 'react';
+import BookingCalendar from '@/components/booking-form/BookingCalendar';
 import type { RegionFormOption } from '@/components/ContactForm';
-
-const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-
-function toIso(date: Date) {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
-
-function isPeakMonth(monthIndex: number) {
-  return monthIndex >= 5 && monthIndex <= 8;
-}
-
-function MonthGrid({
-  year,
-  month,
-  start,
-  end,
-  onPick,
-}: {
-  year: number;
-  month: number;
-  start: string;
-  end: string;
-  onPick: (iso: string) => void;
-}) {
-  const todayIso = toIso(new Date());
-  const first = new Date(year, month, 1);
-  const startPad = (first.getDay() + 6) % 7;
-  const count = new Date(year, month + 1, 0).getDate();
-  const cells = [
-    ...Array.from({ length: startPad }, () => null),
-    ...Array.from({ length: count }, (_, i) => i + 1),
-  ];
-  const label = first.toLocaleDateString('en-GB', {
-    month: 'long',
-    year: 'numeric',
-  });
-
-  return (
-    <div>
-      <p className="coord-label mb-3">{label}</p>
-      <div className="grid grid-cols-7 gap-1 text-center text-[0.65rem] uppercase tracking-wider text-ice">
-        {WEEKDAYS.map((day) => (
-          <span key={day}>{day}</span>
-        ))}
-      </div>
-      <div className="mt-1 grid grid-cols-7 gap-1">
-        {cells.map((day, index) => {
-          if (!day) return <span key={`pad-${index}`} />;
-          const iso = toIso(new Date(year, month, day));
-          const past = iso < todayIso;
-          const selected = iso === start || iso === end;
-          const inRange = start && end && iso > start && iso < end;
-          return (
-            <button
-              key={iso}
-              type="button"
-              disabled={past}
-              onClick={() => onPick(iso)}
-              className={`rounded-lg py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-30 ${
-                selected
-                  ? 'bg-apricot text-ink'
-                  : inRange
-                    ? 'bg-apricot/20 text-glacier'
-                    : isPeakMonth(month)
-                      ? 'bg-night text-glacier hover:bg-apricot/20'
-                      : 'text-glacier hover:bg-night'
-              }`}
-            >
-              {day}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
+import {
+  CONTACT_INPUT_CLASS,
+  DURATION_OPTIONS,
+  tripLengthFromDates,
+} from '@/components/contact-form/inquiry';
 
 type Props = {
   regionOptions: RegionFormOption[];
@@ -88,24 +15,13 @@ type Props = {
 };
 
 export default function BookingForm({ regionOptions, defaultRegion }: Props) {
-  const now = new Date();
-  const months = useMemo(
-    () =>
-      [0, 1, 2].map((offset) => {
-        const date = new Date(now.getFullYear(), now.getMonth() + offset, 1);
-        return { year: date.getFullYear(), month: date.getMonth() };
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
-
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [region, setRegion] = useState(
     defaultRegion || regionOptions[0]?.slug || '',
   );
-  const [groupSize, setGroupSize] = useState('2');
-  const [duration, setDuration] = useState('6–7 days');
+  const [groupSize, setGroupSize] = useState('');
+  const [duration, setDuration] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -126,6 +42,15 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
     }
     setEnd(iso);
   }
+
+  function clearDates() {
+    setStart('');
+    setEnd('');
+  }
+
+  const computedTripLength =
+    start && end ? tripLengthFromDates(start, end) : null;
+  const durationToSend = computedTripLength?.label ?? duration;
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
@@ -148,7 +73,7 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
           travelTo: end,
           datesFlexible: 'no',
           travelMonth: '',
-          duration,
+          duration: durationToSend,
           groupSize,
           message: message.trim()
             ? `[Online booking request]\n${message}`
@@ -185,39 +110,31 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-8">
-      <div className="rounded-2xl border border-teal/20 bg-slate p-6">
+    <form
+      onSubmit={onSubmit}
+      className="grid gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:items-start"
+    >
+      <div className="rounded-2xl border border-teal/20 bg-slate p-6 md:p-8">
         <p className="coord-label mb-2">Booking calendar</p>
         <h2 className="font-display text-2xl font-semibold text-glacier">
           Choose travel dates
         </h2>
         <p className="mt-2 text-sm text-ice">
-          Tap a start date, then an end date. June–September days are
-          highlighted as peak season. We confirm lodges and jeeps after we
-          receive the request.
+          This month is shown first. Use the arrows to browse later months, then
+          tap a start date and an end date.
         </p>
-        <div className="mt-8 grid gap-8 lg:grid-cols-3">
-          {months.map((item) => (
-            <MonthGrid
-              key={`${item.year}-${item.month}`}
-              year={item.year}
-              month={item.month}
-              start={start}
-              end={end}
-              onPick={pickDate}
-            />
-          ))}
+        <div className="mt-8">
+          <BookingCalendar
+            start={start}
+            end={end}
+            tripLengthLabel={computedTripLength?.label}
+            onPick={pickDate}
+            onClear={clearDates}
+          />
         </div>
-        <p className="mt-4 text-sm text-apricot">
-          {start
-            ? end
-              ? `${start} → ${end}`
-              : `Starting ${start} — pick an end date`
-            : 'No dates selected yet'}
-        </p>
       </div>
 
-      <div className="rounded-2xl border border-teal/20 bg-slate p-6">
+      <div className="rounded-2xl border border-teal/20 bg-slate p-6 md:p-8">
         <p className="coord-label mb-4">Trip details</p>
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="text-sm text-ice">
@@ -236,30 +153,46 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
             </select>
           </label>
           <label className="text-sm text-ice">
-            Trip length
-            <select
-              value={duration}
-              onChange={(event) => setDuration(event.target.value)}
-              className="mt-2 w-full rounded-xl border border-teal/30 bg-night px-4 py-3 text-glacier outline-none focus:border-apricot"
-            >
-              {[
-                '3 days',
-                '4–5 days',
-                '6–7 days',
-                '8–10 days',
-                '11–14 days',
-                '2+ weeks',
-              ].map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </select>
+            {computedTripLength ? (
+              <>
+                Trip length
+                <input
+                  readOnly
+                  value={computedTripLength.label}
+                  className={`mt-2 ${CONTACT_INPUT_CLASS} border-apricot/40`}
+                />
+                <p className="mt-2 text-xs text-ice/80">
+                  Counted from the dates you picked on the calendar.
+                </p>
+              </>
+            ) : (
+              <>
+                Trip length
+                <select
+                  required
+                  value={duration}
+                  onChange={(event) => setDuration(event.target.value)}
+                  className="mt-2 w-full rounded-xl border border-teal/30 bg-night px-4 py-3 text-glacier outline-none focus:border-apricot"
+                >
+                  <option value="" disabled>
+                    How many days?
+                  </option>
+                  {DURATION_OPTIONS.map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+              </>
+            )}
           </label>
           <label className="text-sm text-ice">
             Travellers
             <input
               required
+              type="number"
+              min={1}
+              max={30}
               value={groupSize}
               onChange={(event) => setGroupSize(event.target.value)}
               className="mt-2 w-full rounded-xl border border-teal/30 bg-night px-4 py-3 text-glacier outline-none focus:border-apricot"
@@ -308,7 +241,7 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
 
         <button
           type="submit"
-          disabled={submitting || !start}
+          disabled={submitting || !start || !durationToSend || !groupSize.trim()}
           className="mt-6 rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {submitting ? 'Sending…' : 'Request this booking'}
