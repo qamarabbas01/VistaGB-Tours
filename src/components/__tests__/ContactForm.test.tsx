@@ -8,6 +8,7 @@ function renderForm() {
 }
 
 async function fillTravelerDetails(user: ReturnType<typeof userEvent.setup>) {
+  await user.type(screen.getByLabelText(/number of travelers/i), '2');
   await user.type(screen.getByLabelText(/full name/i), 'Ada Lovelace');
   await user.type(screen.getByLabelText(/^email$/i), 'ada@example.com');
 }
@@ -36,6 +37,8 @@ describe('ContactForm', () => {
     expect(screen.getByLabelText('Karimabad')).toBeInTheDocument();
     expect(screen.getByLabelText(/full name/i)).toBeRequired();
     expect(screen.getByLabelText(/^email$/i)).toBeRequired();
+    expect(screen.getByLabelText(/number of travelers/i)).toBeRequired();
+    expect(screen.getByLabelText(/number of travelers/i)).toHaveValue(null);
 
     const honeypot = container.querySelector<HTMLInputElement>(
       'input[name="website"]',
@@ -49,6 +52,9 @@ describe('ContactForm', () => {
   it('requires a trip length before submitting', () => {
     const { container } = renderForm();
 
+    fireEvent.change(screen.getByLabelText(/start date/i), {
+      target: { value: '2026-09-12' },
+    });
     fireEvent.submit(container.querySelector('form')!);
 
     expect(screen.getByRole('alert')).toHaveTextContent(
@@ -143,6 +149,41 @@ describe('ContactForm', () => {
     expect(
       screen.getByText(/we.ll reply within 24 hours with a route and quote/i),
     ).toBeInTheDocument();
+  });
+
+  it('fills trip length from a start and end date instead of asking how many days', async () => {
+    const user = userEvent.setup();
+    (global.fetch as jest.Mock).mockResolvedValue({
+      ok: true,
+      json: async () => ({ ok: true }),
+    });
+
+    renderForm();
+
+    fireEvent.change(screen.getByLabelText(/start date/i), {
+      target: { value: '2026-01-26' },
+    });
+    fireEvent.change(screen.getByLabelText(/end date/i), {
+      target: { value: '2026-07-26' },
+    });
+
+    expect(screen.getByLabelText(/trip length/i)).toHaveValue(
+      '182 days · 181 nights',
+    );
+    expect(screen.getByLabelText(/trip length/i)).toHaveAttribute('readonly');
+
+    await fillTravelerDetails(user);
+    await user.click(screen.getByRole('button', { name: /send inquiry/i }));
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    const payload = JSON.parse(
+      (global.fetch as jest.Mock).mock.calls[0][1].body as string,
+    );
+    expect(payload).toMatchObject({
+      travelFrom: '2026-01-26',
+      travelTo: '2026-07-26',
+      duration: '182 days · 181 nights',
+    });
   });
 
   it('still posts the honeypot value when a bot fills the hidden website field', async () => {

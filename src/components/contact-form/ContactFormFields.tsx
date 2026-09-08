@@ -2,6 +2,7 @@ import {
   CONTACT_INPUT_CLASS,
   DURATION_OPTIONS,
   type RegionFormOption,
+  type TripLength,
 } from '@/components/contact-form/inquiry';
 
 type MonthOption = { value: string; label: string };
@@ -13,12 +14,17 @@ type Props = {
   selectedPlaces: string[];
   placesFlexible: boolean;
   datesFlexible: boolean;
+  travelFrom: string;
+  travelTo: string;
+  computedTripLength: TripLength | null;
   monthOptions: MonthOption[];
   error: string | null;
   onRegionChange: (slug: string) => void;
   onTogglePlace: (place: string) => void;
   onPlacesFlexible: (value: boolean) => void;
   onDatesFlexible: (value: boolean) => void;
+  onTravelFromChange: (value: string) => void;
+  onTravelToChange: (value: string) => void;
 };
 
 export function ContactFormFields({
@@ -28,12 +34,17 @@ export function ContactFormFields({
   selectedPlaces,
   placesFlexible,
   datesFlexible,
+  travelFrom,
+  travelTo,
+  computedTripLength,
   monthOptions,
   error,
   onRegionChange,
   onTogglePlace,
   onPlacesFlexible,
   onDatesFlexible,
+  onTravelFromChange,
+  onTravelToChange,
 }: Props) {
   const selectedRegion = regionOptions.find(
     (region) => region.slug === selectedRegionSlug,
@@ -174,7 +185,9 @@ export function ContactFormFields({
                 id="travelFrom"
                 name="travelFrom"
                 type="date"
+                value={travelFrom}
                 disabled={submitting}
+                onChange={(event) => onTravelFromChange(event.target.value)}
                 className={CONTACT_INPUT_CLASS}
               />
             </div>
@@ -186,7 +199,10 @@ export function ContactFormFields({
                 id="travelTo"
                 name="travelTo"
                 type="date"
+                value={travelTo}
+                min={travelFrom || undefined}
                 disabled={submitting}
+                onChange={(event) => onTravelToChange(event.target.value)}
                 className={CONTACT_INPUT_CLASS}
               />
             </div>
@@ -195,26 +211,46 @@ export function ContactFormFields({
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="flex flex-col gap-2">
-            <label htmlFor="duration" className="text-sm text-ice">
-              Trip length
-            </label>
-            <select
-              id="duration"
-              name="duration"
-              required
-              disabled={submitting}
-              defaultValue=""
-              className={CONTACT_INPUT_CLASS}
-            >
-              <option value="" disabled>
-                How many days?
-              </option>
-              {DURATION_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+            {computedTripLength ? (
+              <>
+                <label htmlFor="duration" className="text-sm text-ice">
+                  Trip length
+                </label>
+                <input
+                  id="duration"
+                  name="duration"
+                  readOnly
+                  value={computedTripLength.label}
+                  className={`${CONTACT_INPUT_CLASS} border-apricot/40`}
+                />
+                <p className="text-xs text-ice/80">
+                  Counted from your start and end dates.
+                </p>
+              </>
+            ) : (
+              <>
+                <label htmlFor="duration" className="text-sm text-ice">
+                  Trip length
+                </label>
+                <select
+                  id="duration"
+                  name="duration"
+                  required
+                  disabled={submitting}
+                  defaultValue=""
+                  className={CONTACT_INPUT_CLASS}
+                >
+                  <option value="" disabled>
+                    How many days?
+                  </option>
+                  {DURATION_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="groupSize" className="text-sm text-ice">
@@ -226,7 +262,6 @@ export function ContactFormFields({
               type="number"
               min={1}
               max={30}
-              defaultValue={2}
               required
               disabled={submitting}
               className={CONTACT_INPUT_CLASS}

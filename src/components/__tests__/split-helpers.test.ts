@@ -1,5 +1,6 @@
 import {
   placesSummary,
+  tripLengthFromDates,
   validateInquiry,
 } from '@/components/contact-form/inquiry';
 import { isTrustedMapEmbed } from '@/components/destination-guide/map-embed';
@@ -8,6 +9,30 @@ import {
   formatDayLabel,
   formatTemp,
 } from '@/components/destination-weather/format';
+
+describe('tripLengthFromDates', () => {
+  it('counts inclusive calendar days, including nights', () => {
+    expect(tripLengthFromDates('2026-10-01', '2026-10-01')).toEqual({
+      days: 1,
+      nights: 0,
+      label: '1 day',
+    });
+    expect(tripLengthFromDates('2026-10-01', '2026-10-07')).toEqual({
+      days: 7,
+      nights: 6,
+      label: '7 days · 6 nights',
+    });
+    expect(tripLengthFromDates('2026-01-26', '2026-07-26')).toEqual({
+      days: 182,
+      nights: 181,
+      label: '182 days · 181 nights',
+    });
+  });
+
+  it('rejects an end date before the start date', () => {
+    expect(tripLengthFromDates('2026-07-26', '2026-01-26')).toBeNull();
+  });
+});
 
 describe('validateInquiry', () => {
   it('requires a trip duration', () => {
@@ -43,12 +68,25 @@ describe('validateInquiry', () => {
     ).toMatch(/month/i);
   });
 
-  it('accepts a complete fixed-date inquiry', () => {
+  it('rejects an end date before the start date', () => {
     expect(
       validateInquiry({
         duration: '6–7 days',
         datesFlexible: false,
+        travelFrom: '2026-07-26',
+        travelTo: '2026-01-26',
+        travelMonth: '',
+      }),
+    ).toMatch(/end date/i);
+  });
+
+  it('accepts a complete fixed-date inquiry', () => {
+    expect(
+      validateInquiry({
+        duration: '7 days · 6 nights',
+        datesFlexible: false,
         travelFrom: '2026-09-01',
+        travelTo: '2026-09-07',
         travelMonth: '',
       }),
     ).toBeNull();

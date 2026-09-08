@@ -67,6 +67,7 @@ test.describe('core visitor flows', () => {
 
     await page.getByLabel(/trip length/i).selectOption('6–7 days');
     await page.getByLabel(/start date/i).fill('2026-09-12');
+    await page.getByLabel(/number of travelers/i).fill('2');
     await page.getByLabel(/full name/i).fill('Ada Lovelace');
     await page.getByLabel(/^email$/i).fill('ada@example.com');
     await page.getByRole('button', { name: /send inquiry/i }).click();

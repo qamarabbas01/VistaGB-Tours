@@ -56,7 +56,7 @@ export default function BookPage({ searchParams }: Props) {
       <PageHeader
         label="Online booking"
         title="Request your dates"
-        intro="Choose a window on the calendar. This sends a private-tour inquiry — we come back with availability, a route, and a quote. There is no instant checkout."
+        intro="Choose a start and end date. This sends a private-tour inquiry — we come back with availability, a route, and a quote. There is no instant checkout."
       />
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">

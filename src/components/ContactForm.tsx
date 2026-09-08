@@ -6,6 +6,7 @@ import { ContactFormFields } from '@/components/contact-form/ContactFormFields';
 import {
   buildMonthOptions,
   placesSummary,
+  tripLengthFromDates,
   type RegionFormOption,
   validateInquiry,
 } from '@/components/contact-form/inquiry';
@@ -26,6 +27,8 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
   const [selectedPlaces, setSelectedPlaces] = useState<string[]>([]);
   const [placesFlexible, setPlacesFlexible] = useState(false);
   const [datesFlexible, setDatesFlexible] = useState(false);
+  const [travelFrom, setTravelFrom] = useState('');
+  const [travelTo, setTravelTo] = useState('');
   const [monthOptions, setMonthOptions] = useState<
     { value: string; label: string }[]
   >([]);
@@ -38,6 +41,17 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
     (region) => region.slug === selectedRegionSlug,
   );
   const hasPlaces = Boolean(selectedRegion?.places.length);
+  const computedTripLength =
+    !datesFlexible && travelFrom && travelTo
+      ? tripLengthFromDates(travelFrom, travelTo)
+      : null;
+
+  function handleTravelFromChange(value: string) {
+    setTravelFrom(value);
+    if (value && travelTo && !tripLengthFromDates(value, travelTo)) {
+      setTravelTo('');
+    }
+  }
 
   function handleRegionChange(slug: string) {
     setSelectedRegionSlug(slug);
@@ -60,16 +74,20 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
     setError(null);
 
     const formData = new FormData(event.currentTarget);
-    const travelFrom = String(formData.get('travelFrom') ?? '').trim();
-    const travelTo = String(formData.get('travelTo') ?? '').trim();
+    const startDate = String(formData.get('travelFrom') ?? '').trim();
+    const endDate = String(formData.get('travelTo') ?? '').trim();
     const travelMonth = String(formData.get('travelMonth') ?? '').trim();
-    const duration = String(formData.get('duration') ?? '').trim();
+    const durationFromDates = tripLengthFromDates(startDate, endDate);
+    const duration = (
+      durationFromDates?.label ?? String(formData.get('duration') ?? '')
+    ).trim();
     const groupSize = String(formData.get('groupSize') ?? '').trim();
 
     const validationError = validateInquiry({
       duration,
       datesFlexible,
-      travelFrom,
+      travelFrom: startDate,
+      travelTo: endDate,
       travelMonth,
     });
     if (validationError) {
@@ -87,8 +105,8 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
         selectedPlaces,
         hasPlaces,
       }),
-      travelFrom: datesFlexible ? '' : travelFrom,
-      travelTo: datesFlexible ? '' : travelTo,
+      travelFrom: datesFlexible ? '' : startDate,
+      travelTo: datesFlexible ? '' : endDate,
       datesFlexible: datesFlexible ? 'yes' : 'no',
       travelMonth: datesFlexible ? travelMonth : '',
       duration,
@@ -159,6 +177,9 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
         selectedPlaces={selectedPlaces}
         placesFlexible={placesFlexible}
         datesFlexible={datesFlexible}
+        travelFrom={travelFrom}
+        travelTo={travelTo}
+        computedTripLength={computedTripLength}
         monthOptions={monthOptions}
         error={error}
         onRegionChange={handleRegionChange}
@@ -168,6 +189,8 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
           if (value) setSelectedPlaces([]);
         }}
         onDatesFlexible={setDatesFlexible}
+        onTravelFromChange={handleTravelFromChange}
+        onTravelToChange={setTravelTo}
       />
       <Button
         type="submit"
