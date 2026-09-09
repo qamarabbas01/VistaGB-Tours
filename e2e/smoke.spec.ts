@@ -41,8 +41,13 @@ test.describe('core visitor flows', () => {
     await expect(
       page.getByRole('navigation', { name: 'On this page' }),
     ).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Overview' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Places' })).toBeVisible();
+    const pageNav = page.getByRole('navigation', { name: 'On this page' });
+    await expect(
+      pageNav.getByRole('link', { name: 'Overview', exact: true }),
+    ).toBeVisible();
+    await expect(
+      pageNav.getByRole('link', { name: 'Places', exact: true }),
+    ).toBeVisible();
   });
 
   test('submits the contact form against a mocked API', async ({ page }) => {
