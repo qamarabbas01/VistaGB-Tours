@@ -1,39 +1,26 @@
 'use client';
 
 import Link from 'next/link';
-import CompareButton from '@/components/CompareButton';
+import { ShareButton } from '@/components/destination-hero/ShareButton';
 import WishlistButton from '@/components/WishlistButton';
 
 type Props = {
   slug: string;
   name: string;
-  isRegion?: boolean;
+  addToTripHref: string;
 };
 
-export default function DestinationActions({
-  slug,
-  name,
-  isRegion = false,
-}: Props) {
+export default function DestinationActions({ slug, name, addToTripHref }: Props) {
   return (
-    <div className="mt-5 flex flex-wrap items-center gap-2">
-      <WishlistButton slug={slug} />
-      {isRegion ? <CompareButton slug={slug} /> : null}
-      {isRegion ? (
-        <Link
-          href={`/plan?region=${slug}`}
-          className="rounded-full border border-teal/40 bg-night/70 px-4 py-2 text-sm text-glacier backdrop-blur-md transition-colors hover:border-apricot hover:text-apricot"
-        >
-          Trip planner
-        </Link>
-      ) : null}
+    <div className="mt-6 flex flex-wrap items-center gap-2">
       <Link
-        href={`/book?region=${slug}`}
+        href={addToTripHref}
         className="rounded-full bg-apricot px-4 py-2 text-sm font-semibold text-ink transition-opacity hover:opacity-90"
       >
-        Request dates
+        Add to Trip
       </Link>
-      <span className="sr-only">{name}</span>
+      <WishlistButton slug={slug} labeled />
+      <ShareButton title={name} />
     </div>
   );
 }

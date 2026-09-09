@@ -1,6 +1,12 @@
 type ContextBlock = { key: string; label: string; body: string };
 
-export function ContextSection({ sections }: { sections: ContextBlock[] }) {
+export function ContextSection({
+  sections,
+  id,
+}: {
+  sections: ContextBlock[];
+  id?: string;
+}) {
   if (sections.length === 0) return null;
 
   const gridClass =
@@ -18,7 +24,10 @@ export function ContextSection({ sections }: { sections: ContextBlock[] }) {
         : 'History, culture & weather';
 
   return (
-    <section className="border-t border-teal/20 py-16 md:py-24">
+    <section
+      id={id}
+      className={`border-t border-teal/20 py-16 md:py-24 ${id ? 'destination-anchor' : ''}`.trim()}
+    >
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <p className="coord-label mb-3">Know the place</p>
         <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">

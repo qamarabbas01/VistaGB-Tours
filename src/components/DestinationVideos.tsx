@@ -33,7 +33,10 @@ export default function DestinationVideos({
     'Short clips — drone views, treks, jeep tracks, snow, blossom, and autumn colour.';
 
   return (
-    <section className="border-t border-teal/20 bg-slate py-16 md:py-24">
+    <section
+      id="videos"
+      className="destination-anchor border-t border-teal/20 bg-slate py-16 md:py-24"
+    >
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <p className="coord-label mb-3">{label}</p>
         <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">

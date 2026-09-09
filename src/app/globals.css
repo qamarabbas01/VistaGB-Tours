@@ -47,6 +47,13 @@ html {
   --sticky-sidebar-max-height: calc(
     100dvh - var(--sticky-sidebar-top) - 1.5rem
   );
+  --sticky-section-nav-height: 3.25rem;
+}
+
+.destination-anchor {
+  scroll-margin-top: calc(
+    var(--site-header-height) + var(--sticky-section-nav-height) + 0.75rem
+  );
 }
 
 body {

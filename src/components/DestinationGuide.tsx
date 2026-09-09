@@ -28,7 +28,7 @@ export default function DestinationGuide({ region, guide }: Props) {
 
   return (
     <>
-      <ContextSection sections={contextSections} />
+      <ContextSection id="guide" sections={contextSections} />
 
       {guide.famousFoods && guide.famousFoods.length > 0 ? (
         <ListingGrid
@@ -39,7 +39,10 @@ export default function DestinationGuide({ region, guide }: Props) {
       ) : null}
 
       {guide.activities && guide.activities.length > 0 ? (
-        <section className="border-t border-teal/20 bg-slate py-16 md:py-24">
+        <section
+          id="things-to-do"
+          className="destination-anchor border-t border-teal/20 bg-slate py-16 md:py-24"
+        >
           <div className="mx-auto max-w-7xl px-6 md:px-10">
             <p className="coord-label mb-3">What to do</p>
             <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
@@ -129,7 +132,10 @@ export default function DestinationGuide({ region, guide }: Props) {
       ) : null}
 
       {guide.mapEmbedUrl && isTrustedMapEmbed(guide.mapEmbedUrl) ? (
-        <section className="border-t border-teal/20 bg-slate py-16 md:py-24">
+        <section
+          id="map"
+          className="destination-anchor border-t border-teal/20 bg-slate py-16 md:py-24"
+        >
           <div className="mx-auto max-w-7xl px-6 md:px-10">
             <p className="coord-label mb-3">Orientation</p>
             <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">

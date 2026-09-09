@@ -2,9 +2,11 @@ import OptimizedImage from '@/components/OptimizedImage';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import DestinationActions from '@/components/DestinationActions';
+import { DestinationHero } from '@/components/DestinationHero';
+import { DestinationSectionNav, type SectionNavItem } from '@/components/DestinationSectionNav';
 import DestinationGuide from '@/components/DestinationGuide';
 import DestinationVideos from '@/components/DestinationVideos';
+import { isTrustedMapEmbed } from '@/components/destination-guide/map-embed';
 import JsonLd from '@/components/JsonLd';
 import { LazyDestinationGallery } from '@/components/lazy/DestinationGallery';
 import { LazyDestinationWeather } from '@/components/lazy/DestinationWeather';
@@ -177,58 +179,37 @@ function PlaceDetailPage({ place }: { place: Place }) {
           }),
         ])}
       />
-      <section className="relative h-[45vh] min-h-[320px] w-full overflow-hidden md:h-[55vh]">
-        <OptimizedImage
-          src={place.image}
-          alt={place.name}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/50 to-scrim/20" />
-        <div className="absolute inset-0 flex flex-col justify-end">
-          <div className="mx-auto w-full max-w-7xl px-6 pb-12 md:px-10 md:pb-16">
-            {parent ? (
-              <nav className="coord-label mb-4 flex flex-wrap items-center gap-2 text-ice">
-                <Link
-                  href="/destinations"
-                  className="transition-colors hover:text-apricot"
-                >
-                  All Destinations
-                </Link>
-                <span>/</span>
-                <Link
-                  href={`/destinations/${parent.slug}`}
-                  className="transition-colors hover:text-apricot"
-                >
-                  {parent.name}
-                </Link>
-              </nav>
-            ) : (
-              <Link
-                href="/destinations"
-                className="coord-label mb-4 inline-block text-ice transition-colors hover:text-apricot"
-              >
-                ← All Destinations
-              </Link>
-            )}
-            <p className="coord-label mb-3">
-              {place.type} · ALT {place.altitude}
-              {place.duration ? ` · ${place.duration}` : ''}
-            </p>
-            <h1 className="font-display text-4xl font-semibold leading-tight text-glacier md:text-5xl">
-              {place.name}
-            </h1>
-            <p className="mt-2 text-lg font-medium text-apricot md:text-xl">
-              {place.tagline}
-            </p>
-            <DestinationActions slug={place.slug} name={place.name} />
-          </div>
-        </div>
-      </section>
+      <DestinationHero
+        slug={place.slug}
+        name={place.name}
+        tagline={place.tagline}
+        image={place.image}
+        location={parent?.name ?? parent?.region ?? 'Gilgit-Baltistan'}
+        altitude={place.altitude}
+        addToTripHref={
+          parent ? `/plan?region=${parent.slug}` : `/book?region=${place.slug}`
+        }
+        weatherSlug={weatherPoint ? place.slug : undefined}
+      />
+      <DestinationSectionNav
+        items={
+          [
+            { id: 'overview', label: 'Overview' },
+            nearbyPlaces.length > 0
+              ? { id: 'places', label: 'Places' }
+              : null,
+            place.activities.length > 0
+              ? { id: 'things-to-do', label: 'Things to Do' }
+              : null,
+            weatherPoint ? { id: 'weather', label: 'Weather' } : null,
+          ].filter((item): item is SectionNavItem => Boolean(item))
+        }
+      />
 
-      <section className="py-16 md:py-24">
+      <section
+        id="overview"
+        className="destination-anchor py-16 md:py-24"
+      >
         <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-3 md:items-start md:px-10">
           <div className="min-w-0 md:col-span-2">
             <p className="coord-label mb-3">Overview</p>
@@ -237,7 +218,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
             </p>
 
             {place.activities.length > 0 ? (
-              <>
+              <div id="things-to-do" className="destination-anchor">
                 <p className="coord-label mb-4 mt-12">Things To Do</p>
                 <ul className="flex flex-wrap gap-2">
                   {place.activities.map((activity) => (
@@ -249,7 +230,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
                     </li>
                   ))}
                 </ul>
-              </>
+              </div>
             ) : null}
 
             <p className="coord-label mb-4 mt-12">Highlights</p>
@@ -268,10 +249,12 @@ function PlaceDetailPage({ place }: { place: Place }) {
 
           <StickySidebar from="md">
             {weatherPoint ? (
-              <LazyDestinationWeather
-                slug={place.slug}
-                locationName={weatherPoint.label}
-              />
+              <div id="weather" className="destination-anchor">
+                <LazyDestinationWeather
+                  slug={place.slug}
+                  locationName={weatherPoint.label}
+                />
+              </div>
             ) : null}
 
             <div className="rounded-2xl border border-teal/20 bg-slate p-6">
@@ -330,7 +313,10 @@ function PlaceDetailPage({ place }: { place: Place }) {
       />
 
       {nearbyPlaces.length > 0 ? (
-        <section className="border-t border-teal/20 bg-slate py-16 md:py-24">
+        <section
+          id="places"
+          className="destination-anchor border-t border-teal/20 bg-slate py-16 md:py-24"
+        >
           <div className="mx-auto max-w-7xl px-6 md:px-10">
             <p className="coord-label mb-3">Nearby</p>
             <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
@@ -381,43 +367,40 @@ function RegionDetailPage({ region }: { region: RegionDestination }) {
   return (
     <div>
       <JsonLd data={withJsonLdContext(schemaNodes)} />
-      <section className="relative h-[50vh] min-h-[360px] w-full overflow-hidden md:h-[60vh]">
-        <OptimizedImage
-          src={region.image}
-          alt={region.name}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/50 to-scrim/20" />
-        <div className="absolute inset-0 flex flex-col justify-end">
-          <div className="mx-auto w-full max-w-7xl px-6 pb-12 md:px-10 md:pb-16">
-            <Link
-              href="/destinations"
-              className="coord-label mb-4 inline-block text-ice transition-colors hover:text-apricot"
-            >
-              ← All Destinations
-            </Link>
-            <p className="coord-label mb-3">
-              {region.region} · ALT {region.altitude}
-            </p>
-            <h1 className="font-display text-4xl font-semibold leading-tight text-glacier md:text-6xl">
-              {region.name}
-            </h1>
-            <p className="mt-2 text-lg font-medium text-apricot md:text-xl">
-              {region.tagline}
-            </p>
-            <DestinationActions
-              slug={region.slug}
-              name={region.name}
-              isRegion
-            />
-          </div>
-        </div>
-      </section>
+      <DestinationHero
+        slug={region.slug}
+        name={region.name}
+        tagline={region.tagline}
+        image={region.image}
+        location={region.region}
+        altitude={region.altitude}
+        addToTripHref={`/plan?region=${region.slug}`}
+        weatherSlug={weatherPoint ? region.slug : undefined}
+        video={region.videos?.[0]}
+      />
+      <DestinationSectionNav
+        items={
+          [
+            { id: 'overview', label: 'Overview' },
+            childPlaces.length > 0 ? { id: 'places', label: 'Places' } : null,
+            guide?.activities && guide.activities.length > 0
+              ? { id: 'things-to-do', label: 'Things to Do' }
+              : null,
+            guide?.history || guide?.culture || guide?.weather
+              ? { id: 'guide', label: 'Guide' }
+              : null,
+            weatherPoint ? { id: 'weather', label: 'Weather' } : null,
+            guide?.mapEmbedUrl && isTrustedMapEmbed(guide.mapEmbedUrl)
+              ? { id: 'map', label: 'Map' }
+              : null,
+          ].filter((item): item is SectionNavItem => Boolean(item))
+        }
+      />
 
-      <section className="py-16 md:py-24">
+      <section
+        id="overview"
+        className="destination-anchor py-16 md:py-24"
+      >
         <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-3 md:items-start md:px-10">
           <div className="min-w-0 md:col-span-2">
             <p className="coord-label mb-3">Overview</p>
@@ -457,10 +440,12 @@ function RegionDetailPage({ region }: { region: RegionDestination }) {
 
           <StickySidebar from="md">
             {weatherPoint ? (
-              <LazyDestinationWeather
-                slug={region.slug}
-                locationName={weatherPoint.label}
-              />
+              <div id="weather" className="destination-anchor">
+                <LazyDestinationWeather
+                  slug={region.slug}
+                  locationName={weatherPoint.label}
+                />
+              </div>
             ) : null}
 
             <div className="rounded-2xl border border-teal/20 bg-slate p-6">
@@ -545,7 +530,10 @@ function RegionDetailPage({ region }: { region: RegionDestination }) {
       </section>
 
       {childPlaces.length > 0 ? (
-        <section className="border-t border-teal/20 bg-slate py-16 md:py-24">
+        <section
+          id="places"
+          className="destination-anchor border-t border-teal/20 bg-slate py-16 md:py-24"
+        >
           <div className="mx-auto max-w-7xl px-6 md:px-10">
             <p className="coord-label mb-3">Places in {region.name}</p>
             <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
