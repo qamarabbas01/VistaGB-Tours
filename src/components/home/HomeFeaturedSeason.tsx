@@ -1,6 +1,7 @@
 import OptimizedImage from '@/components/OptimizedImage';
 import Button from '@/components/Button';
 import Link from 'next/link';
+import { LocationMeta } from '@/components/destination-card/LocationMeta';
 import type { SeasonFeature } from '@/data/seasons';
 import type { RegionDestination } from '@/data/types';
 
@@ -54,7 +55,7 @@ export function HomeFeaturedSeason({
               <Link
                 key={destination.slug}
                 href={`/destinations/${destination.slug}`}
-                className="group relative min-h-[220px] overflow-hidden bg-slate"
+                className="group relative min-h-[280px] overflow-hidden bg-slate md:min-h-[300px]"
               >
                 <OptimizedImage
                   src={destination.image}
@@ -63,13 +64,19 @@ export function HomeFeaturedSeason({
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/70 to-scrim/20" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
-                  <p className="coord-label mb-2">{destination.region}</p>
                   <h3 className="font-display text-2xl font-semibold text-glacier">
                     {destination.name}
                   </h3>
-                  <p className="mt-1 text-sm text-ice">{destination.tagline}</p>
+                  <LocationMeta
+                    altitude={destination.altitude}
+                    region={destination.region}
+                    bestTime={destination.bestTime}
+                  />
+                  <span className="mt-4 inline-block text-sm font-medium text-apricot">
+                    Explore →
+                  </span>
                 </div>
               </Link>
             ))}

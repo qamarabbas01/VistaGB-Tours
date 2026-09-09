@@ -1,5 +1,6 @@
 import OptimizedImage from '@/components/OptimizedImage';
 import Link from 'next/link';
+import { LocationMeta } from '@/components/destination-card/LocationMeta';
 import type { RegionDestination } from '@/data/types';
 
 export function HomePopularDestinations({
@@ -34,24 +35,29 @@ export function HomePopularDestinations({
             <Link
               href={`/destinations/${dest.slug}`}
               key={dest.slug}
-              className="group relative h-[420px] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl md:w-[340px]"
+              className="group flex w-[300px] flex-shrink-0 flex-col overflow-hidden rounded-2xl border border-teal/20 bg-slate transition-colors hover:border-apricot/50 md:w-[340px]"
             >
-              <OptimizedImage
-                src={dest.image}
-                alt={dest.name}
-                fill
-                sizes="(max-width: 768px) 300px, 340px"
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-scrim via-scrim/30 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <p className="coord-label mb-2">
-                  {dest.region} · ALT {dest.altitude}
-                </p>
-                <h3 className="font-display text-2xl font-semibold text-glacier">
+              <div className="relative h-52 w-full overflow-hidden">
+                <OptimizedImage
+                  src={dest.image}
+                  alt={dest.name}
+                  fill
+                  sizes="(max-width: 768px) 300px, 340px"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="font-display text-2xl font-semibold text-glacier transition-colors group-hover:text-apricot">
                   {dest.name}
                 </h3>
-                <p className="mt-1 text-sm text-ice">{dest.tagline}</p>
+                <LocationMeta
+                  altitude={dest.altitude}
+                  region={dest.region}
+                  bestTime={dest.bestTime}
+                />
+                <span className="mt-auto inline-block pt-5 text-sm font-medium text-apricot">
+                  Explore →
+                </span>
               </div>
             </Link>
           ))}

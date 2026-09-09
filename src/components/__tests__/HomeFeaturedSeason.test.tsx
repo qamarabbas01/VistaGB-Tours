@@ -29,6 +29,9 @@ describe('HomeFeaturedSeason', () => {
     expect(
       screen.getByRole('link', { name: /hunza valley/i }),
     ).toHaveAttribute('href', '/destinations/hunza-valley');
+    expect(screen.getByText('2,400m')).toBeInTheDocument();
+    expect(screen.getByText('Hunza, Gilgit-Baltistan')).toBeInTheDocument();
+    expect(screen.getByText('Best: Apr–Oct')).toBeInTheDocument();
   });
 
   it('renders cherry blossom copy in spring', () => {

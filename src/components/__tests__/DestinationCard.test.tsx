@@ -9,18 +9,20 @@ jest.mock('@/data', () => ({
 }));
 
 describe('DestinationCard', () => {
-  it('renders a region destination with altitude, tagline, and nested place count', () => {
+  it('renders a region destination with travel metadata and nested place count', () => {
     renderWithPreferences(<DestinationCard location={mockRegion} />);
 
     expect(
       screen.getByRole('heading', { name: 'Test Valley' }),
     ).toBeInTheDocument();
-    expect(screen.getByText('A sample high valley')).toBeInTheDocument();
+    expect(screen.getByText('2,400m')).toBeInTheDocument();
+    expect(screen.getByText('Test, Gilgit-Baltistan')).toBeInTheDocument();
+    expect(screen.getByText('Best: Apr–Oct')).toBeInTheDocument();
     expect(
       screen.getByText('Terraced orchards and glacial peaks for tests.'),
     ).toBeInTheDocument();
-    expect(screen.getByText('Test · ALT 2,400M')).toBeInTheDocument();
     expect(screen.getByText('2 places inside')).toBeInTheDocument();
+    expect(screen.getByText('Explore →')).toBeInTheDocument();
     expect(
       screen.getByRole('img', { name: 'Test Valley' }).getAttribute('src'),
     ).toContain('test-valley.jpg');
@@ -43,8 +45,12 @@ describe('DestinationCard', () => {
     expect(
       screen.getByRole('heading', { name: 'Test Town' }),
     ).toBeInTheDocument();
-    expect(screen.getByText('Town · Test Valley')).toBeInTheDocument();
-    expect(screen.getByText('A bazaar beneath the peaks')).toBeInTheDocument();
+    expect(screen.getByText('Town')).toBeInTheDocument();
+    expect(screen.getByText('2,438m')).toBeInTheDocument();
+    expect(
+      screen.getByText('Test Valley, Gilgit-Baltistan'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Best: Apr–Oct')).toBeInTheDocument();
     expect(screen.queryByText(/places inside/i)).not.toBeInTheDocument();
     expect(
       screen.queryByRole('button', { name: /add to compare/i }),
