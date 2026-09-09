@@ -1,6 +1,7 @@
 import OptimizedImage from '@/components/OptimizedImage';
 import ContactForm from '@/components/ContactForm';
 import JsonLd from '@/components/JsonLd';
+import { StickySidebar } from '@/components/StickySidebar';
 import { contact } from '@/config/contact';
 import { getPlacesForRegion, regions } from '@/data';
 import {
@@ -104,8 +105,8 @@ export default function ContactPage() {
       </section>
 
       <section className="py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-12 lg:gap-16 md:px-10">
-          <div className="lg:col-span-7">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-12 lg:items-start lg:gap-16 md:px-10">
+          <div className="min-w-0 lg:col-span-7">
             <div className="rounded-2xl border border-teal/20 bg-slate p-8 md:p-10">
               <p className="coord-label mb-3">Inquiry Form</p>
               <h2 className="font-display text-2xl font-semibold text-glacier md:text-3xl">
@@ -122,7 +123,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <aside className="flex flex-col gap-6 lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
+          <StickySidebar from="lg" className="lg:col-span-5">
             {contact.email || contact.phone.display || contact.whatsappUrl ? (
               <div className="rounded-2xl border border-teal/20 bg-slate p-8">
                 <p className="coord-label mb-5">Reach Us Directly</p>
@@ -263,7 +264,7 @@ export default function ContactPage() {
                 </li>
               </ul>
             </div>
-          </aside>
+          </StickySidebar>
         </div>
       </section>
 
