@@ -9,6 +9,7 @@ import JsonLd from '@/components/JsonLd';
 import { LazyDestinationGallery } from '@/components/lazy/DestinationGallery';
 import { LazyDestinationWeather } from '@/components/lazy/DestinationWeather';
 import PlaceCard from '@/components/PlaceCard';
+import { StickySidebar } from '@/components/StickySidebar';
 import { getCoordinatesForSlug } from '@/data/coordinates';
 import { composeRegionGallery } from '@/data/gallery';
 import {
@@ -228,8 +229,8 @@ function PlaceDetailPage({ place }: { place: Place }) {
       </section>
 
       <section className="py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-3 md:px-10">
-          <div className="md:col-span-2">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-3 md:items-start md:px-10">
+          <div className="min-w-0 md:col-span-2">
             <p className="coord-label mb-3">Overview</p>
             <p className="text-sm leading-relaxed text-ice md:text-base">
               {place.overview}
@@ -265,7 +266,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
             </ul>
           </div>
 
-          <aside className="flex flex-col gap-6">
+          <StickySidebar from="md">
             {weatherPoint ? (
               <LazyDestinationWeather
                 slug={place.slug}
@@ -318,7 +319,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
                 <p className="mt-2 text-sm text-ice">{parent.tagline}</p>
               </div>
             ) : null}
-          </aside>
+          </StickySidebar>
         </div>
       </section>
 
@@ -417,8 +418,8 @@ function RegionDetailPage({ region }: { region: RegionDestination }) {
       </section>
 
       <section className="py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-3 md:px-10">
-          <div className="md:col-span-2">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-3 md:items-start md:px-10">
+          <div className="min-w-0 md:col-span-2">
             <p className="coord-label mb-3">Overview</p>
             <p className="text-sm leading-relaxed text-ice md:text-base">
               {region.overview}
@@ -454,7 +455,7 @@ function RegionDetailPage({ region }: { region: RegionDestination }) {
             </ul>
           </div>
 
-          <aside className="flex flex-col gap-6">
+          <StickySidebar from="md">
             {weatherPoint ? (
               <LazyDestinationWeather
                 slug={region.slug}
@@ -539,7 +540,7 @@ function RegionDetailPage({ region }: { region: RegionDestination }) {
                 </Link>
               </div>
             </div>
-          </aside>
+          </StickySidebar>
         </div>
       </section>
 

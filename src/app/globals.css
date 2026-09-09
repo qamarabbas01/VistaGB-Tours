@@ -41,6 +41,12 @@
 
 html {
   scroll-behavior: smooth;
+  /* Navbar is sticky at the top; keep sidebars just below it. */
+  --site-header-height: 4.5rem;
+  --sticky-sidebar-top: calc(var(--site-header-height) + 1.5rem);
+  --sticky-sidebar-max-height: calc(
+    100dvh - var(--sticky-sidebar-top) - 1.5rem
+  );
 }
 
 body {
