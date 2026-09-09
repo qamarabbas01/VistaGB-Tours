@@ -36,7 +36,17 @@ test.describe('core visitor flows', () => {
       page.getByRole('heading', { name: 'Hunza Valley', level: 1 }),
     ).toBeVisible();
     await expect(
-      page.getByRole('link', { name: /all destinations/i }),
+      page.getByRole('link', { name: /back to destinations/i }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('navigation', { name: 'On this page' }),
+    ).toBeVisible();
+    const pageNav = page.getByRole('navigation', { name: 'On this page' });
+    await expect(
+      pageNav.getByRole('link', { name: 'Overview', exact: true }),
+    ).toBeVisible();
+    await expect(
+      pageNav.getByRole('link', { name: 'Places', exact: true }),
     ).toBeVisible();
   });
 
