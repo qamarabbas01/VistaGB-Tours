@@ -1,6 +1,7 @@
 import OptimizedImage from '@/components/OptimizedImage';
 import Link from 'next/link';
 import WishlistButton from '@/components/WishlistButton';
+import { LocationMeta } from '@/components/destination-card/LocationMeta';
 import type { Place } from '@/data/types';
 
 type Props = {
@@ -44,16 +45,17 @@ export default function PlaceCard({
       </Link>
 
       <div className={compact ? 'p-4' : 'flex flex-1 flex-col p-5'}>
-        <p className="coord-label mb-1 text-[0.65rem]">
-          {parentName} · ALT {place.altitude}
-        </p>
         <Link href={`/destinations/${place.slug}`}>
           <h3 className="font-display text-lg font-semibold text-glacier transition-colors hover:text-apricot">
             {place.name}
           </h3>
         </Link>
-        <p className="mt-1 text-sm text-apricot">{place.tagline}</p>
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ice">
+        <LocationMeta
+          altitude={place.altitude}
+          region={parentName}
+          bestTime={place.bestTime}
+        />
+        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-ice">
           {place.description}
         </p>
 
@@ -70,19 +72,11 @@ export default function PlaceCard({
           </div>
         ) : null}
 
-        <div className="mt-auto flex flex-wrap items-center gap-3 pt-4 text-xs text-ice">
-          {place.duration ? <span>{place.duration}</span> : null}
-          {place.duration && place.bestTime ? (
-            <span className="text-teal">·</span>
-          ) : null}
-          {place.bestTime ? <span>{place.bestTime}</span> : null}
-        </div>
-
         <Link
           href={`/destinations/${place.slug}`}
-          className="mt-3 inline-block text-sm font-medium text-apricot hover:underline"
+          className="mt-auto inline-block pt-4 text-sm font-medium text-apricot hover:underline"
         >
-          Open details →
+          Explore →
         </Link>
       </div>
     </article>
