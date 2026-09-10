@@ -48,6 +48,14 @@ test.describe('core visitor flows', () => {
     await expect(
       pageNav.getByRole('link', { name: 'Places', exact: true }),
     ).toBeVisible();
+    const planTrip = page.getByRole('link', {
+      name: /plan a trip to hunza/i,
+    });
+    await expect(planTrip).toBeVisible();
+    await expect(planTrip).toHaveAttribute(
+      'href',
+      /\/assistant\?destination=hunza-valley/,
+    );
   });
 
   test('submits the contact form against a mocked API', async ({ page }) => {

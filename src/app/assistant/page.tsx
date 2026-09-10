@@ -1,6 +1,7 @@
 import JsonLd from '@/components/JsonLd';
 import { LazyTravelAssistant } from '@/components/lazy/TravelAssistant';
 import { getLocationBySlug } from '@/data';
+import { readAssistantPrompt } from '@/lib/assistant/plan-trip';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
@@ -20,6 +21,7 @@ export const metadata = buildPageMetadata({
 type Props = {
   searchParams?: {
     destination?: string | string[];
+    prompt?: string | string[];
   };
 };
 
@@ -27,6 +29,7 @@ export default function AssistantPage({ searchParams }: Props) {
   const raw = searchParams?.destination;
   const slug = (Array.isArray(raw) ? raw[0] : (raw ?? '')).trim();
   const location = slug ? getLocationBySlug(slug) : undefined;
+  const initialPrompt = readAssistantPrompt(searchParams?.prompt);
 
   return (
     <div>
@@ -62,6 +65,7 @@ export default function AssistantPage({ searchParams }: Props) {
           <LazyTravelAssistant
             destinationSlug={location?.slug}
             destinationName={location?.name}
+            initialPrompt={initialPrompt}
           />
         </div>
       </section>

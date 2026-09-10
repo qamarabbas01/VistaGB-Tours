@@ -11,6 +11,7 @@ import JsonLd from '@/components/JsonLd';
 import { LazyDestinationGallery } from '@/components/lazy/DestinationGallery';
 import { LazyDestinationWeather } from '@/components/lazy/DestinationWeather';
 import PlaceCard from '@/components/PlaceCard';
+import { PlanTripCta } from '@/components/PlanTripCta';
 import { StickySidebar } from '@/components/StickySidebar';
 import { getCoordinatesForSlug } from '@/data/coordinates';
 import { composeRegionGallery } from '@/data/gallery';
@@ -335,6 +336,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
           </div>
         </section>
       ) : null}
+      <PlanTripCta slug={place.slug} name={place.name} />
     </div>
   );
 }
@@ -618,6 +620,7 @@ function RegionDetailPage({ region }: { region: RegionDestination }) {
           </div>
         </div>
       </section>
+      <PlanTripCta slug={region.slug} name={region.name} />
     </div>
   );
 }

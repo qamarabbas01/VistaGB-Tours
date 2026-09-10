@@ -25,6 +25,7 @@ const SUGGESTIONS = [
 type Props = {
   destinationSlug?: string;
   destinationName?: string;
+  initialPrompt?: string;
   variant?: 'page' | 'widget';
 };
 
@@ -35,6 +36,7 @@ function newId() {
 export default function TravelAssistant({
   destinationSlug,
   destinationName,
+  initialPrompt,
   variant = 'page',
 }: Props) {
   const isWidget = variant === 'widget';
@@ -44,6 +46,7 @@ export default function TravelAssistant({
   const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const sentInitial = useRef(false);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -143,6 +146,15 @@ export default function TravelAssistant({
       abortRef.current = null;
     }
   }
+
+  useEffect(() => {
+    const text = initialPrompt?.trim();
+    if (!text || sentInitial.current) return;
+    sentInitial.current = true;
+    void sendMessage(text);
+    // Auto-start once from the destination CTA prompt.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialPrompt]);
 
   function onSubmit(event: FormEvent) {
     event.preventDefault();
