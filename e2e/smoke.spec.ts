@@ -58,6 +58,39 @@ test.describe('core visitor flows', () => {
     );
   });
 
+  test('presents the GB travel guide on the assistant page', async ({
+    page,
+  }) => {
+    await page.goto('/assistant');
+    await expect(
+      page.getByRole('heading', { name: 'Your GB Travel Guide', level: 1 }),
+    ).toBeVisible();
+    await expect(
+      page.getByText(
+        'Ask me anything about travelling through Gilgit-Baltistan.',
+      ).first(),
+    ).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Plan a trip' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Best places' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Budget trip' })).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'What should I pack?' }),
+    ).toBeVisible();
+  });
+
+  test('focuses the travel guide on Hunza from a destination query', async ({
+    page,
+  }) => {
+    await page.goto('/assistant?destination=hunza-valley');
+    await expect(page.getByText('Ask about Hunza').first()).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Plan my Hunza trip' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: '3-day itinerary' }),
+    ).toBeVisible();
+  });
+
   test('submits the contact form against a mocked API', async ({ page }) => {
     await page.route('**/api/contact', async (route) => {
       expect(route.request().method()).toBe('POST');

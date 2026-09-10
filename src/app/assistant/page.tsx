@@ -1,7 +1,7 @@
 import JsonLd from '@/components/JsonLd';
 import { LazyTravelAssistant } from '@/components/lazy/TravelAssistant';
 import { getLocationBySlug } from '@/data';
-import { readAssistantPrompt } from '@/lib/assistant/plan-trip';
+import { assistantGuideCopy } from '@/lib/assistant/guide-ui';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
@@ -10,10 +10,10 @@ import {
 } from '@/lib/seo';
 
 const ASSISTANT_DESCRIPTION =
-  'Ask VistaGB’s travel assistant about Hunza, Skardu, itineraries, hotels, food, weather, roads, packing, and budgets for Gilgit-Baltistan.';
+  'Ask me anything about travelling through Gilgit-Baltistan — itineraries, places, budgets, packing, and when to go.';
 
 export const metadata = buildPageMetadata({
-  title: 'AI Travel Assistant',
+  title: 'Your GB Travel Guide',
   description: ASSISTANT_DESCRIPTION,
   path: '/assistant',
 });
@@ -21,7 +21,6 @@ export const metadata = buildPageMetadata({
 type Props = {
   searchParams?: {
     destination?: string | string[];
-    prompt?: string | string[];
   };
 };
 
@@ -29,7 +28,7 @@ export default function AssistantPage({ searchParams }: Props) {
   const raw = searchParams?.destination;
   const slug = (Array.isArray(raw) ? raw[0] : (raw ?? '')).trim();
   const location = slug ? getLocationBySlug(slug) : undefined;
-  const initialPrompt = readAssistantPrompt(searchParams?.prompt);
+  const copy = assistantGuideCopy(location?.name);
 
   return (
     <div>
@@ -37,10 +36,10 @@ export default function AssistantPage({ searchParams }: Props) {
         data={withJsonLdContext([
           breadcrumbJsonLd([
             { name: 'Home', path: '/' },
-            { name: 'AI Travel Assistant', path: '/assistant' },
+            { name: 'Your GB Travel Guide', path: '/assistant' },
           ]),
           webPageJsonLd({
-            name: 'AI Travel Assistant',
+            name: 'Your GB Travel Guide',
             description: ASSISTANT_DESCRIPTION,
             path: '/assistant',
           }),
@@ -48,14 +47,12 @@ export default function AssistantPage({ searchParams }: Props) {
       />
       <section className="border-b border-teal/20 bg-gradient-to-b from-slate via-night to-night py-12 md:py-16">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <p className="coord-label mb-3">Trip designer</p>
+          <p className="coord-label mb-3">VistaGB</p>
           <h1 className="font-display text-4xl font-semibold leading-tight text-glacier md:text-6xl">
-            AI Travel Assistant
+            {copy.title}
           </h1>
-          <p className="mt-4 max-w-2xl text-ice">
-            Instant answers from VistaGB destination guides — itineraries,
-            lodges, food, seasons, live weather, roads, packing, and budgets —
-            then hand off to our team when you&apos;re ready to book.
+          <p className="mt-4 max-w-xl text-pretty text-lg leading-relaxed text-ice">
+            {copy.intro}
           </p>
         </div>
       </section>
@@ -65,7 +62,6 @@ export default function AssistantPage({ searchParams }: Props) {
           <LazyTravelAssistant
             destinationSlug={location?.slug}
             destinationName={location?.name}
-            initialPrompt={initialPrompt}
           />
         </div>
       </section>
