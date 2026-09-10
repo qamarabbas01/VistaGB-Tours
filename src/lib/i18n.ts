@@ -41,7 +41,7 @@ const en = {
   chat: {
     open: 'Open live chat',
     close: 'Close chat',
-    title: 'Live chat',
+    title: 'Travel guide',
   },
   alerts: {
     label: 'Travel alerts',
@@ -85,7 +85,7 @@ const ur: typeof en = {
   chat: {
     open: 'لائیو چیٹ کھولیں',
     close: 'چیٹ بند کریں',
-    title: 'لائیو چیٹ',
+    title: 'سفری گائیڈ',
   },
   alerts: {
     label: 'سفر کی اطلاعات',

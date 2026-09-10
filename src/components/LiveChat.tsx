@@ -9,7 +9,7 @@ const TravelAssistant = dynamic(() => import('@/components/TravelAssistant'), {
   ssr: false,
   loading: () => (
     <div className="flex h-full items-center justify-center px-4 text-sm text-ice">
-      Loading assistant…
+      Loading your guide…
     </div>
   ),
 });

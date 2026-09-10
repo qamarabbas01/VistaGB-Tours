@@ -2,25 +2,13 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { assistantGuideCopy } from '@/lib/assistant/guide-ui';
 
 export type ChatMessage = {
   id: string;
   role: 'user' | 'assistant';
   content: string;
 };
-
-const SUGGESTIONS = [
-  'Tell me about Hunza',
-  '5-day itinerary for Skardu',
-  'Best hotels in Hunza',
-  'Famous food in Gilgit',
-  'Best time to visit Nagar',
-  'Weather in Hunza',
-  'Budget for a week in GB',
-  'Road conditions to Hunza',
-  'Packing list for Deosai',
-  'Nearby destinations from Skardu',
-] as const;
 
 type Props = {
   destinationSlug?: string;
@@ -46,6 +34,7 @@ export default function TravelAssistant({
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
+    if (messages.length === 0 && !loading) return;
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages, loading]);
 
@@ -149,6 +138,7 @@ export default function TravelAssistant({
     void sendMessage(input);
   }
 
+  const copy = assistantGuideCopy(destinationName);
   const showSuggestions = messages.length === 0 && !loading;
 
   return (
@@ -161,46 +151,50 @@ export default function TravelAssistant({
     >
       {!isWidget ? (
         <div className="border-b border-teal/20 px-5 py-4 md:px-6">
-          <p className="coord-label mb-1">AI Travel Assistant</p>
+          <p className="coord-label mb-1">VistaGB</p>
           <h2 className="font-display text-xl font-semibold text-glacier md:text-2xl">
-            Plan Gilgit-Baltistan with VistaGB
+            {copy.title}
           </h2>
-          <p className="mt-1 text-sm text-ice">
-            Ask about valleys, itineraries, hotels, food, weather, roads,
-            packing, and budgets
-            {destinationName ? (
-              <>
-                {' '}
-                — currently focused on{' '}
-                <span className="text-apricot">{destinationName}</span>
-              </>
-            ) : null}
-            .
+          <p className="mt-2 max-w-md text-pretty text-sm leading-relaxed text-ice">
+            {copy.intro}
           </p>
         </div>
       ) : null}
 
       <div className="flex-1 space-y-4 overflow-y-auto px-5 py-5 md:px-6">
         {showSuggestions ? (
-          <div className="mx-auto max-w-2xl py-6 text-center">
-            <p className="text-sm leading-relaxed text-ice">
-              Grounded in VistaGB destination guides
-              {destinationName ? ` and ${destinationName}` : ''}. Live weather
-              pulls in when you ask.
-            </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {(isWidget ? SUGGESTIONS.slice(0, 4) : SUGGESTIONS).map(
-                (suggestion) => (
-                  <button
-                    key={suggestion}
-                    type="button"
-                    onClick={() => void sendMessage(suggestion)}
-                    className="rounded-full border border-teal/30 bg-night/40 px-3.5 py-2 text-left text-xs text-ice transition-colors hover:border-apricot/60 hover:text-apricot md:text-sm"
-                  >
-                    {suggestion}
-                  </button>
-                ),
-              )}
+          <div
+            className={`mx-auto flex max-w-lg flex-col items-center text-center ${
+              isWidget ? 'py-4' : 'py-6 md:py-10'
+            }`}
+          >
+            {isWidget ? (
+              <>
+                <h2 className="font-display text-xl font-semibold text-glacier">
+                  {copy.title}
+                </h2>
+                <p className="mt-2 max-w-xs text-pretty text-sm leading-relaxed text-ice">
+                  {copy.intro}
+                </p>
+              </>
+            ) : null}
+            <div
+              className={`flex flex-wrap justify-center gap-2.5 ${
+                isWidget ? 'mt-6' : ''
+              }`}
+              role="group"
+              aria-label="Suggested questions"
+            >
+              {copy.suggestions.map((suggestion) => (
+                <button
+                  key={suggestion.label}
+                  type="button"
+                  onClick={() => void sendMessage(suggestion.prompt)}
+                  className="rounded-full border border-teal/40 bg-night/40 px-5 py-2.5 text-sm text-glacier transition-colors hover:border-apricot hover:text-apricot"
+                >
+                  {suggestion.label}
+                </button>
+              ))}
             </div>
           </div>
         ) : null}
@@ -244,7 +238,7 @@ export default function TravelAssistant({
           className="flex flex-col gap-2 rounded-2xl border border-teal/30 bg-night/60 p-2 focus-within:border-apricot/70 sm:flex-row"
         >
           <label htmlFor="assistant-input" className="sr-only">
-            Ask the travel assistant
+            Message your GB travel guide
           </label>
           <input
             id="assistant-input"
@@ -252,7 +246,7 @@ export default function TravelAssistant({
             onChange={(e) => setInput(e.target.value)}
             maxLength={2000}
             disabled={loading}
-            placeholder="Ask about Hunza, weather, hotels, packing…"
+            placeholder={copy.placeholder}
             className="min-w-0 flex-1 bg-transparent px-3 py-3 text-sm text-glacier outline-none placeholder:text-ice/50 disabled:opacity-60"
           />
           <button

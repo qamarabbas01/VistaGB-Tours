@@ -9,7 +9,7 @@ export const LazyTravelAssistant = dynamic(
     loading: () => (
       <div
         className="skeleton h-[480px] w-full rounded-2xl"
-        aria-label="Loading assistant"
+        aria-label="Loading travel guide"
       />
     ),
   },

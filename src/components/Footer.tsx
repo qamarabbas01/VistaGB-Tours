@@ -37,7 +37,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/assistant" className="hover:text-apricot">
-                  AI Assistant
+                  Travel Guide
                 </Link>
               </li>
               <li>
