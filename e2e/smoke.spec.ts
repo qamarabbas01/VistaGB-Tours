@@ -48,6 +48,14 @@ test.describe('core visitor flows', () => {
     await expect(
       pageNav.getByRole('link', { name: 'Places', exact: true }),
     ).toBeVisible();
+    const planTrip = page.getByRole('link', {
+      name: /plan a trip to hunza/i,
+    });
+    await expect(planTrip).toBeVisible();
+    await expect(planTrip).toHaveAttribute(
+      'href',
+      /\/assistant\?destination=hunza-valley/,
+    );
   });
 
   test('presents the GB travel guide on the assistant page', async ({
