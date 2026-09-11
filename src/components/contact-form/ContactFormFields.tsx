@@ -338,6 +338,7 @@ export function ContactFormFields({
 
       <fieldset className="flex flex-col gap-5 border-0 border-t border-teal/15 p-0 pt-8">
         <legend className="coord-label mb-1">Your Details</legend>
+
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="flex flex-col gap-2">
             <label htmlFor="name" className="text-sm text-ice">
@@ -354,6 +355,7 @@ export function ContactFormFields({
               placeholder="Your name"
             />
           </div>
+
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="text-sm text-ice">
               Email
@@ -370,6 +372,24 @@ export function ContactFormFields({
             />
           </div>
         </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="phone" className="text-sm text-ice">
+            Phone number{' '}
+            <span className="text-xs text-ice/70">(optional)</span>
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            maxLength={30}
+            disabled={submitting}
+            className={CONTACT_INPUT_CLASS}
+            placeholder="+92 300 1234567"
+          />
+        </div>
+
         <div className="flex flex-col gap-2">
           <label htmlFor="message" className="text-sm text-ice">
             Anything else?{' '}
@@ -386,7 +406,6 @@ export function ContactFormFields({
           />
         </div>
       </fieldset>
-
       {error ? (
         <p className="text-sm text-red-400" role="alert">
           {error}

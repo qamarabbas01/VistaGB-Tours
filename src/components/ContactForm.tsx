@@ -113,6 +113,7 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
       groupSize,
       message: String(formData.get('message') ?? '').trim(),
       website: String(formData.get('website') ?? ''),
+      phone: String(formData.get('phone') ?? '').trim(),
     };
 
     try {
