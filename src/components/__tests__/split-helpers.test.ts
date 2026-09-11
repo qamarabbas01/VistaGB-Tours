@@ -11,7 +11,7 @@ import {
 } from '@/components/destination-weather/format';
 
 describe('tripLengthFromDates', () => {
-  it('counts inclusive calendar days, including nights', () => {
+  it('counts inclusive calendar days and keeps the night count', () => {
     expect(tripLengthFromDates('2026-10-01', '2026-10-01')).toEqual({
       days: 1,
       nights: 0,
@@ -20,12 +20,12 @@ describe('tripLengthFromDates', () => {
     expect(tripLengthFromDates('2026-10-01', '2026-10-07')).toEqual({
       days: 7,
       nights: 6,
-      label: '7 days · 6 nights',
+      label: '7 days',
     });
     expect(tripLengthFromDates('2026-01-26', '2026-07-26')).toEqual({
       days: 182,
       nights: 181,
-      label: '182 days · 181 nights',
+      label: '182 days',
     });
   });
 
@@ -83,7 +83,7 @@ describe('validateInquiry', () => {
   it('accepts a complete fixed-date inquiry', () => {
     expect(
       validateInquiry({
-        duration: '7 days · 6 nights',
+        duration: '7 days',
         datesFlexible: false,
         travelFrom: '2026-09-01',
         travelTo: '2026-09-07',

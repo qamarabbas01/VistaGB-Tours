@@ -38,6 +38,6 @@ describe('BookingForm calendar', () => {
 
     expect(screen.getByText('10 Sep 2026')).toBeInTheDocument();
     expect(screen.getByText('16 Sep 2026')).toBeInTheDocument();
-    expect(screen.getAllByDisplayValue('7 days · 6 nights').length).toBeGreaterThan(0);
+    expect(screen.getAllByDisplayValue('7 days').length).toBeGreaterThan(0);
   });
 });

@@ -21,7 +21,7 @@ type Props = {
   datesFlexible: boolean;
   travelFrom: string;
   travelTo: string;
-  computedTripLength: TripLength | null; // safe to ignore for calendar calculation, kept for API interface
+  computedTripLength: TripLength | null;
   monthOptions: MonthOption[];
   error: string | null;
   onRegionChange: (slug: string) => void;
@@ -32,10 +32,8 @@ type Props = {
   onTravelToChange: (value: string) => void;
 };
 
-// Helper to calculate days difference (calendar dates, ignore time of day).
 function getTripLength(from: string, to: string): TripLength | null {
   if (!from || !to) return null;
-  // Parse as UTC to ensure no TZ cleaving
   const fromDate = new Date(from + "T00:00:00Z");
   const toDate = new Date(to + "T00:00:00Z");
   if (isNaN(fromDate.valueOf()) || isNaN(toDate.valueOf())) return null;
@@ -54,7 +52,6 @@ export function ContactFormFields({
   datesFlexible,
   travelFrom,
   travelTo,
-  // computedTripLength,  // not used, using local calculation
   monthOptions,
   error,
   onRegionChange,
@@ -69,13 +66,11 @@ export function ContactFormFields({
   );
   const hasPlaces = Boolean(selectedRegion?.places.length);
 
-  // Calculate trip length based on local travelFrom and travelTo
   const calendarTripLength = useMemo(
     () => getTripLength(travelFrom, travelTo),
     [travelFrom, travelTo],
   );
 
-  // Valid for disabling invalid end date
   const isEndDateInvalid =
     travelFrom && travelTo && getTripLength(travelFrom, travelTo) === null;
 
@@ -216,7 +211,6 @@ export function ContactFormFields({
                 value={travelFrom}
                 disabled={submitting}
                 onChange={(event) => {
-                  // Clear travelTo if after new travelFrom
                   if (travelTo && getTripLength(event.target.value, travelTo) === null) {
                     onTravelToChange('');
                   }
@@ -237,10 +231,9 @@ export function ContactFormFields({
                 min={travelFrom || undefined}
                 disabled={submitting || !travelFrom}
                 onChange={(event) => {
-                  // Only allow setting if not before travelFrom
                   if (travelFrom && event.target.value) {
                     if (getTripLength(travelFrom, event.target.value) === null) {
-                      onTravelToChange(''); // clear if invalid
+                      onTravelToChange('');
                       return;
                     }
                   }
