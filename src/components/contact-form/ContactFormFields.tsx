@@ -2,10 +2,15 @@ import {
   CONTACT_INPUT_CLASS,
   DURATION_OPTIONS,
   type RegionFormOption,
-  type TripLength,
 } from '@/components/contact-form/inquiry';
+import { useMemo } from 'react';
 
 type MonthOption = { value: string; label: string };
+
+type TripLength = {
+  days: number;
+  label: string;
+};
 
 type Props = {
   regionOptions: RegionFormOption[];
@@ -27,6 +32,17 @@ type Props = {
   onTravelToChange: (value: string) => void;
 };
 
+function getTripLength(from: string, to: string): TripLength | null {
+  if (!from || !to) return null;
+  const fromDate = new Date(from + "T00:00:00Z");
+  const toDate = new Date(to + "T00:00:00Z");
+  if (isNaN(fromDate.valueOf()) || isNaN(toDate.valueOf())) return null;
+  const diffMs = toDate.getTime() - fromDate.getTime();
+  const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24)) + 1;
+  if (diffDays < 1) return null;
+  return { days: diffDays, label: `${diffDays} day${diffDays > 1 ? 's' : ''}` };
+}
+
 export function ContactFormFields({
   regionOptions,
   submitting,
@@ -36,7 +52,6 @@ export function ContactFormFields({
   datesFlexible,
   travelFrom,
   travelTo,
-  computedTripLength,
   monthOptions,
   error,
   onRegionChange,
@@ -50,6 +65,14 @@ export function ContactFormFields({
     (region) => region.slug === selectedRegionSlug,
   );
   const hasPlaces = Boolean(selectedRegion?.places.length);
+
+  const calendarTripLength = useMemo(
+    () => getTripLength(travelFrom, travelTo),
+    [travelFrom, travelTo],
+  );
+
+  const isEndDateInvalid =
+    travelFrom && travelTo && getTripLength(travelFrom, travelTo) === null;
 
   return (
     <>
@@ -187,7 +210,12 @@ export function ContactFormFields({
                 type="date"
                 value={travelFrom}
                 disabled={submitting}
-                onChange={(event) => onTravelFromChange(event.target.value)}
+                onChange={(event) => {
+                  if (travelTo && getTripLength(event.target.value, travelTo) === null) {
+                    onTravelToChange('');
+                  }
+                  onTravelFromChange(event.target.value);
+                }}
                 className={CONTACT_INPUT_CLASS}
               />
             </div>
@@ -201,32 +229,70 @@ export function ContactFormFields({
                 type="date"
                 value={travelTo}
                 min={travelFrom || undefined}
-                disabled={submitting}
-                onChange={(event) => onTravelToChange(event.target.value)}
-                className={CONTACT_INPUT_CLASS}
+                disabled={submitting || !travelFrom}
+                onChange={(event) => {
+                  if (travelFrom && event.target.value) {
+                    if (getTripLength(travelFrom, event.target.value) === null) {
+                      onTravelToChange('');
+                      return;
+                    }
+                  }
+                  onTravelToChange(event.target.value);
+                }}
+                className={CONTACT_INPUT_CLASS + (isEndDateInvalid ? ' border-rose-400' : '')}
               />
+              {isEndDateInvalid ? (
+                <span className="text-xs text-red-400">
+                  End date can&apos;t be before Start date.
+                </span>
+              ) : null}
             </div>
           </div>
         )}
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="flex flex-col gap-2">
-            {computedTripLength ? (
-              <>
-                <label htmlFor="duration" className="text-sm text-ice">
-                  Trip length
-                </label>
-                <input
-                  id="duration"
-                  name="duration"
-                  readOnly
-                  value={computedTripLength.label}
-                  className={`${CONTACT_INPUT_CLASS} border-apricot/40`}
-                />
-                <p className="text-xs text-ice/80">
-                  Counted from your start and end dates.
-                </p>
-              </>
+            {!datesFlexible ? (
+              calendarTripLength ? (
+                <>
+                  <label htmlFor="duration" className="text-sm text-ice">
+                    Trip length
+                  </label>
+                  <input
+                    id="duration"
+                    name="duration"
+                    readOnly
+                    value={calendarTripLength.label}
+                    className={`${CONTACT_INPUT_CLASS} border-apricot/40`}
+                  />
+                  <p className="text-xs text-ice/80">
+                    Counted from your start and end dates.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <label htmlFor="duration" className="text-sm text-ice">
+                    Trip length
+                  </label>
+                  <select
+                    id="duration"
+                    name="duration"
+                    required
+                    disabled={submitting}
+                    defaultValue=""
+                    className={CONTACT_INPUT_CLASS}
+                  >
+                    <option value="" disabled>
+                      How many days?
+                    </option>
+                    {DURATION_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </>
+              )
             ) : (
               <>
                 <label htmlFor="duration" className="text-sm text-ice">
@@ -272,6 +338,7 @@ export function ContactFormFields({
 
       <fieldset className="flex flex-col gap-5 border-0 border-t border-teal/15 p-0 pt-8">
         <legend className="coord-label mb-1">Your Details</legend>
+
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="flex flex-col gap-2">
             <label htmlFor="name" className="text-sm text-ice">
@@ -288,6 +355,7 @@ export function ContactFormFields({
               placeholder="Your name"
             />
           </div>
+
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="text-sm text-ice">
               Email
@@ -304,6 +372,24 @@ export function ContactFormFields({
             />
           </div>
         </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="phone" className="text-sm text-ice">
+            Phone number{' '}
+            <span className="text-xs text-ice/70">(optional)</span>
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            maxLength={30}
+            disabled={submitting}
+            className={CONTACT_INPUT_CLASS}
+            placeholder="+92 300 1234567"
+          />
+        </div>
+
         <div className="flex flex-col gap-2">
           <label htmlFor="message" className="text-sm text-ice">
             Anything else?{' '}
@@ -320,7 +406,6 @@ export function ContactFormFields({
           />
         </div>
       </fieldset>
-
       {error ? (
         <p className="text-sm text-red-400" role="alert">
           {error}

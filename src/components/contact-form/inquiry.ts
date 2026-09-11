@@ -63,12 +63,14 @@ export type TripLength = {
 
 export function formatTripLength(days: number): TripLength | null {
   if (!Number.isInteger(days) || days < 1) return null;
+
   const nights = days - 1;
-  if (days === 1) {
-    return { days, nights, label: '1 day' };
-  }
-  const nightLabel = nights === 1 ? '1 night' : `${nights} nights`;
-  return { days, nights, label: `${days} days · ${nightLabel}` };
+
+  return {
+    days,
+    nights,
+    label: `${days} day${days === 1 ? '' : 's'}`,
+  };
 }
 
 /** Inclusive calendar days: 1 Jan → 7 Jan is a 7-day trip (6 nights). */
@@ -78,12 +80,14 @@ export function tripLengthFromDates(
 ): TripLength | null {
   const from = parseIsoDate(fromIso);
   const to = parseIsoDate(toIso);
+
   if (!from || !to) return null;
+
   const days =
     Math.round((to.getTime() - from.getTime()) / MS_PER_DAY) + 1;
+
   return formatTripLength(days);
 }
-
 export function validateInquiry(input: {
   duration: string;
   datesFlexible: boolean;
