@@ -2,10 +2,15 @@ import {
   CONTACT_INPUT_CLASS,
   DURATION_OPTIONS,
   type RegionFormOption,
-  type TripLength,
 } from '@/components/contact-form/inquiry';
+import { useMemo } from 'react';
 
 type MonthOption = { value: string; label: string };
+
+type TripLength = {
+  days: number;
+  label: string;
+};
 
 type Props = {
   regionOptions: RegionFormOption[];
@@ -16,7 +21,7 @@ type Props = {
   datesFlexible: boolean;
   travelFrom: string;
   travelTo: string;
-  computedTripLength: TripLength | null;
+  computedTripLength: TripLength | null; // safe to ignore for calendar calculation, kept for API interface
   monthOptions: MonthOption[];
   error: string | null;
   onRegionChange: (slug: string) => void;
@@ -27,6 +32,19 @@ type Props = {
   onTravelToChange: (value: string) => void;
 };
 
+// Helper to calculate days difference (calendar dates, ignore time of day).
+function getTripLength(from: string, to: string): TripLength | null {
+  if (!from || !to) return null;
+  // Parse as UTC to ensure no TZ cleaving
+  const fromDate = new Date(from + "T00:00:00Z");
+  const toDate = new Date(to + "T00:00:00Z");
+  if (isNaN(fromDate.valueOf()) || isNaN(toDate.valueOf())) return null;
+  const diffMs = toDate.getTime() - fromDate.getTime();
+  const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24)) + 1;
+  if (diffDays < 1) return null;
+  return { days: diffDays, label: `${diffDays} day${diffDays > 1 ? 's' : ''}` };
+}
+
 export function ContactFormFields({
   regionOptions,
   submitting,
@@ -36,7 +54,7 @@ export function ContactFormFields({
   datesFlexible,
   travelFrom,
   travelTo,
-  computedTripLength,
+  // computedTripLength,  // not used, using local calculation
   monthOptions,
   error,
   onRegionChange,
@@ -50,6 +68,16 @@ export function ContactFormFields({
     (region) => region.slug === selectedRegionSlug,
   );
   const hasPlaces = Boolean(selectedRegion?.places.length);
+
+  // Calculate trip length based on local travelFrom and travelTo
+  const calendarTripLength = useMemo(
+    () => getTripLength(travelFrom, travelTo),
+    [travelFrom, travelTo],
+  );
+
+  // Valid for disabling invalid end date
+  const isEndDateInvalid =
+    travelFrom && travelTo && getTripLength(travelFrom, travelTo) === null;
 
   return (
     <>
@@ -187,7 +215,13 @@ export function ContactFormFields({
                 type="date"
                 value={travelFrom}
                 disabled={submitting}
-                onChange={(event) => onTravelFromChange(event.target.value)}
+                onChange={(event) => {
+                  // Clear travelTo if after new travelFrom
+                  if (travelTo && getTripLength(event.target.value, travelTo) === null) {
+                    onTravelToChange('');
+                  }
+                  onTravelFromChange(event.target.value);
+                }}
                 className={CONTACT_INPUT_CLASS}
               />
             </div>
@@ -201,32 +235,71 @@ export function ContactFormFields({
                 type="date"
                 value={travelTo}
                 min={travelFrom || undefined}
-                disabled={submitting}
-                onChange={(event) => onTravelToChange(event.target.value)}
-                className={CONTACT_INPUT_CLASS}
+                disabled={submitting || !travelFrom}
+                onChange={(event) => {
+                  // Only allow setting if not before travelFrom
+                  if (travelFrom && event.target.value) {
+                    if (getTripLength(travelFrom, event.target.value) === null) {
+                      onTravelToChange(''); // clear if invalid
+                      return;
+                    }
+                  }
+                  onTravelToChange(event.target.value);
+                }}
+                className={CONTACT_INPUT_CLASS + (isEndDateInvalid ? ' border-rose-400' : '')}
               />
+              {isEndDateInvalid ? (
+                <span className="text-xs text-red-400">
+                  End date can&apos;t be before Start date.
+                </span>
+              ) : null}
             </div>
           </div>
         )}
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="flex flex-col gap-2">
-            {computedTripLength ? (
-              <>
-                <label htmlFor="duration" className="text-sm text-ice">
-                  Trip length
-                </label>
-                <input
-                  id="duration"
-                  name="duration"
-                  readOnly
-                  value={computedTripLength.label}
-                  className={`${CONTACT_INPUT_CLASS} border-apricot/40`}
-                />
-                <p className="text-xs text-ice/80">
-                  Counted from your start and end dates.
-                </p>
-              </>
+            {!datesFlexible ? (
+              calendarTripLength ? (
+                <>
+                  <label htmlFor="duration" className="text-sm text-ice">
+                    Trip length
+                  </label>
+                  <input
+                    id="duration"
+                    name="duration"
+                    readOnly
+                    value={calendarTripLength.label}
+                    className={`${CONTACT_INPUT_CLASS} border-apricot/40`}
+                  />
+                  <p className="text-xs text-ice/80">
+                    Counted from your start and end dates.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <label htmlFor="duration" className="text-sm text-ice">
+                    Trip length
+                  </label>
+                  <select
+                    id="duration"
+                    name="duration"
+                    required
+                    disabled={submitting}
+                    defaultValue=""
+                    className={CONTACT_INPUT_CLASS}
+                  >
+                    <option value="" disabled>
+                      How many days?
+                    </option>
+                    {DURATION_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </>
+              )
             ) : (
               <>
                 <label htmlFor="duration" className="text-sm text-ice">
