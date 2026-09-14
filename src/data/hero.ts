@@ -1,3 +1,5 @@
+import { getLocationBySlug, isPlace } from './index';
+
 export const experiences = [
   {
     slug: 'attabad-lake',
@@ -194,7 +196,7 @@ export const statistics = [
   },
 ] as const;
 
-export const mapPins = [
+const mapPinCoordinates = [
   {
     name: 'Hunza',
     slug: 'hunza-valley',
@@ -234,6 +236,29 @@ export const mapPins = [
     alt: '3,300M',
   },
 ] as const;
+
+const FALLBACK_MAP_IMAGE = '/images/commons/bd7ddfea0e6ee033.jpg';
+
+/**
+ * Map pins enriched with the image/region/description already defined on
+ * each destination or place, so the map preview card doesn't fork its own
+ * copy of that content.
+ */
+export const mapPins = mapPinCoordinates.map((pin) => {
+  const destination = getLocationBySlug(pin.slug);
+  const region = destination
+    ? isPlace(destination)
+      ? (destination.hubName ?? 'Gilgit-Baltistan')
+      : destination.region
+    : 'Gilgit-Baltistan';
+
+  return {
+    ...pin,
+    image: destination?.image ?? FALLBACK_MAP_IMAGE,
+    region: `${region}, GB`,
+    description: destination?.tagline ?? destination?.description ?? '',
+  };
+});
 
 export const galleryImages = [
   {

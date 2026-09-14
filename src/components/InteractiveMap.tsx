@@ -6,6 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import type { Marker as LeafletMarker } from 'leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import OptimizedImage from '@/components/OptimizedImage';
 import { usePreferences } from '@/components/PreferencesProvider';
 
 export type MapLocation = {
@@ -14,6 +15,9 @@ export type MapLocation = {
   lat: number;
   lng: number;
   alt: string;
+  image: string;
+  region: string;
+  description: string;
 };
 
 type InteractiveMapProps = {
@@ -110,17 +114,20 @@ function DestinationMarker({
         },
       }}
     >
-      <Popup>
-        <div className="vista-map-popup">
-          <p className="vista-map-popup__name">{location.name}</p>
-          <p className="vista-map-popup__meta">{location.alt}</p>
-          <Link
-            href={`/destinations/${location.slug}`}
-            className="vista-map-popup__link"
-          >
-            Open destination →
-          </Link>
-        </div>
+      <Popup minWidth={220} maxWidth={240} className="vista-map-popup-wrap">
+        <Link
+          href={`/destinations/${location.slug}`}
+          className="vista-map-popup"
+        >
+          <div className="vista-map-popup__body">
+            <p className="vista-map-popup__name">{location.name}</p>
+            <p className="vista-map-popup__region">{location.region}</p>
+            {location.description ? (
+              <p className="vista-map-popup__desc">{location.description}</p>
+            ) : null}
+            <span className="vista-map-popup__link">View Destination →</span>
+          </div>
+        </Link>
       </Popup>
     </Marker>
   );
