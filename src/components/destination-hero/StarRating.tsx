@@ -41,7 +41,10 @@ export function StarRating({ score, count }: Props) {
   }`;
 
   return (
-    <p className="flex items-center gap-2 text-sm text-glacier" aria-label={label}>
+    <p
+      className="flex items-center gap-2 text-sm text-glacier"
+      aria-label={label}
+    >
       <span className="flex gap-0.5" aria-hidden="true">
         {Array.from({ length: 5 }, (_, index) => (
           <Star key={index} index={index} fill={rounded - index} />

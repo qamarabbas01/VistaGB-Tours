@@ -1,4 +1,8 @@
-import { planTripHref, planTripPrompt, tripPlaceName } from '@/lib/assistant/plan-trip';
+import {
+  planTripHref,
+  planTripPrompt,
+  tripPlaceName,
+} from '@/lib/assistant/plan-trip';
 
 describe('plan-trip helpers', () => {
   it('shortens valley names for the Hunza-style CTA copy', () => {

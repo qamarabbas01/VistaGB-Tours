@@ -10,7 +10,11 @@ type Props = {
   addToTripHref: string;
 };
 
-export default function DestinationActions({ slug, name, addToTripHref }: Props) {
+export default function DestinationActions({
+  slug,
+  name,
+  addToTripHref,
+}: Props) {
   return (
     <div className="mt-6 flex flex-wrap items-center gap-2">
       <Link

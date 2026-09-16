@@ -76,9 +76,9 @@ describe('destination data modules', () => {
 
   it('resolves Explore by Experience categories to matching places or regions', () => {
     const mountains = searchLocations('mountains');
-    expect(
-      mountains.places.length + mountains.regions.length,
-    ).toBeGreaterThan(0);
+    expect(mountains.places.length + mountains.regions.length).toBeGreaterThan(
+      0,
+    );
 
     const lakes = searchLocations('lakes');
     expect(lakes.places.length).toBeGreaterThan(0);
@@ -88,17 +88,13 @@ describe('destination data modules', () => {
     expect(forts.places.some((place) => place.type === 'Fort')).toBe(true);
 
     const polo = searchLocations('polo');
-    expect(polo.regions.some((region) => region.slug === 'ghizer')).toBe(
-      true,
-    );
+    expect(polo.regions.some((region) => region.slug === 'ghizer')).toBe(true);
 
     const trekking = searchLocations('trekking');
     expect(trekking.places.length).toBeGreaterThan(0);
 
     const camping = searchLocations('camping');
-    expect(
-      camping.places.length + camping.regions.length,
-    ).toBeGreaterThan(0);
+    expect(camping.places.length + camping.regions.length).toBeGreaterThan(0);
 
     const photography = searchLocations('photography');
     expect(photography.places.length).toBeGreaterThan(0);

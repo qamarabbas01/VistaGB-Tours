@@ -7,18 +7,18 @@ import {
 
 describe('featured seasons', () => {
   it('maps Pakistan calendar months to winter, spring, summer, and autumn', () => {
-    expect(
-      getFeaturedSeason(new Date('2026-01-15T12:00:00+05:00')).id,
-    ).toBe('winter');
-    expect(
-      getFeaturedSeason(new Date('2026-04-12T12:00:00+05:00')).label,
-    ).toBe('Cherry Blossom Season');
-    expect(
-      getFeaturedSeason(new Date('2026-07-01T12:00:00+05:00')).id,
-    ).toBe('summer');
-    expect(
-      getFeaturedSeason(new Date('2026-09-08T12:00:00+05:00')).label,
-    ).toBe('Autumn in GB');
+    expect(getFeaturedSeason(new Date('2026-01-15T12:00:00+05:00')).id).toBe(
+      'winter',
+    );
+    expect(getFeaturedSeason(new Date('2026-04-12T12:00:00+05:00')).label).toBe(
+      'Cherry Blossom Season',
+    );
+    expect(getFeaturedSeason(new Date('2026-07-01T12:00:00+05:00')).id).toBe(
+      'summer',
+    );
+    expect(getFeaturedSeason(new Date('2026-09-08T12:00:00+05:00')).label).toBe(
+      'Autumn in GB',
+    );
     expect(
       getFeaturedSeason(new Date('2026-09-08T12:00:00+05:00')).intro,
     ).toMatch(/hunza, nagar and skardu/i);

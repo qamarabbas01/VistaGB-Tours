@@ -27,10 +27,7 @@ export function DestinationSectionNav({ items }: Props) {
       (entries) => {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              a.boundingClientRect.top - b.boundingClientRect.top,
-          );
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
         const next = visible[0]?.target.id;
         if (next) setActive(next);
       },

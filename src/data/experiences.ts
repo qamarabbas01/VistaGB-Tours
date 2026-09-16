@@ -83,7 +83,9 @@ export const EXPERIENCE_QUERY_ALIASES: Record<string, ExperienceSlug> = {
   photo: 'photography',
 };
 
-export function resolveExperienceSlug(query: string): ExperienceSlug | undefined {
+export function resolveExperienceSlug(
+  query: string,
+): ExperienceSlug | undefined {
   return EXPERIENCE_QUERY_ALIASES[query.trim().toLowerCase()];
 }
 
@@ -209,7 +211,9 @@ export function matchExperienceLocations(
         regions: regions.filter((region) =>
           /polo|shandur/i.test(regionBlob(region)),
         ),
-        places: places.filter((place) => /polo|shandur/i.test(placeBlob(place))),
+        places: places.filter((place) =>
+          /polo|shandur/i.test(placeBlob(place)),
+        ),
       };
     case 'photography':
       return {

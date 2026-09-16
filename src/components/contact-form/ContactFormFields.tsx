@@ -34,8 +34,8 @@ type Props = {
 
 function getTripLength(from: string, to: string): TripLength | null {
   if (!from || !to) return null;
-  const fromDate = new Date(from + "T00:00:00Z");
-  const toDate = new Date(to + "T00:00:00Z");
+  const fromDate = new Date(from + 'T00:00:00Z');
+  const toDate = new Date(to + 'T00:00:00Z');
   if (isNaN(fromDate.valueOf()) || isNaN(toDate.valueOf())) return null;
   const diffMs = toDate.getTime() - fromDate.getTime();
   const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24)) + 1;
@@ -211,7 +211,10 @@ export function ContactFormFields({
                 value={travelFrom}
                 disabled={submitting}
                 onChange={(event) => {
-                  if (travelTo && getTripLength(event.target.value, travelTo) === null) {
+                  if (
+                    travelTo &&
+                    getTripLength(event.target.value, travelTo) === null
+                  ) {
                     onTravelToChange('');
                   }
                   onTravelFromChange(event.target.value);
@@ -232,14 +235,19 @@ export function ContactFormFields({
                 disabled={submitting || !travelFrom}
                 onChange={(event) => {
                   if (travelFrom && event.target.value) {
-                    if (getTripLength(travelFrom, event.target.value) === null) {
+                    if (
+                      getTripLength(travelFrom, event.target.value) === null
+                    ) {
                       onTravelToChange('');
                       return;
                     }
                   }
                   onTravelToChange(event.target.value);
                 }}
-                className={CONTACT_INPUT_CLASS + (isEndDateInvalid ? ' border-rose-400' : '')}
+                className={
+                  CONTACT_INPUT_CLASS +
+                  (isEndDateInvalid ? ' border-rose-400' : '')
+                }
               />
               {isEndDateInvalid ? (
                 <span className="text-xs text-red-400">
@@ -375,8 +383,7 @@ export function ContactFormFields({
 
         <div className="flex flex-col gap-2">
           <label htmlFor="phone" className="text-sm text-ice">
-            Phone number{' '}
-            <span className="text-xs text-ice/70">(optional)</span>
+            Phone number <span className="text-xs text-ice/70">(optional)</span>
           </label>
           <input
             id="phone"

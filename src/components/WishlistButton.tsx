@@ -33,11 +33,7 @@ export default function WishlistButton({
           ? 'border-apricot/70 bg-apricot text-ink'
           : 'border-teal/40 bg-night/70 text-glacier hover:border-apricot hover:text-apricot'
       } ${
-        labeled
-          ? 'gap-2 px-4 py-2 text-sm'
-          : compact
-            ? 'h-9 w-9'
-            : 'h-10 w-10'
+        labeled ? 'gap-2 px-4 py-2 text-sm' : compact ? 'h-9 w-9' : 'h-10 w-10'
       }`}
     >
       <svg

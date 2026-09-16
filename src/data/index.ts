@@ -10,10 +10,7 @@ import { gilgitDestination } from './destinations/gilgit';
 import { nagarDestination } from './destinations/nagar';
 import { legacyDestinations } from './destinations/legacy';
 import { allPlaces } from './places';
-import {
-  matchExperienceLocations,
-  resolveExperienceSlug,
-} from './experiences';
+import { matchExperienceLocations, resolveExperienceSlug } from './experiences';
 
 export { blogPosts } from './blog';
 export {
