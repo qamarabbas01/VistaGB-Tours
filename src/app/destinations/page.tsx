@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import DestinationCard from '@/components/DestinationCard';
+import { DiscoverySearch } from '@/components/DiscoverySearch';
 import JsonLd from '@/components/JsonLd';
 import Pagination from '@/components/Pagination';
 import {
@@ -10,6 +11,7 @@ import {
   searchLocations,
   type TravelLocation,
 } from '@/data';
+import { DISCOVERY_SUGGESTIONS } from '@/lib/search/discovery';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
@@ -85,31 +87,7 @@ export default function DestinationsPage({ searchParams }: Props) {
             From terraced apricot valleys to the cold deserts beneath K2 — these
             are the places that define a trip to Gilgit-Baltistan.
           </p>
-          <form
-            action="/destinations"
-            method="get"
-            role="search"
-            className="mt-8 flex max-w-3xl flex-col gap-2 rounded-2xl border border-teal/30 bg-night/70 p-2 shadow-2xl shadow-black/10 transition-colors focus-within:border-apricot/70 sm:flex-row"
-          >
-            <label htmlFor="destination-search" className="sr-only">
-              Search destinations
-            </label>
-            <input
-              id="destination-search"
-              name="q"
-              type="search"
-              defaultValue={query}
-              maxLength={120}
-              placeholder="Search a destination, valley, lake, mountain, route…"
-              className="min-w-0 flex-1 appearance-none bg-transparent px-4 py-3 text-glacier outline-none placeholder:text-ice/60"
-            />
-            <button
-              type="submit"
-              className="rounded-xl bg-apricot px-7 py-3 font-semibold text-ink transition-opacity hover:opacity-90"
-            >
-              Search
-            </button>
-          </form>
+          <DiscoverySearch defaultQuery={query} />
           <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
             <span className="font-mono uppercase tracking-widest text-ice/60">
               Explore by
@@ -163,12 +141,22 @@ export default function DestinationsPage({ searchParams }: Props) {
           ) : (
             <div className="rounded-2xl border border-teal/20 bg-slate px-6 py-14 text-center">
               <h2 className="font-display text-2xl font-semibold text-glacier">
-                No destinations found
+                No places found for &ldquo;{query}&rdquo;
               </h2>
               <p className="mt-2 text-ice">
-                Try a place name, district, lake, mountain, fort, or trekking
-                route.
+                Try a destination, landmark, or one of these:
               </p>
+              <div className="mt-5 flex flex-wrap justify-center gap-2">
+                {DISCOVERY_SUGGESTIONS.map((suggestion) => (
+                  <Link
+                    key={suggestion.href}
+                    href={suggestion.href}
+                    className="rounded-full border border-teal/40 px-3.5 py-1.5 text-sm text-glacier hover:border-apricot hover:text-apricot"
+                  >
+                    {suggestion.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
 

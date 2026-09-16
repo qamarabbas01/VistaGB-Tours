@@ -58,6 +58,33 @@ test.describe('core visitor flows', () => {
     );
   });
 
+  test('discovers destinations from the search dropdown', async ({ page }) => {
+    await page.goto('/destinations');
+    const search = page.getByRole('combobox', { name: /search vistagb/i });
+    await search.fill('hunza');
+    const suggestions = page.getByRole('listbox', {
+      name: 'Search suggestions',
+    });
+    await expect(suggestions.getByText('Destinations')).toBeVisible();
+    await expect(suggestions.getByText('Places')).toBeVisible();
+    await expect(
+      suggestions.getByRole('option', { name: 'Hunza Valley', exact: true }),
+    ).toBeVisible();
+    await search.press('Enter');
+    await expect(page).toHaveURL(/\/destinations\/hunza-valley/);
+
+    await page.goto('/destinations');
+    await page.getByRole('combobox', { name: /search vistagb/i }).fill(
+      'xyzzy-not-a-place',
+    );
+    await expect(
+      page.getByText('No places found for “xyzzy-not-a-place”'),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Attabad Lake' }).first(),
+    ).toBeVisible();
+  });
+
   test('presents the GB travel guide on the assistant page', async ({
     page,
   }) => {
