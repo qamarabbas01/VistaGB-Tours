@@ -68,7 +68,7 @@ test.describe('core visitor flows', () => {
     await expect(suggestions.getByText('Destinations')).toBeVisible();
     await expect(suggestions.getByText('Places')).toBeVisible();
     await expect(
-      suggestions.getByRole('option', { name: 'Hunza Valley' }),
+      suggestions.getByRole('option', { name: 'Hunza Valley', exact: true }),
     ).toBeVisible();
     await search.press('Enter');
     await expect(page).toHaveURL(/\/destinations\/hunza-valley/);
