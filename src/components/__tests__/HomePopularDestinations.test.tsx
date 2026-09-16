@@ -13,9 +13,7 @@ describe('HomePopularDestinations', () => {
       bestTime: 'April–October; blossom in spring',
     };
 
-    renderWithPreferences(
-      <HomePopularDestinations destinations={[hunza]} />,
-    );
+    renderWithPreferences(<HomePopularDestinations destinations={[hunza]} />);
 
     expect(
       screen.getByRole('heading', { name: 'Popular Destinations' }),
@@ -27,8 +25,9 @@ describe('HomePopularDestinations', () => {
     expect(screen.getByText('Hunza, Gilgit-Baltistan')).toBeInTheDocument();
     expect(screen.getByText('Best: Apr–Oct')).toBeInTheDocument();
     expect(screen.getByText('Explore →')).toBeInTheDocument();
-    expect(
-      screen.getByRole('link', { name: /hunza valley/i }),
-    ).toHaveAttribute('href', '/destinations/hunza-valley');
+    expect(screen.getByRole('link', { name: /hunza valley/i })).toHaveAttribute(
+      'href',
+      '/destinations/hunza-valley',
+    );
   });
 });

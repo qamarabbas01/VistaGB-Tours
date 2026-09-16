@@ -1,7 +1,10 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { formatAltitude, formatLocationLabel } from '@/components/destination-card/meta';
+import {
+  formatAltitude,
+  formatLocationLabel,
+} from '@/components/destination-card/meta';
 import { formatTemp } from '@/components/destination-weather/format';
 import { useEffect, useState } from 'react';
 import type { DestinationWeather as WeatherPayload } from '@/lib/weather/types';
@@ -12,13 +15,7 @@ type Props = {
   weatherSlug?: string;
 };
 
-function FactIcon({
-  children,
-  label,
-}: {
-  children: ReactNode;
-  label: string;
-}) {
+function FactIcon({ children, label }: { children: ReactNode; label: string }) {
   return (
     <span className="flex items-center gap-2 text-sm text-ice">
       <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-teal/25 bg-night/50 text-apricot">

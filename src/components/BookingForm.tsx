@@ -241,7 +241,9 @@ export default function BookingForm({ regionOptions, defaultRegion }: Props) {
 
         <button
           type="submit"
-          disabled={submitting || !start || !durationToSend || !groupSize.trim()}
+          disabled={
+            submitting || !start || !durationToSend || !groupSize.trim()
+          }
           className="mt-6 rounded-full bg-apricot px-8 py-3 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {submitting ? 'Sending…' : 'Request this booking'}

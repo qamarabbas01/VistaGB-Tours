@@ -27,12 +27,13 @@ describe('DestinationHero', () => {
     ).toBeInTheDocument();
     expect(screen.getByText('Hunza, Gilgit-Baltistan')).toBeInTheDocument();
     expect(screen.getByText('2,438m')).toBeInTheDocument();
-    expect(
-      screen.getByRole('link', { name: 'Add to Trip' }),
-    ).toHaveAttribute('href', '/plan?region=hunza-valley');
-    expect(screen.getByRole('button', { name: /save to wishlist/i })).toHaveTextContent(
-      'Save',
+    expect(screen.getByRole('link', { name: 'Add to Trip' })).toHaveAttribute(
+      'href',
+      '/plan?region=hunza-valley',
     );
+    expect(
+      screen.getByRole('button', { name: /save to wishlist/i }),
+    ).toHaveTextContent('Save');
     expect(screen.getByRole('button', { name: 'Share' })).toBeInTheDocument();
     expect(screen.getByLabelText(/out of 5/i)).toBeInTheDocument();
   });

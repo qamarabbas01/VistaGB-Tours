@@ -9,9 +9,7 @@ function renderForm() {
   return render(<ContactForm regionOptions={mockRegionOptions} />);
 }
 
-async function fillTravelerDetails(
-  user: ReturnType<typeof userEvent.setup>,
-) {
+async function fillTravelerDetails(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText(/number of travelers/i), '2');
   await user.type(screen.getByLabelText(/full name/i), 'Ada Lovelace');
   await user.type(screen.getByLabelText(/^email$/i), 'ada@example.com');
@@ -76,10 +74,7 @@ describe('ContactForm', () => {
     const user = userEvent.setup();
     const { container } = renderForm();
 
-    await user.selectOptions(
-      screen.getByLabelText(/trip length/i),
-      '3 days',
-    );
+    await user.selectOptions(screen.getByLabelText(/trip length/i), '3 days');
 
     await fillTravelerDetails(user);
 
@@ -96,20 +91,13 @@ describe('ContactForm', () => {
     const user = userEvent.setup();
     const { container } = renderForm();
 
-    await user.click(
-      screen.getByLabelText(/my travel dates are flexible/i),
-    );
+    await user.click(screen.getByLabelText(/my travel dates are flexible/i));
 
     expect(
-      await screen.findByLabelText(
-        /which month are you hoping to travel/i,
-      ),
+      await screen.findByLabelText(/which month are you hoping to travel/i),
     ).toBeInTheDocument();
 
-    await user.selectOptions(
-      screen.getByLabelText(/trip length/i),
-      '6–7 days',
-    );
+    await user.selectOptions(screen.getByLabelText(/trip length/i), '6–7 days');
 
     await fillTravelerDetails(user);
 
@@ -138,10 +126,7 @@ describe('ContactForm', () => {
       target: { value: '2026-09-12' },
     });
 
-    await user.selectOptions(
-      screen.getByLabelText(/trip length/i),
-      '6–7 days',
-    );
+    await user.selectOptions(screen.getByLabelText(/trip length/i), '6–7 days');
 
     await fillTravelerDetails(user);
 
@@ -150,9 +135,7 @@ describe('ContactForm', () => {
       'Traveling with kids.',
     );
 
-    await user.click(
-      screen.getByRole('button', { name: /send inquiry/i }),
-    );
+    await user.click(screen.getByRole('button', { name: /send inquiry/i }));
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledTimes(1);
@@ -183,14 +166,10 @@ describe('ContactForm', () => {
       website: '',
     });
 
-    expect(
-      await screen.findByText(/message sent/i),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(/message sent/i)).toBeInTheDocument();
 
     expect(
-      screen.getByText(
-        /we.ll reply within 24 hours with a route and quote/i,
-      ),
+      screen.getByText(/we.ll reply within 24 hours with a route and quote/i),
     ).toBeInTheDocument();
   });
 
@@ -212,19 +191,13 @@ describe('ContactForm', () => {
       target: { value: '2026-07-26' },
     });
 
-    expect(screen.getByLabelText(/trip length/i)).toHaveValue(
-      '182 days',
-    );
+    expect(screen.getByLabelText(/trip length/i)).toHaveValue('182 days');
 
-    expect(screen.getByLabelText(/trip length/i)).toHaveAttribute(
-      'readonly',
-    );
+    expect(screen.getByLabelText(/trip length/i)).toHaveAttribute('readonly');
 
     await fillTravelerDetails(user);
 
-    await user.click(
-      screen.getByRole('button', { name: /send inquiry/i }),
-    );
+    await user.click(screen.getByRole('button', { name: /send inquiry/i }));
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalled();
@@ -259,10 +232,7 @@ describe('ContactForm', () => {
       target: { value: 'https://spam.example' },
     });
 
-    await user.selectOptions(
-      screen.getByLabelText(/trip length/i),
-      '3 days',
-    );
+    await user.selectOptions(screen.getByLabelText(/trip length/i), '3 days');
 
     fireEvent.change(screen.getByLabelText(/start date/i), {
       target: { value: '2026-10-01' },
@@ -270,9 +240,7 @@ describe('ContactForm', () => {
 
     await fillTravelerDetails(user);
 
-    await user.click(
-      screen.getByRole('button', { name: /send inquiry/i }),
-    );
+    await user.click(screen.getByRole('button', { name: /send inquiry/i }));
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalled();
@@ -297,10 +265,7 @@ describe('ContactForm', () => {
 
     renderForm();
 
-    await user.selectOptions(
-      screen.getByLabelText(/trip length/i),
-      '3 days',
-    );
+    await user.selectOptions(screen.getByLabelText(/trip length/i), '3 days');
 
     fireEvent.change(screen.getByLabelText(/start date/i), {
       target: { value: '2026-09-01' },
@@ -308,17 +273,13 @@ describe('ContactForm', () => {
 
     await fillTravelerDetails(user);
 
-    await user.click(
-      screen.getByRole('button', { name: /send inquiry/i }),
-    );
+    await user.click(screen.getByRole('button', { name: /send inquiry/i }));
 
     expect(await screen.findByRole('alert')).toHaveTextContent(
       'Please provide a valid email address.',
     );
 
-    expect(
-      screen.getByRole('button', { name: /send inquiry/i }),
-    ).toBeEnabled();
+    expect(screen.getByRole('button', { name: /send inquiry/i })).toBeEnabled();
   });
 
   it('resets selected places when the region changes', async () => {
@@ -335,17 +296,11 @@ describe('ContactForm', () => {
       'skardu',
     );
 
-    expect(
-      screen.queryByLabelText('Karimabad'),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Karimabad')).not.toBeInTheDocument();
 
-    expect(
-      screen.getByLabelText('Shangrila'),
-    ).not.toBeChecked();
+    expect(screen.getByLabelText('Shangrila')).not.toBeChecked();
 
-    expect(
-      screen.getByLabelText('Deosai Plains'),
-    ).not.toBeChecked();
+    expect(screen.getByLabelText('Deosai Plains')).not.toBeChecked();
   });
 
   it('hides place checkboxes when the traveler asks for suggestions', async () => {
@@ -354,13 +309,9 @@ describe('ContactForm', () => {
     renderForm();
 
     await user.click(
-      screen.getByLabelText(
-        /not sure yet — help me choose places/i,
-      ),
+      screen.getByLabelText(/not sure yet — help me choose places/i),
     );
 
-    expect(
-      screen.queryByLabelText('Karimabad'),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Karimabad')).not.toBeInTheDocument();
   });
 });

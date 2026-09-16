@@ -49,11 +49,7 @@ export function monthsFromToday(
   return (year - today.getFullYear()) * 12 + (month - today.getMonth());
 }
 
-export function canGoPrevious(
-  year: number,
-  month: number,
-  today = new Date(),
-) {
+export function canGoPrevious(year: number, month: number, today = new Date()) {
   return monthsFromToday(year, month, today) > 0;
 }
 

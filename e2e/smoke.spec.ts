@@ -66,13 +66,19 @@ test.describe('core visitor flows', () => {
       page.getByRole('heading', { name: 'Your GB Travel Guide', level: 1 }),
     ).toBeVisible();
     await expect(
-      page.getByText(
-        'Ask me anything about travelling through Gilgit-Baltistan.',
-      ).first(),
+      page
+        .getByText('Ask me anything about travelling through Gilgit-Baltistan.')
+        .first(),
     ).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Plan a trip' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Best places' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Budget trip' })).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Plan a trip' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Best places' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Budget trip' }),
+    ).toBeVisible();
     await expect(
       page.getByRole('button', { name: 'What should I pack?' }),
     ).toBeVisible();

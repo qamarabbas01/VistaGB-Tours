@@ -3,7 +3,10 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { DestinationHero } from '@/components/DestinationHero';
-import { DestinationSectionNav, type SectionNavItem } from '@/components/DestinationSectionNav';
+import {
+  DestinationSectionNav,
+  type SectionNavItem,
+} from '@/components/DestinationSectionNav';
 import DestinationGuide from '@/components/DestinationGuide';
 import DestinationVideos from '@/components/DestinationVideos';
 import { isTrustedMapEmbed } from '@/components/destination-guide/map-embed';
@@ -193,24 +196,17 @@ function PlaceDetailPage({ place }: { place: Place }) {
         weatherSlug={weatherPoint ? place.slug : undefined}
       />
       <DestinationSectionNav
-        items={
-          [
-            { id: 'overview', label: 'Overview' },
-            nearbyPlaces.length > 0
-              ? { id: 'places', label: 'Places' }
-              : null,
-            place.activities.length > 0
-              ? { id: 'things-to-do', label: 'Things to Do' }
-              : null,
-            weatherPoint ? { id: 'weather', label: 'Weather' } : null,
-          ].filter((item): item is SectionNavItem => Boolean(item))
-        }
+        items={[
+          { id: 'overview', label: 'Overview' },
+          nearbyPlaces.length > 0 ? { id: 'places', label: 'Places' } : null,
+          place.activities.length > 0
+            ? { id: 'things-to-do', label: 'Things to Do' }
+            : null,
+          weatherPoint ? { id: 'weather', label: 'Weather' } : null,
+        ].filter((item): item is SectionNavItem => Boolean(item))}
       />
 
-      <section
-        id="overview"
-        className="destination-anchor py-16 md:py-24"
-      >
+      <section id="overview" className="destination-anchor py-16 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-3 md:items-start md:px-10">
           <div className="min-w-0 md:col-span-2">
             <p className="coord-label mb-3">Overview</p>
@@ -381,28 +377,23 @@ function RegionDetailPage({ region }: { region: RegionDestination }) {
         video={region.videos?.[0]}
       />
       <DestinationSectionNav
-        items={
-          [
-            { id: 'overview', label: 'Overview' },
-            childPlaces.length > 0 ? { id: 'places', label: 'Places' } : null,
-            guide?.activities && guide.activities.length > 0
-              ? { id: 'things-to-do', label: 'Things to Do' }
-              : null,
-            guide?.history || guide?.culture || guide?.weather
-              ? { id: 'guide', label: 'Guide' }
-              : null,
-            weatherPoint ? { id: 'weather', label: 'Weather' } : null,
-            guide?.mapEmbedUrl && isTrustedMapEmbed(guide.mapEmbedUrl)
-              ? { id: 'map', label: 'Map' }
-              : null,
-          ].filter((item): item is SectionNavItem => Boolean(item))
-        }
+        items={[
+          { id: 'overview', label: 'Overview' },
+          childPlaces.length > 0 ? { id: 'places', label: 'Places' } : null,
+          guide?.activities && guide.activities.length > 0
+            ? { id: 'things-to-do', label: 'Things to Do' }
+            : null,
+          guide?.history || guide?.culture || guide?.weather
+            ? { id: 'guide', label: 'Guide' }
+            : null,
+          weatherPoint ? { id: 'weather', label: 'Weather' } : null,
+          guide?.mapEmbedUrl && isTrustedMapEmbed(guide.mapEmbedUrl)
+            ? { id: 'map', label: 'Map' }
+            : null,
+        ].filter((item): item is SectionNavItem => Boolean(item))}
       />
 
-      <section
-        id="overview"
-        className="destination-anchor py-16 md:py-24"
-      >
+      <section id="overview" className="destination-anchor py-16 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-3 md:items-start md:px-10">
           <div className="min-w-0 md:col-span-2">
             <p className="coord-label mb-3">Overview</p>

@@ -12,7 +12,9 @@ describe('HomeExploreByExperience', () => {
     ).toBeInTheDocument();
 
     for (const category of EXPERIENCE_CATEGORIES) {
-      const link = screen.getByRole('link', { name: new RegExp(category.name) });
+      const link = screen.getByRole('link', {
+        name: new RegExp(category.name),
+      });
       expect(link).toHaveAttribute('href', experienceHref(category.slug));
     }
 

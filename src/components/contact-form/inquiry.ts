@@ -83,8 +83,7 @@ export function tripLengthFromDates(
 
   if (!from || !to) return null;
 
-  const days =
-    Math.round((to.getTime() - from.getTime()) / MS_PER_DAY) + 1;
+  const days = Math.round((to.getTime() - from.getTime()) / MS_PER_DAY) + 1;
 
   return formatTripLength(days);
 }

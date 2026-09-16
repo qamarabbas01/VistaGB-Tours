@@ -167,11 +167,7 @@ export default function BookingCalendar({
         <div className="rounded-xl border border-teal/20 bg-night/40 px-4 py-3">
           <p className="coord-label mb-1">End</p>
           <p className="text-sm text-glacier">
-            {end
-              ? formatDayLabel(end)
-              : start
-                ? 'Then an end date'
-                : '—'}
+            {end ? formatDayLabel(end) : start ? 'Then an end date' : '—'}
           </p>
         </div>
       </div>

@@ -52,10 +52,7 @@ export const SEASON_FEATURES = [
 export type SeasonFeature = (typeof SEASON_FEATURES)[number];
 export type SeasonId = SeasonFeature['id'];
 
-export function calendarMonth(
-  date: Date,
-  timeZone = PK_TIME_ZONE,
-): number {
+export function calendarMonth(date: Date, timeZone = PK_TIME_ZONE): number {
   const formatted = new Intl.DateTimeFormat('en-US', {
     timeZone,
     month: 'numeric',
