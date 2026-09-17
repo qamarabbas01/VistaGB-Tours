@@ -2,6 +2,7 @@ export type NewsItem = {
   id: string;
   title: string;
   summary: string;
+  body: string;
   date: string;
   time: string;
   views: number;

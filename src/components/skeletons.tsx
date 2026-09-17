@@ -41,14 +41,14 @@ export function CardGridSkeleton({ count = 6 }: { count?: number }) {
 
 export function NewsListSkeleton({ count = 4 }: { count?: number }) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-5 md:gap-6">
       {Array.from({ length: count }, (_, index) => (
         <div
           key={index}
-          className="overflow-hidden rounded-2xl border border-teal/20 bg-slate"
+          className="overflow-hidden rounded-2xl border border-teal/20 bg-slate md:flex"
         >
-          <Skeleton className="h-48 w-full md:h-56" />
-          <div className="space-y-3 p-6 md:p-8">
+          <Skeleton className="aspect-[16/10] w-full md:aspect-auto md:h-auto md:min-h-[200px] md:w-[280px]" />
+          <div className="flex-1 space-y-3 p-6 md:p-7">
             <Skeleton className="h-3 w-32 rounded-full" />
             <Skeleton className="h-7 w-4/5 rounded-md" />
             <Skeleton className="h-4 w-full rounded-full" />
