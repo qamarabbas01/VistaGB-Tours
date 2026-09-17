@@ -32,6 +32,7 @@ import {
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
+  destinationTrail,
   faqJsonLd,
   touristPlaceJsonLd,
   withJsonLdContext,
@@ -151,14 +152,11 @@ function PlaceDetailPage({ place }: { place: Place }) {
     .map((s) => getLocationBySlug(s))
     .filter((loc): loc is Place => Boolean(loc && isPlace(loc)));
   const weatherPoint = getCoordinatesForSlug(place.slug);
-  const crumbs = [
-    { name: 'Home', path: '/' },
-    { name: 'Destinations', path: '/destinations' },
-    ...(parent
-      ? [{ name: parent.name, path: `/destinations/${parent.slug}` }]
-      : []),
-    { name: place.name, path: `/destinations/${place.slug}` },
-  ];
+  const crumbs = destinationTrail({
+    name: place.name,
+    slug: place.slug,
+    parent: parent ? { name: parent.name, slug: parent.slug } : undefined,
+  });
 
   return (
     <div>
@@ -193,6 +191,7 @@ function PlaceDetailPage({ place }: { place: Place }) {
         addToTripHref={
           parent ? `/plan?region=${parent.slug}` : `/book?region=${place.slug}`
         }
+        crumbs={crumbs}
         weatherSlug={weatherPoint ? place.slug : undefined}
       />
       <DestinationSectionNav
@@ -343,12 +342,12 @@ function RegionDetailPage({ region }: { region: RegionDestination }) {
   const otherRegions = getRelatedRegions(region);
   const guide = region.guide;
   const weatherPoint = getCoordinatesForSlug(region.slug);
+  const crumbs = destinationTrail({
+    name: region.name,
+    slug: region.slug,
+  });
   const schemaNodes = [
-    breadcrumbJsonLd([
-      { name: 'Home', path: '/' },
-      { name: 'Destinations', path: '/destinations' },
-      { name: region.name, path: `/destinations/${region.slug}` },
-    ]),
+    breadcrumbJsonLd(crumbs),
     touristPlaceJsonLd({
       type: 'TouristDestination',
       name: region.name,
@@ -373,6 +372,7 @@ function RegionDetailPage({ region }: { region: RegionDestination }) {
         location={region.region}
         altitude={region.altitude}
         addToTripHref={`/plan?region=${region.slug}`}
+        crumbs={crumbs}
         weatherSlug={weatherPoint ? region.slug : undefined}
         video={region.videos?.[0]}
       />

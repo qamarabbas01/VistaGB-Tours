@@ -9,6 +9,33 @@ export type BreadcrumbItem = {
   path: string;
 };
 
+export const HOME_CRUMB: BreadcrumbItem = { name: 'Home', path: '/' };
+export const DESTINATIONS_CRUMB: BreadcrumbItem = {
+  name: 'Destinations',
+  path: '/destinations',
+};
+
+/** Home → Destinations → region → place (when nested). */
+export function destinationTrail(args: {
+  name: string;
+  slug: string;
+  parent?: { name: string; slug: string };
+}): BreadcrumbItem[] {
+  return [
+    HOME_CRUMB,
+    DESTINATIONS_CRUMB,
+    ...(args.parent
+      ? [
+          {
+            name: args.parent.name,
+            path: `/destinations/${args.parent.slug}`,
+          },
+        ]
+      : []),
+    { name: args.name, path: `/destinations/${args.slug}` },
+  ];
+}
+
 export type FaqItem = {
   question: string;
   answer: string;

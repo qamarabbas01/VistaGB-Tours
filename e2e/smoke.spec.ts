@@ -35,9 +35,13 @@ test.describe('core visitor flows', () => {
     await expect(
       page.getByRole('heading', { name: 'Hunza Valley', level: 1 }),
     ).toBeVisible();
+    const crumbs = page.getByRole('navigation', { name: 'Breadcrumb' });
+    await expect(crumbs).toBeVisible();
+    await expect(crumbs.getByRole('link', { name: 'Home' })).toBeVisible();
     await expect(
-      page.getByRole('link', { name: /back to destinations/i }),
+      crumbs.getByRole('link', { name: 'Destinations' }),
     ).toBeVisible();
+    await expect(crumbs.getByText('Hunza Valley')).toBeVisible();
     await expect(
       page.getByRole('navigation', { name: 'On this page' }),
     ).toBeVisible();
@@ -58,6 +62,21 @@ test.describe('core visitor flows', () => {
     );
   });
 
+  test('shows nested breadcrumbs on a place page', async ({ page }) => {
+    await page.goto('/destinations/attabad-lake');
+    const crumbs = page.getByRole('navigation', { name: 'Breadcrumb' });
+    await expect(crumbs.getByRole('link', { name: 'Home' })).toBeVisible();
+    await expect(
+      crumbs.getByRole('link', { name: 'Destinations' }),
+    ).toBeVisible();
+    await expect(
+      crumbs.getByRole('link', { name: 'Hunza Valley' }),
+    ).toHaveAttribute('href', '/destinations/hunza-valley');
+    await expect(crumbs.getByText('Attabad Lake')).toBeVisible();
+    await crumbs.getByRole('link', { name: 'Hunza Valley' }).click();
+    await expect(page).toHaveURL(/\/destinations\/hunza-valley/);
+  });
+
   test('discovers destinations from the search dropdown', async ({ page }) => {
     await page.goto('/destinations');
     const search = page.getByRole('combobox', { name: /search vistagb/i });
@@ -74,9 +93,9 @@ test.describe('core visitor flows', () => {
     await expect(page).toHaveURL(/\/destinations\/hunza-valley/);
 
     await page.goto('/destinations');
-    await page.getByRole('combobox', { name: /search vistagb/i }).fill(
-      'xyzzy-not-a-place',
-    );
+    await page
+      .getByRole('combobox', { name: /search vistagb/i })
+      .fill('xyzzy-not-a-place');
     await expect(
       page.getByText('No places found for “xyzzy-not-a-place”'),
     ).toBeVisible();

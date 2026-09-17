@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import DestinationCard from '@/components/DestinationCard';
 import { DiscoverySearch } from '@/components/DiscoverySearch';
 import JsonLd from '@/components/JsonLd';
@@ -16,6 +17,8 @@ import {
   breadcrumbJsonLd,
   buildPageMetadata,
   collectionJsonLd,
+  DESTINATIONS_CRUMB,
+  HOME_CRUMB,
   withJsonLdContext,
 } from '@/lib/seo';
 
@@ -62,10 +65,7 @@ export default function DestinationsPage({ searchParams }: Props) {
     <div>
       <JsonLd
         data={withJsonLdContext([
-          breadcrumbJsonLd([
-            { name: 'Home', path: '/' },
-            { name: 'Destinations', path: '/destinations' },
-          ]),
+          breadcrumbJsonLd([HOME_CRUMB, DESTINATIONS_CRUMB]),
           collectionJsonLd({
             name: 'Destinations',
             description: DESTINATIONS_DESCRIPTION,
@@ -79,7 +79,8 @@ export default function DestinationsPage({ searchParams }: Props) {
       />
       <section className="border-b border-teal/20 bg-slate py-12 md:py-16">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <p className="coord-label mb-3">The Map</p>
+          <Breadcrumbs items={[HOME_CRUMB, DESTINATIONS_CRUMB]} />
+          <p className="coord-label mb-3 mt-6">The Map</p>
           <h1 className="font-display text-4xl font-semibold leading-tight md:text-6xl">
             Destinations
           </h1>
