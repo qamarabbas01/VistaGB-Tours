@@ -1,72 +1,148 @@
-import { Metric } from '@/components/destination-weather/Metric';
+'use client';
+
+import { useEffect, useState, type ReactNode } from 'react';
+import { WeatherGlyph } from '@/components/destination-weather/WeatherGlyph';
 import {
-  formatClock,
+  formatCondition,
   formatDayLabel,
   formatTemp,
+  formatUpdatedAgo,
 } from '@/components/destination-weather/format';
 import type { DestinationWeather as WeatherPayload } from '@/lib/weather/types';
 
-export function WeatherPanel({ weather }: { weather: WeatherPayload }) {
+type Props = {
+  weather: WeatherPayload;
+  locationName: string;
+};
+
+export function WeatherPanel({ weather, locationName }: Props) {
+  const [now, setNow] = useState(() => Date.now());
+  const [forecastOpen, setForecastOpen] = useState(false);
+  const today = weather.forecast[0] ?? weather.today;
+  const tomorrow = weather.forecast[1];
+  const remaining = weather.forecast.slice(2);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+
   return (
-    <div className="space-y-5">
-      <div>
-        <p className="font-display text-4xl font-semibold text-glacier">
-          {formatTemp(weather.current.temperatureC)}
-          <span className="ml-1 text-lg font-medium text-ice">C</span>
-        </p>
-        <p className="mt-1 text-sm text-apricot">{weather.current.condition}</p>
-        <p className="mt-1 text-xs text-ice">
-          Today {formatTemp(weather.today.tempMinC)} –{' '}
-          {formatTemp(weather.today.tempMaxC)}
-        </p>
-      </div>
+    <div>
+      <p className="coord-label mb-1">Weather</p>
+      <h2 className="font-display text-xl font-semibold text-glacier">
+        {locationName}
+      </h2>
 
-      <div className="grid grid-cols-2 gap-2">
-        <Metric label="Snow" value={`${weather.current.snowfallCm} cm`} />
-        <Metric label="Rain" value={`${weather.current.rainMm} mm`} />
-        <Metric label="Wind" value={`${weather.current.windKmh} km/h`} />
-        <Metric label="Chance" value={`${weather.today.precipProbability}%`} />
-        <Metric label="Sunrise" value={formatClock(weather.today.sunrise)} />
-        <Metric label="Sunset" value={formatClock(weather.today.sunset)} />
-      </div>
-
-      <div>
-        <p className="mb-3 text-[10px] uppercase tracking-wider text-teal">
-          5-day forecast
-        </p>
-        <ul className="space-y-2">
-          {weather.forecast.map((day, index) => (
-            <li
-              key={day.date}
-              className="flex items-center justify-between gap-3 border-t border-teal/15 pt-2 text-sm first:border-t-0 first:pt-0"
-            >
-              <div className="min-w-0">
-                <p className="font-medium text-glacier">
-                  {formatDayLabel(day.date, index)}
-                </p>
-                <p className="truncate text-xs text-ice">{day.condition}</p>
-              </div>
-              <div className="shrink-0 text-right">
-                <p className="text-glacier">
-                  {formatTemp(day.tempMaxC)}{' '}
-                  <span className="text-ice">/ {formatTemp(day.tempMinC)}</span>
-                </p>
-                <p className="text-[11px] text-ice">
-                  {day.snowfallCm > 0
-                    ? `Snow ${day.snowfallCm} cm`
-                    : day.rainMm > 0
-                      ? `Rain ${day.rainMm} mm`
-                      : `Wind ${Math.round(day.windMaxKmh)} km/h`}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <p className="text-[10px] leading-relaxed text-ice/50">
-        Conditions update about every 30 minutes · Open-Meteo
+      <p className="mt-5 font-display text-5xl font-semibold leading-none text-glacier">
+        {formatTemp(weather.current.temperatureC)}
       </p>
+      <p className="mt-2 text-sm text-apricot">
+        {formatCondition(weather.current.condition)}
+      </p>
+      <p className="mt-1 text-sm text-ice">
+        Feels like {formatTemp(weather.current.feelsLikeC)}
+      </p>
+
+      <div className="mt-6 space-y-3">
+        <DayRow
+          label="Today"
+          primary={
+            <>
+              <WeatherGlyph kind="condition" code={today.weatherCode} />
+              <span>{formatTemp(today.tempMaxC)}</span>
+            </>
+          }
+          secondary={
+            <>
+              <WeatherGlyph kind="rain" />
+              <span>{today.precipProbability}%</span>
+            </>
+          }
+        />
+        {tomorrow ? (
+          <DayRow
+            label="Tomorrow"
+            primary={
+              <>
+                <WeatherGlyph kind="condition" code={tomorrow.weatherCode} />
+                <span>{formatTemp(tomorrow.tempMaxC)}</span>
+              </>
+            }
+            secondary={
+              <>
+                <WeatherGlyph kind="moon" />
+                <span>{formatTemp(tomorrow.tempMinC)}</span>
+              </>
+            }
+          />
+        ) : null}
+      </div>
+
+      {remaining.length > 0 ? (
+        <div className="mt-5">
+          <button
+            type="button"
+            aria-expanded={forecastOpen}
+            onClick={() => setForecastOpen((open) => !open)}
+            className="text-sm font-medium text-apricot hover:underline"
+          >
+            7-day forecast →
+          </button>
+          {forecastOpen ? (
+            <ul className="mt-3 space-y-2">
+              {remaining.map((day, index) => (
+                <li
+                  key={day.date}
+                  className="flex items-center justify-between gap-3 border-t border-teal/15 pt-2 text-sm"
+                >
+                  <span className="font-medium text-glacier">
+                    {formatDayLabel(day.date, index + 2)}
+                  </span>
+                  <span className="inline-flex items-center gap-3 text-ice">
+                    <span className="inline-flex items-center gap-1.5">
+                      <WeatherGlyph kind="condition" code={day.weatherCode} />
+                      {formatTemp(day.tempMaxC)}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <WeatherGlyph kind="moon" />
+                      {formatTemp(day.tempMinC)}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+      ) : null}
+
+      <p className="mt-5 text-xs text-ice/60">
+        {formatUpdatedAgo(weather.fetchedAt, now)}
+      </p>
+    </div>
+  );
+}
+
+function DayRow({
+  label,
+  primary,
+  secondary,
+}: {
+  label: string;
+  primary: ReactNode;
+  secondary: ReactNode;
+}) {
+  return (
+    <div>
+      <p className="text-xs font-medium uppercase tracking-wider text-teal">
+        {label}
+      </p>
+      <div className="mt-1.5 flex items-center justify-between text-sm text-glacier">
+        <span className="inline-flex items-center gap-2">{primary}</span>
+        <span className="inline-flex items-center gap-2 text-ice">
+          {secondary}
+        </span>
+      </div>
     </div>
   );
 }
