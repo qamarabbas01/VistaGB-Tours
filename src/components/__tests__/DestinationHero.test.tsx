@@ -3,7 +3,7 @@ import { DestinationHero } from '@/components/DestinationHero';
 import { renderWithPreferences } from '@/test-utils';
 
 describe('DestinationHero', () => {
-  it('leads with back link, title, huge media, and trip actions', () => {
+  it('leads with breadcrumbs, title, huge media, and trip actions', () => {
     renderWithPreferences(
       <DestinationHero
         slug="hunza-valley"
@@ -13,12 +13,21 @@ describe('DestinationHero', () => {
         location="Hunza"
         altitude="2,438M"
         addToTripHref="/plan?region=hunza-valley"
+        crumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Destinations', path: '/destinations' },
+          { name: 'Hunza Valley', path: '/destinations/hunza-valley' },
+        ]}
       />,
     );
 
     expect(
-      screen.getByRole('link', { name: /back to destinations/i }),
-    ).toHaveAttribute('href', '/destinations');
+      screen.getByRole('navigation', { name: 'Breadcrumb' }),
+    ).toHaveTextContent('Home/Destinations/Hunza Valley');
+    expect(screen.getByRole('link', { name: 'Destinations' })).toHaveAttribute(
+      'href',
+      '/destinations',
+    );
     expect(
       screen.getByRole('heading', { level: 1, name: 'Hunza Valley' }),
     ).toBeInTheDocument();
