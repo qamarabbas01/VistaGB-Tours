@@ -2,21 +2,32 @@
 
 import { useCallback, useState } from 'react';
 import InfiniteSentinel from '@/components/InfiniteSentinel';
-import NewsCard from '@/components/NewsCard';
+import Pagination from '@/components/Pagination';
+import { NewsFeed } from '@/components/news/NewsFeed';
 import { NewsListSkeleton } from '@/components/skeletons';
 import type { NewsItem } from '@/lib/news/types';
 
 type Props = {
-  nextPage: number;
+  items: NewsItem[];
+  currentPage: number;
   totalPages: number;
+  initialStoryId?: string;
 };
 
-export default function NewsInfiniteRest({ nextPage, totalPages }: Props) {
-  const [items, setItems] = useState<NewsItem[]>([]);
-  const [page, setPage] = useState(nextPage);
+export function NewsListing({
+  items,
+  currentPage,
+  totalPages,
+  initialStoryId,
+}: Props) {
+  const [extra, setExtra] = useState<NewsItem[]>([]);
+  const [page, setPage] = useState(2);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const done = page > totalPages;
+  const infinite = currentPage === 1;
+  const done = !infinite || page > totalPages;
+  const seen = new Set(items.map((item) => item.id));
+  const feedItems = [...items, ...extra.filter((item) => !seen.has(item.id))];
 
   const loadMore = useCallback(async () => {
     if (done || loading) return;
@@ -30,9 +41,9 @@ export default function NewsInfiniteRest({ nextPage, totalPages }: Props) {
       }
       const data = (await response.json()) as { items?: NewsItem[] };
       const nextItems = data.items ?? [];
-      setItems((current) => {
-        const seen = new Set(current.map((item) => item.id));
-        return [...current, ...nextItems.filter((item) => !seen.has(item.id))];
+      setExtra((current) => {
+        const ids = new Set(current.map((item) => item.id));
+        return [...current, ...nextItems.filter((item) => !ids.has(item.id))];
       });
       setPage((current) => current + 1);
     } catch (err) {
@@ -44,29 +55,30 @@ export default function NewsInfiniteRest({ nextPage, totalPages }: Props) {
     }
   }, [done, loading, page]);
 
-  if (nextPage > totalPages) return null;
-
   return (
     <>
-      {items.length > 0 ? (
-        <div className="mt-6 flex flex-col gap-6">
-          {items.map((item) => (
-            <NewsCard key={item.id} item={item} />
-          ))}
-        </div>
-      ) : null}
+      <NewsFeed items={feedItems} syncUrl initialStoryId={initialStoryId} />
 
-      {loading ? (
+      {infinite && loading ? (
         <div className="mt-6">
           <NewsListSkeleton count={2} />
         </div>
       ) : null}
 
-      {error ? (
-        <p className="mt-6 text-center text-sm text-ice">{error}</p>
+      {infinite && error ? (
+        <div className="mt-6 text-center">
+          <p className="text-sm text-ice">{error}</p>
+          <button
+            type="button"
+            onClick={loadMore}
+            className="mt-3 text-sm font-medium text-apricot hover:underline"
+          >
+            Try again
+          </button>
+        </div>
       ) : null}
 
-      {!done ? (
+      {infinite && !done ? (
         <div className="mt-10 flex flex-col items-center gap-4">
           <InfiniteSentinel onVisible={loadMore} disabled={loading} />
           <button
@@ -78,6 +90,15 @@ export default function NewsInfiniteRest({ nextPage, totalPages }: Props) {
             {loading ? 'Loading…' : 'Load more news'}
           </button>
         </div>
+      ) : null}
+
+      {!infinite ? (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          basePath="/news"
+          className="mt-12"
+        />
       ) : null}
     </>
   );

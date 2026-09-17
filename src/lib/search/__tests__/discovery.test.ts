@@ -4,9 +4,9 @@ describe('searchDiscovery', () => {
   it('groups Hunza results into destinations, places, and matching guides', () => {
     const result = searchDiscovery('hunza');
 
-    expect(
-      result.groups.map((group) => group.name),
-    ).toEqual(expect.arrayContaining(['Destinations', 'Places', 'Guides']));
+    expect(result.groups.map((group) => group.name)).toEqual(
+      expect.arrayContaining(['Destinations', 'Places', 'Guides']),
+    );
     expect(
       result.groups
         .find((group) => group.name === 'Destinations')
@@ -66,8 +66,7 @@ describe('searchDiscovery', () => {
     expect(news?.hits).toHaveLength(1);
     expect(news?.hits[0]).toMatchObject({
       label: 'Shandur Polo Festival dates announced',
-      href: 'https://example.com/festival',
-      external: true,
+      href: '/news?story=1',
     });
   });
 

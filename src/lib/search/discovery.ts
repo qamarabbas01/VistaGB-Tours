@@ -1,11 +1,7 @@
 import { blogPosts, searchLocations } from '@/data';
 import type { NewsItem } from '@/lib/news/types';
 
-export type DiscoveryGroupName =
-  | 'Destinations'
-  | 'Places'
-  | 'Guides'
-  | 'News';
+export type DiscoveryGroupName = 'Destinations' | 'Places' | 'Guides' | 'News';
 
 export type DiscoveryHit = {
   id: string;
@@ -99,7 +95,9 @@ export function searchDiscovery(
       score: bestScore([post.title, post.excerpt, post.tag], q),
     }))
     .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score || a.post.title.localeCompare(b.post.title))
+    .sort(
+      (a, b) => b.score - a.score || a.post.title.localeCompare(b.post.title),
+    )
     .slice(0, LIMITS.Guides)
     .map((item) => ({
       id: `guide:${item.post.title}`,
@@ -115,16 +113,14 @@ export function searchDiscovery(
     }))
     .filter((entry) => entry.score > 0)
     .sort(
-      (a, b) =>
-        b.score - a.score || a.item.title.localeCompare(b.item.title),
+      (a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title),
     )
     .slice(0, LIMITS.News)
     .map((entry) => ({
       id: `news:${entry.item.id}`,
       group: 'News' as const,
       label: entry.item.title,
-      href: entry.item.url,
-      external: true,
+      href: `/news?story=${entry.item.id}`,
     }));
 
   const groups = [
