@@ -61,29 +61,30 @@ export default function DestinationWeather({ slug, locationName }: Props) {
 
   return (
     <div className="rounded-2xl border border-teal/20 bg-slate p-6">
-      <p className="coord-label mb-1">Live weather</p>
-      <p className="mb-4 text-xs text-ice/70">{locationName}</p>
-
       {loading ? (
         <div className="space-y-3" aria-busy="true" aria-live="polite">
-          <div className="h-12 animate-pulse rounded-lg bg-night/50" />
-          <div className="grid grid-cols-2 gap-2">
-            <div className="h-14 animate-pulse rounded-xl bg-night/40" />
-            <div className="h-14 animate-pulse rounded-xl bg-night/40" />
-            <div className="h-14 animate-pulse rounded-xl bg-night/40" />
-            <div className="h-14 animate-pulse rounded-xl bg-night/40" />
-          </div>
-          <div className="h-28 animate-pulse rounded-xl bg-night/40" />
+          <div className="h-3 w-16 animate-pulse rounded bg-night/50" />
+          <div className="h-6 w-40 animate-pulse rounded bg-night/50" />
+          <div className="h-12 w-24 animate-pulse rounded-lg bg-night/50" />
+          <div className="h-20 animate-pulse rounded-xl bg-night/40" />
         </div>
       ) : null}
 
       {!loading && error ? (
-        <p className="text-sm leading-relaxed text-ice">
-          Weather is temporarily unavailable. Check again before you travel.
-        </p>
+        <>
+          <p className="coord-label mb-1">Weather</p>
+          <h2 className="font-display text-xl font-semibold text-glacier">
+            {locationName}
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-ice">
+            Weather is temporarily unavailable. Check again before you travel.
+          </p>
+        </>
       ) : null}
 
-      {!loading && weather ? <WeatherPanel weather={weather} /> : null}
+      {!loading && weather ? (
+        <WeatherPanel weather={weather} locationName={locationName} />
+      ) : null}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 export type WeatherCurrent = {
   temperatureC: number;
+  feelsLikeC: number;
   weatherCode: number;
   condition: string;
   windKmh: number;
@@ -29,6 +30,7 @@ export type DestinationWeather = {
   longitude: number;
   timezone: string;
   updatedAt: string;
+  fetchedAt: string;
   current: WeatherCurrent;
   today: WeatherDay;
   forecast: WeatherDay[];

@@ -8,6 +8,7 @@ import {
   formatClock,
   formatDayLabel,
   formatTemp,
+  formatUpdatedAgo,
 } from '@/components/destination-weather/format';
 
 describe('tripLengthFromDates', () => {
@@ -140,6 +141,20 @@ describe('weather format helpers', () => {
 
   it('labels the first forecast day as Today', () => {
     expect(formatDayLabel('2026-08-26', 0)).toBe('Today');
-    expect(formatDayLabel('2026-08-27', 1)).toMatch(/^[A-Z][a-z]{2}$/);
+    expect(formatDayLabel('2026-08-27', 1)).toBe('Tomorrow');
+    expect(formatDayLabel('2026-08-28', 2)).toMatch(/^[A-Z][a-z]{2}$/);
+  });
+
+  it('says how recently the weather was updated', () => {
+    const now = Date.parse('2026-09-17T12:08:00Z');
+    expect(formatUpdatedAgo('2026-09-17T12:08:00Z', now)).toBe(
+      'Last updated just now',
+    );
+    expect(formatUpdatedAgo('2026-09-17T12:00:00Z', now)).toBe(
+      'Last updated 8 minutes ago',
+    );
+    expect(formatUpdatedAgo('2026-09-17T11:08:00Z', now)).toBe(
+      'Last updated 1 hour ago',
+    );
   });
 });

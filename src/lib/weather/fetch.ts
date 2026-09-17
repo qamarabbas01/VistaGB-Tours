@@ -7,6 +7,7 @@ type OpenMeteoResponse = {
   current: {
     time: string;
     temperature_2m: number;
+    apparent_temperature?: number;
     weather_code: number;
     wind_speed_10m: number;
     rain: number;
@@ -69,9 +70,10 @@ export async function fetchDestinationWeather(
     latitude: String(point.lat),
     longitude: String(point.lng),
     timezone: 'Asia/Karachi',
-    forecast_days: '5',
+    forecast_days: '7',
     current: [
       'temperature_2m',
+      'apparent_temperature',
       'weather_code',
       'wind_speed_10m',
       'rain',
@@ -120,8 +122,12 @@ export async function fetchDestinationWeather(
     longitude: point.lng,
     timezone: data.timezone,
     updatedAt: data.current.time,
+    fetchedAt: new Date().toISOString(),
     current: {
       temperatureC: round1(data.current.temperature_2m),
+      feelsLikeC: round1(
+        data.current.apparent_temperature ?? data.current.temperature_2m,
+      ),
       weatherCode: data.current.weather_code,
       condition: weatherCodeLabel(data.current.weather_code),
       windKmh: round1(data.current.wind_speed_10m),
