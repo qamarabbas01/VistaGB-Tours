@@ -21,6 +21,22 @@ test.describe('core visitor flows', () => {
     ).toBeVisible();
   });
 
+  test('offers a way back from a missing page', async ({ page }) => {
+    const response = await page.goto('/this-trail-does-not-exist');
+    expect(response?.status()).toBe(404);
+    await expect(
+      page.getByRole('heading', { name: /lost in the mountains\?/i }),
+    ).toBeVisible();
+    await expect(page.getByText(/we couldn't find this place/i)).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Explore Destinations' }),
+    ).toHaveAttribute('href', '/destinations');
+    await expect(page.getByRole('link', { name: 'Go Home' })).toHaveAttribute(
+      'href',
+      '/',
+    );
+  });
+
   test('opens a destination from the destinations index', async ({ page }) => {
     await page.goto('/destinations');
     await expect(
