@@ -6,6 +6,8 @@ describe('Footer', () => {
     render(<Footer />);
 
     const nav = screen.getByRole('navigation', { name: 'Footer' });
+    expect(nav.className).toMatch(/grid-cols-2/);
+    expect(nav.className).toMatch(/lg:grid-cols-5/);
 
     expect(screen.getByText('Discover Gilgit-Baltistan.')).toBeInTheDocument();
 

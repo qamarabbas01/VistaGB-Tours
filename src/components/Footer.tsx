@@ -40,26 +40,26 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-teal/20 bg-slate">
-      <div className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-16">
-        <div className="flex flex-col gap-12 xl:flex-row xl:gap-16">
+      <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 md:px-10 md:py-16">
+        <div className="flex flex-col gap-8 xl:flex-row xl:gap-16">
           <div className="xl:w-56 xl:shrink-0">
             <Link href="/" className="inline-block">
               <p className="font-display text-xl font-semibold tracking-wide text-glacier">
                 VistaGB
               </p>
             </Link>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-ice">
+            <p className="mt-2 max-w-xs text-sm leading-relaxed text-ice md:mt-3">
               Discover Gilgit-Baltistan.
             </p>
           </div>
 
           <nav
             aria-label="Footer"
-            className="grid flex-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+            className="grid min-w-0 flex-1 grid-cols-2 gap-x-6 gap-y-8 sm:gap-10 md:grid-cols-3 lg:grid-cols-5"
           >
             {FOOTER_COLUMNS.map((column) => (
-              <div key={column.title}>
-                <p className="coord-label mb-4">{column.title}</p>
+              <div key={column.title} className="min-w-0">
+                <p className="coord-label mb-3 md:mb-4">{column.title}</p>
                 <ul className="flex flex-col gap-2">
                   {column.links.map((link) => (
                     <li key={link.label}>
@@ -72,9 +72,9 @@ export default function Footer() {
               </div>
             ))}
 
-            <div>
-              <p className="coord-label mb-4">Follow</p>
-              <ul className="flex flex-col gap-2">
+            <div className="col-span-2 min-w-0 md:col-span-1">
+              <p className="coord-label mb-3 md:mb-4">Follow</p>
+              <ul className="flex flex-row flex-wrap gap-x-5 gap-y-2 lg:flex-col lg:gap-2">
                 <li>
                   <FooterLink href={social.instagram} external>
                     Instagram
@@ -97,17 +97,19 @@ export default function Footer() {
 
         <div className="altitude-line my-8" />
 
-        <div className="flex flex-col items-start justify-between gap-4 text-xs text-ice md:flex-row md:items-center">
+        <div className="flex flex-col items-start justify-between gap-3 text-xs text-ice md:flex-row md:items-center md:gap-4">
           <p>
             &copy; {new Date().getFullYear()} VistaGB Tours. All rights
             reserved.
           </p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            {contact.location.label ? <p>{contact.location.label}</p> : null}
+          <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-4 sm:gap-y-1">
+            {contact.location.label ? (
+              <p className="break-words">{contact.location.label}</p>
+            ) : null}
             {contact.email ? (
               <a
                 href={`mailto:${contact.email}`}
-                className="hover:text-apricot"
+                className="break-all hover:text-apricot"
               >
                 {contact.email}
               </a>
@@ -117,7 +119,9 @@ export default function Footer() {
               </Link>
             )}
             {contact.location.coords ? (
-              <p className="coord-label">{contact.location.coords}</p>
+              <p className="coord-label break-words">
+                {contact.location.coords}
+              </p>
             ) : null}
           </div>
         </div>
