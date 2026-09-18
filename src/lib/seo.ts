@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { contact } from '@/config/contact';
-import { SITE_URL, site } from '@/config/site';
+import { SITE_URL, getSocialProfiles, site } from '@/config/site';
 
 export { SITE_URL, site };
 
@@ -143,7 +143,12 @@ export function organizationJsonLd(): Record<string, unknown> {
 
   if (contact.email) organization.email = contact.email;
   if (contact.phone.tel) organization.telephone = contact.phone.tel;
-  if (contact.whatsappUrl) organization.sameAs = [contact.whatsappUrl];
+
+  const sameAs = [
+    contact.whatsappUrl,
+    ...Object.values(getSocialProfiles()),
+  ].filter(Boolean);
+  if (sameAs.length > 0) organization.sameAs = sameAs;
 
   return organization;
 }
