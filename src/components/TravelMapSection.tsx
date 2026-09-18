@@ -23,7 +23,7 @@ export default function TravelMapSection({ locations }: TravelMapSectionProps) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
 
   return (
-    <section className="bg-slate py-20 md:py-28">
+    <section id="map" className="destination-anchor bg-slate py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.2fr]">
           <div>

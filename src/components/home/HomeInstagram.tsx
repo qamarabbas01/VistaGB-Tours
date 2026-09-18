@@ -1,11 +1,14 @@
 import OptimizedImage from '@/components/OptimizedImage';
+import { getSocialLinks } from '@/config/site';
 import type { galleryImages } from '@/data/hero';
 
 type GalleryImage = (typeof galleryImages)[number];
 
 export function HomeInstagram({ images }: { images: readonly GalleryImage[] }) {
+  const instagram = getSocialLinks().instagram;
+
   return (
-    <section className="py-20 md:py-28">
+    <section id="gallery" className="destination-anchor py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -20,7 +23,7 @@ export function HomeInstagram({ images }: { images: readonly GalleryImage[] }) {
             </p>
           </div>
           <a
-            href="https://www.instagram.com/"
+            href={instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-medium text-apricot hover:underline"

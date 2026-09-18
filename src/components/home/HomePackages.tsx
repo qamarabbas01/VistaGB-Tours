@@ -7,7 +7,7 @@ type TourPackage = (typeof packages)[number];
 
 export function HomePackages({ items }: { items: readonly TourPackage[] }) {
   return (
-    <section className="py-20 md:py-28">
+    <section id="packages" className="destination-anchor py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
