@@ -4,14 +4,11 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { usePreferences } from '@/components/PreferencesProvider';
+import { AssistantSkeleton } from '@/components/skeletons';
 
 const TravelAssistant = dynamic(() => import('@/components/TravelAssistant'), {
   ssr: false,
-  loading: () => (
-    <div className="flex h-full items-center justify-center px-4 text-sm text-ice">
-      Loading your guide…
-    </div>
-  ),
+  loading: () => <AssistantSkeleton variant="widget" />,
 });
 
 export default function LiveChat() {

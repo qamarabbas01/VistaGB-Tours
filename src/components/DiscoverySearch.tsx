@@ -15,6 +15,7 @@ import {
   searchDiscovery,
   type DiscoveryHit,
 } from '@/lib/search/discovery';
+import { SearchResultsSkeleton } from '@/components/skeletons';
 import type { NewsItem } from '@/lib/news/types';
 
 type Props = {
@@ -32,14 +33,17 @@ export function DiscoverySearch({ defaultQuery = '', newsItems }: Props) {
   const [news, setNews] = useState<
     Pick<NewsItem, 'id' | 'title' | 'summary' | 'url'>[]
   >(newsItems ?? []);
+  const [newsLoading, setNewsLoading] = useState(newsItems === undefined);
 
   useEffect(() => {
     if (newsItems) {
       setNews(newsItems);
+      setNewsLoading(false);
       return;
     }
 
     let cancelled = false;
+    setNewsLoading(true);
     fetch('/api/news?page=1')
       .then((response) => (response.ok ? response.json() : null))
       .then((payload: { items?: NewsItem[] } | null) => {
@@ -47,6 +51,9 @@ export function DiscoverySearch({ defaultQuery = '', newsItems }: Props) {
       })
       .catch(() => {
         /* News is optional in the dropdown. */
+      })
+      .finally(() => {
+        if (!cancelled) setNewsLoading(false);
       });
 
     return () => {
@@ -218,6 +225,7 @@ export function DiscoverySearch({ defaultQuery = '', newsItems }: Props) {
               </div>
             ))
           )}
+          {newsLoading ? <SearchResultsSkeleton count={3} /> : null}
         </div>
       ) : null}
     </div>

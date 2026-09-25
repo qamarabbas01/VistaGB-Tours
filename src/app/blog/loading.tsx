@@ -1,4 +1,4 @@
-import { CardGridSkeleton, PageHeroSkeleton } from '@/components/skeletons';
+import { BlogGridSkeleton, PageHeroSkeleton } from '@/components/skeletons';
 
 export default function BlogLoading() {
   return (
@@ -6,7 +6,7 @@ export default function BlogLoading() {
       <PageHeroSkeleton />
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <CardGridSkeleton />
+          <BlogGridSkeleton />
         </div>
       </section>
     </div>

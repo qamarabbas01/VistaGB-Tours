@@ -4,15 +4,11 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import type { MapLocation } from '@/components/InteractiveMap';
+import { MapCanvasSkeleton } from '@/components/skeletons';
 
 const InteractiveMap = dynamic(() => import('@/components/InteractiveMap'), {
   ssr: false,
-  loading: () => (
-    <div
-      className="skeleton h-full min-h-[360px] rounded-2xl"
-      aria-label="Loading map"
-    />
-  ),
+  loading: () => <MapCanvasSkeleton />,
 });
 
 type TravelMapSectionProps = {
