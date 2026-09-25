@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { AssistantReplySkeleton } from '@/components/skeletons';
 import { assistantGuideCopy } from '@/lib/assistant/guide-ui';
 
 export type ChatMessage = {
@@ -226,10 +227,7 @@ export default function TravelAssistant({
               }`}
             >
               {message.role === 'assistant' && !message.content ? (
-                <span className="inline-flex items-center gap-1 text-ice">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-apricot" />
-                  Thinking…
-                </span>
+                <AssistantReplySkeleton />
               ) : (
                 <p className="whitespace-pre-wrap">{message.content}</p>
               )}
@@ -266,7 +264,7 @@ export default function TravelAssistant({
             disabled={loading || !input.trim()}
             className="rounded-xl bg-apricot px-6 py-3 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {loading ? '…' : 'Ask'}
+            Ask
           </button>
         </form>
         <p className="mt-3 text-xs text-ice/60">

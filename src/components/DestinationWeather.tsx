@@ -1,6 +1,7 @@
 'use client';
 
 import { WeatherPanel } from '@/components/destination-weather/WeatherPanel';
+import { WeatherSkeleton } from '@/components/skeletons';
 import { useEffect, useState } from 'react';
 import type { DestinationWeather as WeatherPayload } from '@/lib/weather/types';
 
@@ -61,14 +62,7 @@ export default function DestinationWeather({ slug, locationName }: Props) {
 
   return (
     <div className="rounded-2xl border border-teal/20 bg-slate p-6">
-      {loading ? (
-        <div className="space-y-3" aria-busy="true" aria-live="polite">
-          <div className="h-3 w-16 animate-pulse rounded bg-night/50" />
-          <div className="h-6 w-40 animate-pulse rounded bg-night/50" />
-          <div className="h-12 w-24 animate-pulse rounded-lg bg-night/50" />
-          <div className="h-20 animate-pulse rounded-xl bg-night/40" />
-        </div>
-      ) : null}
+      {loading ? <WeatherSkeleton /> : null}
 
       {!loading && error ? (
         <>

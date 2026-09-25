@@ -127,6 +127,10 @@ button:focus-visible {
   background-color: var(--slate);
 }
 
+.skeleton-muted {
+  background-color: color-mix(in srgb, var(--teal) 28%, var(--night));
+}
+
 .skeleton::after {
   content: '';
   position: absolute;

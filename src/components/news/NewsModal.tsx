@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import { NewsImage } from '@/components/news/NewsImage';
+import { NewsArticleSkeleton } from '@/components/skeletons';
 import type { NewsItem } from '@/lib/news/types';
 
 type Props = {
@@ -134,13 +135,7 @@ export function NewsModal({ item, onClose }: Props) {
             </div>
           ) : null}
 
-          {loading && paragraphs.length === 0 ? (
-            <div className="mt-6 space-y-3" aria-busy="true">
-              <div className="h-4 w-full animate-pulse rounded bg-night/50" />
-              <div className="h-4 w-5/6 animate-pulse rounded bg-night/50" />
-              <div className="h-4 w-4/6 animate-pulse rounded bg-night/50" />
-            </div>
-          ) : null}
+          {loading && paragraphs.length === 0 ? <NewsArticleSkeleton /> : null}
 
           {paragraphs.length > 0 ? (
             <div className="mt-6 space-y-4 text-sm leading-relaxed text-ice md:text-base">

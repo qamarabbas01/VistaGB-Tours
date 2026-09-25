@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react';
 import BlogCard from '@/components/BlogCard';
 import InfiniteSentinel from '@/components/InfiniteSentinel';
+import { BlogGridSkeleton } from '@/components/skeletons';
 import type { BlogPost } from '@/data/types';
 
 const BATCH = 9;
@@ -29,7 +30,11 @@ export default function BlogInfiniteRest({ rest }: { rest: BlogPost[] }) {
             <BlogCard key={post.title} post={post} />
           ))}
         </div>
-      ) : null}
+      ) : (
+        <div className="mt-8">
+          <BlogGridSkeleton count={3} />
+        </div>
+      )}
 
       {!done ? (
         <div className="mt-10 flex flex-col items-center gap-4">
