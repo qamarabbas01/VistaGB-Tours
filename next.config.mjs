@@ -2,6 +2,7 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  allowedDevOrigins: ['127.0.0.1'],
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60 * 60 * 24 * 30,

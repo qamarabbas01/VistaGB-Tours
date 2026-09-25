@@ -17,11 +17,12 @@ export const metadata = buildPageMetadata({
 });
 
 type Props = {
-  searchParams?: { region?: string | string[] };
+  searchParams?: Promise<{ region?: string | string[] }>;
 };
 
-export default function PlanPage({ searchParams }: Props) {
-  const raw = searchParams?.region;
+export default async function PlanPage({ searchParams }: Props) {
+  const resolvedSearchParams = await searchParams;
+  const raw = resolvedSearchParams?.region;
   const initialSlug = (Array.isArray(raw) ? raw[0] : (raw ?? '')).trim();
   const options = regions
     .filter((region) => (region.guide?.suggestedItinerary?.length ?? 0) > 0)
