@@ -34,18 +34,19 @@ export const metadata = buildPageMetadata({
 const ITEMS_PER_PAGE = 9;
 
 type Props = {
-  searchParams?: {
+  searchParams?: Promise<{
     page?: string | string[];
     q?: string | string[];
-  };
+  }>;
 };
 
-export default function DestinationsPage({ searchParams }: Props) {
-  const queryParam = searchParams?.q;
+export default async function DestinationsPage({ searchParams }: Props) {
+  const resolvedSearchParams = await searchParams;
+  const queryParam = resolvedSearchParams?.q;
   const query = (
     Array.isArray(queryParam) ? queryParam[0] : (queryParam ?? '')
   ).trim();
-  const pageParam = searchParams?.page;
+  const pageParam = resolvedSearchParams?.page;
   const pageStr = Array.isArray(pageParam) ? pageParam[0] : pageParam;
   const requestedPage = Math.max(1, parseInt(pageStr ?? '1', 10) || 1);
   const totalPages = Math.ceil(regions.length / ITEMS_PER_PAGE);

@@ -30,11 +30,12 @@ const regionOptions = [
 ];
 
 type Props = {
-  searchParams?: { region?: string | string[] };
+  searchParams?: Promise<{ region?: string | string[] }>;
 };
 
-export default function BookPage({ searchParams }: Props) {
-  const raw = searchParams?.region;
+export default async function BookPage({ searchParams }: Props) {
+  const resolvedSearchParams = await searchParams;
+  const raw = resolvedSearchParams?.region;
   const defaultRegion = (Array.isArray(raw) ? raw[0] : (raw ?? '')).trim();
 
   return (

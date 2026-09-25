@@ -19,13 +19,14 @@ export const metadata = buildPageMetadata({
 });
 
 type Props = {
-  searchParams?: {
+  searchParams?: Promise<{
     destination?: string | string[];
-  };
+  }>;
 };
 
-export default function AssistantPage({ searchParams }: Props) {
-  const raw = searchParams?.destination;
+export default async function AssistantPage({ searchParams }: Props) {
+  const resolvedSearchParams = await searchParams;
+  const raw = resolvedSearchParams?.destination;
   const slug = (Array.isArray(raw) ? raw[0] : (raw ?? '')).trim();
   const location = slug ? getLocationBySlug(slug) : undefined;
   const copy = assistantGuideCopy(location?.name);
