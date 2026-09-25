@@ -119,7 +119,7 @@ export async function streamOpenAIAnswer(options: {
               const token = json.choices?.[0]?.delta?.content;
               if (token) controller.enqueue(encoder.encode(token));
             } catch {
-              // skip malformed chunks
+              continue;
             }
           }
         }

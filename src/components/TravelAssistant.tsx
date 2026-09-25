@@ -142,7 +142,6 @@ export default function TravelAssistant({
     if (!text || sentInitial.current) return;
     sentInitial.current = true;
     void sendMessage(text);
-    // Auto-start once from the destination CTA prompt.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialPrompt]);
 

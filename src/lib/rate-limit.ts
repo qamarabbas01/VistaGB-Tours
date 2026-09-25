@@ -5,10 +5,6 @@ type Bucket = {
 
 const buckets = new Map<string, Bucket>();
 
-/**
- * Simple in-memory sliding window limiter (per server instance).
- * Good enough for a single Vercel/Node instance; swap for Redis in multi-instance prod.
- */
 const CLEANUP_THRESHOLD = 1000;
 
 export function rateLimit(
@@ -17,7 +13,6 @@ export function rateLimit(
 ): { ok: true } | { ok: false; retryAfterSec: number } {
   const now = Date.now();
 
-  // Periodic cleanup to prevent unbounded growth from unique IPs
   if (buckets.size > CLEANUP_THRESHOLD) {
     for (const [k, b] of buckets) {
       if (b.resetAt <= now) buckets.delete(k);
