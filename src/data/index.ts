@@ -233,8 +233,6 @@ export function searchLocations(query: string): SearchResult {
     place.searchTags?.some((tag) => tag.toLowerCase() === q),
   );
 
-  // Exact curated categories intentionally take precedence over incidental
-  // mentions in prose (for example, a town that merely overlooks a fort).
   if (taggedRegions.length > 0 || taggedPlaces.length > 0) {
     return {
       query,

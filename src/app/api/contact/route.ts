@@ -32,7 +32,7 @@ const FIELD_LIMITS = {
   duration: 40,
   groupSize: 20,
   message: 4000,
-  website: 200, // honeypot
+  website: 200,
 } as const;
 
 function isValidEmail(email: string) {
@@ -154,7 +154,6 @@ export async function POST(request: Request) {
     website = '',
   } = body as Partial<ContactPayload> & { website?: string };
 
-  // Honeypot: bots fill this hidden field; humans never see it.
   if (typeof website === 'string' && website.trim() !== '') {
     return NextResponse.json({ ok: true });
   }

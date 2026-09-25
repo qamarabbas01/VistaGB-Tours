@@ -24,15 +24,16 @@ export const metadata = buildPageMetadata({
 const ITEMS_PER_PAGE = 9;
 
 type Props = {
-  searchParams?: { page?: string | string[] };
+  searchParams?: Promise<{ page?: string | string[] }>;
 };
 
 const sortedPosts = [...blogPosts].sort(
   (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
 );
 
-export default function BlogPage({ searchParams }: Props) {
-  const pageParam = searchParams?.page;
+export default async function BlogPage({ searchParams }: Props) {
+  const resolvedSearchParams = await searchParams;
+  const pageParam = resolvedSearchParams?.page;
   const pageStr = Array.isArray(pageParam) ? pageParam[0] : pageParam;
   const requestedPage = Math.max(1, parseInt(pageStr ?? '1', 10) || 1);
 

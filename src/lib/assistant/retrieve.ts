@@ -172,7 +172,6 @@ export async function buildTravelContext(
     destinations.push(toRetrieved(place));
   }
 
-  // Common aliases that search may miss as short names
   const aliasMap: Record<string, string> = {
     hunza: 'hunza-valley',
     skardu: 'skardu',

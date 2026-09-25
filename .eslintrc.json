@@ -1,5 +1,12 @@
 {
   "extends": "next/core-web-vitals",
+  "ignorePatterns": [
+    ".next",
+    "node_modules",
+    "playwright-report",
+    "test-results",
+    "coverage"
+  ],
   "overrides": [
     {
       "files": ["**/__tests__/**/*.{ts,tsx}", "**/*.test.{ts,tsx}"],

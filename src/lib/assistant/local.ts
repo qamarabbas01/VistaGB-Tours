@@ -234,7 +234,6 @@ export function answerLocally(ctx: TravelContext): string {
     return answerGeneralNoDestination(ctx);
   }
 
-  // Attach general knowledge when asked alongside a destination
   const appendix =
     ctx.generalTopics.length > 0 &&
     ctx.intent !== 'budget' &&

@@ -23,11 +23,41 @@ function unique(items) {
 }
 
 function resolveChunk(rel) {
+  const normalized = rel.replace(/^\.next\//, '');
   const candidates = [
-    path.join(NEXT_DIR, rel),
-    path.join(NEXT_DIR, 'static', rel.replace(/^static\//, '')),
+    path.isAbsolute(rel) ? rel : path.join(ROOT, rel),
+    path.join(NEXT_DIR, normalized),
+    path.join(NEXT_DIR, 'static', normalized.replace(/^static\//, '')),
   ];
   return candidates.find((candidate) => fs.existsSync(candidate)) ?? null;
+}
+
+function loadPageChunks() {
+  const diagnosticsPath = path.join(
+    NEXT_DIR,
+    'diagnostics',
+    'route-bundle-stats.json',
+  );
+  if (fs.existsSync(diagnosticsPath)) {
+    const rows = JSON.parse(fs.readFileSync(diagnosticsPath, 'utf8'));
+    const pages = {};
+    for (const row of rows) {
+      if (!row || typeof row.route !== 'string') continue;
+      pages[row.route] = row.firstLoadChunkPaths ?? [];
+    }
+    return pages;
+  }
+
+  const manifestPath = path.join(NEXT_DIR, 'app-build-manifest.json');
+  if (fs.existsSync(manifestPath)) {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    return manifest.pages ?? {};
+  }
+
+  console.error(
+    'Missing .next/diagnostics/route-bundle-stats.json. Run `npm run build` first.',
+  );
+  process.exit(1);
 }
 
 function pageGzipBytes(files) {
@@ -52,22 +82,13 @@ function formatKb(bytes) {
 }
 
 function main() {
-  const manifestPath = path.join(NEXT_DIR, 'app-build-manifest.json');
-  if (!fs.existsSync(manifestPath)) {
-    console.error(
-      'Missing .next/app-build-manifest.json. Run `npm run build` first.',
-    );
-    process.exit(1);
-  }
-
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  const pages = manifest.pages ?? {};
+  const pages = loadPageChunks();
   const failures = [];
 
   for (const [route, files] of Object.entries(pages)) {
     const { total, missing } = pageGzipBytes(files);
     const budget =
-      route === '/page' || route === '/page.js'
+      route === '/' || route === '/page' || route === '/page.js'
         ? HOME_BUDGET_BYTES
         : PAGE_BUDGET_BYTES;
     const over = total > budget;
@@ -86,7 +107,7 @@ function main() {
   }
 
   if (Object.keys(pages).length === 0) {
-    console.error('app-build-manifest.json has no pages.');
+    console.error('Bundle manifest has no pages.');
     process.exit(1);
   }
 

@@ -2,6 +2,9 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Playwright loads the dev server at 127.0.0.1. Next 16 only allows
+  // localhost for /_next dev assets unless this host is listed.
+  allowedDevOrigins: ['127.0.0.1'],
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60 * 60 * 24 * 30,

@@ -131,7 +131,6 @@ export async function POST(request: Request) {
       },
     });
   } catch (error) {
-    // Fall back to grounded local answers if the LLM fails
     try {
       const local = answerLocally(context);
       return new Response(textStreamFromString(local), {
