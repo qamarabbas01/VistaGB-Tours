@@ -17,15 +17,15 @@
   },
   "dependencies": {
     "leaflet": "^1.9.4",
-    "next": "16.3.5",
+    "next": "16.3.6",
     "react": "^18",
     "react-dom": "^18",
     "react-leaflet": "4.2.1",
-    "resend": "^6.28.1",
+    "resend": "^6.30.0",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^16.3.5",
+    "@next/bundle-analyzer": "^16.3.6",
     "@playwright/test": "^1.63.0",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^6.6.3",
@@ -40,7 +40,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.5.26",
     "jest": "^30.5.1",
-    "jest-environment-jsdom": "^29.7.0",
+    "jest-environment-jsdom": "^30.5.2",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
