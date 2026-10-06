@@ -59,6 +59,7 @@ import fails the Next.js build. CI also runs `npm run check:secrets`.
 | `RESEND_API_KEY`                      | Server | Resend API key for contact emails                |
 | `RESEND_FROM_EMAIL`                   | Server | Verified from address                            |
 | `CONTACT_EMAIL_TO`                    | Server | Optional inbox override                          |
+| `CONTACT_FORM_SECRET`                 | Server | Optional contact-form token secret               |
 | `OPENAI_API_KEY`                      | Server | Optional AI assistant key                        |
 | `OPENAI_MODEL`                        | Server | Optional model override                          |
 
@@ -70,7 +71,7 @@ import fails the Next.js build. CI also runs `npm run check:secrets`.
   official tourism images (with permission), or other properly licensed content
   you control (CDN or `/public`). High-quality owned shots make the biggest
   difference for production.
-- Contact form includes a honeypot field and per-IP rate limiting.
+- Contact form keeps a honeypot, and also requires a short-lived signed token, checks request metadata, and rate-limits by IP and email.
 - News is fetched from https://visitgilgitbaltistan.gov.pk and revalidated hourly.
 - CI (`.github/workflows/ci.yml`) runs on pull requests and pushes to `main`:
   lint, typecheck, unit tests, production build, first-load JS gzip budgets

@@ -6,7 +6,9 @@ import ContactForm from '@/components/ContactForm';
 import { mockRegionOptions } from '@/test-utils';
 
 function renderForm() {
-  return render(<ContactForm regionOptions={mockRegionOptions} />);
+  return render(
+    <ContactForm regionOptions={mockRegionOptions} formToken="test-token" />,
+  );
 }
 
 async function fillTravelerDetails(user: ReturnType<typeof userEvent.setup>) {
@@ -164,6 +166,7 @@ describe('ContactForm', () => {
       groupSize: '2',
       message: 'Traveling with kids.',
       website: '',
+      formToken: 'test-token',
     });
 
     expect(await screen.findByText(/message sent/i)).toBeInTheDocument();

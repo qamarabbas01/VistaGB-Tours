@@ -12,6 +12,22 @@ export function getContactMailEnv() {
   };
 }
 
+/**
+ * Signs the contact form token. A dedicated secret wins. Otherwise the Resend
+ * key is reused so production still rejects forged tokens. Local and test
+ * runs without either value use a fixed development secret.
+ */
+export function getContactFormSecret() {
+  const dedicated = process.env.CONTACT_FORM_SECRET?.trim();
+  if (dedicated) return dedicated;
+
+  const resend = process.env.RESEND_API_KEY?.trim();
+  if (resend) return resend;
+
+  if (process.env.NODE_ENV === 'production') return '';
+  return 'dev-contact-form-secret';
+}
+
 export function getAssistantEnv() {
   return {
     apiKey: process.env.OPENAI_API_KEY?.trim() ?? '',

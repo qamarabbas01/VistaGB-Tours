@@ -1,6 +1,20 @@
 import { contact } from '@/config/contact';
+import {
+  CONTACT_EMAIL_LIMIT,
+  CONTACT_EMAIL_WINDOW_MS,
+  CONTACT_FLOOD_LIMIT,
+  CONTACT_FLOOD_WINDOW_MS,
+  CONTACT_MAX_BODY_BYTES,
+  CONTACT_SEND_LIMIT,
+  CONTACT_SEND_WINDOW_MS,
+  contactTokenError,
+  declaredBodyTooLarge,
+  hasTrustedContactMetadata,
+  isHoneypotTripped,
+  verifyContactFormToken,
+} from '@/lib/contact/form-guard';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
-import { getContactMailEnv } from '@/lib/server-env';
+import { getContactFormSecret, getContactMailEnv } from '@/lib/server-env';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
@@ -32,7 +46,6 @@ const FIELD_LIMITS = {
   duration: 40,
   groupSize: 20,
   message: 4000,
-  website: 200,
 } as const;
 
 function isValidEmail(email: string) {
@@ -110,31 +123,108 @@ function tooLong(value: string, max: number) {
   return value.length > max;
 }
 
+function tooManyRequests(retryAfterSec: number) {
+  return NextResponse.json(
+    {
+      error: 'Too many inquiries from this network. Please try again later.',
+    },
+    {
+      status: 429,
+      headers: { 'Retry-After': String(retryAfterSec) },
+    },
+  );
+}
+
 export async function POST(request: Request) {
   const ip = getClientIp(request);
-  const limited = rateLimit(`contact:${ip}`, {
-    limit: 5,
-    windowMs: 60 * 60 * 1000,
+  const flooded = rateLimit(`contact:flood:${ip}`, {
+    limit: CONTACT_FLOOD_LIMIT,
+    windowMs: CONTACT_FLOOD_WINDOW_MS,
   });
-  if (!limited.ok) {
+  if (!flooded.ok) {
+    return tooManyRequests(flooded.retryAfterSec);
+  }
+
+  if (declaredBodyTooLarge(request)) {
     return NextResponse.json(
-      {
-        error: 'Too many inquiries from this network. Please try again later.',
-      },
-      {
-        status: 429,
-        headers: { 'Retry-After': String(limited.retryAfterSec) },
-      },
+      { error: 'Request body is too large.' },
+      { status: 413 },
+    );
+  }
+
+  let raw: string;
+  try {
+    raw = await request.text();
+  } catch {
+    return NextResponse.json(
+      { error: 'Invalid request body.' },
+      { status: 400 },
+    );
+  }
+
+  if (Buffer.byteLength(raw, 'utf8') > CONTACT_MAX_BODY_BYTES) {
+    return NextResponse.json(
+      { error: 'Request body is too large.' },
+      { status: 413 },
     );
   }
 
   let body: unknown;
-
   try {
-    body = await request.json();
+    body = JSON.parse(raw) as unknown;
   } catch {
     return NextResponse.json(
       { error: 'Invalid request body.' },
+      { status: 400 },
+    );
+  }
+
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return NextResponse.json(
+      { error: 'Invalid request body.' },
+      { status: 400 },
+    );
+  }
+
+  const record = body as Partial<ContactPayload> & {
+    website?: unknown;
+    formToken?: unknown;
+  };
+
+  if (isHoneypotTripped(record.website)) {
+    console.warn(`[contact] honeypot tripped from ${ip}`);
+    return NextResponse.json({ ok: true });
+  }
+
+  if (!hasTrustedContactMetadata(request)) {
+    console.warn(`[contact] rejected untrusted request metadata from ${ip}`);
+    return NextResponse.json(
+      {
+        error: 'Please use the contact form on this site to send your inquiry.',
+      },
+      { status: 400 },
+    );
+  }
+
+  const secret = getContactFormSecret();
+  if (!secret) {
+    console.error(
+      'Contact form signing secret is not configured (set CONTACT_FORM_SECRET or RESEND_API_KEY).',
+    );
+    return NextResponse.json(
+      {
+        error:
+          'Unable to send your message right now. Please try again later or email us directly.',
+      },
+      { status: 503 },
+    );
+  }
+
+  const token = verifyContactFormToken(record.formToken, secret);
+  if (!token.ok) {
+    console.warn(`[contact] rejected form token from ${ip} (${token.reason})`);
+    return NextResponse.json(
+      { error: contactTokenError(token.reason) },
       { status: 400 },
     );
   }
@@ -151,12 +241,7 @@ export async function POST(request: Request) {
     duration,
     groupSize,
     message = '',
-    website = '',
-  } = body as Partial<ContactPayload> & { website?: string };
-
-  if (typeof website === 'string' && website.trim() !== '') {
-    return NextResponse.json({ ok: true });
-  }
+  } = record;
 
   if (
     typeof name !== 'string' ||
@@ -230,9 +315,10 @@ export async function POST(request: Request) {
     );
   }
 
+  const normalizedEmail = email.trim().toLowerCase();
   const inquiry: ContactPayload = {
     name: name.trim(),
-    email: email.trim(),
+    email: normalizedEmail,
     destination: destination.trim(),
     places: places.trim(),
     travelFrom: travelFrom.trim(),
@@ -260,6 +346,22 @@ export async function POST(request: Request) {
       },
       { status: 503 },
     );
+  }
+
+  const sendLimited = rateLimit(`contact:send:${ip}`, {
+    limit: CONTACT_SEND_LIMIT,
+    windowMs: CONTACT_SEND_WINDOW_MS,
+  });
+  if (!sendLimited.ok) {
+    return tooManyRequests(sendLimited.retryAfterSec);
+  }
+
+  const emailLimited = rateLimit(`contact:email:${normalizedEmail}`, {
+    limit: CONTACT_EMAIL_LIMIT,
+    windowMs: CONTACT_EMAIL_WINDOW_MS,
+  });
+  if (!emailLimited.ok) {
+    return tooManyRequests(emailLimited.retryAfterSec);
   }
 
   const resend = new Resend(apiKey);

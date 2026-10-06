@@ -15,9 +15,13 @@ export type { RegionFormOption };
 
 type ContactFormProps = {
   regionOptions: RegionFormOption[];
+  formToken: string;
 };
 
-export default function ContactForm({ regionOptions }: ContactFormProps) {
+export default function ContactForm({
+  regionOptions,
+  formToken,
+}: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -114,6 +118,7 @@ export default function ContactForm({ regionOptions }: ContactFormProps) {
       message: String(formData.get('message') ?? '').trim(),
       website: String(formData.get('website') ?? ''),
       phone: String(formData.get('phone') ?? '').trim(),
+      formToken,
     };
 
     try {

@@ -1,9 +1,11 @@
+import { headers } from 'next/headers';
 import OptimizedImage from '@/components/OptimizedImage';
 import ContactForm from '@/components/ContactForm';
 import JsonLd from '@/components/JsonLd';
 import { StickySidebar } from '@/components/StickySidebar';
 import { contact } from '@/config/contact';
 import { getPlacesForRegion, regions } from '@/data';
+import { issueContactFormToken } from '@/lib/contact/form-guard';
 import {
   breadcrumbJsonLd,
   buildPageMetadata,
@@ -59,7 +61,11 @@ const regionOptions = [
 const heroImage =
   regions.find((region) => region.slug === 'skardu')?.image ?? regions[0].image;
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  // Touch the request so the token is minted per visit, not at build time.
+  await headers();
+  const formToken = issueContactFormToken();
+
   return (
     <div>
       <JsonLd
@@ -118,7 +124,10 @@ export default function ContactPage() {
                 there.
               </p>
               <div className="mt-8">
-                <ContactForm regionOptions={regionOptions} />
+                <ContactForm
+                  regionOptions={regionOptions}
+                  formToken={formToken}
+                />
               </div>
             </div>
           </div>
