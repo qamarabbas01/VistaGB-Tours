@@ -1,4 +1,14 @@
 import { NextResponse } from 'next/server';
+import {
+  ASSISTANT_MAX_BODY_BYTES,
+  ASSISTANT_MAX_JSON_DEPTH,
+  ASSISTANT_OVERSIZE_LIMIT,
+  ASSISTANT_OVERSIZE_WINDOW_MS,
+  PayloadTooLargeError,
+  jsonNestingDepth,
+  oversizedContentLength,
+  readBodyLimited,
+} from '@/lib/assistant/body-limits';
 import { answerLocally } from '@/lib/assistant/local';
 import {
   streamOpenAIAnswer,
@@ -24,6 +34,32 @@ type Body = {
 const MAX_MESSAGE_LENGTH = 2000;
 const MAX_HISTORY = 12;
 
+function rejectOversized(ip: string, bytes: number) {
+  console.warn(
+    `[assistant] rejected oversized payload from ${ip} (${bytes} bytes)`,
+  );
+
+  const limited = rateLimit(`assistant:oversize:${ip}`, {
+    limit: ASSISTANT_OVERSIZE_LIMIT,
+    windowMs: ASSISTANT_OVERSIZE_WINDOW_MS,
+  });
+
+  if (!limited.ok) {
+    return NextResponse.json(
+      { error: 'Too many oversized requests. Please try again shortly.' },
+      {
+        status: 429,
+        headers: { 'Retry-After': String(limited.retryAfterSec) },
+      },
+    );
+  }
+
+  return NextResponse.json(
+    { error: 'Request body is too large.' },
+    { status: 413 },
+  );
+}
+
 export async function POST(request: Request) {
   const ip = getClientIp(request);
   const limited = rateLimit(`assistant:${ip}`, {
@@ -41,13 +77,46 @@ export async function POST(request: Request) {
     );
   }
 
-  let body: Body;
+  const declaredBytes = oversizedContentLength(
+    request,
+    ASSISTANT_MAX_BODY_BYTES,
+  );
+  if (declaredBytes !== null) {
+    return rejectOversized(ip, declaredBytes);
+  }
+
+  let raw: string;
   try {
-    body = (await request.json()) as Body;
+    raw = await readBodyLimited(request, ASSISTANT_MAX_BODY_BYTES);
+  } catch (error) {
+    if (error instanceof PayloadTooLargeError) {
+      return rejectOversized(ip, error.bytes);
+    }
+    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+  }
+
+  if (jsonNestingDepth(raw) > ASSISTANT_MAX_JSON_DEPTH) {
+    return NextResponse.json(
+      { error: 'Request payload is too deeply nested.' },
+      { status: 400 },
+    );
+  }
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw) as unknown;
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
   }
 
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+    return NextResponse.json(
+      { error: 'messages array is required' },
+      { status: 400 },
+    );
+  }
+
+  const body = parsed as Body;
   const messages = Array.isArray(body.messages) ? body.messages : [];
   if (messages.length === 0) {
     return NextResponse.json(
