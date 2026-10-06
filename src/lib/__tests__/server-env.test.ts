@@ -4,12 +4,17 @@
 
 jest.mock('server-only', () => ({}));
 
-import { getAssistantEnv, getContactMailEnv } from '@/lib/server-env';
+import {
+  getAssistantEnv,
+  getContactFormSecret,
+  getContactMailEnv,
+} from '@/lib/server-env';
 
 const KEYS = [
   'RESEND_API_KEY',
   'RESEND_FROM_EMAIL',
   'CONTACT_EMAIL_TO',
+  'CONTACT_FORM_SECRET',
   'OPENAI_API_KEY',
   'OPENAI_MODEL',
 ] as const;
@@ -68,5 +73,26 @@ describe('server-env', () => {
 
     process.env.OPENAI_MODEL = ' gpt-4o ';
     expect(getAssistantEnv().model).toBe('gpt-4o');
+  });
+
+  it('prefers a dedicated contact form secret, then the Resend key', () => {
+    process.env.CONTACT_FORM_SECRET = '  form-secret  ';
+    process.env.RESEND_API_KEY = 're_test_key';
+    expect(getContactFormSecret()).toBe('form-secret');
+
+    delete process.env.CONTACT_FORM_SECRET;
+    expect(getContactFormSecret()).toBe('re_test_key');
+  });
+
+  it('uses a development secret only outside production', () => {
+    delete process.env.CONTACT_FORM_SECRET;
+    delete process.env.RESEND_API_KEY;
+    expect(getContactFormSecret()).toBe('dev-contact-form-secret');
+
+    const env = process.env as Record<string, string | undefined>;
+    const previous = env.NODE_ENV;
+    env.NODE_ENV = 'production';
+    expect(getContactFormSecret()).toBe('');
+    env.NODE_ENV = previous;
   });
 });
